@@ -1,0 +1,12 @@
+{
+  "name": "Python-Haskell-Dev",
+  "build": {
+    "dockerfile": "./Dockerfile"
+  },
+  "workspaceFolder": "/ruu-thesis-project-port",
+  "extensions": [
+    "ms-python.python",
+    "haskell.haskell"
+  ],
+  "postCreateCommand": "stack setup && pip install -r requirements.txt"
+}
