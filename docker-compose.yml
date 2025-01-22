@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  dev-environment:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ruu-thesis-project-port-container
+    volumes:
+      - .:/ruu-thesis-project-port  
+    stdin_open: true  
+    tty: true
+  
