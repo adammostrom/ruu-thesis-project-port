@@ -54,6 +54,14 @@ extra-doc-files:    CHANGELOG.md
 common warnings
     ghc-options: -Wall
 
+-- Add more modules that need to be exposed as the project grows
+library
+  hs-source-dirs:      lib
+  exposed-modules:     Basic.Operations, Basic.Predicates 
+  build-depends:       base >= 4.14 && < 5
+  default-language:     GHC2021
+
+
 executable haskell
     -- Import common warning flags.
     import:           warnings
@@ -68,10 +76,21 @@ executable haskell
     -- other-extensions:
 
     -- Other library packages from which modules are imported.
-    build-depends:    base ^>=4.17.2.1
+    build-depends:    base ^>=4.17.2.1,
+                      QuickCheck
 
     -- Directories containing source files.
     hs-source-dirs:   src
 
     -- Base language which the package is written in.
     default-language: GHC2021
+
+-- Add test suites like this one for each module that is being tested. 
+test-suite testBasicOperations
+  type:           exitcode-stdio-1.0
+  main-is:            testOperations.hs
+  hs-source-dirs:     tests/Basic
+  build-depends:  base >= 4.14 && < 5,
+                  haskell,
+                  HUnit, QuickCheck
+  default-language: Haskell2010
