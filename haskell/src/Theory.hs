@@ -1,6 +1,7 @@
-module Theory where 
+module Theory  where 
 
 --import Rel.TotalPreorder
+
 
 
 -- NOTE: Idris code marked in comments as beginning with ">".
@@ -94,10 +95,14 @@ data PolicySeq = Nil | Cons Policy PolicySeq
 val :: PolicySeq -> State -> Dist Val
 val Nil _ = return (Val 0)
 val (Cons p ps) x = do
-    let y = p x
-    mx' <- next 0 x y
+    let y = p x  -- Action to take based on the current state
+    mx' <- next 0 x y  -- Get distribution of next states (Dist State)
+
+    -- Map the next states to their rewards and values
     let mapped = fmap (\x' -> reward 0 x y x' `addVal` val ps x') mx'
-    return $ meas mapped
+
+    -- Apply meas to the mapped distribution (Dist (Dist Val)) to get the final value
+    return (meas mapped)
 
 addVal :: Val -> Dist Val -> Dist Val
 addVal (Val v1) (Dist xs) = Dist [(Val (v1 + v2), p) | (Val v2, p) <- xs]
