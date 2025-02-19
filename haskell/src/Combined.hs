@@ -2,39 +2,8 @@ module Combined where
 
 import Data.List (maximumBy)
 import Data.Ord (comparing)
-
--- Custom Map-like data type
-
-newtype CustomMap k v = CustomMap {getMap :: [(k, v)]} deriving (Show, Eq)
-
--- Insert a key-value pair into the custom map.
-insert :: (Eq k) => k -> v -> CustomMap k v -> CustomMap k v
-insert k v (CustomMap xs) = CustomMap ((k, v) : filter ((/= k) . fst) xs)
-
--- Lookup a value by key in the custom map.
-lookupC :: (Eq k) => k -> CustomMap k v -> Maybe v
-lookupC k (CustomMap xs) = fmap snd (find ((== k) . fst) xs)
-
--- Convert a list of key-value pairs to a custom map.
-fromList :: (Eq k) => [(k, v)] -> CustomMap k v
-fromList = CustomMap
-
--- Convert a custom map back to a list of key-value pairs.
-toList :: CustomMap k v -> [(k, v)]
-toList (CustomMap xs) = xs
-
--- Find a key-value pair in the list.
-find :: (a -> Bool) -> [a] -> Maybe a
-find _ [] = Nothing
-find p (x : xs)
-  | p x = Just x
-  | otherwise = find p xs
-
--- Custom Map version of `Map.findWithDefault`.
-findWithDefault :: (Eq k) => v -> k -> CustomMap k v -> v
-findWithDefault def k m = case lookupC k m of
-  Nothing -> def
-  Just v -> v
+import CustomMap
+    ( CustomMap, lookupC, fromList, toList, findWithDefault )
 
 -- Define State and Action types
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
@@ -45,7 +14,7 @@ data Action = Start | Delay | Unit
 
 type Probability = Double
 
-type Policy = CustomMap State String
+type Policy = CustomMap State Action
 
 type Transition = CustomMap State Probability
 
@@ -134,12 +103,12 @@ states = [DHU, DHC, DLU, DLC, SHU, SHC, SLU, SLC]
 -- Actions based on state
 actions :: State -> [Action]
 actions s
-  | s `elem` ["DHU", "DHC", "DLU", "DLC"] = ["Start", "Delay"]
+  | s `elem` [DHU, DHC, DLU, DLC] = [Start, Delay]
   | otherwise = []
 
 -- Reward function (returns 1 for "SHU", else 0)
-reward :: Time -> State -> State -> State -> Int
-reward _ x _ _ = if x == "SHU" then 1 else 0
+reward :: Time -> State -> Action -> State -> Int
+reward _ x _ _ = if x == SHU then 1 else 0
 
 -- Value function (calculates value based on policies)
 val :: Time -> Horizon -> Policies -> State -> Double
@@ -154,7 +123,7 @@ bestExt :: Time -> Horizon -> Policies -> Policy
 bestExt t n psTail = fromList $ map bestAction states
   where
     bestAction state
-      | null (actions state) = (state, "")
+      | null (actions state) = (state, Unit)
       | otherwise = (state, snd $ maximumBy (comparing fst) [(val t n psTail state, a) | a <- actions state])
 
 -- Bi function (builds a policy sequence recursively)
@@ -166,37 +135,37 @@ bi t n =
    in p : psTail
 
 -- Best action for a given state
-best :: Time -> Horizon -> State -> String
+best :: Time -> Horizon -> State -> (Action, Double)
 best t n x =
   let ps = bi (t + 1) n
       p = bestExt t n ps
-      b = findWithDefault "" x p
+      b = findWithDefault Unit x p
       vb = val t n (p : ps) x
-   in "Horizon, best, value: " ++ show (n + 1) ++ " " ++ b ++ " " ++ show vb
+   in (b, vb)
 
 -- Placeholder for next state transitions (to be filled with actual transition probabilities)
 -- Transition function using CustomMap
-nextFun :: Time -> State -> String -> Transition
-nextFun _ "DHU" "Start" =
+nextFun :: Time -> State -> Action -> Transition
+nextFun _ DHU Start =
   fromList
-    [ ("DHU", pD_Start * pH_D_DH * pU_D_0),
-      ("DHC", pD_Start * pH_D_DH * pC_D_0),
-      ("DLU", pD_Start * pL_D_DH * pU_D_0),
-      ("DLC", pD_Start * pL_D_DH * pC_D_0),
-      ("SHU", pS_Start * pH_S_DH * pU_S_0),
-      ("SHC", pS_Start * pH_S_DH * pC_S_0),
-      ("SLU", pS_Start * pL_S_DH * pU_S_0),
-      ("SLC", pS_Start * pL_S_DH * pC_S_0)
+    [ (DHU, pD_Start * pH_D_DH * pU_D_0),
+      (DHC, pD_Start * pH_D_DH * pC_D_0),
+      (DLU, pD_Start * pL_D_DH * pU_D_0),
+      (DLC, pD_Start * pL_D_DH * pC_D_0),
+      (SHU, pS_Start * pH_S_DH * pU_S_0),
+      (SHC, pS_Start * pH_S_DH * pC_S_0),
+      (SLU, pS_Start * pL_S_DH * pU_S_0),
+      (SLC, pS_Start * pL_S_DH * pC_S_0)
     ]
-nextFun _ "DHU" "Delay" =
+nextFun _ DHU Delay =
   fromList
-    [ ("DHU", pD_Delay * pH_D_DH * pU_D_0),
-      ("DHC", pD_Delay * pH_D_DH * pC_D_0),
-      ("DLU", pD_Delay * pL_D_DH * pU_D_0),
-      ("DLC", pD_Delay * pL_D_DH * pC_D_0),
-      ("SHU", pS_Delay * pH_S_DH * pU_S_0),
-      ("SHC", pS_Delay * pH_S_DH * pC_S_0),
-      ("SLU", pS_Delay * pL_S_DH * pU_S_0),
-      ("SLC", pS_Delay * pL_S_DH * pC_S_0)
+    [ (DHU, pD_Delay * pH_D_DH * pU_D_0),
+      (DHC, pD_Delay * pH_D_DH * pC_D_0),
+      (DLU, pD_Delay * pL_D_DH * pU_D_0),
+      (DLC, pD_Delay * pL_D_DH * pC_D_0),
+      (SHU, pS_Delay * pH_S_DH * pU_S_0),
+      (SHC, pS_Delay * pH_S_DH * pC_S_0),
+      (SLU, pS_Delay * pL_S_DH * pU_S_0),
+      (SLC, pS_Delay * pL_S_DH * pC_S_0)
     ]
 nextFun _ _ _ = fromList [] -- Default case: empty transition map

@@ -6,14 +6,30 @@ module Theory where
 
 import Control.Monad (liftM2)
 
-newtype Val = Val Double deriving (Show, Eq, Ord)
-
-type Nat = Int
 
 -- Probability distribution type (uncertainty monad)
 newtype Dist a = Dist {getDist :: [(a, Double)]} deriving (Show, Eq)
 
-type ProbDist a = [(a, Double)]
+newtype Val = Val Double deriving (Show, Eq, Ord)
+
+type Nat = Int
+type Time = Int
+type Horizon = Int
+
+-- Policy Type
+{-
+> Policy : (t : Nat) -> Type
+> Policy t = (x : X t) -> Y t x
+-}
+type Policy = State -> Action
+
+{-
+>data PolicySeq : (t : Nat) -> (n : Nat) -> Type where
+    >   Nil   :  {t : Nat} -> PolicySeq t Z
+    >   (::)  :  {t, n : Nat} -> Policy t -> PolicySeq (S t) n -> PolicySeq t (S n)
+-}
+data PolicySeq = Nil | Cons Policy PolicySeq
+
 
 instance Functor Dist where
   fmap f (Dist xs) = Dist [(f x, p) | (x, p) <- xs]
@@ -35,22 +51,15 @@ data Action = Start | Delay | Unit
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
   deriving (Show, Eq, Enum)
 
--- Ctrl function (Y), here a function that gives an Action
-{- > X : (t : Nat) -> Type -}
-class Ctrl y where
-  ctrl :: y -> Action
-
--- "Hardcoded" control functions given a state.
-{- > Y : (t : Nat) -> X t -> Type -}
-instance Ctrl State where
-  ctrl DHU = Start
-  ctrl DHC = Delay
-  ctrl DLU = Unit
-  ctrl DLC = Unit
-  ctrl SHU = Start
-  ctrl SHC = Delay
-  ctrl SLU = Unit
-  ctrl SLC = Unit
+ctrl :: State -> Action
+ctrl DHU = Start
+ctrl DHC = Delay
+ctrl DLU = Unit
+ctrl DLC = Unit
+ctrl SHU = Start
+ctrl SHC = Delay
+ctrl SLU = Unit
+ctrl SLC = Unit
 
 -- Successor function
 newtype S t = S t
@@ -75,19 +84,7 @@ reward _ _ _ = Val 0
 meas :: Dist Val -> Val
 meas (Dist xs) = Val (sum [v * p | (Val v, p) <- xs])
 
--- Policy Type
-{-
-> Policy : (t : Nat) -> Type
-> Policy t = (x : X t) -> Y t x
--}
-type Policy = State -> Action
 
-{-
->data PolicySeq : (t : Nat) -> (n : Nat) -> Type where
-    >   Nil   :  {t : Nat} -> PolicySeq t Z
-    >   (::)  :  {t, n : Nat} -> Policy t -> PolicySeq (S t) n -> PolicySeq t (S n)
--}
-data PolicySeq = Nil | Cons Policy PolicySeq
 
 -- Value function for policy sequences
 {-
@@ -99,13 +96,11 @@ data PolicySeq = Nil | Cons Policy PolicySeq
 -}
 -- Value function (recursive calculation)
 val :: PolicySeq -> State -> Dist Val
-val Nil _ = return (Val 0)  -- Base case: empty policy sequence gives value 0.
-val (Cons p ps) x = do
-    let y = p x  -- Action chosen by the policy for state x.
-    mx' <- nextT x y  -- Get the transition probabilities (Dist State).
-    -- Map over the distribution of next states and apply reward and recursive val.
-    let mapped = fmap (\x' -> addVal (reward x y x') (val ps x')) mx'
-    return (meas mapped)
+val Nil _ = return (Val 0)
+val (Cons p ps)  x = do
+    let y = p x
+    mx' <- nextT x y
+    Dist [(Val v, p) | (Val v, p) <- getDist (fmap (\x' -> addVal (reward x y x') (val ps x')) mx')]
 
 
 addVal :: Val -> Dist Val -> Dist Val
