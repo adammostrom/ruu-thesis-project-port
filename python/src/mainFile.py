@@ -373,10 +373,12 @@ def next(t: int, x: str, y: str) -> dict[str, float]:
 
 
 test = next(0, "DHU", "Start")
-
+""" 
 for k, v in test.items():
-    print(k, v)
-print("\nSum of all probabilities: ", sum(test.values()))
+    print(k, v) """
+    
+    
+# print("\nSum of all probabilities: ", sum(test.values()))
 
 
 # Reward function.
@@ -428,7 +430,7 @@ ps_test_delay = [
     },
 ]
 
-print(val(0, ps_test_start, "DHU"), val(0, ps_test_delay, "DHU"))
+# print(val(0, ps_test_start, "DHU"), val(0, ps_test_delay, "DHU"))
 
 
 # Computes the best single policy to add to an existing policy sequence.
@@ -482,13 +484,13 @@ def best(t: int, n: int, x: str) -> str:
     return f"Horizon, best, value: {n}, {b}, {vb}"
 
 
-# Computing the best decision for different decision horizons.
+""" # Computing the best decision for different decision horizons.
 bests = []
 for i in range(1, 8):
     bests.append(best(0, i, "DHU"))
 
-for best in bests:
-    print(best)
+for b in bests:
+    print(b) """
 
 
     # Returns a value between 0 and 1, where 0 means "does not matter at all"
@@ -510,10 +512,11 @@ def mMeas(t: int, n: int, x: str) -> float:
         return (best_action_val - worst_action_val) / best_action_val
 
     # Comparing mMeas values to those of the article
-
+""" 
 
 print(mMeas(0, 4, "SHU"))
 print(mMeas(0, 6, "SLC"))
 print(mMeas(0, 7, "DHU"))
 print(mMeas(1, 7, "DHU"))
 print(mMeas(3, 7, "DHU"))
+ """
