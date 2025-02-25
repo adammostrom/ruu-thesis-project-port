@@ -48,7 +48,7 @@ def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
 
 
 # For a current time step, state and action, returns the probabilities of entering each state in the next time step.
-def next(t: int, x: str, y: str) -> dict[str, float]:
+def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
     # "y" can be "Start", "Delay", or None for S-states.
     if t == 0:
         # CASE: t == 0
@@ -371,11 +371,11 @@ def next(t: int, x: str, y: str) -> dict[str, float]:
 
         # Testing the transition function.
 
-
-test = next(0, "DHU", "Start")
-""" 
+"""
+test = nextFunc(0, "DHU", "Start")
 for k, v in test.items():
-    print(k, v) """
+    print(k, v) 
+"""
     
     
 # print("\nSum of all probabilities: ", sum(test.values()))
@@ -387,6 +387,8 @@ def reward(t: int, x: str, y: str, next_x: str) -> int:
     # output and at the same time are not comitted to severe future climate change.
     return 1 if next_x in ["DHU", "SHU"] else 0
 
+def meas(val: float, pr: float) -> float: # In default implementation, returns the expected value.
+    return val * pr
 
 # print(reward(0, "DHU", "Start", "DHU"))
 # Computing the total expected value from a policy sequence when starting at time t in state x.
@@ -395,9 +397,9 @@ def val(t: int, ps: list[dict[str, str]], x: str) -> float:
     if len(ps) == 0:
         return value
     y = ps[0][x]
-    m_next = next(t, x, y)
+    m_next = nextFunc(t, x, y)
     for x_prim, pr in m_next.items():
-        value += (reward(t, x, y, x_prim) + val(t + 1, ps[1:], x_prim)) * pr
+        value += meas(reward(t, x, y, x_prim) + val(t+1, ps[1:], x_prim), pr)
     return value
 
 
@@ -434,7 +436,7 @@ ps_test_delay = [
 
 
 # Computes the best single policy to add to an existing policy sequence.
-def best_ext(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
+def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
     policy = dict()
 
     for state in states:
@@ -467,7 +469,7 @@ def bi(t: int, n: int) -> list[dict[str, str]]:
         return []
     else:
         ps_tail = bi(t + 1, n - 1)
-        p = best_ext(t, ps_tail)
+        p = bestExt(t, ps_tail)
         return [p] + ps_tail
 
     # For a given time step, state and decision horizon, returns the optimal action and the
@@ -475,22 +477,24 @@ def bi(t: int, n: int) -> list[dict[str, str]]:
 
 # expected value of the sequence it starts (assuming the rest of the sequence is optimal).
 def best(t: int, n: int, x: str) -> str:
-    if n == 0:
+    if n <= 0:
         raise (ValueError("The horizon must be greater than zero!"))
     ps = bi(t + 1, n - 1)
-    p = best_ext(t, ps)
+    p = bestExt(t, ps)
     b = p[x]
     vb = val(t, [p] + ps, x)
-    return f"Horizon, best, value: {n}, {b}, {vb}"
+    return f"Horizon, best, value : {n}, {b}, {vb}"
 
 
-""" # Computing the best decision for different decision horizons.
+""" 
+# Computing the best decision for different decision horizons.
 bests = []
 for i in range(1, 8):
     bests.append(best(0, i, "DHU"))
 
 for b in bests:
-    print(b) """
+    print(b) 
+"""
 
 
     # Returns a value between 0 and 1, where 0 means "does not matter at all"
@@ -512,11 +516,11 @@ def mMeas(t: int, n: int, x: str) -> float:
         return (best_action_val - worst_action_val) / best_action_val
 
     # Comparing mMeas values to those of the article
-""" 
 
+""" 
 print(mMeas(0, 4, "SHU"))
 print(mMeas(0, 6, "SLC"))
 print(mMeas(0, 7, "DHU"))
 print(mMeas(1, 7, "DHU"))
 print(mMeas(3, 7, "DHU"))
- """
+"""
