@@ -480,6 +480,9 @@ def best(t: int, n: int, x: str) -> str:
     ps = bi(t + 1, n - 1)
     p = best_ext(t, ps)
     b = p[x]
+    # Added the return of No Action instead of None as a string, mainly for testing purposes.
+    if(b == None):
+        b = "No Action"
     vb = val(t, [p] + ps, x)
     return f"Horizon, best, value: {n}, {b}, {vb}"
 
@@ -491,6 +494,12 @@ for i in range(1, 8):
 
 for b in bests:
     print(b) """
+    
+# Run the best function once with default value of DHU 0 1 
+
+def run_best(x, y, state):
+    result = best(x, y, state)
+    print(result)
 
 
     # Returns a value between 0 and 1, where 0 means "does not matter at all"
