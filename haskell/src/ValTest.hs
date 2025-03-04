@@ -31,19 +31,20 @@ newtype Prob a = Prob {runProb :: [(a, Double)]}
 
 -- Implementing Monad instance
 instance Applicative Prob where
-  pure x = Prob [(x, 1)] -- A certain outcome
+  pure x = Prob [(x, 1)] 
   Prob fs <*> Prob xs = Prob [(f x, p * q) | (f, p) <- fs, (x, q) <- xs]
 
 instance Monad Prob where
   return = pure
   Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- runProb (f x)]
 
--- Normalize the probability distribution (so probabilities sum to 1)
+-- Normalize the probability distribution (so probabilities sum to 1), this is to avoid having wrongful percentage distribution
 normalize :: (Ord a) => Prob a -> Prob a
 normalize (Prob xs) =
   let total = sum (map snd xs)
    in Prob [(x, p / total) | (x, p) <- xs, total > 0]
 
+-- 
 pS_Start :: Double
 pS_Start = 0.9
 
@@ -120,10 +121,17 @@ pC_D = (1.0 - pU_D)
 mkSimpleProb :: [(State, Double)] -> Prob State
 mkSimpleProb = Prob . filter (\(_, p) -> p >= 0)
 
--- Reward function (now includes `next_x` like Python)
+
+{-
+- Reward function
+
+Value is added for transitioning into states which do not have low economic
+output and at the same time are not comitted to severe future climate change.
+-}
 reward :: Int -> State -> Action -> State -> Val
 reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 
+-- The next function imolemented as cases
 next :: Int -> State -> Action -> Prob State
 next t x y = case (t, x, y) of
   (0, DHU, Start) ->
@@ -324,6 +332,7 @@ next t x y = case (t, x, y) of
 meas :: (State -> Val) -> Map State Double -> Val
 meas f dist = sum [p * f x | (x, p) <- Map.toList dist]
 
+
 expectation :: (a -> Val) -> Prob a -> Val
 expectation f (Prob xs) = sum [p * f x | (x, p) <- xs]
 
@@ -331,36 +340,35 @@ val :: Int -> PolicySeq -> State -> Prob Val
 val _ [] _ = return 0
 val t (p : ps) x = do
   let y = fromMaybe Unit (Map.lookup x p)
-  x' <- next t x y -- This is a monadic bind!
-  r <- return (reward t x y x') -- Wrap the reward in the monad
-  v <- val (t + 1) ps x' -- Recursively compute value
+  x' <- next t x y 
+  r <- return (reward t x y x') 
+  v <- val (t + 1) ps x' 
   return (r + v)
 
 -- Compute the best extension of a policy sequence
 best_ext :: Int -> PolicySeq -> Policy
 best_ext t ps_tail = Map.fromList $ map bestAction states
   where
-    states = [DHU, DHC, DLU, DLC] -- States that need actions
+    states = [DHU, DHC, DLU, DLC]
     actions = [Start, Delay]
 
     -- Helper function to determine the best action for a given state
     bestAction state =
       if state `elem` states
         then
-          let -- List of possible actions and their values
+          let 
               actionValues = [(action, extractValue (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
-              -- Choose the action with the highest expected value
+              
               best = maximumBy (comparing snd) actionValues
            in (state, fst best)
-        else (state, Start) -- Default action if no action is available
+        else (state, Start) 
 
 -- Extract numeric value from Prob Val (i.e., compute the expected value)
 extractValue :: Prob Val -> Double
 extractValue (Prob xs) = sum [p * value x | (x, p) <- xs]
   where
-    -- Define how to convert 'Val' to a 'Double'
     value :: Val -> Double
-    value = id -- Since Val is already a Double, we can use id
+    value = id 
 
 -- Recursively build an optimal policy sequence
 bi :: Int -> Int -> PolicySeq
@@ -396,7 +404,7 @@ mMeas t n x
        in (bestVal - worstVal) / bestVal
 
 
--- Comparing mMeas values to those of the article
+-- Comparing mMeas values to those of the article, testing.
 main :: IO ()
 main = do
     putStrLn "Testing mMeas function..."
