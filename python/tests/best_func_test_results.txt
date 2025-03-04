@@ -1,2128 +1,2128 @@
-Input: state=DHU, x=0, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.468
+Expected Output: Horizon = 1, Best = Delay, Value = 0.468
 Output: Horizon=1, Best=Delay, Value=0.46799999999999997
+Input: state = DHU, time = 0, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=0, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.635454
+Expected Output: Horizon = 2, Best = Delay, Value = 0.635454
 Output: Horizon=2, Best=Delay, Value=0.6354539999999999
+Input: state = DHU, time = 0, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=0, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.940669612
+Expected Output: Horizon = 3, Best = Start, Value = 0.940669612
 Output: Horizon=3, Best=Start, Value=0.9406696120000004
+Input: state = DHU, time = 0, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=0, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.250012318344
+Expected Output: Horizon = 4, Best = Start, Value = 1.250012318344
 Output: Horizon=4, Best=Start, Value=1.2500123183440004
+Input: state = DHU, time = 0, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=0, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.533635393558128
+Expected Output: Horizon = 5, Best = Start, Value = 1.533635393558128
 Output: Horizon=5, Best=Start, Value=1.5336353935581286
+Input: state = DHU, time = 0, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=0, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.790773853744118
+Expected Output: Horizon = 6, Best = Start, Value = 1.790773853744118
 Output: Horizon=6, Best=Start, Value=1.7907738537441182
+Input: state = DHU, time = 0, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=0, y=7
-Expected Output: Horizon=7, Best=Start, Value=2.022874449805313
+Expected Output: Horizon = 7, Best = Start, Value = 2.022874449805313
 Output: Horizon=7, Best=Start, Value=2.0228744498053137
+Input: state = DHU, time = 0, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=0, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 0, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=0, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 0, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=0, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 0, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=0, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 0, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=0, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 0, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=0, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 0, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=0, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 0, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=0, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.198
+Expected Output: Horizon = 1, Best = Delay, Value = 0.198
 Output: Horizon=1, Best=Delay, Value=0.19800000000000004
+Input: state = DLU, time = 0, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=0, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.3598140000000001
+Expected Output: Horizon = 2, Best = Start, Value = 0.3598140000000001
 Output: Horizon=2, Best=Start, Value=0.3598140000000001
+Input: state = DLU, time = 0, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=0, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.664790988
+Expected Output: Horizon = 3, Best = Start, Value = 0.664790988
 Output: Horizon=3, Best=Start, Value=0.6647909880000001
+Input: state = DLU, time = 0, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=0, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9659672596560003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9659672596560003
 Output: Horizon=4, Best=Start, Value=0.9659672596560003
+Input: state = DLU, time = 0, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=0, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.246650427381872
+Expected Output: Horizon = 5, Best = Start, Value = 1.246650427381872
 Output: Horizon=5, Best=Start, Value=1.2466504273818724
+Input: state = DLU, time = 0, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=0, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.502730520980083
+Expected Output: Horizon = 6, Best = Start, Value = 1.502730520980083
 Output: Horizon=6, Best=Start, Value=1.5027305209800832
+Input: state = DLU, time = 0, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=0, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.734450105070974
+Expected Output: Horizon = 7, Best = Start, Value = 1.734450105070974
 Output: Horizon=7, Best=Start, Value=1.7344501050709737
+Input: state = DLU, time = 0, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=0, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 0, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=0, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 0, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=0, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 0, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=0, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 0, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=0, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 0, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=0, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 0, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=0, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 0, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=0, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 0, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=0, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 0, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=0, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 0, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=0, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 0, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=0, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 0, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=0, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 0, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=0, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 0, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=0, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 0, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=0, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 0, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=0, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 0, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=0, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 0, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=0, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 0, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=0, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 0, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=0, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 0, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=0, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 0, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=0, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 0, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=0, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 0, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=0, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 0, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=0, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 0, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=0, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 0, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=0, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 0, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=0, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 0, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=0, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 0, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=0, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 0, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=0, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 0, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=0, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 0, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=0, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 0, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=0, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 0, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=1, y=1
-Expected Output: Horizon=1, Best=Start, Value=0.2640000000000001
+Expected Output: Horizon = 1, Best = Start, Value = 0.2640000000000001
 Output: Horizon=1, Best=Start, Value=0.26400000000000007
+Input: state = DHU, time = 1, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=1, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.5765340000000002
+Expected Output: Horizon = 2, Best = Start, Value = 0.5765340000000002
 Output: Horizon=2, Best=Start, Value=0.5765340000000001
+Input: state = DHU, time = 1, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=1, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Expected Output: Horizon = 3, Best = Start, Value = 0.8924211480000004
 Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Input: state = DHU, time = 1, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=1, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.189389009576
+Expected Output: Horizon = 4, Best = Start, Value = 1.189389009576
 Output: Horizon=4, Best=Start, Value=1.1893890095760005
+Input: state = DHU, time = 1, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=1, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.461227197284913
+Expected Output: Horizon = 5, Best = Start, Value = 1.461227197284913
 Output: Horizon=5, Best=Start, Value=1.4612271972849125
+Input: state = DHU, time = 1, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=1, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.70752590762108
+Expected Output: Horizon = 6, Best = Start, Value = 1.70752590762108
 Output: Horizon=6, Best=Start, Value=1.7075259076210798
+Input: state = DHU, time = 1, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=1, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.929786715225345
+Expected Output: Horizon = 7, Best = Start, Value = 1.929786715225345
 Output: Horizon=7, Best=Start, Value=1.9297867152253452
+Input: state = DHU, time = 1, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=1, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 1, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=1, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 1, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=1, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 1, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=1, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 1, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=1, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 1, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=1, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 1, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=1, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 1, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=1, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Expected Output: Horizon = 1, Best = Delay, Value = 0.09000000000000001
 Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Input: state = DLU, time = 1, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=1, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.342126
+Expected Output: Horizon = 2, Best = Start, Value = 0.342126
 Output: Horizon=2, Best=Start, Value=0.34212600000000004
+Input: state = DLU, time = 1, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=1, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.6362930520000002
+Expected Output: Horizon = 3, Best = Start, Value = 0.6362930520000002
 Output: Horizon=3, Best=Start, Value=0.6362930520000001
+Input: state = DLU, time = 1, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=1, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9254420004240003
 Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Input: state = DLU, time = 1, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=1, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.194465383255088
+Expected Output: Horizon = 5, Best = Start, Value = 1.194465383255088
 Output: Horizon=5, Best=Start, Value=1.1944653832550884
+Input: state = DLU, time = 1, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=1, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.439750763881522
+Expected Output: Horizon = 6, Best = Start, Value = 1.439750763881522
 Output: Horizon=6, Best=Start, Value=1.4397507638815217
+Input: state = DLU, time = 1, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=1, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.661646772790838
+Expected Output: Horizon = 7, Best = Start, Value = 1.661646772790838
 Output: Horizon=7, Best=Start, Value=1.6616467727908382
+Input: state = DLU, time = 1, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=1, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 1, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=1, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 1, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=1, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 1, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=1, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 1, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=1, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 1, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=1, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 1, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=1, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 1, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=1, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 1, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=1, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 1, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=1, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 1, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=1, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 1, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=1, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 1, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=1, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 1, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=1, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 1, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=1, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 1, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=1, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 1, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=1, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 1, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=1, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 1, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=1, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 1, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=1, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 1, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=1, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 1, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=1, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 1, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=1, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 1, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=1, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 1, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=1, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 1, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=1, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 1, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=1, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 1, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=1, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 1, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=1, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 1, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=1, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 1, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=1, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 1, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=1, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 1, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=1, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 1, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=1, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 1, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=1, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 1, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=2, y=1
-Expected Output: Horizon=1, Best=Start, Value=0.2640000000000001
+Expected Output: Horizon = 1, Best = Start, Value = 0.2640000000000001
 Output: Horizon=1, Best=Start, Value=0.26400000000000007
+Input: state = DHU, time = 2, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=2, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.5765340000000002
+Expected Output: Horizon = 2, Best = Start, Value = 0.5765340000000002
 Output: Horizon=2, Best=Start, Value=0.5765340000000001
+Input: state = DHU, time = 2, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=2, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Expected Output: Horizon = 3, Best = Start, Value = 0.8924211480000004
 Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Input: state = DHU, time = 2, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=2, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.189389009576
+Expected Output: Horizon = 4, Best = Start, Value = 1.189389009576
 Output: Horizon=4, Best=Start, Value=1.1893890095760005
+Input: state = DHU, time = 2, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=2, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.461227197284913
+Expected Output: Horizon = 5, Best = Start, Value = 1.461227197284913
 Output: Horizon=5, Best=Start, Value=1.4612271972849125
+Input: state = DHU, time = 2, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=2, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.70752590762108
+Expected Output: Horizon = 6, Best = Start, Value = 1.70752590762108
 Output: Horizon=6, Best=Start, Value=1.7075259076210798
+Input: state = DHU, time = 2, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=2, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.929786715225345
+Expected Output: Horizon = 7, Best = Start, Value = 1.929786715225345
 Output: Horizon=7, Best=Start, Value=1.9297867152253452
+Input: state = DHU, time = 2, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=2, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 2, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=2, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 2, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=2, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 2, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=2, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 2, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=2, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 2, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=2, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 2, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=2, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 2, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=2, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Expected Output: Horizon = 1, Best = Delay, Value = 0.09000000000000001
 Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Input: state = DLU, time = 2, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=2, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.342126
+Expected Output: Horizon = 2, Best = Start, Value = 0.342126
 Output: Horizon=2, Best=Start, Value=0.34212600000000004
+Input: state = DLU, time = 2, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=2, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.6362930520000002
+Expected Output: Horizon = 3, Best = Start, Value = 0.6362930520000002
 Output: Horizon=3, Best=Start, Value=0.6362930520000001
+Input: state = DLU, time = 2, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=2, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9254420004240003
 Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Input: state = DLU, time = 2, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=2, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.194465383255088
+Expected Output: Horizon = 5, Best = Start, Value = 1.194465383255088
 Output: Horizon=5, Best=Start, Value=1.1944653832550884
+Input: state = DLU, time = 2, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=2, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.439750763881522
+Expected Output: Horizon = 6, Best = Start, Value = 1.439750763881522
 Output: Horizon=6, Best=Start, Value=1.4397507638815217
+Input: state = DLU, time = 2, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=2, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.661646772790838
+Expected Output: Horizon = 7, Best = Start, Value = 1.661646772790838
 Output: Horizon=7, Best=Start, Value=1.6616467727908382
+Input: state = DLU, time = 2, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=2, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 2, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=2, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 2, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=2, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 2, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=2, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 2, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=2, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 2, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=2, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 2, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=2, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 2, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=2, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 2, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=2, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 2, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=2, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 2, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=2, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 2, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=2, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 2, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=2, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 2, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=2, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 2, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=2, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 2, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=2, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 2, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=2, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 2, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=2, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 2, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=2, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 2, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=2, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 2, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=2, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 2, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=2, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 2, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=2, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 2, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=2, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 2, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=2, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 2, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=2, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 2, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=2, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 2, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=2, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 2, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=2, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 2, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=2, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 2, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=2, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 2, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=2, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 2, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=2, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 2, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=2, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 2, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=2, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 2, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=3, y=1
-Expected Output: Horizon=1, Best=Start, Value=0.2640000000000001
+Expected Output: Horizon = 1, Best = Start, Value = 0.2640000000000001
 Output: Horizon=1, Best=Start, Value=0.26400000000000007
+Input: state = DHU, time = 3, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=3, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.5765340000000002
+Expected Output: Horizon = 2, Best = Start, Value = 0.5765340000000002
 Output: Horizon=2, Best=Start, Value=0.5765340000000001
+Input: state = DHU, time = 3, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=3, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Expected Output: Horizon = 3, Best = Start, Value = 0.8924211480000004
 Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Input: state = DHU, time = 3, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=3, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.189389009576
+Expected Output: Horizon = 4, Best = Start, Value = 1.189389009576
 Output: Horizon=4, Best=Start, Value=1.1893890095760005
+Input: state = DHU, time = 3, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=3, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.461227197284913
+Expected Output: Horizon = 5, Best = Start, Value = 1.461227197284913
 Output: Horizon=5, Best=Start, Value=1.4612271972849125
+Input: state = DHU, time = 3, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=3, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.70752590762108
+Expected Output: Horizon = 6, Best = Start, Value = 1.70752590762108
 Output: Horizon=6, Best=Start, Value=1.7075259076210798
+Input: state = DHU, time = 3, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=3, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.929786715225345
+Expected Output: Horizon = 7, Best = Start, Value = 1.929786715225345
 Output: Horizon=7, Best=Start, Value=1.9297867152253452
+Input: state = DHU, time = 3, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=3, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 3, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=3, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 3, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=3, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 3, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=3, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 3, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=3, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 3, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=3, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 3, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=3, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 3, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=3, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Expected Output: Horizon = 1, Best = Delay, Value = 0.09000000000000001
 Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Input: state = DLU, time = 3, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=3, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.342126
+Expected Output: Horizon = 2, Best = Start, Value = 0.342126
 Output: Horizon=2, Best=Start, Value=0.34212600000000004
+Input: state = DLU, time = 3, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=3, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.6362930520000002
+Expected Output: Horizon = 3, Best = Start, Value = 0.6362930520000002
 Output: Horizon=3, Best=Start, Value=0.6362930520000001
+Input: state = DLU, time = 3, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=3, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9254420004240003
 Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Input: state = DLU, time = 3, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=3, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.194465383255088
+Expected Output: Horizon = 5, Best = Start, Value = 1.194465383255088
 Output: Horizon=5, Best=Start, Value=1.1944653832550884
+Input: state = DLU, time = 3, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=3, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.439750763881522
+Expected Output: Horizon = 6, Best = Start, Value = 1.439750763881522
 Output: Horizon=6, Best=Start, Value=1.4397507638815217
+Input: state = DLU, time = 3, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=3, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.661646772790838
+Expected Output: Horizon = 7, Best = Start, Value = 1.661646772790838
 Output: Horizon=7, Best=Start, Value=1.6616467727908382
+Input: state = DLU, time = 3, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=3, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 3, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=3, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 3, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=3, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 3, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=3, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 3, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=3, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 3, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=3, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 3, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=3, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 3, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=3, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 3, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=3, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 3, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=3, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 3, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=3, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 3, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=3, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 3, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=3, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 3, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=3, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 3, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=3, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 3, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=3, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 3, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=3, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 3, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=3, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 3, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=3, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 3, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=3, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 3, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=3, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 3, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=3, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 3, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=3, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 3, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=3, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 3, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=3, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 3, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=3, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 3, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=3, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 3, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=3, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 3, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=3, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 3, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=3, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 3, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=3, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 3, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=3, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 3, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=3, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 3, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=3, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 3, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=3, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 3, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=4, y=1
-Expected Output: Horizon=1, Best=Start, Value=0.2640000000000001
+Expected Output: Horizon = 1, Best = Start, Value = 0.2640000000000001
 Output: Horizon=1, Best=Start, Value=0.26400000000000007
+Input: state = DHU, time = 4, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=4, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.5765340000000002
+Expected Output: Horizon = 2, Best = Start, Value = 0.5765340000000002
 Output: Horizon=2, Best=Start, Value=0.5765340000000001
+Input: state = DHU, time = 4, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=4, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Expected Output: Horizon = 3, Best = Start, Value = 0.8924211480000004
 Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Input: state = DHU, time = 4, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=4, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.189389009576
+Expected Output: Horizon = 4, Best = Start, Value = 1.189389009576
 Output: Horizon=4, Best=Start, Value=1.1893890095760005
+Input: state = DHU, time = 4, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=4, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.461227197284913
+Expected Output: Horizon = 5, Best = Start, Value = 1.461227197284913
 Output: Horizon=5, Best=Start, Value=1.4612271972849125
+Input: state = DHU, time = 4, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=4, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.70752590762108
+Expected Output: Horizon = 6, Best = Start, Value = 1.70752590762108
 Output: Horizon=6, Best=Start, Value=1.7075259076210798
+Input: state = DHU, time = 4, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=4, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.929786715225345
+Expected Output: Horizon = 7, Best = Start, Value = 1.929786715225345
 Output: Horizon=7, Best=Start, Value=1.9297867152253452
+Input: state = DHU, time = 4, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=4, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 4, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=4, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 4, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=4, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 4, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=4, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 4, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=4, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 4, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=4, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 4, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=4, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 4, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=4, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Expected Output: Horizon = 1, Best = Delay, Value = 0.09000000000000001
 Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Input: state = DLU, time = 4, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=4, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.342126
+Expected Output: Horizon = 2, Best = Start, Value = 0.342126
 Output: Horizon=2, Best=Start, Value=0.34212600000000004
+Input: state = DLU, time = 4, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=4, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.6362930520000002
+Expected Output: Horizon = 3, Best = Start, Value = 0.6362930520000002
 Output: Horizon=3, Best=Start, Value=0.6362930520000001
+Input: state = DLU, time = 4, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=4, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9254420004240003
 Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Input: state = DLU, time = 4, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=4, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.194465383255088
+Expected Output: Horizon = 5, Best = Start, Value = 1.194465383255088
 Output: Horizon=5, Best=Start, Value=1.1944653832550884
+Input: state = DLU, time = 4, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=4, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.439750763881522
+Expected Output: Horizon = 6, Best = Start, Value = 1.439750763881522
 Output: Horizon=6, Best=Start, Value=1.4397507638815217
+Input: state = DLU, time = 4, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=4, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.661646772790838
+Expected Output: Horizon = 7, Best = Start, Value = 1.661646772790838
 Output: Horizon=7, Best=Start, Value=1.6616467727908382
+Input: state = DLU, time = 4, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=4, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 4, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=4, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 4, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=4, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 4, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=4, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 4, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=4, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 4, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=4, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 4, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=4, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 4, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=4, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 4, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=4, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 4, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=4, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 4, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=4, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 4, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=4, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 4, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=4, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 4, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=4, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 4, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=4, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 4, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=4, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 4, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=4, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 4, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=4, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 4, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=4, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 4, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=4, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 4, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=4, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 4, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=4, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 4, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=4, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 4, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=4, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 4, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=4, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 4, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=4, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 4, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=4, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 4, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=4, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 4, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=4, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 4, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=4, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 4, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=4, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 4, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=4, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 4, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=4, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 4, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=4, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 4, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=4, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 4, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=5, y=1
-Expected Output: Horizon=1, Best=Start, Value=0.2640000000000001
+Expected Output: Horizon = 1, Best = Start, Value = 0.2640000000000001
 Output: Horizon=1, Best=Start, Value=0.26400000000000007
+Input: state = DHU, time = 5, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=5, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.5765340000000002
+Expected Output: Horizon = 2, Best = Start, Value = 0.5765340000000002
 Output: Horizon=2, Best=Start, Value=0.5765340000000001
+Input: state = DHU, time = 5, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=5, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Expected Output: Horizon = 3, Best = Start, Value = 0.8924211480000004
 Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Input: state = DHU, time = 5, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=5, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.189389009576
+Expected Output: Horizon = 4, Best = Start, Value = 1.189389009576
 Output: Horizon=4, Best=Start, Value=1.1893890095760005
+Input: state = DHU, time = 5, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=5, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.461227197284913
+Expected Output: Horizon = 5, Best = Start, Value = 1.461227197284913
 Output: Horizon=5, Best=Start, Value=1.4612271972849125
+Input: state = DHU, time = 5, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=5, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.70752590762108
+Expected Output: Horizon = 6, Best = Start, Value = 1.70752590762108
 Output: Horizon=6, Best=Start, Value=1.7075259076210798
+Input: state = DHU, time = 5, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=5, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.929786715225345
+Expected Output: Horizon = 7, Best = Start, Value = 1.929786715225345
 Output: Horizon=7, Best=Start, Value=1.9297867152253452
+Input: state = DHU, time = 5, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=5, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 5, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=5, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 5, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=5, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 5, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=5, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 5, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=5, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 5, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=5, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 5, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=5, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 5, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=5, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Expected Output: Horizon = 1, Best = Delay, Value = 0.09000000000000001
 Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Input: state = DLU, time = 5, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=5, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.342126
+Expected Output: Horizon = 2, Best = Start, Value = 0.342126
 Output: Horizon=2, Best=Start, Value=0.34212600000000004
+Input: state = DLU, time = 5, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=5, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.6362930520000002
+Expected Output: Horizon = 3, Best = Start, Value = 0.6362930520000002
 Output: Horizon=3, Best=Start, Value=0.6362930520000001
+Input: state = DLU, time = 5, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=5, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9254420004240003
 Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Input: state = DLU, time = 5, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=5, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.194465383255088
+Expected Output: Horizon = 5, Best = Start, Value = 1.194465383255088
 Output: Horizon=5, Best=Start, Value=1.1944653832550884
+Input: state = DLU, time = 5, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=5, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.439750763881522
+Expected Output: Horizon = 6, Best = Start, Value = 1.439750763881522
 Output: Horizon=6, Best=Start, Value=1.4397507638815217
+Input: state = DLU, time = 5, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=5, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.661646772790838
+Expected Output: Horizon = 7, Best = Start, Value = 1.661646772790838
 Output: Horizon=7, Best=Start, Value=1.6616467727908382
+Input: state = DLU, time = 5, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=5, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 5, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=5, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 5, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=5, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 5, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=5, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 5, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=5, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 5, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=5, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 5, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=5, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 5, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=5, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 5, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=5, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 5, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=5, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 5, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=5, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 5, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=5, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 5, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=5, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 5, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=5, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 5, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=5, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 5, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=5, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 5, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=5, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 5, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=5, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 5, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=5, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 5, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=5, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 5, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=5, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 5, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=5, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 5, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=5, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 5, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=5, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 5, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=5, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 5, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=5, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 5, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=5, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 5, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=5, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 5, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=5, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 5, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=5, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 5, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=5, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 5, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=5, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 5, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=5, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 5, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=5, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 5, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=5, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 5, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=6, y=1
-Expected Output: Horizon=1, Best=Start, Value=0.2640000000000001
+Expected Output: Horizon = 1, Best = Start, Value = 0.2640000000000001
 Output: Horizon=1, Best=Start, Value=0.26400000000000007
+Input: state = DHU, time = 6, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=6, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.5765340000000002
+Expected Output: Horizon = 2, Best = Start, Value = 0.5765340000000002
 Output: Horizon=2, Best=Start, Value=0.5765340000000001
+Input: state = DHU, time = 6, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=6, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Expected Output: Horizon = 3, Best = Start, Value = 0.8924211480000004
 Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Input: state = DHU, time = 6, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=6, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.189389009576
+Expected Output: Horizon = 4, Best = Start, Value = 1.189389009576
 Output: Horizon=4, Best=Start, Value=1.1893890095760005
+Input: state = DHU, time = 6, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=6, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.461227197284913
+Expected Output: Horizon = 5, Best = Start, Value = 1.461227197284913
 Output: Horizon=5, Best=Start, Value=1.4612271972849125
+Input: state = DHU, time = 6, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=6, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.70752590762108
+Expected Output: Horizon = 6, Best = Start, Value = 1.70752590762108
 Output: Horizon=6, Best=Start, Value=1.7075259076210798
+Input: state = DHU, time = 6, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=6, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.929786715225345
+Expected Output: Horizon = 7, Best = Start, Value = 1.929786715225345
 Output: Horizon=7, Best=Start, Value=1.9297867152253452
+Input: state = DHU, time = 6, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=6, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 6, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=6, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 6, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=6, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 6, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=6, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 6, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=6, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 6, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=6, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 6, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=6, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 6, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=6, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Expected Output: Horizon = 1, Best = Delay, Value = 0.09000000000000001
 Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Input: state = DLU, time = 6, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=6, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.342126
+Expected Output: Horizon = 2, Best = Start, Value = 0.342126
 Output: Horizon=2, Best=Start, Value=0.34212600000000004
+Input: state = DLU, time = 6, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=6, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.6362930520000002
+Expected Output: Horizon = 3, Best = Start, Value = 0.6362930520000002
 Output: Horizon=3, Best=Start, Value=0.6362930520000001
+Input: state = DLU, time = 6, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=6, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9254420004240003
 Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Input: state = DLU, time = 6, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=6, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.194465383255088
+Expected Output: Horizon = 5, Best = Start, Value = 1.194465383255088
 Output: Horizon=5, Best=Start, Value=1.1944653832550884
+Input: state = DLU, time = 6, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=6, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.439750763881522
+Expected Output: Horizon = 6, Best = Start, Value = 1.439750763881522
 Output: Horizon=6, Best=Start, Value=1.4397507638815217
+Input: state = DLU, time = 6, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=6, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.661646772790838
+Expected Output: Horizon = 7, Best = Start, Value = 1.661646772790838
 Output: Horizon=7, Best=Start, Value=1.6616467727908382
+Input: state = DLU, time = 6, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=6, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 6, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=6, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 6, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=6, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 6, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=6, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 6, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=6, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 6, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=6, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 6, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=6, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 6, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=6, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 6, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=6, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 6, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=6, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 6, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=6, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 6, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=6, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 6, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=6, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 6, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=6, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 6, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=6, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 6, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=6, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 6, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=6, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 6, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=6, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 6, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=6, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 6, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=6, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 6, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=6, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 6, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=6, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 6, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=6, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 6, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=6, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 6, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=6, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 6, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=6, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 6, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=6, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 6, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=6, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 6, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=6, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 6, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=6, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 6, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=6, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 6, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=6, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 6, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=6, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 6, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=6, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 6, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=6, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 6, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=7, y=1
-Expected Output: Horizon=1, Best=Start, Value=0.2640000000000001
+Expected Output: Horizon = 1, Best = Start, Value = 0.2640000000000001
 Output: Horizon=1, Best=Start, Value=0.26400000000000007
+Input: state = DHU, time = 7, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=7, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.5765340000000002
+Expected Output: Horizon = 2, Best = Start, Value = 0.5765340000000002
 Output: Horizon=2, Best=Start, Value=0.5765340000000001
+Input: state = DHU, time = 7, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=7, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Expected Output: Horizon = 3, Best = Start, Value = 0.8924211480000004
 Output: Horizon=3, Best=Start, Value=0.8924211480000004
+Input: state = DHU, time = 7, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=7, y=4
-Expected Output: Horizon=4, Best=Start, Value=1.189389009576
+Expected Output: Horizon = 4, Best = Start, Value = 1.189389009576
 Output: Horizon=4, Best=Start, Value=1.1893890095760005
+Input: state = DHU, time = 7, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=7, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.461227197284913
+Expected Output: Horizon = 5, Best = Start, Value = 1.461227197284913
 Output: Horizon=5, Best=Start, Value=1.4612271972849125
+Input: state = DHU, time = 7, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=7, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.70752590762108
+Expected Output: Horizon = 6, Best = Start, Value = 1.70752590762108
 Output: Horizon=6, Best=Start, Value=1.7075259076210798
+Input: state = DHU, time = 7, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DHU, x=7, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.929786715225345
+Expected Output: Horizon = 7, Best = Start, Value = 1.929786715225345
 Output: Horizon=7, Best=Start, Value=1.9297867152253452
+Input: state = DHU, time = 7, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DHC, x=7, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DHC, time = 7, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=7, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DHC, time = 7, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=7, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DHC, time = 7, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=7, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DHC, time = 7, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=7, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DHC, time = 7, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=7, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DHC, time = 7, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DHC, x=7, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DHC, time = 7, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLU, x=7, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Expected Output: Horizon = 1, Best = Delay, Value = 0.09000000000000001
 Output: Horizon=1, Best=Delay, Value=0.09000000000000001
+Input: state = DLU, time = 7, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=7, y=2
-Expected Output: Horizon=2, Best=Start, Value=0.342126
+Expected Output: Horizon = 2, Best = Start, Value = 0.342126
 Output: Horizon=2, Best=Start, Value=0.34212600000000004
+Input: state = DLU, time = 7, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=7, y=3
-Expected Output: Horizon=3, Best=Start, Value=0.6362930520000002
+Expected Output: Horizon = 3, Best = Start, Value = 0.6362930520000002
 Output: Horizon=3, Best=Start, Value=0.6362930520000001
+Input: state = DLU, time = 7, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=7, y=4
-Expected Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Expected Output: Horizon = 4, Best = Start, Value = 0.9254420004240003
 Output: Horizon=4, Best=Start, Value=0.9254420004240003
+Input: state = DLU, time = 7, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=7, y=5
-Expected Output: Horizon=5, Best=Start, Value=1.194465383255088
+Expected Output: Horizon = 5, Best = Start, Value = 1.194465383255088
 Output: Horizon=5, Best=Start, Value=1.1944653832550884
+Input: state = DLU, time = 7, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=7, y=6
-Expected Output: Horizon=6, Best=Start, Value=1.439750763881522
+Expected Output: Horizon = 6, Best = Start, Value = 1.439750763881522
 Output: Horizon=6, Best=Start, Value=1.4397507638815217
+Input: state = DLU, time = 7, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=DLU, x=7, y=7
-Expected Output: Horizon=7, Best=Start, Value=1.661646772790838
+Expected Output: Horizon = 7, Best = Start, Value = 1.661646772790838
 Output: Horizon=7, Best=Start, Value=1.6616467727908382
+Input: state = DLU, time = 7, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=DLC, x=7, y=1
-Expected Output: Horizon=1, Best=Delay, Value=0.0
+Expected Output: Horizon = 1, Best = Delay, Value = 0.0
 Output: Horizon=1, Best=Start, Value=0.0
+Input: state = DLC, time = 7, horizon = 1
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=7, y=2
-Expected Output: Horizon=2, Best=Delay, Value=0.0
+Expected Output: Horizon = 2, Best = Delay, Value = 0.0
 Output: Horizon=2, Best=Start, Value=0.0
+Input: state = DLC, time = 7, horizon = 2
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=7, y=3
-Expected Output: Horizon=3, Best=Delay, Value=0.0
+Expected Output: Horizon = 3, Best = Delay, Value = 0.0
 Output: Horizon=3, Best=Start, Value=0.0
+Input: state = DLC, time = 7, horizon = 3
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=7, y=4
-Expected Output: Horizon=4, Best=Delay, Value=0.0
+Expected Output: Horizon = 4, Best = Delay, Value = 0.0
 Output: Horizon=4, Best=Start, Value=0.0
+Input: state = DLC, time = 7, horizon = 4
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=7, y=5
-Expected Output: Horizon=5, Best=Delay, Value=0.0
+Expected Output: Horizon = 5, Best = Delay, Value = 0.0
 Output: Horizon=5, Best=Start, Value=0.0
+Input: state = DLC, time = 7, horizon = 5
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=7, y=6
-Expected Output: Horizon=6, Best=Delay, Value=0.0
+Expected Output: Horizon = 6, Best = Delay, Value = 0.0
 Output: Horizon=6, Best=Start, Value=0.0
+Input: state = DLC, time = 7, horizon = 6
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=DLC, x=7, y=7
-Expected Output: Horizon=7, Best=Delay, Value=0.0
+Expected Output: Horizon = 7, Best = Delay, Value = 0.0
 Output: Horizon=7, Best=Start, Value=0.0
+Input: state = DLC, time = 7, horizon = 7
 ----------------------------------------------------------------------------------FAIL: 'Start' != 'Delay'
 - Start
 + Delay
 
-Input: state=SHU, x=7, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.63
+Expected Output: Horizon = 1, Best = No Action, Value = 0.63
 Output: Horizon=1, Best=No Action, Value=0.63
+Input: state = SHU, time = 7, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=7, y=2
-Expected Output: Horizon=2, Best=No Action, Value=1.0998
+Expected Output: Horizon = 2, Best = No Action, Value = 1.0998
 Output: Horizon=2, Best=No Action, Value=1.0997999999999999
+Input: state = SHU, time = 7, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=7, y=3
-Expected Output: Horizon=3, Best=No Action, Value=1.487628
+Expected Output: Horizon = 3, Best = No Action, Value = 1.487628
 Output: Horizon=3, Best=No Action, Value=1.4876280000000002
+Input: state = SHU, time = 7, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=7, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.82407608
+Expected Output: Horizon = 4, Best = No Action, Value = 1.82407608
 Output: Horizon=4, Best=No Action, Value=1.8240760800000002
+Input: state = SHU, time = 7, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=7, y=5
-Expected Output: Horizon=5, Best=No Action, Value=2.1223443888
+Expected Output: Horizon = 5, Best = No Action, Value = 2.1223443888
 Output: Horizon=5, Best=No Action, Value=2.1223443888
+Input: state = SHU, time = 7, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=7, y=6
-Expected Output: Horizon=6, Best=No Action, Value=2.389153279968
+Expected Output: Horizon = 6, Best = No Action, Value = 2.389153279968
 Output: Horizon=6, Best=No Action, Value=2.389153279968
+Input: state = SHU, time = 7, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHU, x=7, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.62869355078848
+Expected Output: Horizon = 7, Best = No Action, Value = 2.62869355078848
 Output: Horizon=7, Best=No Action, Value=2.6286935507884803
+Input: state = SHU, time = 7, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=7, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SHC, time = 7, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=7, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SHC, time = 7, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=7, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SHC, time = 7, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=7, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SHC, time = 7, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=7, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SHC, time = 7, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=7, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SHC, time = 7, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SHC, x=7, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SHC, time = 7, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=7, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Expected Output: Horizon = 1, Best = No Action, Value = 0.2700000000000001
 Output: Horizon=1, Best=No Action, Value=0.2700000000000001
+Input: state = SLU, time = 7, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=7, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Expected Output: Horizon = 2, Best = No Action, Value = 0.6102000000000002
 Output: Horizon=2, Best=No Action, Value=0.6102000000000002
+Input: state = SLU, time = 7, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=7, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Expected Output: Horizon = 3, Best = No Action, Value = 0.9513720000000003
 Output: Horizon=3, Best=No Action, Value=0.9513720000000003
+Input: state = SLU, time = 7, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=7, y=4
-Expected Output: Horizon=4, Best=No Action, Value=1.27102392
+Expected Output: Horizon = 4, Best = No Action, Value = 1.27102392
 Output: Horizon=4, Best=No Action, Value=1.2710239200000004
+Input: state = SLU, time = 7, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=7, y=5
-Expected Output: Horizon=5, Best=No Action, Value=1.563245611200001
+Expected Output: Horizon = 5, Best = No Action, Value = 1.563245611200001
 Output: Horizon=5, Best=No Action, Value=1.5632456112000006
+Input: state = SLU, time = 7, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=7, y=6
-Expected Output: Horizon=6, Best=No Action, Value=1.827877720032001
+Expected Output: Horizon = 6, Best = No Action, Value = 1.827877720032001
 Output: Horizon=6, Best=No Action, Value=1.8278777200320007
+Input: state = SLU, time = 7, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLU, x=7, y=7
-Expected Output: Horizon=7, Best=No Action, Value=2.066634349211521
+Expected Output: Horizon = 7, Best = No Action, Value = 2.066634349211521
 Output: Horizon=7, Best=No Action, Value=2.0666343492115207
+Input: state = SLU, time = 7, horizon = 7
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=7, y=1
-Expected Output: Horizon=1, Best=No Action, Value=0.0
+Expected Output: Horizon = 1, Best = No Action, Value = 0.0
 Output: Horizon=1, Best=No Action, Value=0.0
+Input: state = SLC, time = 7, horizon = 1
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=7, y=2
-Expected Output: Horizon=2, Best=No Action, Value=0.0
+Expected Output: Horizon = 2, Best = No Action, Value = 0.0
 Output: Horizon=2, Best=No Action, Value=0.0
+Input: state = SLC, time = 7, horizon = 2
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=7, y=3
-Expected Output: Horizon=3, Best=No Action, Value=0.0
+Expected Output: Horizon = 3, Best = No Action, Value = 0.0
 Output: Horizon=3, Best=No Action, Value=0.0
+Input: state = SLC, time = 7, horizon = 3
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=7, y=4
-Expected Output: Horizon=4, Best=No Action, Value=0.0
+Expected Output: Horizon = 4, Best = No Action, Value = 0.0
 Output: Horizon=4, Best=No Action, Value=0.0
+Input: state = SLC, time = 7, horizon = 4
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=7, y=5
-Expected Output: Horizon=5, Best=No Action, Value=0.0
+Expected Output: Horizon = 5, Best = No Action, Value = 0.0
 Output: Horizon=5, Best=No Action, Value=0.0
+Input: state = SLC, time = 7, horizon = 5
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=7, y=6
-Expected Output: Horizon=6, Best=No Action, Value=0.0
+Expected Output: Horizon = 6, Best = No Action, Value = 0.0
 Output: Horizon=6, Best=No Action, Value=0.0
+Input: state = SLC, time = 7, horizon = 6
 ----------------------------------------------------------------------------------PASS
-Input: state=SLC, x=7, y=7
-Expected Output: Horizon=7, Best=No Action, Value=0.0
+Expected Output: Horizon = 7, Best = No Action, Value = 0.0
 Output: Horizon=7, Best=No Action, Value=0.0
+Input: state = SLC, time = 7, horizon = 7
 ----------------------------------------------------------------------------------PASS

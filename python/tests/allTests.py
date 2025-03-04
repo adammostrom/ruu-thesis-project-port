@@ -70,9 +70,10 @@ class TestBestsFunctionFromCSV(unittest.TestCase):
                     expected_value = float(test["Value"])
                     
                     # Write input, expected output, and actual output to file
-                    log_file.write(f"Input: state={state}, x={x}, y={y}\n")
-                    log_file.write(f"Expected Output: Horizon={expected_horizon}, Best={expected_best}, Value={expected_value}\n")
+                    
+                    log_file.write(f"Expected Output: Horizon = {expected_horizon}, Best = {expected_best}, Value = {expected_value}\n")
                     log_file.write(f"Output: Horizon={horizon}, Best={best_action}, Value={value}\n")
+                    log_file.write(f"Input: state = {state}, time = {x}, horizon = {y}\n")
                     log_file.write(f"----------------------------------------------------------------------------------")
                     try:
                         self.assertEqual(horizon, expected_horizon)
