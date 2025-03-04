@@ -56,41 +56,31 @@ common warnings
 
 -- Add more modules that need to be exposed as the project grows
 library
-  hs-source-dirs:      lib
+  hs-source-dirs:      haskell/lib
   exposed-modules:     Basic.Operations, Basic.Predicates 
-  build-depends:       base >= 4.14 && < 5
+  build-depends:       base >= 4.14 && < 5, 
+                       containers
   default-language:     GHC2021
 
 
 executable haskell
-    -- Import common warning flags.
     import:           warnings
-
-    -- .hs or .lhs file containing the Main module.
     main-is:          Main.hs
-
-    -- Modules included in this executable, other than Main.
-    -- other-modules:
-
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
-
-    -- Other library packages from which modules are imported.
+    hs-source-dirs:   haskell/src
     build-depends:    base ^>=4.17.2.1,
-                      QuickCheck
-
-    -- Directories containing source files.
-    hs-source-dirs:   src
-
-    -- Base language which the package is written in.
+                      QuickCheck,
+                      containers
     default-language: GHC2021
+    other-modules:    ValTest 
+
 
 -- Add test suites like this one for each module that is being tested. 
-test-suite testBasicOperations
-  type:           exitcode-stdio-1.0
-  main-is:            testOperations.hs
-  hs-source-dirs:     tests/Basic
+test-suite testBest
+  type:               exitcode-stdio-1.0
+  main-is:            testBest.hs
+  hs-source-dirs:     haskell/tests
   build-depends:  base >= 4.14 && < 5,
                   haskell,
-                  HUnit, QuickCheck
+                  HUnit, QuickCheck,
+                  ValTest
   default-language: Haskell2010
