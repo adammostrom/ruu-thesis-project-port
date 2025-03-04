@@ -1,4 +1,4 @@
-
+{-# LANGUAGE TypeFamilies, DataKinds, TypeOperators, GADTs, ScopedTypeVariables #-}
 
 module Basic.Operations where 
 
@@ -19,7 +19,7 @@ We need to enable the following language extensions:
 
 -}
 
-{-# LANGUAGE TypeFamilies, DataKinds, TypeOperators, GADTs, ScopedTypeVariables #-}
+
 
 {-
 The TypeEq type is a type equality type that captures equality between two types a and b.
