@@ -5,6 +5,8 @@ import re
 import sys
 import unittest
 
+# RUN IT WITH "python3 testScript.py"
+
 # Add the src directory to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
 
