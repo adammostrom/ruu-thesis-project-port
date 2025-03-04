@@ -518,13 +518,18 @@ def mMeas(t: int, n: int, x: str) -> float:
         return (best_action_val - worst_action_val) / best_action_val
 
     # Comparing mMeas values to those of the article
-
+    
+    
+def run_mMeas(x, y, state):
+    result = mMeas(x, y, state)
+    print(result)
+    
 
 def run_best(x, y, state):
     result = best(x, y, state)
     print(result)
     
-    
+
 """ 
 print(mMeas(0, 4, "SHU"))
 print(mMeas(0, 6, "SLC"))
