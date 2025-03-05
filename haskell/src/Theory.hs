@@ -51,7 +51,8 @@ data Action = Start | Delay | Unit
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
   deriving (Show, Eq, Enum)
 
-ctrl :: State -> Action
+-- Example of a Policy
+ctrl :: Policy -- State -> Action
 ctrl DHU = Start
 ctrl DHC = Delay
 ctrl DLU = Unit
@@ -69,6 +70,11 @@ newtype S t = S t
 -- Transition function (we will mock the transition probabilities based on actions)
 nextT :: State -> Action -> Dist State
 nextT DHU Start = Dist [(DHC, 0.9), (DLU, 0.1)] -- Example, can modify based on your actual logic
+
+    -- This is a strange example: deciding to start the transition
+    -- should lead with at least a non-zero probability to some state
+    -- with "S" as the first letter.
+
 nextT DHC Delay = Dist [(DHU, 0.8), (DHC, 0.2)]
 nextT _ _ = Dist [(DHU, 1.0)] -- Default transition
 
@@ -95,16 +101,17 @@ meas (Dist xs) = Val (sum [v * p | (Val v, p) <- xs])
     >                         meas (map (reward t x y <++> val ps) mx')
 -}
 -- Value function (recursive calculation)
-val :: PolicySeq -> State -> Dist Val
+val :: PolicySeq -> State -> Dist Val   -- PJ: why Dist Val and not just Val?
 val Nil _ = return (Val 0)
 val (Cons p ps)  x = do
     let y = p x
     mx' <- nextT x y
     Dist [(Val v, p) | (Val v, p) <- getDist (fmap (\x' -> addVal (reward x y x') (val ps x')) mx')]
-
+      -- strange deviation from the Idris code (perhaps due to wrong type?)
 
 addVal :: Val -> Dist Val -> Dist Val
 addVal (Val v1) (Dist xs) = Dist [(Val (v1 + v2), p) | (Val v2, p) <- xs]
+-- Why do you want to define addition for this assymetric type?
 
 -- Placeholder for best and worst policy extensions
 {-

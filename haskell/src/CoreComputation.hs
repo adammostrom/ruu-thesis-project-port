@@ -6,7 +6,7 @@
 
 module CoreComputation where
 
-import Data.List (maximumBy)
+import Data.List (maximumBy, nub)
 import Data.Map (Map)
 import Data.Map qualified as Map
 import Data.Maybe (fromMaybe)
@@ -27,9 +27,18 @@ type Policy = Map State Action
 type PolicySeq = [Policy]
 
 -- Probability distribution monad
-newtype Prob a = Prob {runProb :: [(a, Double)]}
+newtype Prob a = Prob {unProb :: [(a, Double)]}
   deriving (Show, Functor)
 
+runProb :: Eq a => Prob a -> [(a, Double)]
+runProb = collectAndSumEqual . unProb
+
+collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
+collectAndSumEqual aps =
+  let support = nub (map fst aps)
+  in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
+         support
+         
 -- Implementing Monad instance
 instance Applicative Prob where
   pure x = Prob [(x, 1)] 
@@ -37,7 +46,7 @@ instance Applicative Prob where
 
 instance Monad Prob where
   return = pure
-  Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- runProb (f x)]
+  Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- unProb (f x)]
 
 -- Normalize the probability distribution (so probabilities sum to 1), this is to avoid having wrongful percentage distribution
 normalize :: (Ord a) => Prob a -> Prob a
@@ -329,21 +338,30 @@ next t x y = case (t, x, y) of
       ]
   _ -> error "Invalid state or action combination"
 
+-- PJ: It looks like you use type OtherProb a = Map a Double instead
+-- of Prob from above. A bit unclear why? (This has a different type
+-- than "meas" in the Idris code. Perhaps useful, but why use the same
+-- name for something different?)
+-- PJ: You also have a third defintion later (called extractValue).
+
 -- Measurement function: computes expectation
 meas :: (State -> Val) -> Map State Double -> Val
 meas f dist = sum [p * f x | (x, p) <- Map.toList dist]
-
+-- PJ: meas is never actually used, it seems
 
 expectation :: (a -> Val) -> Prob a -> Val
 expectation f (Prob xs) = sum [p * f x | (x, p) <- xs]
+-- PJ: this is used a few times, but also extractValue later
 
+
+-- PJ: Why return a Prob Val instead of just Val? [unexplained deviation from the Idris code]
 val :: Int -> PolicySeq -> State -> Prob Val
 val _ [] _ = return 0
 val t (p : ps) x = do
   let y = fromMaybe Unit (Map.lookup x p)
   x' <- next t x y 
-  r <- return (reward t x y x') 
-  v <- val (t + 1) ps x' 
+  let r = reward t x y x'   -- PJ: I simplified this line
+  v <- val (t + 1) ps x'    
   return (r + v)
 
 -- Compute the best extension of a policy sequence
@@ -414,3 +432,33 @@ main = do
     print $ mMeas 0 7 DHU
     print $ mMeas 1 7 DHU
     print $ mMeas 3 7 DHU
+
+-- PJ: test policy
+myPol :: Policy
+myPol = constPol Start
+
+constPol :: Action -> Policy
+constPol a = Map.fromList
+  [ (DHU,a)
+  , (DHC,a)
+  , (DLU,a)
+  , (DLC,a)
+  , (SHU,a) 
+  , (SHC,a)
+  , (SLU,a)
+  , (SLC,a)
+  ]
+
+testVal = val 0 [myPol] DHU 
+{-
+Prob {runProb =
+  [ (1.0,4.899999999999998e-2)
+  , (0.0,2.0999999999999998e-2)
+  , (0.0,2.0999999999999994e-2)
+  , (0.0,9.0e-3)
+  , (1.0,0.24300000000000008)
+  , (0.0,2.7e-2)
+  , (0.0,0.5670000000000001)
+  , (0.0,6.299999999999999e-2)
+  ]}
+-}
