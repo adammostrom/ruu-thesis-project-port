@@ -495,6 +495,11 @@ for b in bests:
     print(b) 
 """
 
+# For comparing outputs with those from the Idris version.
+def run_best(x, y, state):
+    result = best(x, y, state)
+    print(result)
+
 # Returns a value between 0 and 1, where 0 means "does not matter at all"
 # and 1 means "matters maximally" to achieving the defined goal of the SDP.
 def mMeas(t: int, n: int, x: str) -> float:
