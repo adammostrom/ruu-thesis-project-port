@@ -1,5 +1,4 @@
 import copy
-
 import numpy as np
 
 # Defining the set of allowed states in the SDP.
@@ -37,7 +36,6 @@ pU_D = 0.3
 pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
-
 # Checking that no probabilities are negative.
 def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
     dist: dict[str, float] = {}
@@ -45,7 +43,6 @@ def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
         if pr >= 0:
             dist[st] = pr
     return dist
-
 
 # For a current time step, state and action, returns the probabilities of entering each state in the next time step.
 def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
@@ -375,34 +372,39 @@ def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
 test = nextFunc(0, "DHU", "Start")
 for k, v in test.items():
     print(k, v) 
-"""
-    
-    
-# print("\nSum of all probabilities: ", sum(test.values()))
 
+print("\nSum of all probabilities: ", sum(test.values()))
+"""
 
 # Reward function.
 def reward(t: int, x: str, y: str, next_x: str) -> int:
     # Value is added for transitioning into states which do not have low economic
     # output and at the same time are not comitted to severe future climate change.
-    return 1 if next_x in ["DHU", "SHU"] else 0
+    return 1.0 if next_x in ["DHU", "SHU"] else 0.0
 
-def meas(val: float, pr: float) -> float: # In default implementation, returns the expected value.
-    return val * pr
+# Function defining how to add rewards together.
+def add(a: float, b: float) -> float:
+    return a + b # In default implementation, returns regular floating point addition.
 
-# print(reward(0, "DHU", "Start", "DHU"))
+# Function for measuring a certain value.
+def meas(val: float, pr: float) -> float:
+    return val * pr # In default implementation, returns the expected value.
+
+# Default value of zero-length policy sequences.
+zero = 0
+
 # Computing the total expected value from a policy sequence when starting at time t in state x.
 def val(t: int, ps: list[dict[str, str]], x: str) -> float:
-    value = 0
+    value = zero
     if len(ps) == 0:
         return value
     y = ps[0][x]
     m_next = nextFunc(t, x, y)
     for x_prim, pr in m_next.items():
-        value += meas(reward(t, x, y, x_prim) + val(t+1, ps[1:], x_prim), pr)
+        value += meas(add(reward(t, x, y, x_prim), val(t+1, ps[1:], x_prim)), pr)
     return value
 
-
+"""
 # Test of val function.
 ps_test_start = [
     {"DHU": "Start"},
@@ -432,8 +434,8 @@ ps_test_delay = [
     },
 ]
 
-# print(val(0, ps_test_start, "DHU"), val(0, ps_test_delay, "DHU"))
-
+print(val(0, ps_test_start, "DHU"), val(0, ps_test_delay, "DHU"))
+"""
 
 # Computes the best single policy to add to an existing policy sequence.
 def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
@@ -455,15 +457,15 @@ def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
             p = {state: action}
             value = val(t, [p] + ps_tail, state)
             # Choose the action with the highest expected value
-            if value > best_value:
+            if value >= best_value:
                 best_value = value
                 best_action = action
 
         policy[state] = best_action
 
-    return policy  # Builds an optimal policy sequence by recursively adding the best extension (starting from the end).
+    return policy  
 
-
+# Builds an optimal policy sequence by recursively adding the best extension (starting from the end).
 def bi(t: int, n: int) -> list[dict[str, str]]:
     if n == 0:
         return []
@@ -472,9 +474,7 @@ def bi(t: int, n: int) -> list[dict[str, str]]:
         p = bestExt(t, ps_tail)
         return [p] + ps_tail
 
-    # For a given time step, state and decision horizon, returns the optimal action and the
-
-
+# For a given time step, state and decision horizon, returns the optimal action and the
 # expected value of the sequence it starts (assuming the rest of the sequence is optimal).
 def best(t: int, n: int, x: str) -> str:
     if n <= 0:
@@ -484,7 +484,6 @@ def best(t: int, n: int, x: str) -> str:
     b = p[x]
     vb = val(t, [p] + ps, x)
     return f"Horizon, best, value : {n}, {b}, {vb}"
-
 
 """ 
 # Computing the best decision for different decision horizons.
@@ -496,8 +495,7 @@ for b in bests:
     print(b) 
 """
 
-
-    # Returns a value between 0 and 1, where 0 means "does not matter at all"
+# Returns a value between 0 and 1, where 0 means "does not matter at all"
 # and 1 means "matters maximally" to achieving the defined goal of the SDP.
 def mMeas(t: int, n: int, x: str) -> float:
     if x in ["SHU", "SHC", "SLU", "SLC"]:
@@ -515,9 +513,8 @@ def mMeas(t: int, n: int, x: str) -> float:
 
         return (best_action_val - worst_action_val) / best_action_val
 
-    # Comparing mMeas values to those of the article
-
 """ 
+# Comparing mMeas values to those of the article
 print(mMeas(0, 4, "SHU"))
 print(mMeas(0, 6, "SLC"))
 print(mMeas(0, 7, "DHU"))
