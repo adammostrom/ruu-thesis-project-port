@@ -1,10 +1,19 @@
 import copy
 import numpy as np
 
-# Defining the set of allowed states in the SDP.
+# Set of the allowed states in the SDP.
 states = ["DHU", "DHC", "DLU", "DLC", "SHU", "SHC", "SLU", "SLC"]
 
-# Defining the probabilities for the transition function.
+# Function that returns the possible actions in any allowed state.
+def actions(x: str) -> list[str] | list[None]:
+    if x in ["DHU", "DHC", "DLU", "DLC"]:
+        return ["Start", "Delay"]
+    elif x in ["SHU", "SHC", "SLU", "SLC"]:
+        return [None]
+    else:
+        return ValueError(f'Invalid State: "{x}"')
+
+# Probabilities for the transition function.
 pS_Start = 0.9
 pD_Start = 1.0 - pS_Start
 
@@ -36,7 +45,8 @@ pU_D = 0.3
 pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
-# Checking that no probabilities are negative.
+# Function that checks that no probabilities are negative, and then
+# returns probabilities for entering all states in next time step.
 def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
     dist: dict[str, float] = {}
     for st, pr in pairs:
@@ -47,6 +57,8 @@ def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
 # For a current time step, state and action, returns the probabilities of entering each state in the next time step.
 def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
     # "y" can be "Start", "Delay", or None for S-states.
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")    
     if t == 0:
         # CASE: t == 0
         if x == "DHU":
@@ -380,6 +392,14 @@ print("\nSum of all probabilities: ", sum(test.values()))
 def reward(t: int, x: str, y: str, next_x: str) -> int:
     # Value is added for transitioning into states which do not have low economic
     # output and at the same time are not comitted to severe future climate change.
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if x not in states:
+        raise ValueError(f"Invalid state: '{x}'")
+    if y not in actions(x):
+        raise ValueError(f"Invalid action: '{y}'")
+    if next_x not in states:
+        raise ValueError(f"Invalid next state: '{next_x}'")
     return 1.0 if next_x in ["DHU", "SHU"] else 0.0
 
 # Function defining how to add rewards together.
