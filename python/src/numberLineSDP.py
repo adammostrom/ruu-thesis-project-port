@@ -166,7 +166,7 @@ def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
                 raise ValueError("Invalid control for state=2.")
         else:
             raise ValueError(f"Invalid state: {x}")
-        
+      
 # Reward function.
 def reward(t: int, x: str, y: str, next_x: str) -> int:
     # Value is added for transitioning into states which do not have low economic
@@ -244,12 +244,14 @@ def best(t: int, n: int, x: str) -> str:
     return f"Horizon, best, value : {n}, {b}, {vb}"
 
 # Computing the best decision for different decision horizons.
+"""
 bests = []
 for i in range(1, 3):
     bests.append(best(0, i, "2"))
 
 for b in bests:
     print(b)
+"""
 
 # Returns a value between 0 and 1, where 0 means "does not matter at all"
 # and 1 means "matters maximally" to achieving the defined goal of the SDP.
