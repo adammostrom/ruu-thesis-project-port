@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
 from mainFile import nextFunc as nextFunc
 from numberLineSDP import nextFunc as nextFuncSimple
 
-class RewardTest(unittest.TestCase):
+class NextTest(unittest.TestCase):
     
     def assertDictAlmostEqual(self, predicted, expected):
         self.assertEqual(set(predicted.keys()), set(expected.keys()))

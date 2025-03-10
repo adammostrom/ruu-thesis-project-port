@@ -6,10 +6,10 @@ states = ["-2", "-1", "0", "1", "2"]
 
 # Function that returns the possible actions in any allowed state.
 def actions(x: str) -> list[str] | list[None]:
-    if x in ["-2", "-1", "0", "1", "2"]:
-        return ["Left", "Stay", "Right"]
+    if x in states:
+        return ["Left", "Right", "Stay"]
     else:
-        return ValueError(f'Invalid State: "{x}"')
+        raise ValueError(f"Invalid State: '{x}'.")
 
 # Defining the probabilities for the transition function.
 pL_Left = 0.85
@@ -183,16 +183,26 @@ def reward(t: int, x: str, y: str, next_x: str) -> int:
 
 # Function defining how to add rewards together.
 def add(a: float, b: float) -> float:
+    if type(a) != float or type(b) != float:
+        raise TypeError(f"Inputs must be of type 'float', not '{type(a).__name__}' and '{type(b).__name__}'.")
     return a + b # In default implementation, returns regular floating point addition.
 
 # Function for measuring a certain value.
 def meas(val: float, pr: float) -> float:
+    if type(val) != float or type(pr) != float:
+        raise TypeError(f"Inputs must be of type 'float', not '{type(val).__name__}' and '{type(pr).__name__}'.")
     return val * pr # In default implementation, returns the expected value.
 
 # Default value of zero-length policy sequences.
-zero = 0
+zero = 0.0
 # Computing the total expected value from a policy sequence when starting at time t in state x.
 def val(t: int, ps: list[dict[str, str]], x: str) -> float:
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if type(ps) != list:
+        raise TypeError(f"Invalid policy list, must be list of dictionaries (or empty list).")
+    if x not in states:
+        raise ValueError(f"Invalid state: '{x}'")
     value = zero
     if len(ps) == 0:
         return value
@@ -210,12 +220,12 @@ def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
         best_value = -np.inf
         best_action = None
 
-        for action in ["Left", "Stay", "Right"]:
+        for action in actions(state):
             # Calculate value of taking action in state
             p = {state: action}
             value = val(t, [p] + ps_tail, state)
             # Choose the action with the highest expected value
-            if value > best_value:
+            if value >= best_value:
                 best_value = value
                 best_action = action
 
@@ -236,7 +246,7 @@ def bi(t: int, n: int) -> list[dict[str, str]]:
 # expected value of the sequence it starts (assuming the rest of the sequence is optimal).
 def best(t: int, n: int, x: str) -> str:
     if n <= 0:
-        raise (ValueError("The horizon must be greater than zero!"))
+        raise ValueError("The horizon must be greater than zero!")
     ps = bi(t + 1, n - 1)
     p = bestExt(t, ps)
     b = p[x]
