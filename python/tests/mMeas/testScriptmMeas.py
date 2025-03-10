@@ -13,7 +13,7 @@ sys.path.insert(0, src_path)
 
 
 # Import after fixing the path
-from mainFile import mMeas  # Should work now!
+from mainFile import mMeas
 
 
 class TestmMeasFunctionFromCSV(unittest.TestCase):
@@ -46,7 +46,6 @@ class TestmMeasFunctionFromCSV(unittest.TestCase):
 
                     print(f"Testing with: state={state}, x={x}, y={y}")
 
-                    # Run the function
                     result = self.run_mMeas(state, x, y)
                     
                     print(f"Raw output from mMeas: {result}")
@@ -54,18 +53,19 @@ class TestmMeasFunctionFromCSV(unittest.TestCase):
                     # Expected values from CSV
                     expected_value = float(test["Value"])
                     
-                    # Write input, expected output, and actual output to file
-                    
-                    log_file.write(f"Expected Output: Value = {expected_value}\n")
-                    log_file.write(f"Value={result}\n")
-                    log_file.write(f"Input: {x} {y} {state}\n")
-                    log_file.write(f"----------------------------------------------------------------------------------")
+
                     try:
                         self.assertAlmostEqual(result, expected_value, places=5)
-                        log_file.write("PASS")
+                        log_file.write("[PASS]")
                     except AssertionError as e:
                         # Write only the short error message
-                        log_file.write(f"FAIL: {str(e).split(':')[-1].strip()}\n")
+                        log_file.write(f"[FAIL]: {str(e).split(':')[-1].strip()}\n")
+                        
+                    log_file.write(f" for input = {x} {y} {state}\n")
+                    log_file.write(f"Expected Value        = {expected_value}\n")
+                    log_file.write(f"Actual Value          = {result}\n")
+
+                    log_file.write(f"+--------------------------------------------------+")
 
                     log_file.write("\n")  # Add spacing between test cases
 
