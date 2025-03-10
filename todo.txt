@@ -4,9 +4,7 @@
 [#] Merge with Main
 [#] Start with new function for testing (exec mMeas ), 
 [ ] Email Botta
-[#] Skriva klart reflection (CompSec)
-[ ] Börja med CompSec module 11
-
+[ ] Extend testing av "best" function för exhaustive testing.
 
 
 ### ATT TESTA:

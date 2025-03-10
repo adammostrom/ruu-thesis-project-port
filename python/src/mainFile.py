@@ -507,6 +507,12 @@ def mMeas(t: int, n: int, x: str) -> float:
     else:
         ps = bi(t, n)
         ps_prim = copy.deepcopy(ps)
+
+        # Added this check for empty list / AM
+        if len(ps_prim) == 0:
+            return 0
+    
+    
         if ps[0][x] == "Start":
             ps_prim[0][x] = "Delay"
         else:
@@ -515,7 +521,7 @@ def mMeas(t: int, n: int, x: str) -> float:
         best_action_val = val(t, ps, x)
         worst_action_val = val(t, ps_prim, x)
 
-        return (best_action_val - worst_action_val) / best_action_val
+        return (best_action_val - worst_action_val) / best_action_val if best_action_val != 0 else 0 # Added this as the test gave float division by zero error. /AM
 
     # Comparing mMeas values to those of the article
     
