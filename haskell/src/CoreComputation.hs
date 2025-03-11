@@ -34,15 +34,7 @@ type PolicySeq = [Policy]
 newtype Prob a = Prob {unProb :: [(a, Double)]}
   deriving (Show, Functor)
 
-runProb :: Eq a => Prob a -> [(a, Double)]
-runProb = collectAndSumEqual . unProb
 
-collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
-collectAndSumEqual aps =
-  let support = nub (map fst aps)
-  in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
-         support
-         
 -- Implementing Monad instance
 instance Applicative Prob where
   pure x = Prob [(x, 1)] 
@@ -51,6 +43,18 @@ instance Applicative Prob where
 instance Monad Prob where
   return = pure
   Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- unProb (f x)]
+
+
+runProb :: Eq a => Prob a -> [(a, Double)]
+runProb = collectAndSumEqual . unProb
+
+collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
+collectAndSumEqual aps =
+  let support = nub (map fst aps)
+  in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
+          support
+          
+
 
 -- Normalize the probability distribution (so probabilities sum to 1), this is to avoid having wrongful percentage distribution
 normalize :: (Ord a) => Prob a -> Prob a
@@ -62,6 +66,10 @@ normalize (Prob xs) =
 -- Extract the probability of a state from a Prob State
 getProb :: State -> Prob State -> Maybe Double
 getProb state probState = lookup state (runProb probState)
+
+-- Extract the list of (State, Double) pairs from a Prob State (mainly for testing purposes)
+unwrapProbState :: Prob State -> [(State, Double)]
+unwrapProbState (Prob prob)= prob
 
 
 pS_Start :: Double
