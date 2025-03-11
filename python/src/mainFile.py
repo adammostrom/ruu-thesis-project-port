@@ -455,7 +455,7 @@ def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
             p = {state: action}
             value = val(t, [p] + ps_tail, state)
             # Choose the action with the highest expected value
-            if value > best_value:
+            if value >= best_value:
                 best_value = value
                 best_action = action
 
