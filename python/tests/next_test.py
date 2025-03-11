@@ -51,7 +51,7 @@ class NextTest(unittest.TestCase):
         self.assertDictAlmostEqual(nextFunc(0, "SHC", None), {"SHC": 0.7, "SLC": 0.3})
         self.assertDictAlmostEqual(nextFunc(1, "SHC", None), {"SHC": 0.7, "SLC": 0.3})
 
-    # def test_errors(self):
+    def test_errors(self):
         self.assertRaises(ValueError, nextFunc, 1.5, "DHU", "Start")
         self.assertRaises(ValueError, nextFunc, -1, "DHU", "Start")
         self.assertRaises(ValueError, nextFunc, 0, "InvalidState", "Start")
