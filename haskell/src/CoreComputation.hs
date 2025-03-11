@@ -13,12 +13,16 @@ import Data.Maybe (fromMaybe)
 import Data.Ord (comparing)
 
 data Action = Start | Delay | Unit
-  deriving (Show, Eq, Enum, Ord)
+  deriving (Show, Eq, Enum, Ord, Read)
 
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
-  deriving (Show, Eq, Enum, Ord)
+  deriving (Show, Eq, Enum, Ord, Read)
 
 type Val = Double
+type Nat = Int
+type Time = Int
+type Horizon = Int
+
 
 -- A policy maps states to actions
 type Policy = Map State Action
@@ -54,7 +58,12 @@ normalize (Prob xs) =
   let total = sum (map snd xs)
    in Prob [(x, p / total) | (x, p) <- xs, total > 0]
 
--- 
+
+-- Extract the probability of a state from a Prob State
+getProb :: State -> Prob State -> Maybe Double
+getProb state probState = lookup state (runProb probState)
+
+
 pS_Start :: Double
 pS_Start = 0.9
 
@@ -354,6 +363,7 @@ expectation f (Prob xs) = sum [p * f x | (x, p) <- xs]
 -- PJ: this is used a few times, but also extractValue later
 
 
+
 -- PJ: Why return a Prob Val instead of just Val? [unexplained deviation from the Idris code]
 val :: Int -> PolicySeq -> State -> Prob Val
 val _ [] _ = return 0
@@ -398,7 +408,7 @@ bi t n =
    in p : ps_tail
 
 -- Compute the best action and expected value for a given time, state, and horizon
-best :: Int -> Int -> State -> (Action, Val)
+best :: Int -> Int -> State -> (Int, Action, Val)
 best t n x
   | n == 0 = error "Horizon must be greater than zero!"
   | otherwise =
@@ -406,7 +416,7 @@ best t n x
           p = best_ext t ps
           b = fromMaybe Unit (Map.lookup x p)
           vb = expectation id (val t (p : ps) x)
-       in (b, vb)
+       in (n, b, vb)
 
 -- Compute how much a state matters for optimal decision-making
 mMeas :: Int -> Int -> State -> Double
@@ -422,6 +432,21 @@ mMeas t n x
           worstVal = expectation id (val t ps' x)
        in (bestVal - worstVal) / bestVal
 
+
+
+
+
+worstExt :: PolicySeq -> Policy
+worstExt _ = undefined -- Placeholder
+
+-- Extract head and tail of policy sequences
+headPolicy :: PolicySeq -> Maybe Policy
+headPolicy [] = Nothing
+headPolicy (p:ps) = Just p
+
+tailPolicy :: PolicySeq -> Maybe PolicySeq
+tailPolicy [] = Nothing
+tailPolicy (p:ps) = Just ps
 
 -- Comparing mMeas values to those of the article, testing.
 main :: IO ()
