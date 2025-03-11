@@ -1158,1629 +1158,1165 @@ Actual Output   : Horizon = 6 | Best = Start | Value = 1.7075259076210798
 Expected Output : Horizon = 7 | Best = Start | Value = 1.929786715225345
 Actual Output   : Horizon = 7 | Best = Start | Value = 1.9297867152253452
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 0, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 1, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 2, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 3, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 4, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 5, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 6, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DHC, time = 7, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
 [PASS]
  for input: state = DLU, time = 0, horizon = 1
@@ -3942,1629 +3478,1165 @@ Actual Output   : Horizon = 6 | Best = Start | Value = 1.4397507638815217
 Expected Output : Horizon = 7 | Best = Start | Value = 1.661646772790838
 Actual Output   : Horizon = 7 | Best = Start | Value = 1.6616467727908382
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 0, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 1, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 2, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 3, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 4, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 5, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 6, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 1
 Expected Output : Horizon = 1 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 1 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 1 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 2
 Expected Output : Horizon = 2 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 2 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 2 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 3
 Expected Output : Horizon = 3 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 3 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 3 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 4
 Expected Output : Horizon = 4 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 4 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 4 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 5
 Expected Output : Horizon = 5 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 5 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 5 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 6
 Expected Output : Horizon = 6 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 6 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 6 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
-[FAIL]: 'Start' != 'Delay'
-- Start
-+ Delay
+[PASS]
  for input: state = DLC, time = 7, horizon = 7
 Expected Output : Horizon = 7 | Best = Delay | Value = 0.0
-Actual Output   : Horizon = 7 | Best = Start | Value = 0.0
+Actual Output   : Horizon = 7 | Best = Delay | Value = 0.0
 +------------------------------------------------------------------------------------+
 [PASS]
  for input: state = SHU, time = 0, horizon = 1
