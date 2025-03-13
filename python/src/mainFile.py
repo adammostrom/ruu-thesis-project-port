@@ -387,7 +387,7 @@ def reward(t: int, x: str, y: str, next_x: str) -> int:
     # output and at the same time are not comitted to severe future climate change.
     return 1 if next_x in ["DHU", "SHU"] else 0
 
--- PJ: A bit confusing to use the same name (meas) for a different operation
+# PJ: A bit confusing to use the same name (meas) for a different operation
 def meas(val: float, pr: float) -> float: # In default implementation, returns the expected value.
     return val * pr
 

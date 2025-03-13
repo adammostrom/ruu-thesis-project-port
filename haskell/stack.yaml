@@ -1,0 +1,6 @@
+resolver: lts-18.28
+
+extra-deps:
+  - hcg-minus-0.15@sha256:cdc82064814d37ae139db8b06dea8fd7db4696332299362af90ff4f0c58fa0bc,953
+  - hps-0.15@sha256:47ced9cebc0ef07d21dd2ff01bf68e1d97ad14b8c6206bcf709dc8616f0b2b83,1653
+

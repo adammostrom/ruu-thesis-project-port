@@ -338,6 +338,8 @@ next t x y = case (t, x, y) of
       ]
   _ -> error "Invalid state or action combination"
 
+
+
 -- PJ: It looks like you use type OtherProb a = Map a Double instead
 -- of Prob from above. A bit unclear why? (This has a different type
 -- than "meas" in the Idris code. Perhaps useful, but why use the same
@@ -353,16 +355,18 @@ expectation :: (a -> Val) -> Prob a -> Val
 expectation f (Prob xs) = sum [p * f x | (x, p) <- xs]
 -- PJ: this is used a few times, but also extractValue later
 
+-- Added helper function / AM
+extractState :: Prob State -> State
+extractState (Prob xs) = fst $ head xs
+
 
 -- PJ: Why return a Prob Val instead of just Val? [unexplained deviation from the Idris code]
-val :: Int -> PolicySeq -> State -> Prob Val
-val _ [] _ = return 0
-val t (p : ps) x = do
+val :: Int -> PolicySeq -> State -> Val
+val _ [] _ = 0
+val t (p : ps) x = 
   let y = fromMaybe Unit (Map.lookup x p)
-  x' <- next t x y 
-  let r = reward t x y x'   -- PJ: I simplified this line
-  v <- val (t + 1) ps x'    
-  return (r + v)
+      mNext = runProb $ next t x y
+  in sum [pr * (reward t x y x' + val (t + 1) ps x') | (x', pr) <- mNext]
 
 -- Compute the best extension of a policy sequence
 best_ext :: Int -> PolicySeq -> Policy
@@ -376,7 +380,7 @@ best_ext t ps_tail = Map.fromList $ map bestAction states
       if state `elem` states
         then
           let 
-              actionValues = [(action, extractValue (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
+              actionValues = [(action,  (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
               
               best = maximumBy (comparing snd) actionValues
            in (state, fst best)
@@ -405,7 +409,7 @@ best t n x
       let ps = bi (t + 1) (n - 1)
           p = best_ext t ps
           b = fromMaybe Unit (Map.lookup x p)
-          vb = expectation id (val t (p : ps) x)
+          vb =  (val t (p : ps) x)
        in (b, vb)
 
 -- Compute how much a state matters for optimal decision-making
@@ -418,8 +422,8 @@ mMeas t n x
             if Map.lookup x (head ps) == Just Start
               then (Map.insert x Delay (head ps)) : tail ps
               else (Map.insert x Start (head ps)) : tail ps
-          bestVal = expectation id (val t ps x)
-          worstVal = expectation id (val t ps' x)
+          bestVal =  (val t ps x)
+          worstVal =  (val t ps' x)
        in (bestVal - worstVal) / bestVal
 
 
