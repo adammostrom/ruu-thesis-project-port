@@ -1,16 +1,4 @@
-{-# HLINT ignore "Use camelCase" #-}
-{-# LANGUAGE DeriveFunctor #-}
-{-# LANGUAGE RankNTypes #-}
-{-# LANGUAGE ImportQualifiedPost #-}
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
-
-module CoreComputation where
-
-import Data.List (maximumBy, nub)
-import Data.Map (Map)
-import Data.Map qualified as Map
-import Data.Maybe (fromMaybe)
-import Data.Ord (comparing)
+module Specification where
 
 data Action = Start | Delay | Unit
   deriving (Show, Eq, Enum, Ord)
@@ -18,44 +6,11 @@ data Action = Start | Delay | Unit
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
   deriving (Show, Eq, Enum, Ord)
 
-type Val = Double
 
--- A policy maps states to actions
-type Policy = Map State Action
+-- Helper: Ensure probabilities are non-negative
+mkSimpleProb :: [(State, Double)] -> Prob State
+mkSimpleProb = Prob . filter (\(_, p) -> p >= 0)
 
--- A sequence of policies
-type PolicySeq = [Policy]
-
--- Probability distribution monad
-newtype Prob a = Prob {unProb :: [(a, Double)]}
-  deriving (Show, Functor)
-
-runProb :: Eq a => Prob a -> [(a, Double)]
-runProb = collectAndSumEqual . unProb
-
-collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
-collectAndSumEqual aps =
-  let support = nub (map fst aps)
-  in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
-         support
-         
--- Implementing Monad instance
-instance Applicative Prob where
-  pure x = Prob [(x, 1)] 
-  Prob fs <*> Prob xs = Prob [(f x, p * q) | (f, p) <- fs, (x, q) <- xs]
-
-instance Monad Prob where
-  return = pure
-  Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- unProb (f x)]
-
--- Normalize the probability distribution (so probabilities sum to 1), this is to avoid having wrongful percentage distribution
--- CURRENTLY NOT USED
-normalize :: (Ord a) => Prob a -> Prob a
-normalize (Prob xs) =
-  let total = sum (map snd xs)
-   in Prob [(x, p / total) | (x, p) <- xs, total > 0]
-
--- 
 pS_Start :: Double
 pS_Start = 0.9
 
@@ -128,19 +83,6 @@ pC_S = (1.0 - pU_S)
 pC_D :: Double
 pC_D = (1.0 - pU_D)
 
--- Helper: Ensure probabilities are non-negative
-mkSimpleProb :: [(State, Double)] -> Prob State
-mkSimpleProb = Prob . filter (\(_, p) -> p >= 0)
-
-
-{-
-- Reward function
-
-Value is added for transitioning into states which do not have low economic
-output and at the same time are not comitted to severe future climate change.
--}
-reward :: Int -> State -> Action -> State -> Val
-reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 
 -- The next function imolemented as cases
 next :: Int -> State -> Action -> Prob State
@@ -338,137 +280,3 @@ next t x y = case (t, x, y) of
         (SLC, pL_S_SL)
       ]
   _ -> error "Invalid state or action combination"
-
-
-
--- PJ: It looks like you use type OtherProb a = Map a Double instead
--- of Prob from above. A bit unclear why? (This has a different type
--- than "meas" in the Idris code. Perhaps useful, but why use the same
--- name for something different?)
--- PJ: You also have a third defintion later (called extractValue).
-
--- Measurement function: computes expectation
--- CURRENTLY NOT USED
-meas :: (State -> Val) -> Map State Double -> Val
-meas f dist = sum [p * f x | (x, p) <- Map.toList dist]
--- PJ: meas is never actually used, it seems
-
-expectation :: (a -> Val) -> Prob a -> Val
-expectation f (Prob xs) = sum [p * f x | (x, p) <- xs]
--- PJ: this is used a few times, but also extractValue later
-
--- Extract numeric value from Prob Val (i.e., compute the expected value)
-extractValue :: Prob Val -> Double
-extractValue (Prob xs) = sum [p * value x | (x, p) <- xs]
-  where
-    value :: Val -> Double
-    value = id 
-
-
--- Added helper function / AM
--- CURRENTLY NOT USED
-extractState :: Prob State -> State
-extractState (Prob xs) = fst $ head xs
-
-
--- PJ: Why return a Prob Val instead of just Val? [unexplained deviation from the Idris code]
-val :: Int -> PolicySeq -> State -> Val
-val _ [] _ = 0
-val t (p : ps) x = 
-  let y = fromMaybe Unit (Map.lookup x p)
-      mNext = runProb $ next t x y
-  in sum [pr * (reward t x y x' + val (t + 1) ps x') | (x', pr) <- mNext]
-
--- Compute the best extension of a policy sequence
-best_ext :: Int -> PolicySeq -> Policy
-best_ext t ps_tail = Map.fromList $ map bestAction states
-  where
-    states = [DHU, DHC, DLU, DLC]
-    actions = [Start, Delay]
-
-    -- Helper function to determine the best action for a given state
-    bestAction state =
-      if state `elem` states
-        then
-          let 
-              actionValues = [(action, val t (Map.singleton state action : ps_tail) state) | action <- actions]
-              
-              best = maximumBy (comparing snd) actionValues
-           in (state, fst best)
-        else (state, Start) 
-
-
-
--- Recursively build an optimal policy sequence
-bi :: Int -> Int -> PolicySeq
-bi _ 0 = []
-bi t n =
-  let ps_tail = bi (t + 1) (n - 1)
-      p = best_ext t ps_tail
-   in p : ps_tail
-
--- Compute the best action and expected value for a given time, state, and horizon
-best :: Int -> Int -> State -> (Action, Val)
-best t n x
-  | n == 0 = error "Horizon must be greater than zero!"
-  | otherwise =
-      let ps = bi (t + 1) (n - 1)
-          p = best_ext t ps
-          b = fromMaybe Unit (Map.lookup x p)
-          vb =  (val t (p : ps) x)
-       in (b, vb)
-
--- Compute how much a state matters for optimal decision-making
-mMeas :: Int -> Int -> State -> Double
-mMeas t n x
-  | x `elem` [SHU, SHC, SLU, SLC] = 0
-  | otherwise =
-      let ps = bi t n
-          ps' =
-            if Map.lookup x (head ps) == Just Start
-              then (Map.insert x Delay (head ps)) : tail ps
-              else (Map.insert x Start (head ps)) : tail ps
-          bestVal =  (val t ps x)
-          worstVal =  (val t ps' x)
-       in (bestVal - worstVal) / bestVal
-
-
--- Comparing mMeas values to those of the article, testing.
-main :: IO ()
-main = do
-    putStrLn "Testing mMeas function..."
-    print $ mMeas 0 4 DHU
-    print $ mMeas 0 6 SLC
-    print $ mMeas 0 7 DHU
-    print $ mMeas 1 7 DHU
-    print $ mMeas 3 7 DHU
-
--- PJ: test policy
-myPol :: Policy
-myPol = constPol Start
-
-constPol :: Action -> Policy
-constPol a = Map.fromList
-  [ (DHU,a)
-  , (DHC,a)
-  , (DLU,a)
-  , (DLC,a)
-  , (SHU,a) 
-  , (SHC,a)
-  , (SLU,a)
-  , (SLC,a)
-  ]
-
-testVal = val 0 [myPol] DHU 
-{-
-Prob {runProb =
-  [ (1.0,4.899999999999998e-2)
-  , (0.0,2.0999999999999998e-2)
-  , (0.0,2.0999999999999994e-2)
-  , (0.0,9.0e-3)
-  , (1.0,0.24300000000000008)
-  , (0.0,2.7e-2)
-  , (0.0,0.5670000000000001)
-  , (0.0,6.299999999999999e-2)
-  ]}
--}
