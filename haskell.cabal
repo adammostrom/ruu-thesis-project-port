@@ -12,30 +12,31 @@ common warnings
     ghc-options: -Wall
 
 
--- Add more modules that need to be exposed as the project grows
 library
-  hs-source-dirs:      haskell/src
+  hs-source-dirs:      haskell/src, haskell/tests
   default-extensions:  DeriveFunctor
   build-depends:       base >= 4.14 && < 5, 
                        containers,
                        QuickCheck
   default-language:     GHC2021
 
+  exposed-modules:     CoreComputation
 
 executable haskell
     import:           warnings
-    --Changed from Main.hs to CoreComputation.hs
+    -- Changed from Main.hs to CoreComputation.hs
     main-is:          Main.hs
     hs-source-dirs:   haskell/src
     build-depends:    base ^>=4.17.2.1,
                       QuickCheck,
-                      containers
+                      containers,
+                      haskell
     default-language: GHC2021  
 
--- Add test suites like this one for each module that is being tested. 
+
 test-suite tests
   type:               exitcode-stdio-1.0
-  main-is:            testBest.hs
+  main-is:            ExhaustiveTestBest.hs
   other-modules:      CoreComputation
   hs-source-dirs:     haskell/tests, haskell/src
   build-depends:  base >= 4.14 && < 5,

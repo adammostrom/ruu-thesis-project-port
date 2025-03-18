@@ -13,12 +13,16 @@ import Data.Maybe (fromMaybe)
 import Data.Ord (comparing)
 
 data Action = Start | Delay | Unit
-  deriving (Show, Eq, Enum, Ord)
+  deriving (Show, Eq, Enum, Ord, Read)
 
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
-  deriving (Show, Eq, Enum, Ord)
+  deriving (Show, Eq, Enum, Ord, Read)
 
 type Val = Double
+type Nat = Int
+type Time = Int
+type Horizon = Int
+
 
 -- A policy maps states to actions
 type Policy = Map State Action
@@ -30,15 +34,7 @@ type PolicySeq = [Policy]
 newtype Prob a = Prob {unProb :: [(a, Double)]}
   deriving (Show, Functor)
 
-runProb :: Eq a => Prob a -> [(a, Double)]
-runProb = collectAndSumEqual . unProb
 
-collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
-collectAndSumEqual aps =
-  let support = nub (map fst aps)
-  in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
-         support
-         
 -- Implementing Monad instance
 instance Applicative Prob where
   pure x = Prob [(x, 1)] 
@@ -48,6 +44,18 @@ instance Monad Prob where
   return = pure
   Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- unProb (f x)]
 
+
+runProb :: Eq a => Prob a -> [(a, Double)]
+runProb = collectAndSumEqual . unProb
+
+collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
+collectAndSumEqual aps =
+  let support = nub (map fst aps)
+  in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
+          support
+          
+
+
 -- Normalize the probability distribution (so probabilities sum to 1), this is to avoid having wrongful percentage distribution
 -- CURRENTLY NOT USED
 normalize :: (Ord a) => Prob a -> Prob a
@@ -55,7 +63,16 @@ normalize (Prob xs) =
   let total = sum (map snd xs)
    in Prob [(x, p / total) | (x, p) <- xs, total > 0]
 
--- 
+
+-- Extract the probability of a state from a Prob State
+getProb :: State -> Prob State -> Maybe Double
+getProb state probState = lookup state (runProb probState)
+
+-- Extract the list of (State, Double) pairs from a Prob State (mainly for testing purposes)
+unwrapProbState :: Prob State -> [(State, Double)]
+unwrapProbState (Prob prob)= prob
+
+
 pS_Start :: Double
 pS_Start = 0.9
 
@@ -408,7 +425,7 @@ bi t n =
    in p : ps_tail
 
 -- Compute the best action and expected value for a given time, state, and horizon
-best :: Int -> Int -> State -> (Action, Val)
+best :: Int -> Int -> State -> (Int, Action, Val)
 best t n x
   | n == 0 = error "Horizon must be greater than zero!"
   | otherwise =
@@ -416,7 +433,7 @@ best t n x
           p = best_ext t ps
           b = fromMaybe Unit (Map.lookup x p)
           vb =  (val t (p : ps) x)
-       in (b, vb)
+       in (n, b, vb)
 
 -- Compute how much a state matters for optimal decision-making
 mMeas :: Int -> Int -> State -> Double
@@ -432,6 +449,21 @@ mMeas t n x
           worstVal =  (val t ps' x)
        in (bestVal - worstVal) / bestVal
 
+
+
+
+
+worstExt :: PolicySeq -> Policy
+worstExt _ = undefined -- Placeholder
+
+-- Extract head and tail of policy sequences
+headPolicy :: PolicySeq -> Maybe Policy
+headPolicy [] = Nothing
+headPolicy (p:ps) = Just p
+
+tailPolicy :: PolicySeq -> Maybe PolicySeq
+tailPolicy [] = Nothing
+tailPolicy (p:ps) = Just ps
 
 -- Comparing mMeas values to those of the article, testing.
 main :: IO ()
