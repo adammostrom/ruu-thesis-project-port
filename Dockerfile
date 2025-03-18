@@ -10,9 +10,21 @@ RUN apt-get update && apt-get install -y \
     wget \
     git \
     build-essential \
-    python3 \
-    python3-pip \
-    python3-venv \
+    software-properties-common \
+    lsb-release \
+    ca-certificates \
+    gnupg \
+    && apt-get clean
+
+# Add the deadsnakes repository to install Python 3.10
+RUN curl -fsSL https://packages.python.org/debian/python3.10/deadsnakes-archive-keyring.asc | tee /etc/apt/trusted.gpg.d/deadsnakes.asc
+RUN echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu focal main" > /etc/apt/sources.list.d/deadsnakes-ppa.list
+
+# Install Python 3.10 and necessary packages
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3.10-pip \
+    python3.10-venv \
     ghc \
     cabal-install \
     && apt-get clean
@@ -21,8 +33,8 @@ RUN apt-get update && apt-get install -y \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 ENV PATH="/root/.ghcup/bin:${PATH}"
 
-# Set up Python (create a virtual environment)
-RUN python3 -m venv /venv
+# Set up Python (create a virtual environment with Python 3.10)
+RUN python3.10 -m venv /venv
 ENV PATH="/venv/bin:${PATH}"
 
 # Install Python packages inside the virtual environment
