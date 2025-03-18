@@ -4,6 +4,12 @@ import Text.Read (readMaybe)
 import Text.Printf(printf)
 import Debug.Trace
 
+{-
+This test suite simply covers the immediate functionality of Reward function.
+Simply demonstrated by a property test, validating the implementation of the function "reward".
+-}
+
+
 -- Assuming `best` is defined in a module called `BestModule`
 import CoreComputation (State(..), best, Action(..), reward )
 
@@ -55,7 +61,6 @@ runUnitTests = do
 -- Running QuickCheck property tests
 runQuickCheckTests :: IO ()
 runQuickCheckTests = do
-    putStrLn "Running QuickCheck Property Tests..."
     quickCheck prop_reward
 
 -- Main function that runs both unit tests and QuickCheck tests

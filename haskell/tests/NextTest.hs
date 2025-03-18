@@ -18,14 +18,26 @@ instance Arbitrary State where
                     ,return SLU
                     ,return SLC]
 
+instance Arbitrary Action where
+  arbitrary = oneof [ return Start, return Delay, return Unit]
+
 -- Function to check if the probabilities sum to 1
 validProb :: Prob State -> Bool
 validProb prob = abs (sum (map snd (unwrapProbState prob)) - 1.0) < 1e-6  -- Allow small floating-point errors
 
 -- Property to test if probabilities sum to 1 for each state-action pair
-prop_probSum :: Int -> State -> Action -> Property
-prop_probSum t x y = validProb (next t x y) ==> validProb (next t x y)
+prop_probSum :: Int -> State -> Action -> Bool
+prop_probSum t x y = trace ("Horizon: " ++ show t ++ " State: " ++ show x ++ " Action: " ++ show y) $
+  validProb (next t x y)
+
+
+runQuickCheckTests :: IO()
+runQuickCheckTests = do
+  quickCheck prop_probSum
+
+--quickCheck (prop_probSum 0 DHU Start)
 
 -- Example: Running the test
 main :: IO ()
-main = quickCheck (prop_probSum 0 DHU Start)
+main = do
+  runQuickCheckTests
