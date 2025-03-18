@@ -1,6 +1,7 @@
 module Responsibility where
 
 import Theory
+import Specification
 
 -- best 
 -- Compute the best action and expected value for a given time, state, and horizon
@@ -30,3 +31,23 @@ mMeas t n x
           bestVal =  (val t ps x)
           worstVal =  (val t ps' x)
        in (bestVal - worstVal) / bestVal
+
+
+
+-- BestExt  
+bestExt :: Int -> PolicySeq a -> Policy a
+bestExt t ps_tail = Map.fromList $ map bestAction states
+  where
+    states = [DHU, DHC, DLU, DLC]
+    actions = [Start, Delay]
+
+    -- Helper function to determine the best action for a given state
+    bestAction state =
+      if state `elem` states
+        then
+          let 
+              actionValues = [(action,  (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
+              
+              best = maximumBy (comparing snd) actionValues
+           in (state, fst best)
+        else (state, Start) 
