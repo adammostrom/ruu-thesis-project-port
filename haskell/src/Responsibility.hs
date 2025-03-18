@@ -1,6 +1,6 @@
 module Responsibility where
 
-
+import Theory
 
 -- best 
 -- Compute the best action and expected value for a given time, state, and horizon
@@ -13,7 +13,6 @@ best t n x
           b = fromMaybe Unit (Map.lookup x p)
           vb =  (val t (p : ps) x)
        in (b, vb)
-
 
 
 -- bests

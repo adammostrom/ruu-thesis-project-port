@@ -20,7 +20,7 @@ library
                        QuickCheck
   default-language:     GHC2021
 
-  exposed-modules:     CoreComputation
+  exposed-modules:     CoreComputation, Responsibility, Specification, Theory
 
 executable haskell
     import:           warnings

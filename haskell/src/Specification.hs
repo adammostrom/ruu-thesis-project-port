@@ -1,5 +1,8 @@
 module Specification where
 
+import Theory
+
+
 data Action = Start | Delay | Unit
   deriving (Show, Eq, Enum, Ord)
 
