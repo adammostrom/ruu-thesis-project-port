@@ -59,8 +59,23 @@ reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 -- OptPolicySeq Function
 
 -- BestExt  
-bestExt :: (PolicySeq f, Functor f) => f (Policy (S t)) -> Policy t -> Policy t -> X t -> Bool
-bestExt _ p p' x = (val p' x) <= (val p x)
+best_ext :: Int -> PolicySeq a -> Policy a
+best_ext t ps_tail = Map.fromList $ map bestAction states
+  where
+    states = [DHU, DHC, DLU, DLC]
+    actions = [Start, Delay]
+
+    -- Helper function to determine the best action for a given state
+    bestAction state =
+      if state `elem` states
+        then
+          let 
+              actionValues = [(action,  (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
+              
+              best = maximumBy (comparing snd) actionValues
+           in (state, fst best)
+        else (state, Start) 
+
 -- Define a function for "next" state transition, could be implemented based on your model
 next :: Int -> State a -> Action a -> Prob (State a)
 next _ _ _ = Prob [(State undefined, 1)]  -- Placeholder, replace with actual transition logic
