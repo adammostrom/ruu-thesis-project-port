@@ -66,7 +66,7 @@ getProb state probState = lookup state (runProb probState)
 
 
 pS_Start :: Probability
-pS_Start = 0.8
+pS_Start = 0.9
 
 pD_Start :: Probability
 pD_Start = (1.0 - pS_Start)
