@@ -6,7 +6,7 @@
 
 module CoreComputation where
 
-import Data.List (maximumBy, nub)
+import Data.List (maximumBy, nub, sort)
 import Data.Map (Map)
 import Data.Map qualified as Map
 import Data.Maybe (fromMaybe)
@@ -31,13 +31,14 @@ type Policy = Map State Action
 type PolicySeq = [Policy]
 
 -- Probability distribution monad
-newtype Prob a = Prob {unProb :: [(a, Double)]}
+type Probability = Double
+newtype Prob a = Prob {unProb :: [(a, Probability)]}
   deriving (Show, Functor)
 
-runProb :: Eq a => Prob a -> [(a, Double)]
+runProb :: Eq a => Prob a -> [(a, Probability)]
 runProb = collectAndSumEqual . unProb
 
-collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
+collectAndSumEqual :: Eq a => [(a,Probability)] -> [(a, Probability)]
 collectAndSumEqual aps =
   let support = nub (map fst aps)
   in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
@@ -56,88 +57,88 @@ instance Monad Prob where
 normalize :: (Ord a) => Prob a -> Prob a
 normalize (Prob xs) =
   let total = sum (map snd xs)
-   in Prob [(x, p / total) | (x, p) <- xs, total > 0]
+   in Prob [(x, p / total) | (x, p) <- xs, total > 0]  -- why "total > 0"?
 
 
 -- Extract the probability of a state from a Prob State
-getProb :: State -> Prob State -> Maybe Double
+getProb :: State -> Prob State -> Maybe Probability
 getProb state probState = lookup state (runProb probState)
 
 
-pS_Start :: Double
-pS_Start = 0.9
+pS_Start :: Probability
+pS_Start = 0.8
 
-pD_Start :: Double
+pD_Start :: Probability
 pD_Start = (1.0 - pS_Start)
 
-pD_Delay :: Double
+pD_Delay :: Probability
 pD_Delay = 0.9
 
-pS_Delay :: Double
+pS_Delay :: Probability
 pS_Delay = (1.0 - pD_Delay)
 
-pL_S_DH :: Double
+pL_S_DH :: Probability
 pL_S_DH = 0.7
 
-pL_S_DL :: Double
+pL_S_DL :: Probability
 pL_S_DL = 0.9
 
-pL_S_SL :: Double
+pL_S_SL :: Probability
 pL_S_SL = 0.7
 
-pL_S_SH :: Double
+pL_S_SH :: Probability
 pL_S_SH = 0.3
 
-pL_D_DH :: Double
+pL_D_DH :: Probability
 pL_D_DH = pL_S_SH
 
-pL_D_DL :: Double
+pL_D_DL :: Probability
 pL_D_DL = (pL_S_SL)
 
-pU_S_0 :: Double
+pU_S_0 :: Probability
 pU_S_0 = 0.9
 
-pU_D_0 :: Double
+pU_D_0 :: Probability
 pU_D_0 = 0.7
 
-pU_S :: Double
+pU_S :: Probability
 pU_S = 0.9
 
-pU_D :: Double
+pU_D :: Probability
 pU_D = 0.3
 
-pH_S_DH :: Double
+pH_S_DH :: Probability
 pH_S_DH = (1.0 - pL_S_DH)
 
-pH_S_SH :: Double
+pH_S_SH :: Probability
 pH_S_SH = (1.0 - pL_S_SH)
 
-pH_S_DL :: Double
+pH_S_DL :: Probability
 pH_S_DL = (1.0 - pL_S_DL)
 
-pH_S_SL :: Double
+pH_S_SL :: Probability
 pH_S_SL = (1.0 - pL_S_SL)
 
-pH_D_DH :: Double
+pH_D_DH :: Probability
 pH_D_DH = (1.0 - pL_D_DH)
 
-pH_D_DL :: Double
+pH_D_DL :: Probability
 pH_D_DL = (1.0 - pL_D_DL)
 
-pC_S_0 :: Double
+pC_S_0 :: Probability
 pC_S_0 = (1.0 - pU_S_0)
 
-pC_D_0 :: Double
+pC_D_0 :: Probability
 pC_D_0 = (1.0 - pU_D_0)
 
-pC_S :: Double
+pC_S :: Probability
 pC_S = (1.0 - pU_S)
 
-pC_D :: Double
+pC_D :: Probability
 pC_D = (1.0 - pU_D)
 
 -- Helper: Ensure probabilities are non-negative
-mkSimpleProb :: [(State, Double)] -> Prob State
+mkSimpleProb :: [(State, Probability)] -> Prob State
 mkSimpleProb = Prob . filter (\(_, p) -> p >= 0)
 
 
@@ -347,14 +348,14 @@ next t x y = case (t, x, y) of
       ]
   _ -> error "Invalid state or action combination"
 
--- PJ: It looks like you use type OtherProb a = Map a Double instead
+-- PJ: It looks like you use type OtherProb a = Map a Probability instead
 -- of Prob from above. A bit unclear why? (This has a different type
 -- than "meas" in the Idris code. Perhaps useful, but why use the same
 -- name for something different?)
 -- PJ: You also have a third defintion later (called extractValue).
 
 -- Measurement function: computes expectation
-meas :: (State -> Val) -> Map State Double -> Val
+meas :: (State -> Val) -> Map State Probability -> Val
 meas f dist = sum [p * f x | (x, p) <- Map.toList dist]
 -- PJ: meas is never actually used, it seems
 
@@ -432,10 +433,6 @@ mMeas t n x
           worstVal = expectation id (val t ps' x)
        in (bestVal - worstVal) / bestVal
 
-
-
-
-
 worstExt :: PolicySeq -> Policy
 worstExt _ = undefined -- Placeholder
 
@@ -487,3 +484,21 @@ Prob {runProb =
   , (0.0,6.299999999999999e-2)
   ]}
 -}
+
+-- PaJa: some more experiments
+
+-- Compute the optimal policy sequence starting at t=0, with n=7
+optps1 :: PolicySeq
+optps1 = bi 0 7
+-- The distribution of values starting from DHU, following the optimal policy
+mvals1 :: Prob Val
+mvals1 = val 0 optps1 DHU
+-- A (much) shorter representation of that same distribution.
+
+aps1 :: [(Val, Probability)]
+aps1 = runProb mvals1
+-- Note that length (unProb mvals1) is 8192 but the support (length aps1) is only 8.
+-- Thus the current representation is very inefficient.
+-- There is no need to keep making the distribution bigger and bigger.
+-- You can compute its expectation at every step and just keep the
+-- result.
