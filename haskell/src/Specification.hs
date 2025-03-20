@@ -1,7 +1,11 @@
 module Specification where
 
-import Theory
-
+import qualified Theory as T
+import Data.List (maximumBy, nub)
+import Data.Map (Map)
+import Data.Map qualified as Map
+import Data.Maybe (fromMaybe)
+import Data.Ord (comparing)
 
 data Action = Start | Delay | Unit
   deriving (Show, Eq, Enum, Ord)
@@ -9,10 +13,78 @@ data Action = Start | Delay | Unit
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
   deriving (Show, Eq, Enum, Ord)
 
+-- Wrap the custom types with Theory's types
+wrapState :: State -> T.State State
+wrapState = T.State
+
+wrapAction :: Action -> T.Action Action
+wrapAction = T.Action
 
 -- Helper: Ensure probabilities are non-negative
-mkSimpleProb :: [(State, Double)] -> Prob State
-mkSimpleProb = Prob . filter (\(_, p) -> p >= 0)
+mkSimpleProb :: [(State, Double)] -> T.Prob State
+mkSimpleProb = T.Prob . filter (\(_, p) -> p >= 0)
+
+reward :: Int -> State -> Action -> State -> T.Val
+reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
+
+-- best 
+-- Compute the best action and expected value for a given time, state, and horizon
+best :: Int -> Int -> State -> (Action, T.Val)
+best t n x
+  | n == 0 = error "Horizon must be greater than zero!"
+  | otherwise =
+      let ps = bi (t + 1) (n - 1)
+          p = bestExt t ps
+          b = fromMaybe Unit (Map.lookup x p)
+          vb =  (T.val t (p : ps) x)
+       in (b, vb)
+
+
+-- bests
+
+-- mMeas
+mMeas :: Int -> Int -> State -> Double
+mMeas t n x
+  | x `elem` [SHU, SHC, SLU, SLC] = 0
+  | otherwise =
+      let ps = bi t n
+          ps' =
+            if Map.lookup x (head ps) == Just Start
+              then (Map.insert x Delay (head ps)) : tail ps
+              else (Map.insert x Start (head ps)) : tail ps
+          bestVal =  (val t ps x)
+          worstVal =  (val t ps' x)
+       in (bestVal - worstVal) / bestVal
+
+
+
+-- BestExt  
+bestExt :: Int -> T.PolicySeq State -> T.Policy State
+bestExt t ps_tail = Map.fromList $ map bestAction states
+  where
+    states = [DHU, DHC, DLU, DLC]
+    actions = [Start, Delay]
+
+    -- Helper function to determine the best action for a given state
+    bestAction state =
+      if state `elem` states
+        then
+          let 
+              actionValues = [(action,  (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
+              
+              best = maximumBy (comparing snd) actionValues
+           in (state, fst best)
+        else (state, Start) 
+
+
+-- Backwards induction - computes the optimal policy sequence
+bi :: Int -> Int -> T.PolicySeq State
+bi _ 0 = []
+bi t n =
+  let ps_tail = bi (t + 1) (n - 1)
+      p = bestExt t ps_tail  -- Assuming 'best_ext' is defined elsewhere
+  in p : ps_tail
+
 
 pS_Start :: Double
 pS_Start = 0.9
@@ -86,9 +158,8 @@ pC_S = (1.0 - pU_S)
 pC_D :: Double
 pC_D = (1.0 - pU_D)
 
-
 -- The next function imolemented as cases
-next :: Int -> State -> Action -> Prob State
+next :: Int -> State -> Action -> T.Prob State
 next t x y = case (t, x, y) of
   (0, DHU, Start) ->
     mkSimpleProb
