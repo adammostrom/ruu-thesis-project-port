@@ -6,7 +6,7 @@
 
 module CoreComputation where
 
-import Data.List (maximumBy, nub)
+import Data.List (maximumBy, nub, minimumBy)
 import Data.Map (Map)
 import Data.Map qualified as Map
 import Data.Maybe (fromMaybe)
@@ -375,8 +375,8 @@ val t (p : ps) x = do
   return (r + v)
 
 -- Compute the best extension of a policy sequence
-best_ext :: Int -> PolicySeq -> Policy
-best_ext t ps_tail = Map.fromList $ map bestAction states
+bestExt :: Int -> PolicySeq -> Policy
+bestExt t ps_tail = Map.fromList $ map bestAction states
   where
     states = [DHU, DHC, DLU, DLC]
     actions = [Start, Delay]
@@ -392,6 +392,19 @@ best_ext t ps_tail = Map.fromList $ map bestAction states
            in (state, fst best)
         else (state, Start) 
 
+worstExt :: Int -> PolicySeq -> Policy
+worstExt t ps_tail = Map.fromList $ map worstAction states
+  where
+    states = [DHU, DHC, DLU, DLC] 
+    actions = [Start, Delay]      
+
+    -- Helper function to determine the worst action for each state
+    worstAction state =
+      let actionValues = [(action, extractValue (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
+
+          worst = minimumBy (comparing snd) actionValues  
+      in (state, fst worst)
+
 -- Extract numeric value from Prob Val (i.e., compute the expected value)
 extractValue :: Prob Val -> Double
 extractValue (Prob xs) = sum [p * value x | (x, p) <- xs]
@@ -404,7 +417,7 @@ bi :: Int -> Int -> PolicySeq
 bi _ 0 = []
 bi t n =
   let ps_tail = bi (t + 1) (n - 1)
-      p = best_ext t ps_tail
+      p = bestExt t ps_tail
    in p : ps_tail
 
 -- Compute the best action and expected value for a given time, state, and horizon
@@ -413,7 +426,7 @@ best t n x
   | n == 0 = error "Horizon must be greater than zero!"
   | otherwise =
       let ps = bi (t + 1) (n - 1)
-          p = best_ext t ps
+          p = bestExt t ps
           b = fromMaybe Unit (Map.lookup x p)
           vb = expectation id (val t (p : ps) x)
        in (n, b, vb)
@@ -432,12 +445,6 @@ mMeas t n x
           worstVal = expectation id (val t ps' x)
        in (bestVal - worstVal) / bestVal
 
-
-
-
-
-worstExt :: PolicySeq -> Policy
-worstExt _ = undefined -- Placeholder
 
 -- Extract head and tail of policy sequences
 headPolicy :: PolicySeq -> Maybe Policy
