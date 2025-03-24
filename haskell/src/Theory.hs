@@ -26,7 +26,17 @@ newtype Prob a = Prob {unProb :: [(a, Double)]}
 
 -- State and Action definitions
 newtype State a = State a deriving (Show, Eq, Ord)
+
 newtype Action a = Action a deriving (Show, Eq, Ord)
+
+
+-- Generalize State and Action using type classes
+class (Eq state, Show state) => StateType state where
+    -- You can add more methods related to State here if needed.
+    -- e.g. `initialState :: state`
+
+class (Eq action, Show action) => ActionType action where
+    -- Similarly, you can add methods related to Action if necessary.
 
 -- Running probability distribution and summing equal values
 runProb :: Eq a => Prob a -> [(a, Double)]
@@ -38,22 +48,24 @@ collectAndSumEqual aps =
   in map (\a -> (a, sum (map snd (filter ((a ==) . fst) aps))))
          support
 
--- Reward function
--- Refactor 20 March: Made it undefined as it is not defined in the Idris code, and Theory should actually serve more as an interface.
-reward :: Int -> State a -> Action a -> State a -> Val
-reward _ _ _ next_x = undefined
-
--- Define a function for state transitions (for now, a placeholder for actual logic)
-next :: Int -> State a -> Action a -> Prob (State a)
-next _ _ _ = Prob [(State undefined, 1)] 
 
 -- Value function for a policy sequence
-val :: Eq a => Ord a => Int -> PolicySeq a -> State a -> Val
+val :: (Eq a, Ord a, StateType (State a), ActionType (Action a)) =>  Int -> PolicySeq a -> State a -> Val
 val _ [] _ = 0
 val t (p : ps) x = 
   let y = fromMaybe (Action undefined) (Map.lookup x p)
       mNext = runProb $ next t x y
   in sum [pr * (reward t x y x' + val (t + 1) ps x') | (x', pr) <- mNext]
+
+
+-- Reward function
+-- Refactor 20 March: Made it undefined as it is not defined in the Idris code, and Theory should actually serve more as an interface.
+reward :: (StateType state, ActionType action) => Int -> state -> action -> state -> Val
+reward _ _ _ next_x = undefined
+
+-- Define a function for state transitions (for now, a placeholder for actual logic)
+next :: Int -> State a -> Action a -> Prob (State a)
+next _ _ _ = Prob [(State undefined, 1)] 
 
 mkSimpleProb :: [(State a, Double)] -> Prob (State a)
 mkSimpleProb = undefined
@@ -61,7 +73,7 @@ mkSimpleProb = undefined
 best :: Int -> Int -> State a -> (Action a, Val)
 best = undefined
 
-mMeas :: Int -> Int -> State a -> Double
+mMeas :: (StateType (State a), ActionType (Action a)) => Int -> Int -> State a -> Double
 mMeas = undefined
 
 {- bestExt :: Int -> PolicySeq (State a) -> Policy (State a)

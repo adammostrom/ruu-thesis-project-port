@@ -10,21 +10,23 @@ import Data.Ord (comparing)
 data Action = Start | Delay | Unit
   deriving (Show, Eq, Enum, Ord)
 
-data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
+
+data State =  DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
   deriving (Show, Eq, Enum, Ord)
 
+
 -- Wrap the custom types with Theory's types
-wrapState :: State -> T.State State
+{- wrapState :: State -> T.State State
 wrapState = T.State
 
 wrapAction :: Action -> T.Action Action
-wrapAction = T.Action
+wrapAction = T.Action -}
 
 -- Helper: Ensure probabilities are non-negative
-mkSimpleProb :: [(State, Double)] -> T.Prob State
+mkSimpleProb :: [(T.State a, Double)] -> T.Prob (T.State a)
 mkSimpleProb = T.Prob . filter (\(_, p) -> p >= 0)
 
-reward :: Int -> State -> Action -> State -> T.Val
+reward :: Int -> State -> Action -> State -> Int
 reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 
 -- best 
@@ -40,26 +42,25 @@ best t n x
        in (b, vb)
 
 
--- bests
-
 -- mMeas
+-- State and Action are now polymorphic in Specification
 mMeas :: Int -> Int -> State -> Double
 mMeas t n x
   | x `elem` [SHU, SHC, SLU, SLC] = 0
   | otherwise =
       let ps = bi t n
           ps' =
-            if Map.lookup x (head ps) == Just Start
+            if Map.lookup x (head ps) == Just (Start)
               then (Map.insert x Delay (head ps)) : tail ps
               else (Map.insert x Start (head ps)) : tail ps
-          bestVal =  (val t ps x)
-          worstVal =  (val t ps' x)
+          bestVal = val t ps x
+          worstVal = val t ps' x
        in (bestVal - worstVal) / bestVal
 
 
 
 -- BestExt  
-bestExt :: Int -> T.PolicySeq State -> T.Policy State
+bestExt :: Int -> T.PolicySeq (T.State a) -> T.Policy (T.State a)
 bestExt t ps_tail = Map.fromList $ map bestAction states
   where
     states = [DHU, DHC, DLU, DLC]
@@ -78,7 +79,7 @@ bestExt t ps_tail = Map.fromList $ map bestAction states
 
 
 -- Backwards induction - computes the optimal policy sequence
-bi :: Int -> Int -> T.PolicySeq State
+bi :: Int -> Int -> T.PolicySeq (T.State a)
 bi _ 0 = []
 bi t n =
   let ps_tail = bi (t + 1) (n - 1)
@@ -159,7 +160,7 @@ pC_D :: Double
 pC_D = (1.0 - pU_D)
 
 -- The next function imolemented as cases
-next :: Int -> State -> Action -> T.Prob State
+next :: Int -> T.State a -> T.Action a -> T.Prob (T.State a)
 next t x y = case (t, x, y) of
   (0, DHU, Start) ->
     mkSimpleProb
