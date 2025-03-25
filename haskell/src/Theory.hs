@@ -1,92 +1,65 @@
-{-# HLINT ignore "Use camelCase" #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE ImportQualifiedPost #-}
-{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 
 module Theory where
 
-import Data.List (maximumBy, nub)
+import Data.List (nub)
 import Data.Map (Map)
 import Data.Map qualified as Map
 import Data.Maybe (fromMaybe)
 import Data.Ord (comparing)
 
--- A policy maps states to actions (simple type, using 'State' and 'Action' as polymorphic)
-type Policy a = Map (State a) (Action a)
-
--- A sequence of policies
-type PolicySeq a = [Policy a]
-
+-- Core Types
 type Val = Double
 
--- Probability distribution (using a list of values and their probabilities)
-newtype Prob a = Prob {unProb :: [(a, Double)]}
-  deriving (Show, Functor)
+-- Define abstract types for State and Action
+type Policy s a = Map (State s) (Action a)
 
--- State and Action definitions
-newtype State a = State a deriving (Show, Eq, Ord)
+type PolicySeq s a = [Policy s a]
+
+newtype State s = State s deriving (Show, Eq, Ord)
 
 newtype Action a = Action a deriving (Show, Eq, Ord)
 
+newtype Prob a = Prob {unProb :: [(a, Double)]} deriving (Show, Functor)
 
--- Generalize State and Action using type classes
-class (Eq state, Show state) => StateType state where
-    -- You can add more methods related to State here if needed.
-    -- e.g. `initialState :: state`
+instance Applicative Prob where
+    pure x = Prob [(x, 1)]
+    Prob fs <*> Prob xs = Prob [(f x, p * q) | (f, p) <- fs, (x, q) <- xs]
 
-class (Eq action, Show action) => ActionType action where
-    -- Similarly, you can add methods related to Action if necessary.
+instance Monad Prob where
+    return = pure
+    Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- unProb (f x)]
 
--- Running probability distribution and summing equal values
 runProb :: Eq a => Prob a -> [(a, Double)]
 runProb = collectAndSumEqual . unProb
 
 collectAndSumEqual :: Eq a => [(a, Double)] -> [(a, Double)]
 collectAndSumEqual aps =
-  let support = nub (map fst aps)
-  in map (\a -> (a, sum (map snd (filter ((a ==) . fst) aps))))
-         support
+    let support = nub (map fst aps)
+    in map (\a -> (a, sum (map snd (filter ((a ==) . fst) aps)))) support
 
+-- Theory class now abstracts over State and Action types
+class (Ord (State s), Eq (State s), Ord (Action a), Eq (Action a)) => Theory s a where
+    reward :: Int -> State s -> Action a -> State s -> Val
+    next   :: Int -> State s -> Action a -> Prob (State s)
+    bestExt :: Int -> PolicySeq s a -> Policy s a
 
--- Value function for a policy sequence
-val :: (Eq a, Ord a, StateType (State a), ActionType (Action a)) =>  Int -> PolicySeq a -> State a -> Val
+    reward _ _ _ _ = undefined
+    next _ _ _ = Prob [(State undefined, 1)]
+
+val ::(Eq s) => (Ord a) => (Ord s) => (Theory s a) => Int -> PolicySeq s a -> State s -> Val
 val _ [] _ = 0
-val t (p : ps) x = 
-  let y = fromMaybe (Action undefined) (Map.lookup x p)
-      mNext = runProb $ next t x y
-  in sum [pr * (reward t x y x' + val (t + 1) ps x') | (x', pr) <- mNext]
+val t (p : ps) x =
+    let y = fromMaybe (Action undefined) (Map.lookup x p)
+        mNext = runProb $ next t x y
+    in sum [pr * (reward t x y x' + val (t + 1) ps x') | (x', pr) <- mNext]
 
-
--- Reward function
--- Refactor 20 March: Made it undefined as it is not defined in the Idris code, and Theory should actually serve more as an interface.
-reward :: (StateType state, ActionType action) => Int -> state -> action -> state -> Val
-reward _ _ _ next_x = undefined
-
--- Define a function for state transitions (for now, a placeholder for actual logic)
-next :: Int -> State a -> Action a -> Prob (State a)
-next _ _ _ = Prob [(State undefined, 1)] 
-
-mkSimpleProb :: [(State a, Double)] -> Prob (State a)
-mkSimpleProb = undefined
-
-best :: Int -> Int -> State a -> (Action a, Val)
-best = undefined
-
-mMeas :: (StateType (State a), ActionType (Action a)) => Int -> Int -> State a -> Double
-mMeas = undefined
-
-{- bestExt :: Int -> PolicySeq (State a) -> Policy (State a)
-bestExt = undefined -}
-
-class BestExt a where
-  bestExt :: Int -> PolicySeq (State a) -> Policy (State a)
-
--- Backwards induction - computes the optimal policy sequence
-bi :: BestExt a => Int -> Int -> PolicySeq (State a)
+-- Backwards induction
+bi :: Int -> Int -> PolicySeq s a
 bi _ 0 = []
 bi t n =
-  let ps_tail = bi t (n - 1)
-      p = bestExt t ps_tail
-  in p : ps_tail
-
+    let ps_tail = bi t (n - 1)
+        p = bestExt t ps_tail
+    in p : ps_tail

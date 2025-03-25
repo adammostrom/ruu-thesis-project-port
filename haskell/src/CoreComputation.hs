@@ -1,4 +1,4 @@
-{-# HLINT ignore "Use camelCase" #-}
+{- {-# HLINT ignore "Use camelCase" #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE ImportQualifiedPost #-}
@@ -504,3 +504,4 @@ Prob {runProb =
   , (0.0,6.299999999999999e-2)
   ]}
 -}
+ -}
