@@ -1,6 +1,8 @@
 import copy
+
 import numpy as np
 
+# TODO: Make into an Enum instead of string.
 # Set of the allowed states in the SDP.
 states = ["DHU", "DHC", "DLU", "DLC", "SHU", "SHC", "SLU", "SLC"]
 
@@ -13,6 +15,7 @@ def actions(x: str) -> list[str] | list[None]:
     else:
         raise ValueError(f"Invalid State: '{x}'.")
 
+# TODO: Break out into a file "data.py", might aswell add State and Action there aswell.
 # Probabilities for the transition function.
 pS_Start = 0.9
 pD_Start = 1.0 - pS_Start
@@ -380,14 +383,6 @@ def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
 
         # Testing the transition function.
 
-"""
-test = nextFunc(0, "DHU", "Start")
-for k, v in test.items():
-    print(k, v) 
-
-print("\nSum of all probabilities: ", sum(test.values()))
-"""
-
 # Reward function.
 def reward(t: int, x: str, y: str, next_x: str) -> int:
     # Value is added for transitioning into states which do not have low economic
@@ -414,8 +409,6 @@ def meas(val: float, pr: float) -> float:
         raise TypeError(f"Inputs must be of type 'float', not '{type(val).__name__}' and '{type(pr).__name__}'.")
     return val * pr # In default implementation, returns the expected value.
 
-# Default value of zero-length policy sequences.
-zero = 0.0
 
 # Computing the total expected value from a policy sequence when starting at time t in state x.
 def val(t: int, ps: list[dict[str, str]], x: str) -> float:
@@ -425,47 +418,17 @@ def val(t: int, ps: list[dict[str, str]], x: str) -> float:
         raise TypeError(f"Invalid policy list, must be list of dictionaries (or empty list).")
     if x not in states:
         raise ValueError(f"Invalid state: '{x}'")
-    value = zero
+    value = 0.0
     if len(ps) == 0:
         return value
     y = ps[0][x]
+    print(y)
+    print(t)
+    print(x)
     m_next = nextFunc(t, x, y)
     for x_prim, pr in m_next.items():
         value += meas(add(reward(t, x, y, x_prim), val(t+1, ps[1:], x_prim)), pr)
     return value
-
-"""
-# Test of val function.
-ps_test_start = [
-    {"DHU": "Start"},
-    {
-        "DHU": "Start",
-        "DHC": "Start",
-        "DLU": "Start",
-        "DLC": "Start",
-        "SHU": None,
-        "SHC": None,
-        "SLU": None,
-        "SLC": None,
-    },
-]
-
-ps_test_delay = [
-    {"DHU": "Delay"},
-    {
-        "DHU": "Delay",
-        "DHC": "Delay",
-        "DLU": "Delay",
-        "DLC": "Delay",
-        "SHU": None,
-        "SHC": None,
-        "SLU": None,
-        "SLC": None,
-    },
-]
-
-print(val(0, ps_test_start, "DHU"), val(0, ps_test_delay, "DHU"))
-"""
 
 # Computes the best single policy to add to an existing policy sequence.
 def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
@@ -512,15 +475,6 @@ def best(t: int, n: int, x: str) -> str:
     vb = val(t, [p] + ps, x)
     return f"Horizon, best, value : {n}, {b}, {vb}"
 
-""" 
-# Computing the best decision for different decision horizons.
-bests = []
-for i in range(1, 8):
-    bests.append(best(0, i, "DHU"))
-
-for b in bests:
-    print(b) """
-
 # For comparing outputs with those from the Idris version.
 def run_best(x, y, state):
     result = best(x, y, state)
@@ -544,19 +498,3 @@ def mMeas(t: int, n: int, x: str) -> float:
 
         return (best_action_val - worst_action_val) / best_action_val
 
-    # Comparing mMeas values to those of the article
-
-
-def run_best(x, y, state):
-    result = best(x, y, state)
-    print(result)
-    
-    
-""" 
-# Comparing mMeas values to those of the article
-print(mMeas(0, 4, "SHU"))
-print(mMeas(0, 6, "SLC"))
-print(mMeas(0, 7, "DHU"))
-print(mMeas(1, 7, "DHU"))
-print(mMeas(3, 7, "DHU"))
-"""
