@@ -15,9 +15,6 @@ data StateSpec = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
 
 instance Theory ActionSpec StateSpec where 
 
-  -- Helper: Ensure probabilities are non-negative
-  mkSimpleProb :: [(State StateSpec, Double)] -> Prob (State StateSpec)
-  mkSimpleProb = Prob . filter (\(_, p) -> p >= 0)
 
   reward :: Int -> State StateSpec -> Action ActionSpec -> State StateSpec -> Val
   reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0

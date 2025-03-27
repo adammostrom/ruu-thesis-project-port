@@ -49,6 +49,14 @@ class (Ord (State s), Eq (State s), Ord (Action a), Eq (Action a)) => Theory s a
     reward _ _ _ _ = undefined
     next _ _ _ = Prob [(State undefined, 1)]
 
+
+
+
+-- Helper: Ensure probabilities are non-negative
+mkSimpleProb :: [(State s, Double)] -> Prob (State s)
+mkSimpleProb = Prob . filter (\(_, p) -> p >= 0)
+
+
 val ::(Eq s) => (Ord a) => (Ord s) => (Theory s a) => Int -> PolicySeq s a -> State s -> Val
 val _ [] _ = 0
 val t (p : ps) x =
@@ -63,3 +71,5 @@ bi t n =
     let ps_tail = bi t (n - 1)
         p = bestExt t ps_tail
     in p : ps_tail
+
+
