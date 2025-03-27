@@ -17,6 +17,10 @@ class Action(Enum):
 # Abstract Base Class (Enforcing required methods)
 class TheoryInterface(ABC):
 
+    @property
+    @abstractmethod
+    def states(self) -> list[State]:
+        pass
 
     @abstractmethod
     def next(t: int, x: str, y: str) -> dict[str, float]:
@@ -31,18 +35,8 @@ class TheoryInterface(ABC):
         pass
 
     @abstractmethod
-    def meas(val: float, pr: float) -> float:
-        pass
-
-    @abstractmethod
     def actions(x: str) -> list[str] | list[None]:
         pass
-
-    @property
-    @abstractmethod
-    def states(self) -> list[State]:
-        pass
-
 
 
     # Function that checks that no probabilities are negative, and then

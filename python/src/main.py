@@ -1,4 +1,6 @@
+from numberLineSDP import NumberLineSDP
 from specification import Specification
+from theory import TheoryInterface
 
 
 def run_best(spec, x, y, state):
@@ -6,5 +8,4 @@ def run_best(spec, x, y, state):
     print(result)
 
 if __name__ == "__main__":
-    spec = Specification()
-    run_best(spec, 1, 2, "DHU")
+    pass

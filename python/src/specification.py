@@ -40,13 +40,17 @@ class Specification(TheoryInterface):
     def states(self):
         return ["DHU", "DHC", "DLU", "DLC", "SHU", "SHC", "SLU", "SLC"]
 
-    """  @property
-        def actions(self):
-            return [
-                "Start",
-                "Delay"] """
+    # Function that returns the possible actions in any allowed state.
+    def actions(x: str) -> list[str] | list[None]:
+        if x in ["DHU", "DHC", "DLU", "DLC"]:
+            return ["Start", "Delay"]
+        elif x in ["SHU", "SHC", "SLU", "SLC"]:
+            return [None]
+        else:
+            raise ValueError(f"Invalid State: '{x}'.")
 
 
+    # Next takes in timestep t, state x, and action (control) y.
     def next(self, t: int, x: str, y: str) -> dict[str, float]:
         # "y" can be "Start", "Delay", or None for S-states.
         if t < 0 or type(t) != int:
