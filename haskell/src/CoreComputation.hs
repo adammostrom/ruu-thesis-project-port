@@ -32,9 +32,22 @@ type PolicySeq = [Policy]
 
 -- Probability distribution monad
 type Probability = Double
+
 newtype Prob a = Prob {unProb :: [(a, Probability)]}
   deriving (Show, Functor)
 
+-- NiBo: for |d : Prob Ω| to represent a finite probability distribution on
+-- |Ω| all the weights (probabilities, if they add up to 1) should be
+-- positive and their sum should be strictly greater than zero. Can we have
+-- a
+
+--   validProb : Prob Ω -> Bool
+
+-- test for this property? Then the idea (of Design By Contract, see
+-- https://en.wikipedia.org/wiki/Design_by_contract) is that all functions
+-- that operate on arguments of type |Prob Ω| should check that these are
+-- valid representations of finite probability distributions.
+  
 runProb :: Eq a => Prob a -> [(a, Probability)]
 runProb = collectAndSumEqual . unProb
 
@@ -52,6 +65,28 @@ instance Applicative Prob where
 instance Monad Prob where
   return = pure
   Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- unProb (f x)]
+
+-- NiBo: I doubt that this definition of |>>=| is correct. The idea is
+-- that |>>=| must fulfill the so-called total probability law, see
+-- https://en.wikipedia.org/wiki/Law_of_total_probability:
+
+--   prob (xs >>= f) y = sum_{x ∈ xs} (prob xs x) * (prob (f x) y)
+
+-- I am pretty much sure that for |>>=| to fulfill this specification
+-- one has to normalize |f x| before extracting |(y, q)|, see the
+-- implementation of bind at
+
+--   IdrisLibs2/FastSimpleProb/MonadicOperations.lidr.
+
+-- You should implement a test and (Quick)check that |>>=| fulfills the
+-- above specification. There, |prob d ω | is the probability of |ω : Ω|
+-- according to the probability distribution |d : Prob Ω|. I think that
+-- you could implement |prob| with something like
+
+--   prob d ω = sum [p | (ω' , p) <- d, ω' = ω] / sum (weights p)
+
+-- where |weights| is just |map snd|. A |weights| function is also
+-- useful for implementing |validProb|, see previous remark.
 
 -- Normalize the probability distribution (so probabilities sum to 1), this is to avoid having wrongful percentage distribution
 normalize :: (Ord a) => Prob a -> Prob a
