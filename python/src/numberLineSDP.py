@@ -168,7 +168,7 @@ def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
             raise ValueError(f"Invalid state: {x}")
       
 # Reward function.
-def reward(t: int, x: str, y: str, next_x: str) -> int:
+def reward(t: int, x: str, y: str, next_x: str) -> float:
     # Value is added for transitioning into states which do not have low economic
     # output and at the same time are not comitted to severe future climate change.
     if t < 0 or type(t) != int:
