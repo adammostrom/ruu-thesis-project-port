@@ -45,13 +45,7 @@ class Specification(TheoryInterface):
             return [
                 "Start",
                 "Delay"] """
-        
-    def mkSimpleProb(self, pairs: list[tuple[str, float]]) -> dict[str, float]:
-        dist: dict[str, float] = {}
-        for st, pr in pairs:
-            if pr >= 0:
-                dist[st] = pr
-            return dist
+
 
     def next(self, t: int, x: str, y: str) -> dict[str, float]:
         # "y" can be "Start", "Delay", or None for S-states.
@@ -392,13 +386,6 @@ class Specification(TheoryInterface):
         return 1.0 if next_x in ["DHU", "SHU"] else 0.0
 
 
-    # Function defining how to add rewards together.
-    def add(self, a: float, b: float) -> float:
-        if type(a) != float or type(b) != float:
-            raise TypeError(f"Inputs must be of type 'float', not '{type(a).__name__}' and '{type(b).__name__}'.")
-        return a + b # In default implementation, returns regular floating point addition.
-    
-    
     def mMeas(self, t: int, n: int, x: str) -> float:
         if x in ["SHU", "SHC", "SLU", "SLC"]:
             return 0
@@ -415,10 +402,6 @@ class Specification(TheoryInterface):
 
             return (best_action_val - worst_action_val) / best_action_val
 
-    def meas(self, val: float, pr: float) -> float:
-        if type(val) != float or type(pr) != float:
-            raise TypeError(f"Inputs must be of type 'float', not '{type(val).__name__}' and '{type(pr).__name__}'.")
-        return val * pr # In default implementation, returns the expected value.
 
     def actions(self, x: str) -> list[str] | list[None]:
         if x in ["DHU", "DHC", "DLU", "DLC"]:
@@ -430,9 +413,5 @@ class Specification(TheoryInterface):
         else:
             raise ValueError(f"Invalid State: '{x}'.")
         
-    # For seeing the best decision
-    def run_best(self, x, y, state):
-        result = self.best(x, y, state)
-        print(result)
 
 

@@ -17,9 +17,6 @@ class Action(Enum):
 # Abstract Base Class (Enforcing required methods)
 class TheoryInterface(ABC):
 
-    @abstractmethod
-    def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
-        pass
 
     @abstractmethod
     def next(t: int, x: str, y: str) -> dict[str, float]:
@@ -46,6 +43,17 @@ class TheoryInterface(ABC):
     def states(self) -> list[State]:
         pass
 
+
+
+    # Function that checks that no probabilities are negative, and then
+    # returns probabilities for entering all states in next time step.
+    def mkSimpleProb(self, pairs: list[tuple[str, float]]) -> dict[str, float]:
+        dist: dict[str, float] = {}
+        for st, pr in pairs:
+            if pr >= 0:
+                dist[st] = pr
+        return dist
+
     # TODO:
     # Up for discussion: Do we want to make Actions into a datastructure like State is?
     # That is how it is implemented in Haskell atleast, this would allow us to remove the hardcoded strings in the code.
@@ -54,6 +62,17 @@ class TheoryInterface(ABC):
     @abstractmethod
     def actions(self) -> list[Action]:
         pass """
+        
+        # Function defining how to add rewards together.
+    def add(self, a: float, b: float) -> float:
+        if type(a) != float or type(b) != float:
+            raise TypeError(f"Inputs must be of type 'float', not '{type(a).__name__}' and '{type(b).__name__}'.")
+        return a + b # In default implementation, returns regular floating point addition.
+    
+    def meas(self, val: float, pr: float) -> float:
+        if type(val) != float or type(pr) != float:
+            raise TypeError(f"Inputs must be of type 'float', not '{type(val).__name__}' and '{type(pr).__name__}'.")
+        return val * pr # In default implementation, returns the expected value.
 
     def val(self, t: int, ps: list[dict[str, str]], x: str) -> float:
         if t < 0 or type(t) != int:
