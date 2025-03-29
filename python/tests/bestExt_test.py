@@ -28,6 +28,14 @@ def isOptimalExtension(
     return True
 
 class BestExtTest(unittest.TestCase):
+    # Checking optimality using isOptimalExtension
+    def test_property(self):
+        for i in range(7):
+            ps_tail = bi(1, i)
+            self.assertEqual(isOptimalExtension(bestExt(0, ps_tail), ps_tail, 0, states, actions), True)
+        for t in range(7):
+            ps_tail = bi(t+1, 5)
+            self.assertEqual(isOptimalExtension(bestExt(0, ps_tail), ps_tail, t, states, actions), True)
 
     # Checking cases from a trivial SDP where expected results were calculated by hand.
     def test_trivial(self):
@@ -44,14 +52,7 @@ class BestExtTest(unittest.TestCase):
         self.assertEqual(bestExtSimple(1, ps1), {'-2': 'Stay', '-1': 'Stay', '0': 'Right', '1': 'Right', '2': 'Right'})
         self.assertEqual(bestExtSimple(1, ps2), {'-2': 'Stay', '-1': 'Right', '0': 'Right', '1': 'Right', '2': 'Right'})
 
-    def test_test(self):
-        for i in range(7):
-            ps_tail = bi(1, i)
-            self.assertEqual(isOptimalExtension(bestExt(0, ps_tail), ps_tail, 0, states, actions), True)
-        for t in range(7):
-            ps_tail = bi(t+1, 5)
-            self.assertEqual(isOptimalExtension(bestExt(0, ps_tail), ps_tail, t, states, actions), True)
-
+    # Checking that function returns errors for invalid inputs.
     def test_errors(self):
         ps = []
         self.assertRaises(ValueError, bestExt, -1, ps)

@@ -233,6 +233,32 @@ def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
 
     return policy
 
+def worstExt(t: int, ps_tail: list[dict[str, str]] | list[None]) -> dict[str, str]:
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if type(ps_tail) != list:
+        raise TypeError(f"Invalid ps_tail, must be list of dictionaries (or empty list).")
+    
+    policy = dict()
+
+    for state in states:
+        worst_value = np.inf
+        worst_action = None
+
+        # For each available action in the current state
+        for action in actions(state):
+            # Calculate value of taking action in state
+            p = {state: action}
+            value = val(t, [p] + ps_tail, state)
+            # Choose the action with the highest expected value
+            if value <= worst_value:
+                worst_value = value
+                worst_action = action
+
+        policy[state] = worst_action
+
+    return policy
+
 # Builds an optimal policy sequence by recursively adding the best extension (starting from the end).
 def bi(t: int, n: int) -> list[dict[str, str]]:
     if n == 0:

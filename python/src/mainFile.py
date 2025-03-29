@@ -2,6 +2,7 @@ import copy
 import numpy as np
 from typing import Callable
 
+
 # Set of the allowed states in the SDP.
 states = ["DHU", "DHC", "DLU", "DLC", "SHU", "SHC", "SLU", "SLC"]
 
