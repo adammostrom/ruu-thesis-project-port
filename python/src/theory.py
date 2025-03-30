@@ -3,14 +3,18 @@ from enum import Enum, auto
 
 import numpy as np
 
+
 class State(Enum):
      pass
 
 class Action(Enum):
     pass
 
+
+
 # Abstract Base Class (Enforcing required methods)
 class SDP(ABC):
+
 
     @property
     @abstractmethod
@@ -71,8 +75,10 @@ class SDP(ABC):
         y = ps[0][x]
         m_next = self.nextFunc(t, x, y)
         for x_prim, pr in m_next.items():
+            # Added a safe check function, we should to this for each function.
+            reward_value = self.safe_reward(t, x, y, x_prim)
             value += self.meas(
-                self.add(self.reward(t, x, y, x_prim), self.val(t + 1, ps[1:], x_prim)),
+                self.add(reward_value, self.val(t + 1, ps[1:], x_prim)),
                 pr,
             )
         return value
@@ -162,3 +168,21 @@ class SDP(ABC):
         if best_action_val == 0:
             return 0
         return (best_action_val - worst_action_val) / best_action_val
+    
+    
+    # UTILITY FUNCTIONS FOR ERROR HANDLING:
+    
+    def safe_reward(self, t: int, x: State, y: Action, next_x: State) -> float:
+        self.check_reward(t, x, y, next_x)  
+        return self.reward(t, x, y, next_x)  
+    
+    def check_reward(self, t: int, x: State, y: Action, next_x: State) -> bool:
+        if t < 0 or type(t) != int:
+            raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+        if x not in self.states:
+            raise ValueError(f"Invalid state: '{x}'")
+        if y not in self.actions(t, x):
+            raise ValueError(f"Invalid action: '{y}'")
+        if next_x not in self.states:
+            raise ValueError(f"Invalid next state: '{next_x}'")
+        else: return True
