@@ -1,6 +1,8 @@
 from enum import Enum, auto
+
 import numpy as np
 from theory import SDP
+
 
 # Declare all states of the SDP below:
 class State(Enum):

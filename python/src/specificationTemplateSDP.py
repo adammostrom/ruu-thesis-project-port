@@ -1,4 +1,5 @@
 from enum import Enum, auto
+
 import numpy as np
 from theory import SDP
 
@@ -38,14 +39,6 @@ class Specification(SDP):
         pass
 
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
-        if t < 0 or type(t) != int:
-            raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
-        if x not in self.states:
-            raise ValueError(f"Invalid state: '{x}'")
-        if y not in self.actions(t, x):
-            raise ValueError(f"Invalid action: '{y}'")
-        if next_x not in self.states:
-            raise ValueError(f"Invalid next state: '{next_x}'")
         pass
 
 SDP1 = Specification()
