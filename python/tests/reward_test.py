@@ -1,5 +1,4 @@
 import os
-import re
 import sys
 import unittest
 
@@ -41,7 +40,7 @@ class RewardTest(unittest.TestCase):
 
     def test_errors(self):
         self.assertRaises(ValueError, reward, 1.5, "DHU", "Delay", "DHU")
-        self.assertRaises(ValueError, reward, -1, "DHU", "InvalidAction", "DHU")
+        self.assertRaises(ValueError, reward, -1, "DHU", "Delay", "DHU")
 
         self.assertRaises(ValueError, reward, 0, "InvalidState", "Start", "DHU")
         self.assertRaises(ValueError, reward, 0, "DHU", "InvalidAction", "DHU")
