@@ -18,6 +18,11 @@ Python Hypothesis
 
 """
 
+### TO RUN (requires pytest -> pip install pytest) ###
+# navigate to: ruu-thesis-project-port/ruu-thesis-project-port/python $
+# run: pytest -s tests/test_properties.py -v
+#
+
 
 # EXPERIMENTAL, UNDER CONSTRUCTION:
 @pytest.fixture
