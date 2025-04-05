@@ -31,7 +31,7 @@ class Specification(SDP):
         return list(State)
 
     # Function that returns the possible actions in any allowed state.
-    def actions(self, t: int, x: Enum) -> list[str] | list[None]:
+    def actions(self, t: int, x: State) -> list[str] | list[None]:
         pass
 
     # Next takes in timestep t, state x, and action (control) y.

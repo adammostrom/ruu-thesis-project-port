@@ -15,7 +15,6 @@ class Action(Enum):
 # Abstract Base Class (Enforcing required methods)
 class SDP(ABC):
 
-
     @property
     @abstractmethod
     def states(self) -> list[State]:
