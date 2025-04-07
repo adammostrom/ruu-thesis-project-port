@@ -76,3 +76,5 @@ class TestSDP(SDP):
     def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
         if next_x in [State.S1, State.S2]: return 1.0
         else: return 0.0
+        
+sdp_instance = TestSDP()

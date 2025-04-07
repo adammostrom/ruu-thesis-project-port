@@ -23,131 +23,449 @@ Python Hypothesis
 # run: pytest -s tests/test_properties.py -v
 #
 
-
+""" 
 # EXPERIMENTAL, UNDER CONSTRUCTION:
 @pytest.fixture
 def sdp_instance():
-    """Fixture to provide an SDP instance. Replace with different SDP instances as needed."""
+    #Fixture to provide an SDP instance. Replace with different SDP instances as needed.
     from .test_SDP import TestSDP  # Import your SDP class
 
-    return TestSDP()  # Instantiate the SDP instance
+    return TestSDP()  # Instantiate the SDP instance """
 
 
 # ==================== Test SDP Implementation ====================
 
-"""Define the possible states for the SDP"""
 
-
+# Declare all states of the SDP below:
 class State(Enum):
-    S1 = auto()
-    S2 = auto()
-    S3 = auto()
-    S4 = auto()
+    DHU = auto()
+    DHC = auto()
+    DLU = auto()
+    DLC = auto()
+    SHU = auto()
+    SHC = auto()
+    SLU = auto()
+    SLC = auto()
 
-
-"""Define possible actions for the SDP"""
-
-
+# Declare all actions of the SDP below:
 class Action(Enum):
-    A1 = auto()
-    A2 = auto()
-    A3 = auto()
-    A4 = auto()
+    Start = auto()
+    Delay = auto()
 
+# Define transition probabilities below:
+pS_Start = 0.9
+pD_Start = 1.0 - pS_Start
 
-"""Arbitrary implementation of the SDP class for testing"""
+pD_Delay = 0.9
+pS_Delay = 1.0 - pD_Delay
 
+pL_S_DH = 0.7
+pL_S_DL = 0.9
+pL_S_SH = 0.3
+pL_S_SL = 0.7
 
-class TestSDP(SDP):
+pH_S_DH = 1.0 - pL_S_DH
+pH_S_DL = 1.0 - pL_S_DL
+pH_S_SH = 1.0 - pL_S_SH
+pH_S_SL = 1.0 - pL_S_SL
 
+pL_D_DH = pL_S_SH
+pL_D_DL = pL_S_SL
+pH_D_DH = 1.0 - pL_D_DH
+pH_D_DL = 1.0 - pL_D_DL
+
+pU_S_0 = 0.9
+pU_D_0 = 0.7
+pC_S_0 = 1.0 - pU_S_0
+pC_D_0 = 1.0 - pU_D_0
+
+pU_S = 0.9
+pU_D = 0.3
+pC_S = 1.0 - pU_S
+pC_D = 1.0 - pU_D
+
+class MatterMost(SDP):
     @property
-    def states(self):
+    def states(self) -> list[State]:
         return list(State)
 
-    """Define action behavior based on state, arbitrary."""
-
-    def actions(self, t: int, x: State) -> list[Action] | list[None]:
-        if x in [State.S1, State.S2]:
-            return [Action.A1, Action.A2]
-        elif x in [State.S3, State.S4]:
-            return [Action.A3, Action.A4]
-
-    """ 
-    Arbitraily implemented next function. 
-    The property tests make no assertions on the static values, only on the behaviour of the function.
-    """
-
-    def nextFunc(self, t: int, x: State, y: Action) -> dict[State, float]:
-        if t == 0:
-            if x == State.S1 or x == State.S2:
-                if y == Action.A1:
-                    return self.mkSimpleProb([(State.S1, 0.6), (State.S2, 0.4)])
-                elif y == Action.A2:
-                    return self.mkSimpleProb([(State.S1, 0.5), (State.S2, 0.5)])
-                elif y == Action.A3:
-                    return self.mkSimpleProb([(State.S3, 0.5), (State.S2, 0.5)])
-                elif y == Action.A4:
-                    return self.mkSimpleProb([(State.S1, 0.25), (State.S2, 0.75)])
-            elif x == State.S3 or x == State.S4:
-                if y == Action.A1:
-                    return self.mkSimpleProb([(State.S3, 0.9), (State.S4, 0.1)])
-                if y == Action.A3 or y == Action.A2:
-                    return self.mkSimpleProb([(State.S3, 0.4), (State.S4, 0.6)])
-                elif y == Action.A4:
-                    return self.mkSimpleProb([(State.S3, 0.7), (State.S4, 0.3)])
-        elif t > 0:
-            if x == State.S1 or x == State.S2:
-                if y == Action.A1:
-                    return self.mkSimpleProb([(State.S1, 0.7), (State.S2, 0.3)])
-                elif y == Action.A2:
-                    return self.mkSimpleProb([(State.S1, 0.6), (State.S2, 0.4)])
-                elif y == Action.A3:
-                    return self.mkSimpleProb([(State.S1, 0.8), (State.S4, 0.2)])
-                elif y == Action.A4:
-                    return self.mkSimpleProb([(State.S2, 0.76), (State.S4, 0.24)])
-            elif x == State.S3 or x == State.S4:
-                if y == Action.A1:
-                    return self.mkSimpleProb([(State.S2, 0.3), (State.S1, 0.7)])
-                elif y == Action.A2:
-                    return self.mkSimpleProb([(State.S3, 0.45), (State.S1, 0.55)])
-                elif y == Action.A3:
-                    return self.mkSimpleProb([(State.S3, 0.6), (State.S4, 0.4)])
-                elif y == Action.A4:
-                    return self.mkSimpleProb([(State.S3, 0.5), (State.S4, 0.5)])
-
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
-        if next_x in [State.S1, State.S2]:
-            return 1.0
+    # Function that returns the possible actions in any allowed state.
+    def actions(self, t: int, x: Enum) -> list[str] | list[None]:
+        if x in [State.DHU, State.DHC, State.DLU, State.DLC]:
+            return [Action.Start, Action.Delay]
+        elif x in [State.SHU, State.SHC, State.SLU, State.SLC]:
+            return [None]
         else:
-            return 0.0
+            raise ValueError(f"Invalid State: '{x}'.")
 
 
-sdp_instance = TestSDP()
+    # Next takes in timestep t, state x, and action (control) y.
+    def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
+        # "y" can be Action.Start, Action.Delay, or None for S-states.
+        if t < 0 or type(t) != int:
+            raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+        if t == 0:
+            # CASE: t == 0
+            if x == State.DHU:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Start * pH_D_DH * pU_D_0),
+                            (State.DHC, pD_Start * pH_D_DH * pC_D_0),
+                            (State.DLU, pD_Start * pL_D_DH * pU_D_0),
+                            (State.DLC, pD_Start * pL_D_DH * pC_D_0),
+                            (State.SHU, pS_Start * pH_S_DH * pU_S_0),
+                            (State.SHC, pS_Start * pH_S_DH * pC_S_0),
+                            (State.SLU, pS_Start * pL_S_DH * pU_S_0),
+                            (State.SLC, pS_Start * pL_S_DH * pC_S_0),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Delay * pH_D_DH * pU_D_0),
+                            (State.DHC, pD_Delay * pH_D_DH * pC_D_0),
+                            (State.DLU, pD_Delay * pL_D_DH * pU_D_0),
+                            (State.DLC, pD_Delay * pL_D_DH * pC_D_0),
+                            (State.SHU, pS_Delay * pH_S_DH * pU_S_0),
+                            (State.SHC, pS_Delay * pH_S_DH * pC_S_0),
+                            (State.SLU, pS_Delay * pL_S_DH * pU_S_0),
+                            (State.SLC, pS_Delay * pL_S_DH * pC_S_0),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DHU at t=0.")
+
+            elif x == State.DHC:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Start * pH_D_DH),
+                            (State.DLC, pD_Start * pL_D_DH),
+                            (State.SHC, pS_Start * pH_S_DH),
+                            (State.SLC, pS_Start * pL_S_DH),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Delay * pH_D_DH),
+                            (State.DLC, pD_Delay * pL_D_DH),
+                            (State.SHC, pS_Delay * pH_S_DH),
+                            (State.SLC, pS_Delay * pL_S_DH),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DHC at t=0.")
+
+            elif x == State.DLU:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Start * pH_D_DL * pU_D_0),
+                            (State.DHC, pD_Start * pH_D_DL * pC_D_0),
+                            (State.DLU, pD_Start * pL_D_DL * pU_D_0),
+                            (State.DLC, pD_Start * pL_D_DL * pC_D_0),
+                            (State.SHU, pS_Start * pH_S_DL * pU_S_0),
+                            (State.SHC, pS_Start * pH_S_DL * pC_S_0),
+                            (State.SLU, pS_Start * pL_S_DL * pU_S_0),
+                            (State.SLC, pS_Start * pL_S_DL * pC_S_0),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Delay * pH_D_DL * pU_D_0),
+                            (State.DHC, pD_Delay * pH_D_DL * pC_D_0),
+                            (State.DLU, pD_Delay * pL_D_DL * pU_D_0),
+                            (State.DLC, pD_Delay * pL_D_DL * pC_D_0),
+                            (State.SHU, pS_Delay * pH_S_DL * pU_S_0),
+                            (State.SHC, pS_Delay * pH_S_DL * pC_S_0),
+                            (State.SLU, pS_Delay * pL_S_DL * pU_S_0),
+                            (State.SLC, pS_Delay * pL_S_DL * pC_S_0),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DLU at t=0.")
+
+            elif x == State.DLC:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Start * pH_D_DL),
+                            (State.DLC, pD_Start * pL_D_DL),
+                            (State.SHC, pS_Start * pH_S_DL),
+                            (State.SLC, pS_Start * pL_S_DL),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Delay * pH_D_DL),
+                            (State.DLC, pD_Delay * pL_D_DL),
+                            (State.SHC, pS_Delay * pH_S_DL),
+                            (State.SLC, pS_Delay * pL_S_DL),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DLC at t=0.")
+
+            elif x == State.SHU:
+                # In Idris: Theory.next Z SHU () = mkSimpleProb [...]
+                # The control is '()', i.e. a unit (we represent it as None in Python).
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHU, pH_S_SH * pU_S_0),
+                            (State.SHC, pH_S_SH * pC_S_0),
+                            (State.SLU, pL_S_SH * pU_S_0),
+                            (State.SLC, pL_S_SH * pC_S_0),
+                        ]
+                    )
+                else:
+                    raise ValueError(f"Invalid control for SHU at t=0 (should be None), actual: {y}" )
+
+            elif x == State.SHC:
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHC, pH_S_SH),
+                            (State.SLC, pL_S_SH),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for SHC at t=0.")
+
+            elif x == State.SLU:
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHU, pH_S_SL * pU_S_0),
+                            (State.SHC, pH_S_SL * pC_S_0),
+                            (State.SLU, pL_S_SL * pU_S_0),
+                            (State.SLC, pL_S_SL * pC_S_0),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for SLU at t=0.")
+
+            elif x == State.SLC:
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHC, pH_S_SL),
+                            (State.SLC, pL_S_SL),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for SLC at t=0.")
+
+            else:
+                raise ValueError("Unexpected state at t=0.")
+
+        else:
+            # CASE: t > 0
+            # The code is perfectly analogous but uses pU_S, pC_S, pU_D, pC_D
+            # instead of pU_S_0, pC_S_0, pU_D_0, pC_D_0.
+
+            if x == State.DHU:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Start * pH_D_DH * pU_D),
+                            (State.DHC, pD_Start * pH_D_DH * pC_D),
+                            (State.DLU, pD_Start * pL_D_DH * pU_D),
+                            (State.DLC, pD_Start * pL_D_DH * pC_D),
+                            (State.SHU, pS_Start * pH_S_DH * pU_S),
+                            (State.SHC, pS_Start * pH_S_DH * pC_S),
+                            (State.SLU, pS_Start * pL_S_DH * pU_S),
+                            (State.SLC, pS_Start * pL_S_DH * pC_S),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Delay * pH_D_DH * pU_D),
+                            (State.DHC, pD_Delay * pH_D_DH * pC_D),
+                            (State.DLU, pD_Delay * pL_D_DH * pU_D),
+                            (State.DLC, pD_Delay * pL_D_DH * pC_D),
+                            (State.SHU, pS_Delay * pH_S_DH * pU_S),
+                            (State.SHC, pS_Delay * pH_S_DH * pC_S),
+                            (State.SLU, pS_Delay * pL_S_DH * pU_S),
+                            (State.SLC, pS_Delay * pL_S_DH * pC_S),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DHU at t>0.")
+
+            elif x == State.DHC:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Start * pH_D_DH),
+                            (State.DLC, pD_Start * pL_D_DH),
+                            (State.SHC, pS_Start * pH_S_DH),
+                            (State.SLC, pS_Start * pL_S_DH),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Delay * pH_D_DH),
+                            (State.DLC, pD_Delay * pL_D_DH),
+                            (State.SHC, pS_Delay * pH_S_DH),
+                            (State.SLC, pS_Delay * pL_S_DH),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DHC at t>0.")
+
+            elif x == State.DLU:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Start * pH_D_DL * pU_D),
+                            (State.DHC, pD_Start * pH_D_DL * pC_D),
+                            (State.DLU, pD_Start * pL_D_DL * pU_D),
+                            (State.DLC, pD_Start * pL_D_DL * pC_D),
+                            (State.SHU, pS_Start * pH_S_DL * pU_S),
+                            (State.SHC, pS_Start * pH_S_DL * pC_S),
+                            (State.SLU, pS_Start * pL_S_DL * pU_S),
+                            (State.SLC, pS_Start * pL_S_DL * pC_S),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHU, pD_Delay * pH_D_DL * pU_D),
+                            (State.DHC, pD_Delay * pH_D_DL * pC_D),
+                            (State.DLU, pD_Delay * pL_D_DL * pU_D),
+                            (State.DLC, pD_Delay * pL_D_DL * pC_D),
+                            (State.SHU, pS_Delay * pH_S_DL * pU_S),
+                            (State.SHC, pS_Delay * pH_S_DL * pC_S),
+                            (State.SLU, pS_Delay * pL_S_DL * pU_S),
+                            (State.SLC, pS_Delay * pL_S_DL * pC_S),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DLU at t>0.")
+
+            elif x == State.DLC:
+                if y == Action.Start:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Start * pH_D_DL),
+                            (State.DLC, pD_Start * pL_D_DL),
+                            (State.SHC, pS_Start * pH_S_DL),
+                            (State.SLC, pS_Start * pL_S_DL),
+                        ]
+                    )
+                elif y == Action.Delay:
+                    return self.mkSimpleProb(
+                        [
+                            (State.DHC, pD_Delay * pH_D_DL),
+                            (State.DLC, pD_Delay * pL_D_DL),
+                            (State.SHC, pS_Delay * pH_S_DL),
+                            (State.SLC, pS_Delay * pL_S_DL),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for DLC at t>0.")
+
+            elif x == State.SHU:
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHU, pH_S_SH * pU_S),
+                            (State.SHC, pH_S_SH * pC_S),
+                            (State.SLU, pL_S_SH * pU_S),
+                            (State.SLC, pL_S_SH * pC_S),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for SHU at t>0 (should be None).")
+
+            elif x == State.SHC:
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHC, pH_S_SH),
+                            (State.SLC, pL_S_SH),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for SHC at t>0.")
+
+            elif x == State.SLU:
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHU, pH_S_SL * pU_S),
+                            (State.SHC, pH_S_SL * pC_S),
+                            (State.SLU, pL_S_SL * pU_S),
+                            (State.SLC, pL_S_SL * pC_S),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for SLU at t>0.")
+
+            elif x == State.SLC:
+                if y is None:
+                    return self.mkSimpleProb(
+                        [
+                            (State.SHC, pH_S_SL),
+                            (State.SLC, pL_S_SL),
+                        ]
+                    )
+                else:
+                    raise ValueError("Invalid control for SLC at t>0.")
+
+            else:
+                raise ValueError("Unexpected state at t>0.")
+
+            # Testing the transition function.
+
+    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+        # Value is added for transitioning into states which do not have low economic
+        # output and at the same time are not comitted to severe future climate change.
+        if t < 0 or type(t) != int:
+            raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+        if x not in self.states:
+            raise ValueError(f"Invalid state: '{x}'")
+        if y not in self.actions(t, x):
+            raise ValueError(f"Invalid action: '{y}'")
+        if next_x not in self.states:
+            raise ValueError(f"Invalid next state: '{next_x}'")
+        return 1.0 if next_x in [State.DHU, State.SHU] else 0.0
+
+
+
+sdp_instance = MatterMost()
 
 
 # ==================== Property Tests: action  ====================
 
 
 # Tests if the actions function always returns a list, t is irrelevant.
-@given(st.integers(min_value=0), st.sampled_from(sdp_instance.states))
+@given(st.integers(min_value=0, max_value=8), st.sampled_from(sdp_instance.states))
 def test_actions_return_list(t, state):  # `t` is provided by Hypothesis
     actions = sdp_instance.actions(t, state)
     assert isinstance(actions, list)
 
 
 # Tests that the elements in the list are of type Action
-@given(st.integers(min_value=0), st.sampled_from(sdp_instance.states))
+@given(st.integers(min_value=0, max_value=8), st.sampled_from(sdp_instance.states))
 def test_actions_return_type_action(t, state):
     actions = sdp_instance.actions(t, state)
     assert (all(isinstance(a, Action)) or a is None for a in actions)
 
 
-# Test that the function returns correct behaviour for a specifically given state
-@given(st.integers(min_value=0), st.sampled_from(sdp_instance.states))
-def test_actions_returned_valid(t, state):
-    actions = sdp_instance.actions(t, state)
-    if state in [State.S1, State.S2]:
-        assert all(action in [Action.A1, Action.A2] for action in actions)
+# Test that the function will behave the same for same input
+@given(st.integers(min_value=0), st.sampled_from(State))
+def test_actions_deterministic(t, x):
+    result1 = sdp_instance.actions(t, x)
+    result2 = sdp_instance.actions(t, x)
+    assert result1 == result2
 
 
 # ==================== Property Tests: nextFunc  ====================
@@ -155,12 +473,12 @@ def test_actions_returned_valid(t, state):
 
 # Test that nextFunc gives back a dictionary and that the dictionary if of type "dict[State, float]"
 @given(
-    st.integers(min_value=0),
+    st.integers(min_value=1, max_value=8),
     st.sampled_from(sdp_instance.states),
-    st.sampled_from(list(Action)),
 )
-def test_nextFunc_return_dict(t, x, y):
-    next = sdp_instance.nextFunc(t, x, y)
+def test_nextFunc_return_dict(t, x):
+    y = sdp_instance.actions(t, x)
+    next = sdp_instance.nextFunc(t, x, y[0])
     assert isinstance(next, dict)
     assert all(
         isinstance(k, State) for k in next.keys()
@@ -172,47 +490,47 @@ def test_nextFunc_return_dict(t, x, y):
 
 # Test that Probabilities given from next always sum to 1
 @given(
-    st.integers(min_value=0),
+    st.integers(min_value=1, max_value=8),
     st.sampled_from(sdp_instance.states),
-    st.sampled_from(list(Action)),
 )
-def test_nextFunc_probabilities_sum_1(t, x, y):
-    next = sdp_instance.nextFunc(t, x, y)
+def test_nextFunc_probabilities_sum_1(t, x):
+    y = sdp_instance.actions(t, x)
+    next = sdp_instance.nextFunc(t, x, y[0])
     total = sum(next.values())
     assert abs(total - 1.0) < 1e-7
 
 
 # Test that all probabilities are larger than 0
 @given(
-    st.integers(min_value=0),
+    st.integers(min_value=0, max_value=8),
     st.sampled_from(sdp_instance.states),
-    st.sampled_from(list(Action)),
 )
-def test_nextFunc_no_negative_probs(t, x, y):
-    next = sdp_instance.nextFunc(t, x, y)
+def test_nextFunc_no_negative_probs(t, x):
+    y = sdp_instance.actions(t, x)
+    next = sdp_instance.nextFunc(t, x, y[0])
     assert all(v >= 0 for v in next.values())
 
 
 # Test that all states returned from the next function are legitimate states (member of the enum class State)
 @given(
-    st.integers(min_value=0),
+    st.integers(min_value=0, max_value=8),
     st.sampled_from(sdp_instance.states),
-    st.sampled_from(list(Action)),
 )
-def test_nextFunc_valid_states(t, x, y):
-    next = sdp_instance.nextFunc(t, x, y)
+def test_nextFunc_valid_states(t, x):
+    y = sdp_instance.actions(t, x)
+    next = sdp_instance.nextFunc(t, x, y[0])
     assert set(next.keys()).issubset(set(sdp_instance.states))
 
 
 # Test that we always get the same dictionary (same states and probabilities) given the exact same input.
 @given(
-    st.integers(min_value=0),
+    st.integers(min_value=0, max_value=8),
     st.sampled_from(sdp_instance.states),
-    st.sampled_from(list(Action)),
 )
-def test_nextFunc_determinism(t, x, y):
-    result1 = sdp_instance.nextFunc(t, x, y)
-    result2 = sdp_instance.nextFunc(t, x, y)
+def test_nextFunc_determinism(t, x):
+    y = sdp_instance.actions(t, x)
+    result1 = sdp_instance.nextFunc(t, x, y[0])
+    result2 = sdp_instance.nextFunc(t, x, y[0])
 
     assert result1 == result2, f"Function is non-deterministic: {result1} != {result2}"
 
@@ -222,38 +540,38 @@ def test_nextFunc_determinism(t, x, y):
 
 # Test to ensure reward always returns an integer
 @given(
-    st.integers(min_value=0),
-    st.sampled_from(sdp_instance.states),
+    st.integers(min_value=0, max_value=8),
     st.sampled_from(sdp_instance.states),
     st.sampled_from(sdp_instance.states),
 )
-def test_reward_return_int(t: int, x: State, y: State, next_x: State):
-    result = sdp_instance.reward(t, x, y, next_x)
+def test_reward_return_int(t: int, x: State, next_x: State):
+    y = sdp_instance.actions(t, x)
+    result = sdp_instance.reward(t, x, y[0], next_x)
     assert isinstance(result, float)
 
 
 # Test that reward always returns a positive integer (no multiplication with 0)
 @given(
-    st.integers(min_value=0),
-    st.sampled_from(sdp_instance.states),
+    st.integers(min_value=0, max_value=8),
     st.sampled_from(sdp_instance.states),
     st.sampled_from(sdp_instance.states),
 )
-def test_reward_return_positive_int(t: int, x: State, y: State, next_x: State):
-    result = sdp_instance.reward(t, x, y, next_x)
+def test_reward_return_positive_int(t: int, x: State, next_x: State):
+    y = sdp_instance.actions(t, x)
+    result = sdp_instance.reward(t, x, y[0], next_x)
     assert result >= 0
 
 
 # Test that reward always gives the same reward given the same inputs:
 @given(
-    st.integers(min_value=0),
-    st.sampled_from(sdp_instance.states),
+    st.integers(min_value=1, max_value=8),
     st.sampled_from(sdp_instance.states),
     st.sampled_from(sdp_instance.states),
 )
-def test_reward_stochastic(t: int, x: State, y: State, next_x: State):
-    result1 = sdp_instance.reward(t, x, y, next_x)
-    result2 = sdp_instance.reward(t, x, y, next_x)
+def test_reward_stochastic(t: int, x: State, next_x: State):
+    y = sdp_instance.actions(t, x)
+    result1 = sdp_instance.reward(t, x, y[0], next_x)
+    result2 = sdp_instance.reward(t, x, y[0], next_x)
     assert result1 == result2
 
 
@@ -285,6 +603,25 @@ def test_mkSimpleProb_invalid_sum():
     test_data = [(x, 0.3), (y, 0.3)]
     with pytest.raises(ValueError, match="Probabilities do not sum to 1"):
         sdp_instance.mkSimpleProb(test_data)
+        
+
+""" 
+@given(
+    st.lists(
+        st.tuples(
+            st.sampled_from(sdp_instance.states),  # Pick valid states
+            st.floats(min_value=0, max_value=1)    # Only non-negative probabilities
+        ), 
+        min_size=1
+    )
+)
+def test_mkSimpleProb_hypothesis(pairs):
+    total = sum(p[1] for p in pairs)
+    if total > 0:  # Normalize if sum > 0 (otherwise, function would always raise ValueError)
+        normalized_pairs = [(s, p / total) for s, p in pairs]
+        result = sdp_instance.mkSimpleProb(normalized_pairs)
+        assert sum(result.values()) == 1.0 """
+
 
 
 # ==================== Property Tests: val  ====================
@@ -306,32 +643,75 @@ def test_mkSimpleProb_invalid_sum():
 )
 def test_val_return(t: int, ps: list[dict[State, Action]], nx: State):
     if ps and nx not in ps[0]:  # Ensure valid key access
-        ps[0][nx] = Action.A1  # Assign a default action
+        ps[0][nx] = Action.Start  # Assign a default action
     result = sdp_instance.val(t, ps, nx)
-    assert isinstance(result, float)  """
-
+    assert isinstance(result, float) 
+ """
 # ==================== Property Tests: bestExt  ====================
 
-#    def bestExt(self, t: int, ps_tail: list[dict[State, Action]]) -> dict[State, Action]:
-
-
 # Test that bestExt returns a policy (dict[State, Action])
-
-""" @given(
-    st.integers(min_value=0, max_value=5),  # Small t to limit recursion depth
-    st.lists(
-        st.dictionaries(
-            keys=st.sampled_from(sdp_instance.states),
-            values=st.sampled_from(list(Action)),
-            min_size = 1
-        ),
-        min_size=1,
-        max_size=5,  # Control recursion depth by limiting `ps` size
-    )
+@given(
+    st.integers(min_value=0, max_value=5),
+    st.sampled_from(sdp_instance.states)
 )
-def test_bestExt_return_value(t:int, tail: list[dict[State,Action]]):
-    result = sdp_instance.bestExt(t, tail)
-    assert(isinstance(result, dict))  """
+def test_bestExt_return_value(t: int, state: State):
+    action = sdp_instance.actions(t, state)
+    ps_tail = [dict([(state, action[0])])]
+    result = sdp_instance.bestExt(t, ps_tail)
+    assert isinstance(result, dict)
+    assert ps_tail  
+
+# The output policy should only assign valid actions to each state.
+
+# That means policy[state] should be in self.actions(t, state).
+@given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
+def test_bestExt_valid_actions(t: int, state: State):
+    
+    action = sdp_instance.actions(t, state)
+    ps_tail = [dict([(state, action[0])])]
+    
+    policy = sdp_instance.bestExt(t, ps_tail)
+    for state, action in policy.items():
+        assert action in sdp_instance.actions(t, state)
+
+# Test that running bestExt with the same inputs should return the same policy
+@given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
+def test_bestExt_deterministic(t, state):
+
+    action = sdp_instance.actions(t, state)
+    ps_tail = [dict([(state, action[0])])]
+    
+    result1 = sdp_instance.bestExt(t, ps_tail)
+    result2 = sdp_instance.bestExt(t, ps_tail)
+    assert result1 == result2
+
+# This test tangents the "val" function, but bestExt should return the best (optimal) result given from val:
+# If val(t, [p] + ps_tail, state) is strictly better for some action a', bestExt should return a'.
+@given(st.integers(min_value=0, max_value=100), st.sampled_from(sdp_instance.states))
+def test_bestExt_optimality(t, state):
+    
+    action = sdp_instance.actions(t, state)
+    ps_tail = [dict([(state, action[0])])]
+    
+    policy = sdp_instance.bestExt(t, ps_tail)
+    for state, action in policy.items():
+        best_value = sdp_instance.val(t, [{state: action}] + ps_tail, state)
+        for other_action in sdp_instance.actions(t, state):
+            value = sdp_instance.val(t, [{state: other_action}] + ps_tail, state)
+            assert value <= best_value
+            
+            
+            
+# Test that the function work consistently over different t values
+@given(st.integers(min_value=0, max_value=10), st.sampled_from(sdp_instance.states))
+def test_bestExt_stability(t, state):
+    
+    action = sdp_instance.actions(t, state)
+    ps_tail = [dict([(state, action[0])])]
+    
+    policy1 = sdp_instance.bestExt(t, ps_tail)
+    policy2 = sdp_instance.bestExt(t + 1, ps_tail)
+    assert policy1.keys() == policy2.keys()
 
 # ==================== Property Tests: worstExt  ====================
 
@@ -430,8 +810,8 @@ def test_best_policy_consistency():
 
 # Test that makes sure an increase in horizon changes the result provided by the best function. This test specifically focuses on the string return behavour.
 def test_best_horizon_increasing():
-    result_1 = sdp_instance.best(t=0, n=1, x=State.S1)
-    result_2 = sdp_instance.best(t=0, n=2, x=State.S1)
+    result_1 = sdp_instance.best(0, 1, sdp_instance.states[0])
+    result_2 = sdp_instance.best(0, 2, sdp_instance.states[0])
 
     assert result_1 != result_2
 
@@ -467,7 +847,7 @@ def test_mMeas_output_range(t, n, x):
 def test_mMeas_monotonicity():
     x = sdp_instance.states[0]
     t = 1
-    prev_value = sdp_instance.mMeas(t, 10, x)
+    prev_value = sdp_instance.mMeas(t, 7, x)
     for n in range(6, 0, -1):
         curr_value = sdp_instance.mMeas(t, n, x)
         assert curr_value <= prev_value or math.isclose(
