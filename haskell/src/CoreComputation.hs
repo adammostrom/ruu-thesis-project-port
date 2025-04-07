@@ -1,11 +1,12 @@
-{- {-# HLINT ignore "Use camelCase" #-}
+ 
+{-# HLINT ignore "Use camelCase" #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
 
 module CoreComputation where
-
+{-
 import Data.List (maximumBy, nub, sort, minimumBy)
 import Data.Map (Map)
 import Data.Map qualified as Map
