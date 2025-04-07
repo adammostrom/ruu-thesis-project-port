@@ -1,8 +1,8 @@
 {-# LANGUAGE ScopedTypeVariables #-}
-
 import Test.QuickCheck
 import Data.Maybe (isJust, mapMaybe)
 import Text.Read (readMaybe)
+import Text.Printf(printf)
 
 -- Assuming `best` is defined in a module called `BestModule`
 import CoreComputation (State(..), best, Action(..) )
@@ -45,32 +45,6 @@ testBest s x y (a, b, c)
     && testBestValue s x y   == extractTrd (a, b, c)   = True
     | otherwise                                        = False
 
--- First Unit Test
-{- 
-prop_best_0_1_DHU :: Int -> Int -> State -> Bool
-prop_best_0_1_DHU x y state =
-    let result = best 0 1 DHU
-    in fst result == Delay && snd result == 0.4679999999997
- -}
-{- -- Property: best should return a value between 0 and 1
-prop_bestInRange :: Int -> Int -> ValTest.State -> Bool
-prop_bestInRange x y state =
-    let result = best x y state
-    in result >= 0 && result <= 1
-
--- Property: best should be deterministic (same input -> same output)
-prop_bestDeterministic :: Int -> Int -> ValTest.State -> Bool
-prop_bestDeterministic x y state =
-    best x y state == best x y state
--}
-
-{- -- Run tests
-main :: IO ()
-main = do
-    #quickCheck prop_best_0_1_DHU -}
-
-
--- Function to parse a line from the text file
 
 -- Function to parse a line from the text file
 -- Updated parseRow function to return the correct structure
@@ -100,10 +74,13 @@ compareTestResults s x y (expectedAction, expectedValue) = do
     let computedAction = testBestAction s x y
     let computedValue = testBestValue s x y
     if computedAction == expectedAction && abs (computedValue - expectedValue) < 1e-6
+        
         then return $ "Test Passed for " ++ show s ++ " " ++ show x ++ "," ++ show y
+                    ++ "| Expected: " ++ show (expectedAction, expectedValue)
+                    ++ "| Got: " ++ show (computedAction, computedValue)
         else return $ "Test Failed for " ++ show s ++ " " ++ show x ++ "," ++ show y
-                    ++ ". Expected: " ++ show (expectedAction, expectedValue)
-                    ++ ", Got: " ++ show (computedAction, computedValue)
+                    ++ "| Expected: " ++ show (expectedAction, expectedValue)
+                    ++ "| Got: " ++ show (computedAction, computedValue)
 
 -- Function to run all tests and save the result to a file
 runTests :: FilePath -> FilePath -> IO ()

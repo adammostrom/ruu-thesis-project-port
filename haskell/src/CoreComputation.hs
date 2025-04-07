@@ -1,4 +1,4 @@
-{-# HLINT ignore "Use camelCase" #-}
+{- {-# HLINT ignore "Use camelCase" #-}
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE RankNTypes #-}
 {-# LANGUAGE ImportQualifiedPost #-}
@@ -53,7 +53,20 @@ instance Monad Prob where
   return = pure
   Prob xs >>= f = Prob [(y, p * q) | (x, p) <- xs, (y, q) <- unProb (f x)]
 
+
+runProb :: Eq a => Prob a -> [(a, Double)]
+runProb = collectAndSumEqual . unProb
+
+collectAndSumEqual :: Eq a => [(a,Double)] -> [(a, Double)]
+collectAndSumEqual aps =
+  let support = nub (map fst aps)
+  in map (\a -> (a, sum (map snd (filter ((a==).fst) aps))))
+          support
+          
+
+
 -- Normalize the probability distribution (so probabilities sum to 1), this is to avoid having wrongful percentage distribution
+-- CURRENTLY NOT USED
 normalize :: (Ord a) => Prob a -> Prob a
 normalize (Prob xs) =
   let total = sum (map snd xs)
@@ -63,6 +76,10 @@ normalize (Prob xs) =
 -- Extract the probability of a state from a Prob State
 getProb :: State -> Prob State -> Maybe Probability
 getProb state probState = lookup state (runProb probState)
+
+-- Extract the list of (State, Double) pairs from a Prob State (mainly for testing purposes)
+unwrapProbState :: Prob State -> [(State, Double)]
+unwrapProbState (Prob prob)= prob
 
 
 pS_Start :: Probability
@@ -348,6 +365,8 @@ next t x y = case (t, x, y) of
       ]
   _ -> error "Invalid state or action combination"
 
+
+
 -- PJ: It looks like you use type OtherProb a = Map a Double instead
 -- of Prob from above. A bit unclear why? (This has a different type
 -- than "meas" in the Idris code. Perhaps useful, but why use the same
@@ -363,17 +382,27 @@ expectation :: (a -> Val) -> Prob a -> Val
 expectation f (Prob xs) = sum [p * f x | (x, p) <- xs]
 -- PJ: this is used a few times, but also extractValue later
 
+-- Extract numeric value from Prob Val (i.e., compute the expected value)
+extractValue :: Prob Val -> Double
+extractValue (Prob xs) = sum [p * value x | (x, p) <- xs]
+  where
+    value :: Val -> Double
+    value = id 
+
+
+-- Added helper function / AM
+-- CURRENTLY NOT USED
+extractState :: Prob State -> State
+extractState (Prob xs) = fst $ head xs
 
 
 -- PJ: Why return a Prob Val instead of just Val? [unexplained deviation from the Idris code]
-val :: Int -> PolicySeq -> State -> Prob Val
-val _ [] _ = return 0
-val t (p : ps) x = do
+val :: Int -> PolicySeq -> State -> Val
+val _ [] _ = 0
+val t (p : ps) x = 
   let y = fromMaybe Unit (Map.lookup x p)
-  x' <- next t x y 
-  let r = reward t x y x'   -- PJ: I simplified this line
-  v <- val (t + 1) ps x'    
-  return (r + v)
+      mNext = runProb $ next t x y
+  in sum [pr * (reward t x y x' + val (t + 1) ps x') | (x', pr) <- mNext]
 
 -- Compute the best extension of a policy sequence
 bestExt :: Int -> PolicySeq -> Policy
@@ -387,7 +416,7 @@ bestExt t ps_tail = Map.fromList $ map bestAction states
       if state `elem` states
         then
           let 
-              actionValues = [(action, extractValue (val t (Map.singleton state action : ps_tail) state)) | action <- actions]
+              actionValues = [(action, val t (Map.singleton state action : ps_tail) state) | action <- actions]
               
               best = maximumBy (comparing snd) actionValues
            in (state, fst best)
@@ -429,7 +458,7 @@ best t n x
       let ps = bi (t + 1) (n - 1)
           p = bestExt t ps
           b = fromMaybe Unit (Map.lookup x p)
-          vb = expectation id (val t (p : ps) x)
+          vb =  (val t (p : ps) x)
        in (n, b, vb)
 
 -- Compute how much a state matters for optimal decision-making
@@ -442,8 +471,8 @@ mMeas t n x
             if Map.lookup x (head ps) == Just Start
               then (Map.insert x Delay (head ps)) : tail ps
               else (Map.insert x Start (head ps)) : tail ps
-          bestVal = expectation id (val t ps x)
-          worstVal = expectation id (val t ps' x)
+          bestVal =  (val t ps x)
+          worstVal =  (val t ps' x)
        in (bestVal - worstVal) / bestVal
 
 -- Extract head and tail of policy sequences
@@ -512,3 +541,5 @@ aps1 = runProb mvals1
 -- There is no need to keep making the distribution bigger and bigger.
 -- You can compute its expectation at every step and just keep the
 -- result.
+
+-}
