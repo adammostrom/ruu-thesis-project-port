@@ -1,15 +1,12 @@
 from enum import Enum, auto
 
 import numpy as np
-from theory import SDP
+from theoryMemorization import SDP
 
 """
 The following file shows an implementation of the SDP-framework from "theory.py" on a few simple
 labyrinths.
-"""
 
-
-"""
 We start by defining a general class for labyrinth SDP:s, from which we can inherit
 when creating specific labyrinths.
 """
@@ -34,7 +31,7 @@ class Labyrinth(SDP):
         return self._maze_map
 
     @property
-    def probs(self):
+    def probs(self) -> dict:
         return self._probs
     
     @property
@@ -53,6 +50,7 @@ class Labyrinth(SDP):
                 actions.append(Action(dir))
         return actions
 
+    # Made to work for labyrinths of any size.
     def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
         if x not in self.states or y not in self.actions(t, x):
                 raise ValueError(f"Invalid State and/or action: '{x}' '{y}'.")
@@ -78,13 +76,14 @@ class Labyrinth(SDP):
 
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
         pass  # To be completed in specific implementations.
-            
+
     # Function that visualizes the input policy on the maze.
     def mazeVis(self, dim: tuple[int, int],p: dict[State, Action], n) -> str:
         padded_dim = (dim[0]+2, dim[1]+2)
         map = np.full(padded_dim, "■")
         symbols = {}
-        for state, action in p.items():
+        for state, action_pair in p.items():
+            action = action_pair[0]
             index = (int(state.name[1]), int(state.name[2]))
             match action:
                 case Action.Left:
@@ -300,9 +299,9 @@ class LargerLabyrinth(Labyrinth):
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
         match next_x:
             case State._45:
-                return 10.0
+                return 1.0
             case State._22 | State._34:
-                return -100.0
+                return -5.0
             case _:
                 return -0.1
 
@@ -319,8 +318,7 @@ for i in range(1, 8):
 for result in bests:
     print(result)
 
-print(largerMaze.best(0, 8, State._11))
-
-n = 8
+n = 100
+print(largerMaze.best(0, n, State._11))
 ps = largerMaze.bi(0, n)
 largerMaze.mazeVis((4, 5),ps[0] , n)

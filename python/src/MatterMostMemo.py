@@ -1,12 +1,12 @@
 from enum import Enum, auto
 
 import numpy as np
-from theory import SDP
+from theoryMemorization import SDP
 
 """
-This is the unaltered python translation of the SDP described in the report 
-"Responsibility Under Uncertainty: Which Climate Decisions Matter Most?"
-by Botta et al.
+This specification is identical to the one in "MatterMostSDP.py", except it imports
+the theory from "theoryMemorization.py" instead of "theory.py". It was added to be able 
+to easily compare results and computational speed between the two versions.
 """
 
 # Declare all states of the SDP below:
@@ -70,7 +70,6 @@ class MatterMost(SDP):
             return [None]
         else:
             raise ValueError(f"Invalid State: '{x}'.")
-
 
     # nextFunc takes in timestep t, state x, and action (control) y.
     def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
