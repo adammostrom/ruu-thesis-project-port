@@ -38,11 +38,12 @@ def sdp_instance():
 
 from src.implementations.MatterMostSDP import MatterMost as mattermost_module
 
-State = mattermost_module.State
-Action = mattermost_module.Action
-SDP = mattermost_module.MatterMost
+#State = mattermost_module.State
+states = mattermost_module.states
+#Action = mattermost_module.Action
+#SDP = mattermost_module.MatterMost
 
-sdp_instance = SDP()
+sdp_instance = mattermost_module()
 
 
 # ==================== Property Tests: action  ====================
@@ -63,7 +64,7 @@ def test_actions_return_type_action(t, state):
 
 
 # Test that the function will behave the same for same input
-@given(st.integers(min_value=0), st.sampled_from(State))
+@given(st.integers(min_value=0), st.sampled_from(sdp_instance.states))
 def test_actions_deterministic(t, x):
     result1 = sdp_instance.actions(t, x)
     result2 = sdp_instance.actions(t, x)
@@ -83,7 +84,7 @@ def test_nextFunc_return_dict(t, x):
     next = sdp_instance.nextFunc(t, x, y[0])
     assert isinstance(next, dict)
     assert all(
-        isinstance(k, State) for k in next.keys()
+        isinstance(k, sdp_instance.states[0]) for k in next.keys()
     ), f"Keys are not all State instances: {next.keys()}"
     assert all(
         isinstance(v, float) for v in next.values()
@@ -146,7 +147,7 @@ def test_nextFunc_determinism(t, x):
     st.sampled_from(sdp_instance.states),
     st.sampled_from(sdp_instance.states),
 )
-def test_reward_return_int(t: int, x: State, next_x: State):
+def test_reward_return_int(t: int, x, next_x):
     y = sdp_instance.actions(t, x)
     result = sdp_instance.reward(t, x, y[0], next_x)
     assert isinstance(result, float)
