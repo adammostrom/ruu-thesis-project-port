@@ -1,7 +1,7 @@
 from enum import Enum, auto
 
 import numpy as np
-from application.theory import SDP
+from src.application.theory import SDP
 
 
 # Declare all states of the SDP below:
