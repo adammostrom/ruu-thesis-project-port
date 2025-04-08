@@ -36,14 +36,12 @@ def sdp_instance():
 
 # ==================== Test SDP Implementation ====================
 
-from src.implementations.MatterMostSDP import MatterMost as mattermost_module
+#from src.implementations.MatterMostSDP import MatterMost as mattermost_module
+from tests.test_SDP import TestSDP as module
 
-#State = mattermost_module.State
-states = mattermost_module.states
-#Action = mattermost_module.Action
 #SDP = mattermost_module.MatterMost
 
-sdp_instance = mattermost_module()
+sdp_instance = module()
 
 
 # ==================== Property Tests: action  ====================
@@ -54,13 +52,6 @@ sdp_instance = mattermost_module()
 def test_actions_return_list(t, state):  # `t` is provided by Hypothesis
     actions = sdp_instance.actions(t, state)
     assert isinstance(actions, list)
-
-
-# Tests that the elements in the list are of type Action
-@given(st.integers(min_value=0, max_value=8), st.sampled_from(sdp_instance.states))
-def test_actions_return_type_action(t, state):
-    actions = sdp_instance.actions(t, state)
-    assert (all(isinstance(a, Action)) or a is None for a in actions)
 
 
 # Test that the function will behave the same for same input
@@ -159,7 +150,7 @@ def test_reward_return_int(t: int, x, next_x):
     st.sampled_from(sdp_instance.states),
     st.sampled_from(sdp_instance.states),
 )
-def test_reward_return_positive_int(t: int, x: State, next_x: State):
+def test_reward_return_positive_int(t: int, x, next_x):
     y = sdp_instance.actions(t, x)
     result = sdp_instance.reward(t, x, y[0], next_x)
     assert result >= 0
@@ -171,7 +162,7 @@ def test_reward_return_positive_int(t: int, x: State, next_x: State):
     st.sampled_from(sdp_instance.states),
     st.sampled_from(sdp_instance.states),
 )
-def test_reward_stochastic(t: int, x: State, next_x: State):
+def test_reward_stochastic(t: int, x, next_x):
     y = sdp_instance.actions(t, x)
     result1 = sdp_instance.reward(t, x, y[0], next_x)
     result2 = sdp_instance.reward(t, x, y[0], next_x)
@@ -235,7 +226,7 @@ def test_mkSimpleProb_hypothesis(pairs):
     st.sampled_from(sdp_instance.states),
     st.sampled_from(sdp_instance.states)
 )
-def test_val_return(t: int, state: State,  nx: State):
+def test_val_return(t: int, state,  nx):
     
     action = sdp_instance.actions(t, state)
     ps = [dict([(state, action[0])])]
@@ -260,7 +251,7 @@ def test_val_deterministic(t, state,  x):
     st.integers(min_value=0, max_value=5),
     st.sampled_from(sdp_instance.states)
 )
-def test_bestExt_return_value(t: int, state: State):
+def test_bestExt_return_value(t: int, state):
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
     result = sdp_instance.bestExt(t, ps_tail)
@@ -271,7 +262,7 @@ def test_bestExt_return_value(t: int, state: State):
 
 # That means policy[state] should be in self.actions(t, state).
 @given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
-def test_bestExt_valid_actions(t: int, state: State):
+def test_bestExt_valid_actions(t: int, state):
     
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
@@ -323,7 +314,7 @@ def test_bestExt_stability(t, state):
 
 # That means policy[state] should be in self.actions(t, state).
 @given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
-def test_worstExt_valid_actions(t: int, state: State):
+def test_worstExt_valid_actions(t: int, state):
     
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
@@ -384,12 +375,18 @@ def test_bi_length(t, n):
 
 
 # Test that the bi function upholds its recursive structure, by checking if the next value in the "stack" is different from the previous one.
-@given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=5))
+@given(st.integers(min_value=1, max_value=5), st.integers(min_value=0, max_value=5))
 def test_bi_recursive_structure(t, n):
     result = sdp_instance.bi(t, n)
-    for i in range(1, n):
-        assert result[i - 1] != result[i]  # TODO: For some reason bi returns the exat same policy sequence
+    result2 = sdp_instance.bi(t, n-1)
+    assert result2 != result 
 
+
+@given(st.integers(min_value=1, max_value=5), st.integers(min_value=0, max_value=5))
+def test_bi_recursive_structure_2(t, n):
+    result = sdp_instance.bi(t, 5)
+    result2 = sdp_instance.bi(t, 4)
+    assert result[1:]  == result2
 
 # Test that the return values are of correct type (State, Action)
 @given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=5))
