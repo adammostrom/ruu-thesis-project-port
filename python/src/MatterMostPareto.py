@@ -1,12 +1,17 @@
 from enum import Enum, auto
 
 import numpy as np
-from theory import SDP
+from theoryMemorization import SDP
+
+import random
+import matplotlib.pyplot as plt
 
 """
-This is the unaltered python translation of the SDP described in the report 
-"Responsibility Under Uncertainty: Which Climate Decisions Matter Most?"
-by Botta et al.
+This file contains a modification of the SDP described in "Responsibility Under Uncertainty: 
+Which Climate Decisions Matter Most?" by Botta et al. Here, the SDP has been "split" into
+two different SDP:s which are identical apart from their reward functions. Their respective results
+are compared to find a pareto front (that is, outcomes where neither one can attain a better result
+without the other getting a worse result).
 """
 
 # Declare all states of the SDP below:
@@ -63,7 +68,7 @@ class MatterMost(SDP):
         return list(State)
 
     # Function that returns the possible actions in any allowed state.
-    def actions(self, t: int, x: State) -> list[Action] | list[None]:
+    def actions(self, t: int, x: Enum) -> list[str] | list[None]:
         if x in [State.DHU, State.DHC, State.DLU, State.DLC]:
             return [Action.Start, Action.Delay]
         elif x in [State.SHU, State.SHC, State.SLU, State.SLC]:
@@ -399,17 +404,84 @@ class MatterMost(SDP):
             # Testing the transition function.
 
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
-        # Value is added for transitioning into states which do not have low economic
-        # output and at the same time are not comitted to severe future climate change.
-        return 1.0 if next_x in [State.DHU, State.SHU] else 0.0
+        pass
+    
+    def randomExt(self, t: int, ps_tail: list[dict[State, tuple[Action, float]]]) -> dict[State, tuple[Action, float]]:
+        policy = dict()
+        for state in self.states:
+            actions = self.actions(t, state)
+            random_action = random.choice(actions)
+            p = {state: (random_action, None)}
+            value = self.val(t, [p] + ps_tail, state)
+            policy[state] = (random_action, value)
+        return policy
+
+    def randomPS(self, t: int, n: int) -> list[dict[State, tuple[Action, float]]]:
+        if n == 0:
+            return []
+        else:
+            ps_tail = self.randomPS(t + 1, n - 1)
+            p = self.randomExt(t, ps_tail)
+            return [p] + ps_tail
+
+class ClimateMatterMost(MatterMost):
+    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+        # Value is added for transitioning into states which are not comitted to
+        # severe future climate change.
+        return 1.0 if next_x in [State.DHU, State.DLU, State.SHU, State.SLU] else 0.0
+
+class EconomyMatterMost(MatterMost):
+    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+        # Value is added for transitioning into states which do not have
+        # low economic output.
+        return 1.0 if next_x in [State.DHU, State.DHC, State.SHU, State.SHC] else 0.0
 
 
-# First quick check that program still produces same results as before generalization.
-SDP1 = MatterMost()
-# result = SDP1.nextFunc(0, State.DHU, Action.Start)
-# result = SDP1.reward(0, State.DHU, Action.Start, State.DHU)
-# result = SDP1.bi(0, 3)
-# result = SDP1.best(0, 7, State.DHU)
-result = SDP1.mMeas(3, 7, State.DHU)
-print(result)
+SDP_parent = MatterMost()
+SDP1 = ClimateMatterMost()
+SDP2 = EconomyMatterMost()
 
+
+def randomExtGlobal(SDP_parent, SDP1, SDP2, t: int,
+                    ps_tail_1: list[dict[State, tuple[Action, float]]],
+                    ps_tail_2: list[dict[State, tuple[Action, float]]]) -> dict[State, tuple[Action, float]]:
+    policy_SDP1 = dict() # These two will be equal policies
+    policy_SDP2 = dict() # but with different values.
+    for state in SDP_parent.states:
+        actions = SDP_parent.actions(t, state)
+        random_action = random.choice(actions)
+        p = {state: (random_action, None)}
+        value_SDP1 = SDP1.val(t, [p] + ps_tail_1, state)
+        value_SDP2 = SDP2.val(t, [p] + ps_tail_2, state)
+        policy_SDP1[state] = (random_action, value_SDP1)
+        policy_SDP2[state] = (random_action, value_SDP2)
+    return policy_SDP1, policy_SDP2
+
+def randomPSGlobal(SDP_parent, SDP1, SDP2, t: int, n: int) -> list[list[dict[State, tuple[Action, float]]]]:
+    if n == 0:
+        return [], []
+    else:
+        ps_tail_1, ps_tail_2 = randomPSGlobal(SDP_parent, SDP1, SDP2, t + 1, n - 1)
+        p_1, p_2 = randomExtGlobal(SDP_parent, SDP1, SDP2, t, ps_tail_1, ps_tail_2)
+        return [p_1] + ps_tail_1, [p_2] + ps_tail_2
+
+def valueCloud(SDP_parent, SDP1, SDP2, t, n, x, n_points):
+    x_axis = []
+    y_axis = []
+    for i in range(n_points):
+        ps1, ps2 = randomPSGlobal(SDP_parent, SDP1, SDP2, t, n)
+        val_1 = ps1[0][x][1]
+        val_2 = ps2[0][x][1]
+
+        # clean_policy = []
+        # for p in policy:
+        #     clean_p = {state: (action, None) for state, (action, _) in p.items()}
+        #     clean_policy.append(clean_p)
+        # val_2 = SDP2.val(t, clean_policy, x)
+        x_axis.append(val_1)
+        y_axis.append(val_2)
+    plt.scatter(x_axis, y_axis, c="blue", s=.8)
+    plt.show()
+
+
+test = valueCloud(SDP_parent, SDP1, SDP2, 0, 10, State.DHU, 1000)
