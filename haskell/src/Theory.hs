@@ -69,8 +69,9 @@ class Theory x y where
   next :: Int -> x -> y -> Prob x
 
   actions :: Int -> x -> [y]
-
-  states :: [x]
+  
+  -- PJ kommentar 
+  states :: y ->  [x]
 
 
 
@@ -130,6 +131,8 @@ bi t n =
       p = bestExt t ps_tail
    in p : ps_tail
 
+
+   -- skapa lista av värden -> ta measure på result (reward ...)
 val :: (Theory x y, Ord x, Show x) => Int -> PolicySeq x y -> x -> Val
 val _ [] _ = 0
 val t (p : ps) x =
@@ -151,21 +154,21 @@ best t n x
         in (b, vb)
 
 
-mMeas :: Int -> Int -> State -> Double
-mMeas t n x
-  | t < 0 || n < 0        = error "t and n must be non-negative"
-  | otherwise =
-    let psTail = bi (t + 1) (n - 1)
-        pBest  = bestExt t psTail
-        pWorst = worstExt t psTail
-        bestVal  = val t (pBest : psTail) x
-        worstVal = val t (pWorst : psTail) x
-    in if bestVal == 0 then 0 else (bestVal - worstVal) / bestVal
+headPolicy :: PolicySeq x y-> Maybe (Policy x y)
+headPolicy [] = Nothing
+headPolicy (p:ps) = Just p
+
+tailPolicy :: PolicySeq x y-> Maybe (PolicySeq x y)
+tailPolicy [] = Nothing
+tailPolicy (p:ps) = Just ps
 
 
-bestExt ::  Int -> PolicySeq State Action -> Policy State Action
-bestExt  t ps_tail = Map.fromList $ map bestAction getStates
+-- PJ : ( asTypeOf states $ head ps_tail)
+bestExt :: (Theory x y, Show x, Eq x, Ord x) =>  Int -> PolicySeq x y -> Policy x y
+bestExt  t ps_tail = tSt `asTypeOf`head ps_tail
   where
+    y = snd $ head (Map.toList $ head ps_tail)
+    tSt = Map.fromList $ map bestAction (states y)
     bestAction state = (state, getBestAction t state ps_tail)
     getBestAction t state ps_tail =
       let actionsForState = actions t state
@@ -173,25 +176,18 @@ bestExt  t ps_tail = Map.fromList $ map bestAction getStates
           best = maximumBy (comparing snd) actionValues
         in fst best
 
-worstExt ::  Int -> PolicySeq State Action -> Policy State Action
-worstExt  t ps_tail = Map.fromList $ map worstAction getStates
+
+worstExt :: (Theory x y, Show x, Eq x, Ord x) =>  Int -> PolicySeq x y -> Policy x y
+worstExt  t ps_tail =  tSt `asTypeOf` head ps_tail
   where
+    y = snd $ head (Map.toList $ head ps_tail)
+    tSt = Map.fromList $ map worstAction (states y)
     worstAction state = (state, getWorstAction t state ps_tail)
     getWorstAction t state ps_tail =
       let actionsForState = actions t state
           actionValues = [(action, val t (Map.singleton state action : ps_tail) state) | action <- actionsForState]
           worst = minimumBy (comparing snd) actionValues
-      in fst worst
-
-headPolicy :: PolicySeq State Action-> Maybe (Policy State Action)
-headPolicy [] = Nothing
-headPolicy (p:ps) = Just p
-
-tailPolicy :: PolicySeq State Action-> Maybe (PolicySeq State Action)
-tailPolicy [] = Nothing
-tailPolicy (p:ps) = Just ps
-
-
+      in fst worst 
 
 ----------- Concrete Implementation ---------------------------------------------
 
@@ -206,8 +202,8 @@ getStates :: [State]
 getStates = [DHU, DHC, DLU, DLC, SHU, SHC, SLU, SLC]
 
 instance Theory State Action where
-  states :: [State]
-  states = [DHU, DHC, DLU, DLC, SHU, SHC, SLU, SLC]
+  states :: Action -> [State]
+  states _ = [DHU, DHC, DLU, DLC, SHU, SHC, SLU, SLC]
 
   actions :: Int -> State -> [Action]
   actions _ x
