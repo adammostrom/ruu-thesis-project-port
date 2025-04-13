@@ -44,27 +44,3 @@ testReward_SHU_SLC = reward 0 SHU Start SLC == 0 -- Idris returns exception, our
 prop_reward :: State -> State -> Bool
 prop_reward next_x next_y = trace ("Testing state: " ++ show next_x) $
     reward 0 next_y Unit next_x == (if next_x == DHU || next_x == SHU then 1 else 0)
-
--- Utility function to report test results
-runTest :: String -> Bool -> IO ()
-runTest name result =
-    putStrLn $ if result
-        then "[PASS] " ++ name 
-        else "[FAIL] " ++ name
-
--- Running unit tests
-runUnitTests :: IO ()
-runUnitTests = do
-    putStrLn "Running Unit Tests..."
-    runTest "testReward_DHU" testReward_SHU_SLC
-
--- Running QuickCheck property tests
-runQuickCheckTests :: IO ()
-runQuickCheckTests = do
-    quickCheck prop_reward
-
--- Main function that runs both unit tests and QuickCheck tests
-main :: IO ()
-main = do
-    runUnitTests
-    runQuickCheckTests

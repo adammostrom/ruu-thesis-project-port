@@ -1,4 +1,3 @@
-
 module Test_properties where
 
 
@@ -21,6 +20,17 @@ instance Theory State Action where
 
 
 
-
+{-
+Testing of function: BI
+-}
 prop_biLength :: Int -> Int -> Bool
 prop_biLength t n = length (bi t n ) == n
+
+{- prop_biIsOptimal :: Positive Int -> State -> Bool
+prop_biIsOptimal (Positive n) s = 
+    let opt   = val 0 (bi 0 n) s
+        worst = (buildWorstSeq 0 n)
+    in opt >= bad
+
+buildWorstSeq :: Int -> Int -> PolicySeq State Action
+buildWorstSeq -}
