@@ -1,11 +1,21 @@
 import copy
+from typing import Callable
 
 import numpy as np
 
-# Defining the set of allowed states in the SDP.
+# Set of the allowed states in the SDP.
 states = ["DHU", "DHC", "DLU", "DLC", "SHU", "SHC", "SLU", "SLC"]
 
-# Defining the probabilities for the transition function.
+# Function that returns the possible actions in any allowed state.
+def actions(x: str) -> list[str] | list[None]:
+    if x in ["DHU", "DHC", "DLU", "DLC"]:
+        return ["Start", "Delay"]
+    elif x in ["SHU", "SHC", "SLU", "SLC"]:
+        return [None]
+    else:
+        raise ValueError(f"Invalid State: '{x}'.")
+
+# Probabilities for the transition function.
 pS_Start = 0.9
 pD_Start = 1.0 - pS_Start
 
@@ -37,8 +47,8 @@ pU_D = 0.3
 pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
-
-# Checking that no probabilities are negative.
+# Function that checks that no probabilities are negative, and then
+# returns probabilities for entering all states in next time step.
 def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
     dist: dict[str, float] = {}
     for st, pr in pairs:
@@ -46,10 +56,11 @@ def mkSimpleProb(pairs: list[tuple[str, float]]) -> dict[str, float]:
             dist[st] = pr
     return dist
 
-
 # For a current time step, state and action, returns the probabilities of entering each state in the next time step.
 def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
     # "y" can be "Start", "Delay", or None for S-states.
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")    
     if t == 0:
         # CASE: t == 0
         if x == "DHU":
@@ -375,35 +386,57 @@ def nextFunc(t: int, x: str, y: str) -> dict[str, float]:
 test = nextFunc(0, "DHU", "Start")
 for k, v in test.items():
     print(k, v) 
-"""
-    
-    
-# print("\nSum of all probabilities: ", sum(test.values()))
 
+print("\nSum of all probabilities: ", sum(test.values()))
+"""
 
 # Reward function.
-def reward(t: int, x: str, y: str, next_x: str) -> int:
+def reward(t: int, x: str, y: str, next_x: str) -> float:
     # Value is added for transitioning into states which do not have low economic
     # output and at the same time are not comitted to severe future climate change.
-    return 1 if next_x in ["DHU", "SHU"] else 0
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if x not in states:
+        raise ValueError(f"Invalid state: '{x}'")
+    if y not in actions(x):
+        raise ValueError(f"Invalid action: '{y}'")
+    if next_x not in states:
+        raise ValueError(f"Invalid next state: '{next_x}'")
+    return 1.0 if next_x in ["DHU", "SHU"] else 0.0
 
-# PJ: A bit confusing to use the same name (meas) for a different operation
-def meas(val: float, pr: float) -> float: # In default implementation, returns the expected value.
-    return val * pr
+# Function defining how to add rewards together.
+def add(a: float, b: float) -> float:
+    if type(a) != float or type(b) != float:
+        raise TypeError(f"Inputs must be of type 'float', not '{type(a).__name__}' and '{type(b).__name__}'.")
+    return a + b # In default implementation, returns regular floating point addition.
 
-# print(reward(0, "DHU", "Start", "DHU"))
+# Function for measuring a certain value.
+def meas(val: float, pr: float) -> float:
+    if type(val) != float or type(pr) != float:
+        raise TypeError(f"Inputs must be of type 'float', not '{type(val).__name__}' and '{type(pr).__name__}'.")
+    return val * pr # In default implementation, returns the expected value.
+
+# Default value of zero-length policy sequences.
+zero = 0.0
+
 # Computing the total expected value from a policy sequence when starting at time t in state x.
 def val(t: int, ps: list[dict[str, str]], x: str) -> float:
-    value = 0
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if type(ps) != list:
+        raise TypeError(f"Invalid policy list, must be list of dictionaries (or empty list).")
+    if x not in states:
+        raise ValueError(f"Invalid state: '{x}'")
+    value = zero
     if len(ps) == 0:
         return value
     y = ps[0][x]
     m_next = nextFunc(t, x, y)
     for x_prim, pr in m_next.items():
-        value += meas(reward(t, x, y, x_prim) + val(t+1, ps[1:], x_prim), pr)
+        value += meas(add(reward(t, x, y, x_prim), val(t+1, ps[1:], x_prim)), pr)
     return value
 
-
+"""
 # Test of val function.
 ps_test_start = [
     {"DHU": "Start"},
@@ -433,39 +466,68 @@ ps_test_delay = [
     },
 ]
 
-# print(val(0, ps_test_start, "DHU"), val(0, ps_test_delay, "DHU"))
-
+print(val(0, ps_test_start, "DHU"), val(0, ps_test_delay, "DHU"))
+"""
 
 # Computes the best single policy to add to an existing policy sequence.
-def bestExt(t: int, ps_tail: list[dict[str, str]]) -> dict[str, str]:
+def bestExt(t: int, ps_tail: list[dict[str, str]] | list[None]) -> dict[str, str]:
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if type(ps_tail) != list:
+        raise TypeError(f"Invalid ps_tail, must be list of dictionaries (or empty list).")
+    
     policy = dict()
 
     for state in states:
         best_value = -np.inf
         best_action = None
 
-        if state in ["DHU", "DHC", "DLU", "DLC"]:
-            actions = ["Start", "Delay"]
-        else:
-            policy[state] = None
-            continue
-
         # For each available action in the current state
-        for action in actions:
+        for action in actions(state):
             # Calculate value of taking action in state
             p = {state: action}
             value = val(t, [p] + ps_tail, state)
             # Choose the action with the highest expected value
-            if value > best_value:
+            if value >= best_value:
                 best_value = value
                 best_action = action
 
         policy[state] = best_action
 
-    return policy  # Builds an optimal policy sequence by recursively adding the best extension (starting from the end).
+    return policy
 
+def worstExt(t: int, ps_tail: list[dict[str, str]] | list[None]) -> dict[str, str]:
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if type(ps_tail) != list:
+        raise TypeError(f"Invalid ps_tail, must be list of dictionaries (or empty list).")
+    
+    policy = dict()
 
+    for state in states:
+        worst_value = np.inf
+        worst_action = None
+
+        # For each available action in the current state
+        for action in actions(state):
+            # Calculate value of taking action in state
+            p = {state: action}
+            value = val(t, [p] + ps_tail, state)
+            # Choose the action with the highest expected value
+            if value <= worst_value:
+                worst_value = value
+                worst_action = action
+
+        policy[state] = worst_action
+
+    return policy
+
+# Builds an optimal policy sequence by recursively adding the best extension (starting from the end).
 def bi(t: int, n: int) -> list[dict[str, str]]:
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if n < 0 or type(n) != int:
+        raise ValueError(f"Invalid time horizon: '{n}' (must be positive integer).")
     if n == 0:
         return []
     else:
@@ -473,13 +535,15 @@ def bi(t: int, n: int) -> list[dict[str, str]]:
         p = bestExt(t, ps_tail)
         return [p] + ps_tail
 
-    # For a given time step, state and decision horizon, returns the optimal action and the
-
-
+# For a given time step, state and decision horizon, returns the optimal action and the
 # expected value of the sequence it starts (assuming the rest of the sequence is optimal).
 def best(t: int, n: int, x: str) -> str:
-    if n <= 0:
-        raise (ValueError("The horizon must be greater than zero!"))
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if n < 0 or type(n) != int:
+        raise ValueError(f"Invalid time horizon: '{n}' (must be positive integer).")
+    if x not in states:
+        raise ValueError(f"Invalid state: '{x}'.")
     ps = bi(t + 1, n - 1)
     p = bestExt(t, ps)
     b = p[x]
@@ -488,7 +552,6 @@ def best(t: int, n: int, x: str) -> str:
         b = "No Action"
     vb = val(t, [p] + ps, x)
     return f"Horizon, best, value : {n}, {b}, {vb}"
-
 
 """ 
 # Computing the best decision for different decision horizons.
@@ -499,37 +562,36 @@ for i in range(1, 8):
 for b in bests:
     print(b) """
 
-
-    # Returns a value between 0 and 1, where 0 means "does not matter at all"
-# and 1 means "matters maximally" to achieving the defined goal of the SDP.
-def mMeas(t: int, n: int, x: str) -> float:
-    if x in ["SHU", "SHC", "SLU", "SLC"]:
-        return 0
-    else:
-        ps = bi(t, n)
-        ps_prim = copy.deepcopy(ps)
-        if ps[0][x] == "Start":
-            ps_prim[0][x] = "Delay"
-        else:
-            ps_prim[0][x] = "Start"
-
-        best_action_val = val(t, ps, x)
-        worst_action_val = val(t, ps_prim, x)
-
-        return (best_action_val - worst_action_val) / best_action_val
-
-    # Comparing mMeas values to those of the article
-
-
+# For comparing outputs with those from the Idris version.
 def run_best(x, y, state):
     result = best(x, y, state)
     print(result)
-    
-    
-""" 
-print(mMeas(0, 4, "SHU"))
-print(mMeas(0, 6, "SLC"))
-print(mMeas(0, 7, "DHU"))
-print(mMeas(1, 7, "DHU"))
-print(mMeas(3, 7, "DHU"))
+
+# Returns a value between 0 and 1, where 0 means "does not matter at all"
+# and 1 means "matters maximally" to achieving the defined goal of the SDP.
+def mMeas(t: int, n: int, x: str) -> float:
+    if t < 0 or type(t) != int:
+        raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
+    if n < 0 or type(n) != int:
+        raise ValueError(f"Invalid time horizon: '{n}' (must be positive integer).")
+    if x not in states:
+        raise ValueError(f"Invalid state: '{x}'.")
+    ps_tail = bi(t+1, n-1)
+    p_best = bestExt(t, ps_tail)
+    p_worst = worstExt(t, ps_tail)
+
+    best_action_val = val(t, [p_best] + ps_tail, x)
+    worst_action_val = val(t, [p_worst] + ps_tail, x)
+    if best_action_val == 0:
+        return 0
+    return (best_action_val - worst_action_val) / best_action_val
+
+
+"""
+# Comparing mMeas values to those of the article
+print("Importance (Time:0, Horizon:6, Starting state:SHU):", mMeas(0, 4, "SHU"))
+print("Importance (Time:0, Horizon:6, Starting state:SLC):", mMeas(0, 6, "SLC"))
+print("Importance (Time:0, Horizon:6, Starting state:DHU):", mMeas(0, 7, "DHU"))
+print("Importance (Time:1, Horizon:6, Starting state:DHU):", mMeas(1, 7, "DHU"))
+print("Importance (Time:3, Horizon:6, Starting state:DHU):", mMeas(3, 7, "DHU"))
 """

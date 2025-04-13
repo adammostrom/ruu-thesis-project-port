@@ -29,8 +29,8 @@ Börjar med att definera en class per state, och i varje class metod per mainFil
 class TestDHU(unittest.TestCase):
 
     def test_next(self):
-        #self.assertEqual(next(0, "DHU", "Start"), )  Unfinished
-        #self.assertEqual(next(0, "DHU", "Delay"), )  Unfinished
+        #self.assertEqual(nextFunc(0, "DHU", "Start"), )  Unfinished
+        #self.assertEqual(nextFunc(0, "DHU", "Delay"), )  Unfinished
         pass
 
     def test_reward(self):
