@@ -1,4 +1,4 @@
-module Test_Theory where
+module Main (main) where
 
 import Test.Hspec
 import Test.QuickCheck
