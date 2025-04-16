@@ -58,7 +58,7 @@ class MatterMost(SDP):
         return list(State)
 
     # Function that returns the possible actions in any allowed state.
-    def actions(self, t: int, x: Enum) -> list[str] | list[None]:
+    def actions(self, t: int, x: Enum) -> list[Action] | list[None]:
         if x in [State.DHU, State.DHC, State.DLU, State.DLC]:
             return [Action.Start, Action.Delay]
         elif x in [State.SHU, State.SHC, State.SLU, State.SLC]:
@@ -67,8 +67,14 @@ class MatterMost(SDP):
             raise ValueError(f"Invalid State: '{x}'.")
 
 
+    
+    # Added function to get all actions
+    @property
+    def getActions(self) -> list[Action]:
+        return list(Action)
+    
     # Next takes in timestep t, state x, and action (control) y.
-    def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
+    def nextFunc(self, t: int, x: State, y: Action) -> dict[State, float]:
         # "y" can be Action.Start, Action.Delay, or None for S-states.
         if t < 0 or type(t) != int:
             raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")

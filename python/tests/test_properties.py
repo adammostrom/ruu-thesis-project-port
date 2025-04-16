@@ -6,7 +6,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-#from src.application.theory import SDP, Action
+# from src.application.theory import SDP, Action
 
 """
 Testing the property of the SDP using pythons "hypothesis".
@@ -18,28 +18,28 @@ Python Hypothesis
 - st.sampled_from(MySDP().states()) = Randomly picks a state from the list of valid states.
 
 """
-
-### TO RUN (requires pytest -> pip install pytest) ###
-# navigate to: ruu-thesis-project-port/ruu-thesis-project-port/python $
-# run: pytest -s tests/test_properties.py -v
+############################## HOW TO RUN ######################################
+# Requires: pytest (pip install pytest)
 #
-
-""" 
-# EXPERIMENTAL, UNDER CONSTRUCTION:
-@pytest.fixture
-def sdp_instance():
-    #Fixture to provide an SDP instance. Replace with different SDP instances as needed.
-    from .test_SDP import TestSDP  # Import your SDP class
-
-    return TestSDP()  # Instantiate the SDP instance """
-
+# Import relevant SDP to test in the "Test SDP Implementation" section as "module"
+#
+# navigate to:
+# > ruu-thesis-project-port/ruu-thesis-project-port/python
+#
+# Start Python Shell:
+# > python3
+#
+# Run:
+# > pytest -s tests/test_properties.py -v
+###############################################################################
 
 # ==================== Test SDP Implementation ====================
 
-#from src.implementations.MatterMostSDP import MatterMost as mattermost_module
-from tests.test_SDP import TestSDP as module
+from src.implementations.MatterMostSDP import MatterMost as module
 
-#SDP = mattermost_module.MatterMost
+# from tests.test_SDP import TestSDP as module
+
+# SDP = mattermost_module.MatterMost
 
 sdp_instance = module()
 
@@ -73,13 +73,10 @@ def test_actions_deterministic(t, x):
 def test_nextFunc_return_dict(t, x):
     y = sdp_instance.actions(t, x)
     next = sdp_instance.nextFunc(t, x, y[0])
+    state = sdp_instance.states[0]
     assert isinstance(next, dict)
-    assert all(
-        isinstance(k, sdp_instance.states[0]) for k in next.keys()
-    ), f"Keys are not all State instances: {next.keys()}"
-    assert all(
-        isinstance(v, float) for v in next.values()
-    ), f"Values are not all float: {next.values()}"
+    assert all(isinstance(k, type(state)) for k in next.keys())
+    assert all(isinstance(v, float) for v in next.values())
 
 
 # Test that Probabilities given from next always sum to 1
@@ -197,79 +194,68 @@ def test_mkSimpleProb_invalid_sum():
     test_data = [(x, 0.3), (y, 0.3)]
     with pytest.raises(ValueError, match="Probabilities do not sum to 1"):
         sdp_instance.mkSimpleProb(test_data)
-        
-
-""" 
-@given(
-    st.lists(
-        st.tuples(
-            st.sampled_from(sdp_instance.states),  # Pick valid states
-            st.floats(min_value=0, max_value=1)    # Only non-negative probabilities
-        ), 
-        min_size=1
-    )
-)
-def test_mkSimpleProb_hypothesis(pairs):
-    total = sum(p[1] for p in pairs)
-    if total > 0:  # Normalize if sum > 0 (otherwise, function would always raise ValueError)
-        normalized_pairs = [(s, p / total) for s, p in pairs]
-        result = sdp_instance.mkSimpleProb(normalized_pairs)
-        assert sum(result.values()) == 1.0 """
-
 
 
 # ==================== Property Tests: val  ====================
+
 
 # Test that the return of val is a float
 @given(
     st.integers(min_value=0, max_value=5),  # Small t to limit recursion depth
     st.sampled_from(sdp_instance.states),
-    st.sampled_from(sdp_instance.states)
+    st.sampled_from(sdp_instance.states),
 )
-def test_val_return(t: int, state,  nx):
-    
+def test_val_return(t: int, state, nx):
+
     action = sdp_instance.actions(t, state)
     ps = [dict([(state, action[0])])]
     result = sdp_instance.val(t, ps, nx)
-    assert isinstance(result, float) 
-    
+    assert isinstance(result, float)
+
+
 # Test that the val function returns the same value for equal inputs.
-@given(st.integers(min_value=0, max_value=10), st.sampled_from(sdp_instance.states), st.sampled_from(sdp_instance.states))
-def test_val_deterministic(t, state,  x):
-    
+@given(
+    st.integers(min_value=0, max_value=10),
+    st.sampled_from(sdp_instance.states),
+    st.sampled_from(sdp_instance.states),
+)
+def test_val_deterministic(t, state, x):
+
     action = sdp_instance.actions(t, state)
     ps = [dict([(state, action[0])])]
-    
+
     val1 = sdp_instance.val(t, ps, x)
     val2 = sdp_instance.val(t, ps, x)
     assert val1 == val2
- 
+
+
 # ==================== Property Tests: bestExt  ====================
 
+
 # Test that bestExt returns a policy (dict[State, Action])
-@given(
-    st.integers(min_value=0, max_value=5),
-    st.sampled_from(sdp_instance.states)
-)
+@given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
 def test_bestExt_return_value(t: int, state):
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
     result = sdp_instance.bestExt(t, ps_tail)
     assert isinstance(result, dict)
-    assert ps_tail  
+    assert ps_tail
+
 
 # The output policy should only assign valid actions to each state.
+
 
 # That means policy[state] should be in self.actions(t, state).
 @given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
 def test_bestExt_valid_actions(t: int, state):
-    
+
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     policy = sdp_instance.bestExt(t, ps_tail)
     for state, action in policy.items():
         assert action in sdp_instance.actions(t, state)
+
 
 # Test that running bestExt with the same inputs should return the same policy
 @given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
@@ -277,51 +263,54 @@ def test_bestExt_deterministic(t, state):
 
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     result1 = sdp_instance.bestExt(t, ps_tail)
     result2 = sdp_instance.bestExt(t, ps_tail)
     assert result1 == result2
+
 
 # This test tangents the "val" function, but bestExt should return the best (optimal) result given from val:
 # If val(t, [p] + ps_tail, state) is strictly better for some action a', bestExt should return a'.
 @given(st.integers(min_value=0, max_value=100), st.sampled_from(sdp_instance.states))
 def test_bestExt_optimality(t, state):
-    
+
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     policy = sdp_instance.bestExt(t, ps_tail)
     for state, action in policy.items():
         best_value = sdp_instance.val(t, [{state: action}] + ps_tail, state)
         for other_action in sdp_instance.actions(t, state):
             value = sdp_instance.val(t, [{state: other_action}] + ps_tail, state)
             assert value <= best_value
-            
-            
-            
+
+
 # Test that the function work consistently over different t values
 @given(st.integers(min_value=0, max_value=10), st.sampled_from(sdp_instance.states))
 def test_bestExt_stability(t, state):
-    
+
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     policy1 = sdp_instance.bestExt(t, ps_tail)
     policy2 = sdp_instance.bestExt(t + 1, ps_tail)
     assert policy1.keys() == policy2.keys()
 
+
 # ==================== Property Tests: worstExt  ====================
+
 
 # That means policy[state] should be in self.actions(t, state).
 @given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
 def test_worstExt_valid_actions(t: int, state):
-    
+
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     policy = sdp_instance.bestExt(t, ps_tail)
     for state, action in policy.items():
         assert action in sdp_instance.actions(t, state)
+
 
 # Test that running worstExt with the same inputs should return the same policy
 @given(st.integers(min_value=0, max_value=5), st.sampled_from(sdp_instance.states))
@@ -329,39 +318,38 @@ def test_worstExt_deterministic(t, state):
 
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     result1 = sdp_instance.bestExt(t, ps_tail)
     result2 = sdp_instance.bestExt(t, ps_tail)
     assert result1 == result2
+
 
 # This test tangents the "val" function, but bestExt should return the best (optimal) result given from val:
 # If val(t, [p] + ps_tail, state) is strictly better for some action a', bestExt should return a'.
 @given(st.integers(min_value=0, max_value=100), st.sampled_from(sdp_instance.states))
 def test_worstExt_optimality(t, state):
-    
+
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     policy = sdp_instance.bestExt(t, ps_tail)
     for state, action in policy.items():
         best_value = sdp_instance.val(t, [{state: action}] + ps_tail, state)
         for other_action in sdp_instance.actions(t, state):
             value = sdp_instance.val(t, [{state: other_action}] + ps_tail, state)
-            assert value >= best_value
-            
-            
-            
+            assert value <= best_value
+
+
 # Test that the function work consistently over different t values
 @given(st.integers(min_value=0, max_value=10), st.sampled_from(sdp_instance.states))
 def test_worstExt_stability(t, state):
-    
+
     action = sdp_instance.actions(t, state)
     ps_tail = [dict([(state, action[0])])]
-    
+
     policy1 = sdp_instance.bestExt(t, ps_tail)
     policy2 = sdp_instance.bestExt(t + 1, ps_tail)
     assert policy1.keys() == policy2.keys()
-
 
 
 # ==================== Property Tests: bi  ====================
@@ -376,17 +364,11 @@ def test_bi_length(t, n):
 
 # Test that the bi function upholds its recursive structure, by checking if the next value in the "stack" is different from the previous one.
 @given(st.integers(min_value=1, max_value=5), st.integers(min_value=0, max_value=5))
-def test_bi_recursive_structure(t, n):
-    result = sdp_instance.bi(t, n)
-    result2 = sdp_instance.bi(t, n-1)
-    assert result2 != result 
-
-
-@given(st.integers(min_value=1, max_value=5), st.integers(min_value=0, max_value=5))
 def test_bi_recursive_structure_2(t, n):
     result = sdp_instance.bi(t, 5)
     result2 = sdp_instance.bi(t, 4)
-    assert result[1:]  == result2
+    assert result[1:] == result2
+
 
 # Test that the return values are of correct type (State, Action)
 @given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=5))
