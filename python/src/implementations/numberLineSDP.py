@@ -4,14 +4,14 @@ from enum import Enum, auto
 import numpy as np
 from src.application.theory import SDP
 
+
 # Defining the set of allowed states in the SDP.
 class State (Enum):
-    _-2 = -2
-    _-1 = -1
-    _0 = 0
-    _1 = 1
-    _2 = 2
-    
+    NEG2 = -2
+    NEG1 = -1
+    ZERO = 0
+    POS1 = 1
+    POS2 = 2
 
 class Action (Enum):
     Left = auto()

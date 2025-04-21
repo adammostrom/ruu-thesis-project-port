@@ -108,11 +108,8 @@ def test_reward_error_raised():
         mattermost_instance.reward(0, State.DHU, Action.Start, "invalidState")
 
 # -------------------------------------------------------------------------------
-# Placeholder for additional tests
+# Test: `mkSimpleProb` method
 # -------------------------------------------------------------------------------
-
-# The following methods are placeholders for future tests:
-# - mkSimpleProb
 
 def test_mkSimpleProb_valid_probabilities():
         pairs = [(State.DHU, 0.6), (State.DHC, 0.4)]
@@ -121,12 +118,12 @@ def test_mkSimpleProb_valid_probabilities():
         
 def test_mkSimpleProb_negative_probability():
     pairs = [(State.SHU, -0.1), (State.DHU, 1.1)]
-    with pytest.raises(ValueError) as context:
+    with pytest.raises(ValueError):
         mattermost_instance.mkSimpleProb(pairs)
 
 def test_mkSimpleProb_probabilities_do_not_sum_to_one():
     pairs = [(State.SLC, 0.5), (State.DHC, 0.3)]
-    with pytest.raises(ValueError) as context:
+    with pytest.raises(ValueError):
         mattermost_instance.mkSimpleProb(pairs)
 
 def test_mkSimpleProb_probabilities_sum_close_to_one():
@@ -134,9 +131,83 @@ def test_mkSimpleProb_probabilities_sum_close_to_one():
     result = mattermost_instance.mkSimpleProb(pairs)
     assert result == {State.SLU: 0.50000001, State.DLC: 0.49999999}
 
-# - meas
-# - val
-# - bestExt
+# -------------------------------------------------------------------------------
+# Test: `mMeas` method
+# -------------------------------------------------------------------------------
+
+# See: python/benchmarks/mMeas
+
+# -------------------------------------------------------------------------------
+# Test: `best` method
+# -------------------------------------------------------------------------------
+
+# See: python/benchmarks/best
+
+# -------------------------------------------------------------------------------
+# Test: `val` method
+# -------------------------------------------------------------------------------
+
+def test_val_with_empty_policy_list():
+    result = mattermost_instance.val(0, [], State.DHU)
+    assert result == 0.0
+
+def test_val_with_invalid_time_step():
+    with pytest.raises(ValueError):
+        mattermost_instance.val(-1, [], State.DHU)
+
+def test_val_with_invalid_state():
+    with pytest.raises(ValueError):
+        mattermost_instance.val(0, [], State("Invalid"))
+
+def test_val_with_state_not_in_policy():
+    ps = [{State.SHU: Action.Start}]
+    result = mattermost_instance.val(0, ps, State.DHU)
+    assert result == 0.0
+
+# -------------------------------------------------------------------------------
+# Test: `bestExt` method
+# -------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
+# Test: `worstExt` method
+# -------------------------------------------------------------------------------
+
+
+# TODO: Discuss wether bestExt and worstExt should return smaller dicts, as now they both return all possible state:action pairs for that time step, hence they operate based on the "t" variable. Testing different length of input list of dicts yields same result. Also, as of yet no error correction implemented.
+
 # - worstExt
-# - best
-# - bi
+
+# -------------------------------------------------------------------------------
+# Test: `bi` method
+# -------------------------------------------------------------------------------
+
+def test_bi_with_n_zero():
+    result = mattermost_instance.bi(0, 0)
+    assert result == []
+
+def test_bi_with_n_one():
+    ps_best = mattermost_instance.bestExt(0, [])
+    result = mattermost_instance.bi(0, 1)
+    assert result == [ps_best]
+
+def test_bi_with_n_two():
+    ps_best_1 = mattermost_instance.bestExt(1, [])
+    ps_best_0 = mattermost_instance.bestExt(0, [ps_best_1])
+    result = mattermost_instance.bi(0, 2)
+    assert result == [ps_best_0, ps_best_1]
+
+""" def test_bi_with_invalid_n():
+    with pytest.raises(ValueError):
+        mattermost_instance.bi(0, -1) """
+        # TODO: Implement error checking for negative time steps in "bi".
+
+def test_bi_with_invalid_time_step():
+    with pytest.raises(ValueError):
+        mattermost_instance.bi(-1, 1)
+
+def test_bi_with_large_n():
+    result = mattermost_instance.bi(0, 5)
+    assert len(result) == 5
+    for i in range(5):
+        assert isinstance(result[i], dict)
+
