@@ -2,3 +2,4 @@ TODO_KANDIDAT.txt
 dist
 dist-newstyle
 **/venv
+python/tests/.hypothesis/
