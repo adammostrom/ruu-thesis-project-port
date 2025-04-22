@@ -25,6 +25,10 @@ class Labyrinth(SDP):
         self._probs = probs
         self._maze_map = maze_map
 
+    @property
+    def zero(self) -> float:
+        return 0.0
+
     # Map that defines which cells are traversable (paths) and which are not (walls).
     @property
     def maze_map(self) -> list:
@@ -34,8 +38,7 @@ class Labyrinth(SDP):
     def probs(self) -> dict:
         return self._probs
     
-    @property
-    def states(self) -> list[State]:
+    def states(self, t: int) -> list[State]:
         return self._states
 
     # Function that returns the possible actions in any allowed state.
@@ -52,7 +55,7 @@ class Labyrinth(SDP):
 
     # Made to work for labyrinths of any size.
     def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
-        if x not in self.states or y not in self.actions(t, x):
+        if x not in self.states(t) or y not in self.actions(t, x):
                 raise ValueError(f"Invalid State and/or action: '{x}' '{y}'.")
         return self.mkSimpleProb(self.next_helper(t, x, y))
 

@@ -1,6 +1,5 @@
 from enum import Enum, auto
 
-import numpy as np
 from theoryMemorization import SDP
 
 import random
@@ -63,8 +62,7 @@ pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
 class MatterMost(SDP):
-    @property
-    def states(self) -> list[State]:
+    def states(self, t: int) -> list[State]:
         return list(State)
 
     # Function that returns the possible actions in any allowed state.
@@ -408,7 +406,7 @@ class MatterMost(SDP):
     
     def randomExt(self, t: int, ps_tail: list[dict[State, tuple[Action, float]]]) -> dict[State, tuple[Action, float]]:
         policy = dict()
-        for state in self.states:
+        for state in self.states(t):
             actions = self.actions(t, state)
             random_action = random.choice(actions)
             p = {state: (random_action, None)}
@@ -447,7 +445,7 @@ def randomExtGlobal(SDP_parent, SDP1, SDP2, t: int,
                     ps_tail_2: list[dict[State, tuple[Action, float]]]) -> dict[State, tuple[Action, float]]:
     policy_SDP1 = dict() # These two will be equal policies
     policy_SDP2 = dict() # but with different values.
-    for state in SDP_parent.states:
+    for state in SDP_parent.states(t):
         actions = SDP_parent.actions(t, state)
         random_action = random.choice(actions)
         p = {state: (random_action, None)}
@@ -484,4 +482,4 @@ def valueCloud(SDP_parent, SDP1, SDP2, t, n, x, n_points):
     plt.show()
 
 
-test = valueCloud(SDP_parent, SDP1, SDP2, 0, 10, State.DHU, 1000)
+test = valueCloud(SDP_parent, SDP1, SDP2, 0, 30, State.DHU, 500)
