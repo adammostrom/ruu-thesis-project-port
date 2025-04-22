@@ -62,11 +62,19 @@ pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
 class MatterMost(SDP):
+
+    @property
+    def zero(self) -> float:
+        return 0.0
+    
+    @property
+    def discountRate(self) -> float:
+        return 1.0
+
     def states(self, t: int) -> list[State]:
         return list(State)
 
-    # Function that returns the possible actions in any allowed state.
-    def actions(self, t: int, x: Enum) -> list[str] | list[None]:
+    def actions(self, t: int, x: Enum) -> list[Action] | list[None]:
         if x in [State.DHU, State.DHC, State.DLU, State.DLC]:
             return [Action.Start, Action.Delay]
         elif x in [State.SHU, State.SHC, State.SLU, State.SLC]:
@@ -74,9 +82,7 @@ class MatterMost(SDP):
         else:
             raise ValueError(f"Invalid State: '{x}'.")
 
-
-    # nextFunc takes in timestep t, state x, and action (control) y.
-    def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
+    def nextFunc(self, t: int, x: State, y: Action) -> dict[State, float]:
         # "y" can be Action.Start, Action.Delay, or None for S-states.
         if t < 0 or type(t) != int:
             raise ValueError(f"Invalid time step: '{t}' (must be positive integer).")
@@ -423,15 +429,14 @@ class MatterMost(SDP):
             return [p] + ps_tail
 
 class ClimateMatterMost(MatterMost):
+    # Value is added for transitioning into states which are not comitted to
+    # severe future climate change.
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
-        # Value is added for transitioning into states which are not comitted to
-        # severe future climate change.
         return 1.0 if next_x in [State.DHU, State.DLU, State.SHU, State.SLU] else 0.0
 
 class EconomyMatterMost(MatterMost):
+    # Value is added for transitioning into states which do not have low economic output.
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
-        # Value is added for transitioning into states which do not have
-        # low economic output.
         return 1.0 if next_x in [State.DHU, State.DHC, State.SHU, State.SHC] else 0.0
 
 
@@ -482,4 +487,4 @@ def valueCloud(SDP_parent, SDP1, SDP2, t, n, x, n_points):
     plt.show()
 
 
-test = valueCloud(SDP_parent, SDP1, SDP2, 0, 30, State.DHU, 500)
+test = valueCloud(SDP_parent, SDP1, SDP2, 0, 10, State.DHU, 1000)

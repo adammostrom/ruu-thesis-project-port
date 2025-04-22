@@ -1,4 +1,4 @@
-from enum import Enum, auto
+from enum import Enum
 
 import numpy as np
 from theoryMemorization import SDP
@@ -28,6 +28,10 @@ class Labyrinth(SDP):
     @property
     def zero(self) -> float:
         return 0.0
+    
+    @property
+    def discountRate(self) -> float:
+        return 1.0
 
     # Map that defines which cells are traversable (paths) and which are not (walls).
     @property
@@ -42,7 +46,7 @@ class Labyrinth(SDP):
         return self._states
 
     # Function that returns the possible actions in any allowed state.
-    def actions(self, t: int, x: State) -> list[str] | list[None]:
+    def actions(self, t: int, x: State) -> list[Action] | list[None]:
         actions = []
         row = x.value[0]
         col = x.value[1]
@@ -54,12 +58,7 @@ class Labyrinth(SDP):
         return actions
 
     # Made to work for labyrinths of any size.
-    def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
-        if x not in self.states(t) or y not in self.actions(t, x):
-                raise ValueError(f"Invalid State and/or action: '{x}' '{y}'.")
-        return self.mkSimpleProb(self.next_helper(t, x, y))
-
-    def next_helper(self, t: int, x: State, y: Action) -> list[tuple[State, float]]:
+    def nextFunc(self, t: int, x: State, y: Action) -> dict[State, float]:
         row = x.value[0]
         col = x.value[1]
         maze_dims = self.maze_map.shape
@@ -75,7 +74,7 @@ class Labyrinth(SDP):
             transitions.append((State(coord), self._probs[(dir, y)]))
         stay_prob = sum([self._probs[(d, y)] for d in unviable.keys()]) + self._probs["S", y]
         transitions.append((x, stay_prob))
-        return transitions
+        return self.mkSimpleProb(transitions)
 
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
         pass  # To be completed in specific implementations.

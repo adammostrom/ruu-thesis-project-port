@@ -58,14 +58,23 @@ pC_D = 1.0 - pU_D
 
 class MatterMost(SDP):
 
+    # Returns the discount rate for adding rewards from later time steps 
+    # (1 means no discounting takes place).
     @property
     def zero(self) -> float:
         return 0.0
 
+    # Returns the discount rate for adding rewards from later time steps 
+    # (1 means no discounting takes place).
+    @property
+    def discountRate(self) -> float:
+        return 1.0
+
+    # Returns all states 'x' that are valid in time step 't'.
     def states(self, t: int) -> list[State]:
         return list(State)
 
-    # Function that returns the possible actions in any allowed state.
+    # Returns all actions 'y' that are valid in time step 't' and state 'x'.
     def actions(self, t: int, x: State) -> list[Action] | list[None]:
         if x in [State.DHU, State.DHC, State.DLU, State.DLC]:
             return [Action.Start, Action.Delay]
@@ -275,10 +284,9 @@ class MatterMost(SDP):
                         (State.SLC, pL_S_SL),
                     ])
 
-
+    # Given a time step 't', a state 'x' and an action 'y', returns
+    # the reward of ending up in state 'next_x' in time step 't+1'.
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
-        # Value is added for transitioning into states which do not have low economic
-        # output and at the same time are not comitted to severe future climate change.
         return 1.0 if next_x in [State.DHU, State.SHU] else 0.0
 
 

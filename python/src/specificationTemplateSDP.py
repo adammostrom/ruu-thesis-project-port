@@ -33,6 +33,12 @@ class Specification(SDP):
     @property
     def zero(self) -> float:
         pass # Add implementation here...
+
+    # Returns the discount rate for adding rewards from later time steps 
+    # (1 means no discounting takes place).
+    @property
+    def discountRate(self) -> float:
+        pass # Problem-specific, needs to be implemented by user in specification.
     
     # Returns all states 'x' that are valid in time step 't'.
     def states(self, t: int) -> list[State]:
@@ -40,7 +46,7 @@ class Specification(SDP):
 
     # Returns all actions 'y' that are valid in time step 't'
     # and state 'x'.
-    def actions(self, t: int, x: State) -> list[str] | list[None]:
+    def actions(self, t: int, x: State) -> list[Action] | list[None]:
         pass # Add implementation here...
 
     # Given a time step 't', a state 'x' and an action 'y', returns the
@@ -53,5 +59,9 @@ class Specification(SDP):
     def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
         pass # Add implementation here...
 
+
+"""
+Instantiate your specification to run its functions.
+"""
 SDP1 = Specification()
 
