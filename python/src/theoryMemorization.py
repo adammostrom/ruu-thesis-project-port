@@ -27,7 +27,7 @@ class Action(Enum):
     pass
 
 Policy: TypeAlias = dict[State, tuple[Action, float]]
-PolicySequence: TypeAlias = list[dict[State, tuple[Action, float]]]
+PolicySequence: TypeAlias = list[dict[State, tuple[Action, float|None]]]
 
 # Abstract Base Class (Enforcing required methods)
 class SDP(ABC, ErrorChecks, MathOperations):
