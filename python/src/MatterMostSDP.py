@@ -3,7 +3,7 @@ from enum import Enum, auto
 from theory import SDP
 
 """
-This is the unaltered python translation of the SDP described in the report 
+This is the unaltered python translation of the SDP described in the article 
 "Responsibility Under Uncertainty: Which Climate Decisions Matter Most?"
 by Botta et al.
 """

@@ -3,9 +3,9 @@ from enum import Enum, auto
 from theoryMemorization import SDP
 
 """
-This is the unaltered python translation of the SDP described in the report 
+This is a python translation of the SDP described in the article 
 "Responsibility Under Uncertainty: Which Climate Decisions Matter Most?"
-by Botta et al.
+by Botta et al, where memorization is used for faster computations.
 """
 
 # Declare all states of the SDP below:
