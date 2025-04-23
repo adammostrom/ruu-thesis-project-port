@@ -4,6 +4,10 @@ from typing import TypeAlias
 
 import numpy as np
 
+"""
+OLD, UNSEPARATED VERSION OF THEORY, KEPT FOR SAFETY REASONS.
+"""
+
 class State(Enum):
     pass
 
