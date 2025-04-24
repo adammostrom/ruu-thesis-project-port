@@ -71,7 +71,7 @@ class NumberLine(SDP):
                 raise ValueError(f"Unknown action: {y}")
         return self.mkSimpleProb(transitions)
 
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+    def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
         return float(next_x)
 
 

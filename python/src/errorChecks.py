@@ -54,7 +54,7 @@ class ErrorChecks():
         if type(M_Val) != list or type(M_Val[0]) != tuple or type(M_Val[0][0]) != float or type(M_Val[0][1]) != float:
             raise TypeError(f"Input must be a list of tuples of floats.")
         else: return True
-         
+    
     def check_ps(self, ps: PolicySequence) -> bool:
         if not isinstance(ps, list):
             raise TypeError(f"Invalid ps, must be PolicySequence (list of dictionaries, or empty list).")
