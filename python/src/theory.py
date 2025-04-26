@@ -55,9 +55,9 @@ class SDP(ABC, ErrorChecks, MathOperations):
         pass # Problem-specific, to be implemented by user in specification.
 
     # Given a time step 't', a state 'x' and an action 'y', returns
-    # the reward of ending up in state 'next_x' in time step 't+1'.
+    # the reward of ending up in state 'x_prim' in time step 't+1'.
     @abstractmethod
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
         pass # Problem-specific, to be implemented by user in specification.
 
     

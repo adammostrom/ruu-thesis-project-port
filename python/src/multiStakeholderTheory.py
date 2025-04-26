@@ -51,7 +51,7 @@ class SDP_Pareto():
 
             return [[policies[i]] + ps_tails[i] for i in range(len(self.children))]
 
-    def valueCloud(self, t, n, x, n_points):
+    def valueCloud(self, t, n, x, n_points, pareto_front = True):
         x_axis = []
         y_axis = []
         for i in range(n_points):
@@ -60,6 +60,21 @@ class SDP_Pareto():
             val_2 = policies[1][0][x][1]
             x_axis.append(val_1)
             y_axis.append(val_2)
+        
+        coords = sorted(list(zip(x_axis, y_axis)), key = lambda coord: coord[0])
+        pareto_x = [min(x_axis)]
+        pareto_y = [max(y_axis)]
+
+        if pareto_front:
+            for i in range(len(coords) -1):
+                x, y = coords[i]
+                if all(y_prim < y for x_prim, y_prim in coords[i+1:]):
+                    pareto_x.append(x)
+                    pareto_y.append(y)
+            pareto_x.append(max(x_axis))
+            pareto_y.append(min(y_axis))
+            plt.plot(pareto_x, pareto_y)
+
         plt.scatter(x_axis, y_axis, c="blue", s=.8)
         plt.show()
         return x_axis, y_axis

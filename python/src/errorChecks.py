@@ -36,9 +36,9 @@ class ErrorChecks():
             raise ValueError(f"Invalid action: '{y}' in state '{x}' at time step '{t}'.")
         else: return True
 
-    def check_next_x(self, t: int, x: State, y: Action, next_x: State) -> bool:
-        if next_x not in self.nextFunc(t, x, y):
-            raise ValueError(f"Invalid next state: '{next_x}' when taking action '{y}' in state '{x}' at time step '{t}'.")
+    def check_x_prim(self, t: int, x: State, y: Action, x_prim: State) -> bool:
+        if x_prim not in self.nextFunc(t, x, y):
+            raise ValueError(f"Invalid next state: '{x_prim}' when taking action '{y}' in state '{x}' at time step '{t}'.")
         else: return True
 
     def check_a_b(self, a: float, b: float) -> bool:
@@ -87,9 +87,9 @@ class ErrorChecks():
         self.check_y(t, x, y)
         return self.nextFunc(t, x, y)
 
-    def safe_reward(self, t: int, x: State, y: Action, next_x: State) -> float:
+    def safe_reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
         self.check_t(t)
         self.check_x(t, x)
         self.check_y(t, x, y)
-        self.check_next_x(t, x, y, next_x) 
-        return self.reward(t, x, y, next_x)
+        self.check_x_prim(t, x, y, x_prim) 
+        return self.reward(t, x, y, x_prim)

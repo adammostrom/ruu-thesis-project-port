@@ -12,7 +12,7 @@ in state 'ZERO', and for any given time step 't', one must be in a state between
 
 # Declare all states of the SDP below:
 State: TypeAlias = int # Needed because internal functions expect states to be of type 'State'
-def generate_states(t: int) -> int:
+def generate_states(t: int) -> list[int]:
     return [i for i in range(-t, t+1)]
 
 # Declare all actions of the SDP below:
@@ -71,8 +71,8 @@ class NumberLine(SDP):
                 raise ValueError(f"Unknown action: {y}")
         return self.mkSimpleProb(transitions)
 
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
-        return float(next_x)
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
+        return float(x_prim)
 
 
 

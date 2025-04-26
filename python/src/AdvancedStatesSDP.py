@@ -41,13 +41,13 @@ class Specification(SDP):
     # Returns the value considered as the 'baseline' of specification.
     @property
     def zero(self) -> float:
-        return 0.0 # Add implementation here...
+        return 0.0
 
     # Returns the discount rate for adding rewards from later time steps 
     # (1 means no discounting takes place).
     @property
     def discountRate(self) -> float:
-        return 1.0 # Problem-specific, needs to be implemented by user in specification.
+        return 1.0
     
     def states(self, t: int) -> list[State]:
         return [(x1, x2, x3) for x1 in self.decisionValues for x2 in self.climValues for x3 in self.econValues]
@@ -65,7 +65,6 @@ class Specification(SDP):
     # probability distribution over states to be entered in time step 't+1'.
     def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
         dec, clim, econ = x
-        actions = self.actions(t, x)
         newDec = y.value
 
         muClim = clim + drifts[y][0]
@@ -92,7 +91,7 @@ class Specification(SDP):
         dist = list()
         for cVal, pClim in pmfClim.items():
             for eVal, pEcon in pmfEcon.items():
-                dist.append(((newDec, int(cVal), int(eVal)), pClim * pEcon))
+                dist.append(((newDec, cVal, eVal), float(pClim) * float(pEcon)))
         
         return self.mkSimpleProb(dist)
 
@@ -106,11 +105,6 @@ class Specification(SDP):
 """
 Instantiate your specification to run its functions.
 """
-
-# decisionValues = [i for i in range(0, 3)]
-# climValues = [i for i in range(1, 6)]
-# econValues = [i for i in range(1, 6)]
-
 decisionValues = np.arange(0, 3, 1)
 climValues = np.arange(1, 6, 1)
 econValues = np.arange(1, 6, 1)
@@ -121,8 +115,8 @@ SDP1 = Specification(decisionValues, climValues, econValues, 0.5)
 # result = SDP1.nextFunc(0, (0, 1, 1), Action.ECON)
 # result = SDP1.safe_reward(0, (0, 1, 1), Action.ECON, (2, 5, 5))
 # result = SDP1.bi(0, 1)
-result1 = SDP1.best(0, 2, (0, 1, 1))
-result2 = SDP1.worst(0, 2, (0, 1, 1))
+result = SDP1.best(0, 1, (0, 1, 1))
+# result = SDP1.worst(0, 1, (0, 1, 1))
 # result = SDP1.mMeas(0, 7, (0, 1, 1))
 
-print(result1, result2)
+print(result)

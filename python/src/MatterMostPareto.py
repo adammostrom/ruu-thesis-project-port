@@ -285,19 +285,19 @@ class MatterMost(SDP):
                         (State.SLC, pL_S_SL),
                     ])
 
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
         pass
 
 class ClimateMatterMost(MatterMost):
     # Value is added for transitioning into states which are not comitted to
     # severe future climate change.
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
-        return 1.0 if next_x in [State.DHU, State.DLU, State.SHU, State.SLU] else 0.0
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
+        return 1.0 if x_prim in [State.DHU, State.DLU, State.SHU, State.SLU] else 0.0
 
 class EconomyMatterMost(MatterMost):
     # Value is added for transitioning into states which do not have low economic output.
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
-        return 1.0 if next_x in [State.DHU, State.DHC, State.SHU, State.SHC] else 0.0
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
+        return 1.0 if x_prim in [State.DHU, State.DHC, State.SHU, State.SHC] else 0.0
 
 
 SDP_Parent = MatterMost()
@@ -309,7 +309,7 @@ SDP_Children = [SDP1, SDP2]
 Pareto = SDP_Pareto(SDP_Parent, SDP_Children)
 
 # print(len(Pareto.children))
-Pareto.valueCloud(0, 10, State.DHU, 1000)
+Pareto.valueCloud(0, 10, State.DHU, 100)
 # result = Pareto.randomPS(0, 2)
 
 # print(result)

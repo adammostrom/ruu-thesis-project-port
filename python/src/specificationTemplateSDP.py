@@ -55,8 +55,8 @@ class Specification(SDP):
         pass # Add implementation here...
 
     # Given a time step 't', a state 'x' and an action 'y', returns
-    # the reward of ending up in state 'next_x' in time step 't+1'.
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+    # the reward of ending up in state 'x_prim' in time step 't+1'.
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
         pass # Add implementation here...
 
 
