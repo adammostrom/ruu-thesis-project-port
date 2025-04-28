@@ -20,7 +20,7 @@ val sdp t (p : ps) x =
 
 -- Backwards induction
 bi :: (Show x, Ord x) => SDP x y -> Int -> Int -> PolicySeq x y
-bi sdp _ 0 = []
+bi sdp _ n | n <= 0 = [] -- Added safety from negative values mostly for testing /AM
 bi sdp t n =
   let  ps_tail = bi sdp t (n - 1)
        p = bestExt sdp t ps_tail
