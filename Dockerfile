@@ -38,7 +38,7 @@ RUN python3.10 -m venv /venv
 ENV PATH="/venv/bin:${PATH}"
 
 # Install Python packages inside the virtual environment
-RUN pip install --upgrade pip && pip install numpy pandas matplotlib jupyter
+RUN pip install --upgrade pip && pip install numpy pandas matplotlib jupyter pytest
 
 # Set the working directory to the project folder
 WORKDIR /workspace
