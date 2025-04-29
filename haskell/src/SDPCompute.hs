@@ -9,14 +9,16 @@ import Prob(Prob, runProb, expectation)
 import SDPTypes
 
 val :: (Ord x, Show x) => SDP x y -> Int -> PolicySeq x y -> x -> Val
-val sdp _ [] _ = 0
-val sdp t (p : ps) x =
-  case Map.lookup x p of
-    Nothing -> error $ "No action found in policy for state: " ++ show x
-    Just y ->
-      let mNext = next sdp t x y
-          recCall x' = reward sdp t x y x' + val sdp (t + 1) ps x'
-      in expectation recCall mNext
+val = map $ val' sdp t (p : ps) x []
+  where 
+    val sdp _ [] _ = 0
+    val sdp t (p : ps) x =
+      case Map.lookup x p of
+        Nothing -> error $ "No action found in policy for state: " ++ show x
+        Just y ->
+          let mNext = next sdp t x y
+              recCall x' = reward sdp t x y x' + val sdp (t + 1) ps x'
+          in expectation recCall mNext
 
 -- Backwards induction
 bi :: (Show x, Ord x) => SDP x y -> Int -> Int -> PolicySeq x y
@@ -25,6 +27,15 @@ bi sdp t n =
   let  ps_tail = bi sdp t (n - 1)
        p = bestExt sdp t ps_tail
    in  p : ps_tail
+
+
+
+
+
+
+
+
+
 
 -- Optimal extension
 optExt :: (Show x, Ord x) => (Val->Val->Ordering) -> SDP x y -> Int -> PolicySeq x y -> Policy x y
@@ -41,6 +52,34 @@ optExt cmp sdp t ps = Map.fromList $ map optAction (states sdp t)
   -- TODO (optional) reuse the computation of val for ps (now
   -- potentially recomputed many times). This should be possible using
   -- memoization.
+
+
+optExt2 :: (Show x, Ord x) => (Val -> Val -> Ordering) -> SDP x y -> Int -> PolicySeq x y -> Policy x y
+optExt2 cmp sdp t ps =
+  let
+    sts = states sdp t
+    -- Memoize val for each state
+    valMap :: Map x Val
+    valMap = Map.fromList [ (state, val sdp t ps state) | state <- sts ]
+
+    -- Use memoized version
+    getVal state = valMap Map.! state
+
+    optAction t state ps =
+      let actionsForState = actions sdp t state
+          actionVals = [ (a, getVal state) | a <- actionsForState ]
+          best = maximumBy (cmp `on` snd) actionVals
+      in (state, fst best)
+
+  in Map.fromList (map (\state -> optAction t state ps) sts)
+
+
+
+
+
+
+
+
 
 bestExt :: (Show x, Ord x) => SDP x y -> Int -> PolicySeq x y -> Policy x y
 bestExt = optExt compare
