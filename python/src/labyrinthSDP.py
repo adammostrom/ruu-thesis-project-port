@@ -1,80 +1,100 @@
-from enum import Enum, auto
+from enum import Enum
+from typing import TypeAlias
 
 import numpy as np
 from theoryMemorization import SDP
 
 """
-The following file shows an implementation of the SDP-framework from "theory.py" on a few simple
-labyrinths.
+The following file shows an implementation of the SDP-framework from "theoryMemorization.py" 
+on a few simple labyrinth solving problems.
 
 We start by defining a general class for labyrinth SDP:s, from which we can inherit
 when creating specific labyrinths.
 """
 
-class State(Enum):
-    pass # To be completed in specific implementations.
+State: TypeAlias = tuple[int, int] # Needed because internal functions expect states to be of type 'State'
+def generate_states(map: np.ndarray) -> list[State]:
+    states = []
+    h, w = np.shape(map)
+    for row in range(h):
+        for col in range(w):
+            if map[row,col] == 1:
+                states.append((row+1, col+1))
+    return states
 
 class Action(Enum):
-    pass # To be completed in specific implementations.
+    Left = "Left"
+    Right = "Right"
+    Up = "Up"
+    Down = "Down"
+    Stay = "Stay"
 
 
 class Labyrinth(SDP):
-    def __init__(self, states, actions, probs, maze_map):
-        self._states = states
-        self._action = actions
-        self._probs = probs
-        self._maze_map = maze_map
-
-    # Map that defines which cells are traversable (paths) and which are not (walls).
-    @property
-    def maze_map(self) -> list:
-        return self._maze_map
+    def __init__(self, probs, maze_map):
+        self._states = None
+        self.probs = probs
+        self.map = maze_map
+        self.height = np.shape(self.map)[0]
+        self.width = np.shape(self.map)[1]
 
     @property
-    def probs(self) -> dict:
-        return self._probs
+    def zero(self) -> float:
+        return 0.0
     
     @property
-    def states(self) -> list[State]:
+    def discountRate(self) -> float:
+        return 1.0
+    
+    def states(self, t: int) -> list[State]:
+        if not self._states:
+            self._states = generate_states(self.map)
         return self._states
 
     # Function that returns the possible actions in any allowed state.
-    def actions(self, t: int, x: State) -> list[str] | list[None]:
-        actions = []
-        row = x.value[0]
-        col = x.value[1]
-        maze_dims = self.maze_map.shape
-        for dir, coord in {"Left": (row, col-1), "Right": (row, col+1),
-                            "Up": (row-1, col), "Down": (row+1, col), "Stay": (row, col)}.items():
-            if 1 <= coord[0] <= maze_dims[0] and 1 <= coord[1] <= maze_dims[1] and self.maze_map[coord[0]-1, coord[1]-1]:
+    def actions(self, t: int, x: State) -> list[Action] | list[None]:
+        actions = [Action.Stay]
+        row = x[0]
+        col = x[1]
+        h, w = self.height, self.width
+        adjacent = {
+                "Left":  (row, col-1), 
+                "Right": (row, col+1),
+                "Up":    (row-1, col), 
+                "Down":  (row+1, col)
+                }
+        for dir, coord in adjacent.items():
+            if 1 <= coord[0] <= h and 1 <= coord[1] <= w and self.map[coord[0]-1, coord[1]-1]:
                 actions.append(Action(dir))
         return actions
 
     # Made to work for labyrinths of any size.
-    def nextFunc(self, t: int, x: State, y: State) -> dict[State, float]:
-        if x not in self.states or y not in self.actions(t, x):
-                raise ValueError(f"Invalid State and/or action: '{x}' '{y}'.")
-        return self.mkSimpleProb(self.next_helper(t, x, y))
-
-    def next_helper(self, t: int, x: State, y: Action) -> list[tuple[State, float]]:
-        row = x.value[0]
-        col = x.value[1]
-        maze_dims = self.maze_map.shape
+    def nextFunc(self, t: int, x: State, y: Action) -> dict[State, float]:
+        row = x[0]
+        col = x[1]
+        h, w = self.height, self.width
         viable = {}
         unviable = {}
         transitions = []
-        for dir, coord in {"L": (row, col-1), "R": (row, col+1), "U": (row-1, col), "D": (row+1, col)}.items():
-            if 1 <= coord[0] <= maze_dims[0] and 1 <= coord[1] <= maze_dims[1] and self.maze_map[coord[0]-1, coord[1]-1]:
+        actions = self.actions(t, x)
+        adjacent = {
+                "Left":  (row, col-1), 
+                "Right": (row, col+1),
+                "Up":    (row-1, col), 
+                "Down":  (row+1, col)
+                }
+        for dir, coord in adjacent.items():
+            if Action(dir) in actions:
                 viable[dir] = coord
             else:
                 unviable[dir] = coord
         for dir, coord in viable.items():
-            transitions.append((State(coord), self._probs[(dir, y)]))
-        stay_prob = sum([self._probs[(d, y)] for d in unviable.keys()]) + self._probs["S", y]
+            transitions.append(((coord), self.probs[(dir, y)]))
+        stay_prob = sum([self.probs[(d, y)] for d in unviable.keys()]) + self.probs["Stay", y]
         transitions.append((x, stay_prob))
-        return transitions
+        return self.mkSimpleProb(transitions)
 
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
         pass  # To be completed in specific implementations.
 
     # Function that visualizes the input policy on the maze.
@@ -84,7 +104,7 @@ class Labyrinth(SDP):
         symbols = {}
         for state, action_pair in p.items():
             action = action_pair[0]
-            index = (int(state.name[1]), int(state.name[2]))
+            # index = (int(state.name[1]), int(state.name[2]))
             match action:
                 case Action.Left:
                     symbols[state] = "←"
@@ -99,7 +119,7 @@ class Labyrinth(SDP):
                 case _:
                     raise ValueError(f"Invalid state found: '{state}'")
 
-            map[index] = symbols[state]
+            map[state] = symbols[state]
         print(f"Optimal movement map with time horizon {n}")
         for row in map:
             print(" ".join(row))
@@ -112,57 +132,36 @@ that all transition probabilities are equal to either zero or one (e.g. if you t
 then you definatelly will).
 """
 
-class State(Enum):
-    _11 = (1, 1)
-    _12 = (1, 2)
-    _13 = (1, 3)
-    _21 = (2, 1)
-    _23 = (2, 3) 
-    _31 = (3, 1)
-    _32 = (3, 2)
-    _33 = (3, 3)
-
-states = list(State)
-
-class Action(Enum):
-    Left = "Left"
-    Right = "Right"
-    Up = "Up"
-    Down = "Down"
-    Stay = "Stay"
-
-actions = list(Action)
-
 probs_deterministic = {
-    ("L", Action.Left): 1.0,
-    ("R", Action.Left): 0.0,
-    ("U", Action.Left): 0.0,
-    ("D", Action.Left): 0.0,
-    ("S", Action.Left): 0.0,
+    ("Left", Action.Left): 1.0,
+    ("Right", Action.Left): 0.0,
+    ("Up", Action.Left): 0.0,
+    ("Down", Action.Left): 0.0,
+    ("Stay", Action.Left): 0.0,
 
-    ("L", Action.Right): 0.0,
-    ("R", Action.Right): 1.0,
-    ("U", Action.Right): 0.0,
-    ("D", Action.Right): 0.0,
-    ("S", Action.Right): 0.0,
+    ("Left", Action.Right): 0.0,
+    ("Right", Action.Right): 1.0,
+    ("Up", Action.Right): 0.0,
+    ("Down", Action.Right): 0.0,
+    ("Stay", Action.Right): 0.0,
 
-    ("L", Action.Up): 0.0,
-    ("R", Action.Up): 0.0,
-    ("U", Action.Up): 1.0,
-    ("D", Action.Up): 0.0,
-    ("S", Action.Up): 0.0,
+    ("Left", Action.Up): 0.0,
+    ("Right", Action.Up): 0.0,
+    ("Up", Action.Up): 1.0,
+    ("Down", Action.Up): 0.0,
+    ("Stay", Action.Up): 0.0,
 
-    ("L", Action.Down): 0.0,
-    ("R", Action.Down): 0.0,
-    ("U", Action.Down): 0.0,
-    ("D", Action.Down): 1.0,
-    ("S", Action.Down): 0.0,
+    ("Left", Action.Down): 0.0,
+    ("Right", Action.Down): 0.0,
+    ("Up", Action.Down): 0.0,
+    ("Down", Action.Down): 1.0,
+    ("Stay", Action.Down): 0.0,
 
-    ("L", Action.Stay): 0.0,
-    ("R", Action.Stay): 0.0,
-    ("U", Action.Stay): 0.0,
-    ("D", Action.Stay): 0.0,
-    ("S", Action.Stay): 1.0,
+    ("Left", Action.Stay): 0.0,
+    ("Right", Action.Stay): 0.0,
+    ("Up", Action.Stay): 0.0,
+    ("Down", Action.Stay): 0.0,
+    ("Stay", Action.Stay): 1.0,
 }
 
 smaller_maze_map = np.array(
@@ -171,17 +170,18 @@ smaller_maze_map = np.array(
              [1, 1, 1]]
             )
 
+
 class SmallLabyrinth(Labyrinth):
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
-        match next_x:
-            case State._33:
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
+        match x_prim:
+            case (3, 3):
                 return 1.0
-            case State._32:
+            case (3, 2):
                 return -10.0
             case _:
                 return -0.1
 
-smallMazeDet = SmallLabyrinth(states, actions, probs_deterministic, smaller_maze_map)
+smallMazeDet = SmallLabyrinth(probs_deterministic, smaller_maze_map)
 
 """
 Below are some sanity checks for this first maze implementation.
@@ -190,7 +190,7 @@ Below are some sanity checks for this first maze implementation.
 print("Best choises in small deterministic maze:")
 bests = []
 for i in range(1, 8):
-    bests.append(smallMazeDet.best(0, i, State._11))
+    bests.append(smallMazeDet.best(0, i, (1, 1)))
 
 for result in bests:
     print(result)
@@ -210,38 +210,38 @@ When trying to stand still, there is a five percent chance of moving in each dir
 """
 
 probs_probabilistic = {
-    ("L", Action.Left):  0.85,
-    ("R", Action.Left):  0.0,
-    ("U", Action.Left):  0.05,
-    ("D", Action.Left):  0.05,
-    ("S", Action.Left):  0.05,
+    ("Left", Action.Left):  0.85,
+    ("Right", Action.Left):  0.0,
+    ("Up", Action.Left):  0.05,
+    ("Down", Action.Left):  0.05,
+    ("Stay", Action.Left):  0.05,
 
-    ("L", Action.Right): 0.0,
-    ("R", Action.Right): 0.85,
-    ("U", Action.Right): 0.05,
-    ("D", Action.Right): 0.05,
-    ("S", Action.Right): 0.05,
+    ("Left", Action.Right): 0.0,
+    ("Right", Action.Right): 0.85,
+    ("Up", Action.Right): 0.05,
+    ("Down", Action.Right): 0.05,
+    ("Stay", Action.Right): 0.05,
 
-    ("L", Action.Up):    0.05,
-    ("R", Action.Up):    0.05,
-    ("U", Action.Up):    0.85,
-    ("D", Action.Up):    0.0,
-    ("S", Action.Up):    0.05,
+    ("Left", Action.Up):    0.05,
+    ("Right", Action.Up):    0.05,
+    ("Up", Action.Up):    0.85,
+    ("Down", Action.Up):    0.0,
+    ("Stay", Action.Up):    0.05,
 
-    ("L", Action.Down):  0.05,
-    ("R", Action.Down):  0.05,
-    ("U", Action.Down):  0.0,
-    ("D", Action.Down):  0.85,
-    ("S", Action.Down):  0.05,
+    ("Left", Action.Down):  0.05,
+    ("Right", Action.Down):  0.05,
+    ("Up", Action.Down):  0.0,
+    ("Down", Action.Down):  0.85,
+    ("Stay", Action.Down):  0.05,
 
-    ("L", Action.Stay):  0.05,
-    ("R", Action.Stay):  0.05,
-    ("U", Action.Stay):  0.05,
-    ("D", Action.Stay):  0.05,
-    ("S", Action.Stay):  0.80,
+    ("Left", Action.Stay):  0.05,
+    ("Right", Action.Stay):  0.05,
+    ("Up", Action.Stay):  0.05,
+    ("Down", Action.Stay):  0.05,
+    ("Stay", Action.Stay):  0.80,
 }
 
-smallMazeProb = SmallLabyrinth(states, actions, probs_probabilistic, smaller_maze_map)
+smallMazeProb = SmallLabyrinth(probs_probabilistic, smaller_maze_map)
 
 """
 Once again, we run are some sanity checks for this SDP:
@@ -250,7 +250,7 @@ Once again, we run are some sanity checks for this SDP:
 print("Best choises in small probabilistic maze:")
 bests = []
 for i in range(1, 8):
-    bests.append(smallMazeProb.best(0, i, State._11))
+    bests.append(smallMazeProb.best(0, i, (1, 1)))
 
 for result in bests:
     print(result)
@@ -262,31 +262,10 @@ for p in reversed(ps):
     n += 1
 
 """
-Finally, we try out a slightly larger labyrinth. As a larger maze needs a larger set of states, we redefine
-our states, define a new maze map and then create a new class that once again inherits from the general 
+Next we try out a slightly larger labyrinth. We create a new class that once again inherits from the general 
 labyrinth class. Actions remain the same as before, and we use the probabilistic transition probabilities
 from earlier so these do not need to be redefined.
 """
-
-class State(Enum):
-    _11 = (1, 1)
-    _13 = (1, 3)
-    _14 = (1, 4)
-    _15 = (1, 5)
-    _21 = (2, 1)
-    _22 = (2, 2)
-    _23 = (2, 3)
-    _25 = (2, 5)
-    _31 = (3, 1)
-    _33 = (3, 3)
-    _34 = (3, 4)
-    _35 = (3, 5)
-    _41 = (4, 1)
-    _42 = (4, 2)
-    _43 = (4, 3)
-    _45 = (4, 5)
-
-states = list(State)
 
 larger_maze_map = np.array(
             [[1, 0, 1, 1, 1],
@@ -296,29 +275,76 @@ larger_maze_map = np.array(
             )
 
 class LargerLabyrinth(Labyrinth):
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
-        match next_x:
-            case State._45:
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
+        match x_prim:
+            case (4, 5):
                 return 1.0
-            case State._22 | State._34:
-                return -5.0
+            case (2, 2) | (3, 4):
+                return -20.0
             case _:
                 return -0.1
 
-largerMaze = LargerLabyrinth(states, actions, probs_probabilistic, larger_maze_map)
+largerMaze = LargerLabyrinth(probs_probabilistic, larger_maze_map)
 
 """
-Just as before, we run some sanity for this SDP:
+Some sanity checks for this SDP:
 """
 print("Best choises in larger probabilistic maze:")
 bests = []
 for i in range(1, 8):
-    bests.append(largerMaze.best(0, i, State._11))
+    bests.append(largerMaze.best(0, i, (1, 1)))
 
 for result in bests:
     print(result)
 
 n = 100
-print(largerMaze.best(0, n, State._11))
+print(largerMaze.best(0, n, (1, 1)))
 ps = largerMaze.bi(0, n)
 largerMaze.mazeVis((4, 5),ps[0] , n)
+
+"""
+Finally, we try out an even larger labyrinth. As can be seen in the reward function below,
+there are more "traps" in this one. When tried out with the probabilistic transition
+probabilities, these traps resulted in the optimal solution often being simply to get as
+far away from the traps as possible, not getting to the exit of the maze. Therefore, the
+deterministic transition probabilities were used when running sanity checks on this labyrinth.
+"""
+
+largest_maze_map = np.array(
+            [[1, 1, 1, 0, 1, 1, 1, 1],
+             [1, 0, 1, 1, 1, 0, 0, 1],
+             [1, 0, 1, 0, 1, 0, 0, 1],
+             [1, 1, 1, 0, 1, 1, 1, 1],
+             [0, 1, 0, 0, 0, 1, 0, 1],
+             [1, 1, 1, 1, 1, 1, 0, 1],
+             [1, 0, 0, 1, 0, 1, 0, 1],
+             [1, 1, 1, 1, 0, 1, 1, 1]]
+            )
+
+class LargestLabyrinth(Labyrinth):
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
+        match x_prim:
+            case (1, 8):
+                return 10.0
+            case (2, 4) | (2, 8) | (4, 3) | (5, 6) | (6, 3):
+                return -1000.0
+            case _:
+                return -0.1
+
+largestMaze = LargestLabyrinth(probs_deterministic, largest_maze_map)
+
+"""
+Just as before, we run some sanity checks:
+"""
+print("Best choises in largest maze with deterministic transition probs:")
+bests = []
+for i in range(1, 8):
+    bests.append(largestMaze.best(0, i, (1, 1)))
+
+for result in bests:
+    print(result)
+
+n = 100
+print(largestMaze.best(0, n, (1, 1)))
+ps = largestMaze.bi(0, n)
+largestMaze.mazeVis((8, 8),ps[0] , n)
