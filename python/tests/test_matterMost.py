@@ -172,11 +172,6 @@ def test_val_with_state_not_in_policy():
 # Test: `worstExt` method
 # -------------------------------------------------------------------------------
 
-
-# TODO: Discuss wether bestExt and worstExt should return smaller dicts, as now they both return all possible state:action pairs for that time step, hence they operate based on the "t" variable. Testing different length of input list of dicts yields same result. Also, as of yet no error correction implemented.
-
-# - worstExt
-
 # -------------------------------------------------------------------------------
 # Test: `bi` method
 # -------------------------------------------------------------------------------
@@ -195,11 +190,6 @@ def test_bi_with_n_two():
     ps_best_0 = mattermost_instance.bestExt(0, [ps_best_1])
     result = mattermost_instance.bi(0, 2)
     assert result == [ps_best_0, ps_best_1]
-
-""" def test_bi_with_invalid_n():
-    with pytest.raises(ValueError):
-        mattermost_instance.bi(0, -1) """
-        # TODO: Implement error checking for negative time steps in "bi".
 
 def test_bi_with_invalid_time_step():
     with pytest.raises(ValueError):

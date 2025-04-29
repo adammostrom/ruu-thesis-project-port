@@ -189,6 +189,18 @@ class biTest(unittest.TestCase):
         self.assertRaises(ValueError, bi, 0, 1.5)
         
         
+            # Checking cases from a trivial SDP where expected results were calculated by hand.
+    def test_trivial(self):
+        self.assertDictAlmostEqual(nextFuncSimple(0, "0", "Left"), {'-1': 0.85, '0': 0.1, '1': 0.05})
+        self.assertDictAlmostEqual(nextFuncSimple(0, "0", "Stay"), {'-1': 0.1, '0': 0.8, '1': 0.1})
+        self.assertDictAlmostEqual(nextFuncSimple(0, "0", "Right"), {'-1': 0.05, '0': 0.1, '1': 0.85})
+
+        self.assertDictAlmostEqual(nextFuncSimple(1, "2", "Left"), {'1': 0.85, '2': 0.15})
+        self.assertDictAlmostEqual(nextFuncSimple(1, "2", "Stay"), {'1': 0.1, '2': 0.9})
+        self.assertDictAlmostEqual(nextFuncSimple(1, "2", "Right"), {'1': 0.05, '2': 0.95})
+
+        
+        
         
         
         
