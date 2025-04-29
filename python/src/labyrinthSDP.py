@@ -5,7 +5,7 @@ import numpy as np
 from theoryMemorization import SDP
 
 """
-The following file shows an implementation of the SDP-framework from "theoryMemorization.py" 
+This file contains an implementation of the SDP-framework from "theoryMemorization.py" 
 on a few simple labyrinth solving problems.
 
 We start by defining a general class for labyrinth SDP:s, from which we can inherit

@@ -6,25 +6,25 @@ from scipy.stats import norm
 from theoryMemorization import SDP # Replace 'theory' with 'theoryMemorization' for faster computations.
 
 """
-The following is an implementation of a climate-economy-related SDP with an arbitraty number of
-states, and a transition function that calculates transition probabilities based on normal
-distributions which are "shifted" depending on the current state and the chosen action.
+Declare all states of the SDP below:
 """
-
 State: TypeAlias = tuple # Needed because internal functions expect states to be of type 'State'
 # def generate_states(t: int) -> int:
 #     decisionValues = np.arange(0, 3, 1)
 #     climateValues = np.arange(1, 6, 1)
 #     econValues = np.arange(1, 6, 1)
 #     return [(x1, x2, x3) for x1 in decisionValues for x2 in climateValues for x3 in econValues]
-
-
+"""
+Declare all actions of the SDP below:
+"""
 class Action(Enum):
     CLIM = 0
     PASSIVE = 1
     ECON = 2
 
-
+"""
+Define transition probabilities below:
+"""
 drifts = {
     Action.CLIM:      (1.0, -0.4),
     Action.PASSIVE:  (0.0, 0.0),
@@ -99,8 +99,10 @@ class Specification(SDP):
     # Given a time step 't', a state 'x' and an action 'y', returns
     # the reward of ending up in state 'next_x' in time step 't+1'.
     def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
-        return float(next_x[1]) / float(max(self.climValues)) * float(next_x[2]) / float(max(self.climValues)) # Add implementation here...
-
+        if t % 2 == 0:
+            return float(next_x[1])
+        else:
+            return float(next_x[2])
 
 """
 Instantiate your specification to run its functions.

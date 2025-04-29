@@ -309,7 +309,7 @@ SDP_Children = [SDP1, SDP2]
 Pareto = SDP_Pareto(SDP_Parent, SDP_Children)
 
 # print(len(Pareto.children))
-Pareto.valueCloud(0, 10, State.DHU, 100)
+Pareto.valueCloud(0, 10, State.DHU, 1000)
 # result = Pareto.randomPS(0, 2)
 
 # print(result)
