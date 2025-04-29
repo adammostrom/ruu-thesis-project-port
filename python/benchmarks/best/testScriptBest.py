@@ -7,10 +7,14 @@ import unittest
 
 # RUN IT WITH "python3 testScript.py"
 
-# Add the src directory to the Python path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
+# Compute the absolute path of the `src` directory
+src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 
-# Now import the function from mainFile
+# Add `src` to `sys.path`
+sys.path.insert(0, src_path)
+
+
+# Import after fixing the path
 from mainFile import best
 
 
@@ -73,19 +77,22 @@ class TestBestsFunctionFromCSV(unittest.TestCase):
                     
                     # Write input, expected output, and actual output to file
                     
-                    log_file.write(f"Expected Output: Horizon = {expected_horizon}, Best = {expected_best}, Value = {expected_value}\n")
-                    log_file.write(f"Output: Horizon={horizon}, Best={best_action}, Value={value}\n")
-                    log_file.write(f"Input: state = {state}, time = {x}, horizon = {y}\n")
-                    log_file.write(f"----------------------------------------------------------------------------------")
+                   
                     try:
                         self.assertEqual(horizon, expected_horizon)
                         self.assertEqual(best_action, expected_best)
                         self.assertAlmostEqual(value, expected_value, places=5)
-                        log_file.write("PASS")
+                        log_file.write("[PASS]\n")
                     except AssertionError as e:
                         # Write only the short error message
-                        log_file.write(f"FAIL: {str(e).split(':')[-1].strip()}\n")
-
+                        log_file.write(f"[FAIL]: {str(e).split(':')[-1].strip()}\n")
+                    
+                    log_file.write(f" for input: state = {state}, time = {x}, horizon = {y}\n")
+                    log_file.write(f"Expected Output : Horizon = {expected_horizon} | Best = {expected_best} | Value = {expected_value}\n")
+                    log_file.write(f"Actual Output   : Horizon = {horizon} | Best = {best_action} | Value = {value}\n" )
+                   
+                    log_file.write(f"+------------------------------------------------------------------------------------+")
+                    
                     log_file.write("\n")  # Add spacing between test cases
 
 if __name__ == "__main__":

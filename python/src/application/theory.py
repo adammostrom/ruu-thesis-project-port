@@ -30,7 +30,7 @@ class SDP(ABC):
         pass # Problem-specific, needs to be implemented by user.
 
     @abstractmethod
-    def reward(self, t: int, x: State, y: Action, next_x: State) -> int:
+    def reward(self, t: int, x: State, y: Action, next_x: State) -> float:
         pass # Problem-specific, needs to be implemented by user.
 
     # Function that checks that no probabilities are negative, and then
@@ -70,15 +70,19 @@ class SDP(ABC):
         if x not in self.states:
             raise ValueError(f"Invalid state: '{x}'")
         value = 0.0
+        
         if len(ps) == 0:
-            return value
+            return value    
+        
+        if x not in ps[0]:  
+            return value  
+        
         y = ps[0][x]
         m_next = self.nextFunc(t, x, y)
         for x_prim, pr in m_next.items():
             # Added a safe check function, we should to this for each function.
             reward_value = self.safe_reward(t, x, y, x_prim)
-            value += self.meas(
-                self.add(reward_value, self.val(t + 1, ps[1:], x_prim)),
+            value += self.meas((reward_value + self.val(t + 1, ps[1:], x_prim)),
                 pr,
             )
         return value
@@ -172,7 +176,7 @@ class SDP(ABC):
     
     # UTILITY FUNCTIONS FOR ERROR HANDLING:
     
-    def safe_reward(self, t: int, x: State, y: Action, next_x: State) -> float:
+    def safe_reward(self, t: int, x: State, y: Action, next_x: State) -> int:
         self.check_reward(t, x, y, next_x)  
         return self.reward(t, x, y, next_x)  
     
