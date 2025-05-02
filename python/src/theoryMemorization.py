@@ -1,11 +1,13 @@
 from abc import ABC, abstractmethod
-from enum import Enum
+import matplotlib.pyplot as plt
 from typing import TypeAlias
+from enum import Enum
+import numpy as np
+import random
 
 from errorChecks import ErrorChecks
 from mathOperations import MathOperations
 
-import numpy as np
 
 """
 This file contains a modified version of the SDP class found in theory.py. It is different
@@ -187,3 +189,88 @@ class SDP(ABC, ErrorChecks, MathOperations):
         if best_action_val == self.zero:
             return 0
         return (best_action_val - worst_action_val) / best_action_val
+    
+
+    """
+    Below are functions that are additions beyond the straight forward 
+    translation of the model from Idris.
+    """
+    #
+    def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
+        self.check_t(t)
+        self.check_ps_tail(ps_tail)
+
+        policy = dict()
+        for state in self.states(t):
+            actions = self.actions(t, state)
+            random_action = random.choice(actions)
+            p = {state: (random_action, None)}
+            value = self.val(t, [p] + ps_tail, state)
+            policy[state] = (random_action, value)
+        return policy
+
+    #
+    def randomPS(self, t: int, n: int) -> PolicySequence:
+        self.check_t(t)
+        if n == 0: return []
+        self.check_n(n)
+
+        ps_tail = self.randomPS(t + 1, n - 1)
+        p = self.randomExt(t, ps_tail)
+        return [p] + ps_tail
+
+    #    
+    def valDistribution(self, t: int, n: int, x: State, n_points = 1000, n_bins = 'auto') -> None:
+        self.check_t(t)
+        self.check_n(n)
+        self.check_x(t, x)
+
+        data = list()
+        for i in range(n_points):
+            ps = self.randomPS(t, n)
+            val = ps[0][x][1]
+            data.append(val)
+
+        counts, bin_edges = np.histogram(data, bins=n_bins, density=False)
+        probabilities = counts / counts.sum()
+        bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+
+        plt.bar(bin_centers, probabilities, width=(bin_edges[1] - bin_edges[0]) * 0.9)
+        plt.xlabel('Value')
+        plt.ylabel('Probability')
+        plt.title('Binned Empirical Probability Distribution')
+        plt.grid(axis='y', c = "white")
+        plt.show()
+    
+    #
+    def allActionVals(self, t: int, n: int, x: State) -> dict[Action, float]:
+        self.check_t(t)
+        self.check_n(n)
+        self.check_x(t, x)
+
+        vals = dict()
+        ps_tail = self.bi(t+1, n-1)
+        for action in self.actions(t, x):
+            p = {x: (action, None)}
+            value = self.val(t, [p] + ps_tail, x)
+            vals[action] = value
+        return vals
+    
+    def plotActionsToHorizon(self, t: int, n: int, x: State) -> None:
+        toPlot = dict()
+        actions = self.actions(t, x)
+        for action in actions:
+            toPlot[action] = []
+        for i in range(1, n+1):
+            vals = self.allActionVals(t, i, x)
+            for action, val in vals.items():
+                toPlot[action].append(val)
+        for action, values in toPlot.items():
+            plt.plot(range(n), values, label=str(action))
+
+        plt.xlabel("Time horizon")
+        plt.ylabel("Value")
+        plt.title("Action values over time horizon")
+        plt.legend()
+        plt.grid(True)
+        plt.show()
