@@ -159,6 +159,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
         vb = self.val(t, [p] + ps, x)
         return f"Horizon, best, value : {n}, {b}, {vb}"
     
+    # Given a time step 't', a time horizon 'n' and a state 'x', returns the
+    # least optimal action to take at this time and in this state, as well as its value.
     def worst(self, t: int, n: int, x: State) -> str:
         self.check_t(t)
         self.check_n(n)
@@ -192,10 +194,10 @@ class SDP(ABC, ErrorChecks, MathOperations):
     
 
     """
-    Below are functions that are additions beyond the straight forward 
-    translation of the model from Idris.
+    Below are functions that are not included in the original model from Idris.
     """
-    #
+    # Given a time step 't' and a policy sequence 'ps_tail', returns
+    # a random extension to this policy sequence.
     def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
         self.check_t(t)
         self.check_ps_tail(ps_tail)
@@ -209,7 +211,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
             policy[state] = (random_action, value)
         return policy
 
-    #
+    # Given a time step 't' and a time horizon 'n', returns a random
+    # policy sequence of length 'n' starting at time step 't'.
     def randomPS(self, t: int, n: int) -> PolicySequence:
         self.check_t(t)
         if n == 0: return []
@@ -219,7 +222,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
         p = self.randomExt(t, ps_tail)
         return [p] + ps_tail
 
-    #    
+    # Generates a histogram of the binned empirical probability distribution of values 
+    # of a policy of length 'n', measured from time step 't' and state 'x'.
     def valDistribution(self, t: int, n: int, x: State, n_points = 1000, n_bins = 'auto') -> None:
         self.check_t(t)
         self.check_n(n)
@@ -242,7 +246,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
         plt.grid(axis='y', c = "white")
         plt.show()
     
-    #
+    # Given a time step 't', a time horizon 'n' and a state 'x', returns the values 
+    # attained for choosing each valid action in this time step and state.
     def allActionVals(self, t: int, n: int, x: State) -> dict[Action, float]:
         self.check_t(t)
         self.check_n(n)
@@ -256,6 +261,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
             vals[action] = value
         return vals
     
+    # Generates a plot that for each time horizon from 1 to 'n', displays the values of all 
+    # valid actions in time step 't' and state 'x'. 
     def plotActionsToHorizon(self, t: int, n: int, x: State) -> None:
         toPlot = dict()
         actions = self.actions(t, x)
