@@ -2,3 +2,4 @@ dist
 dist-newstyle
 .hypothesis/
 **/venv
+python/tests/__pycache__
