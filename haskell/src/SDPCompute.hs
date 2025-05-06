@@ -60,7 +60,7 @@ optExt2 cmp sdp t ps =
     sts = states sdp t
     -- Memoize val for each state
     valMap :: Map x Val
-    valMap = Map.fromList [ (state, val sdp t ps state) | state <- sts ]
+    valMap = Map.fromList [ (st, val sdp t ps st) | st <- sts ]
 
     -- Use memoized version
     getVal state = valMap Map.! state
