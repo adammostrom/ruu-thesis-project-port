@@ -1,11 +1,16 @@
 from enum import Enum, auto
+from typing import TypeAlias
 
-from theoryMemorization import SDP
+from src.application.multiStakeholderTheory import SDP_Pareto
+from src.application.theoryMemorization import SDP
 
 """
-This is a python translation of the SDP described in the article 
-"Responsibility Under Uncertainty: Which Climate Decisions Matter Most?"
-by Botta et al, where memorization is used for faster computations.
+This file contains a development of the sequential decision problem described in 
+"Responsibility Under Uncertainty: Which Climate Decisions Matter Most?" by Botta et al. 
+Here, the SDP has been "split" into two different SDP:s which are identical apart from 
+their reward functions. Their respective results are compared to find a pareto front 
+(that is, outcomes where neither one can attain a better result without the other getting 
+a worse result).
 """
 
 # Declare all states of the SDP below:
@@ -23,6 +28,9 @@ class State(Enum):
 class Action(Enum):
     Start = auto()
     Delay = auto()
+
+Policy: TypeAlias = dict[State, tuple[Action, float]]
+PolicySequence: TypeAlias = list[dict[State, tuple[Action, float|None]]]
 
 # Define transition probabilities below:
 pS_Start = 0.9
@@ -56,25 +64,20 @@ pU_D = 0.3
 pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
+
 class MatterMost(SDP):
 
-    # Returns the discount rate for adding rewards from later time steps 
-    # (1 means no discounting takes place).
     @property
     def zero(self) -> float:
         return 0.0
-
-    # Returns the discount rate for adding rewards from later time steps 
-    # (1 means no discounting takes place).
+    
     @property
     def discountRate(self) -> float:
         return 1.0
 
-    # Returns all states 'x' that are valid in time step 't'.
     def states(self, t: int) -> list[State]:
         return list(State)
 
-    # Returns all actions 'y' that are valid in time step 't' and state 'x'.
     def actions(self, t: int, x: State) -> list[Action] | list[None]:
         if x in [State.DHU, State.DHC, State.DLU, State.DLC]:
             return [Action.Start, Action.Delay]
@@ -83,8 +86,6 @@ class MatterMost(SDP):
         else:
             raise ValueError(f"Invalid State: '{x}'.")
 
-    # Given a time step 't', a state 'x' and an action 'y', returns the
-    # probability distribution over states to be entered in time step 't+1'.
     def nextFunc(self, t: int, x: State, y: Action) -> dict[State, float]:
         if t == 0:
             match (x, y):
@@ -284,18 +285,58 @@ class MatterMost(SDP):
                         (State.SLC, pL_S_SL),
                     ])
 
-    # Given a time step 't', a state 'x' and an action 'y', returns
-    # the reward of ending up in state 'x_prim' in time step 't+1'.
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
-        return 1.0 if x_prim in [State.DHU, State.SHU] else 0.0
+        pass
+
+class ClimateMatterMost(MatterMost):
+    # Value is added for transitioning into states which are not comitted to
+    # severe future climate change.
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
+        return 1.0 if x_prim in [State.DHU, State.DLU, State.SHU, State.SLU] else 0.0
+
+class EconomyMatterMost(MatterMost):
+    # Value is added for transitioning into states which do not have low economic output.
+    def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
+        return 1.0 if x_prim in [State.DHU, State.DHC, State.SHU, State.SHC] else 0.0
 
 
-# First quick check that program still produces same results as before generalization.
-SDP1 = MatterMost()
-# result = SDP1.safe_nextFunc(0, State.DHU, Action.Start)
-# result = SDP1.safe_reward(0, State.DHU, Action.Start, State.DHU)
-# result = SDP1.bi(0, 3)
-# result = SDP1.best(0, 7, State.DHU)
-result = SDP1.mMeas(3, 7, State.DHU)
-print(result)
+SDP_Parent = MatterMost()
+SDP1 = ClimateMatterMost()
+SDP2 = EconomyMatterMost()
 
+SDP_Children = [SDP1, SDP2]
+
+Pareto = SDP_Pareto(SDP_Parent, SDP_Children)
+
+# print(len(Pareto.children))
+Pareto.valueCloud(0, 10, State.DHU, 100)
+# result = Pareto.randomPS(0, 2)
+
+# print(result)
+
+
+
+
+
+"""
+Below are functions for creating random policies / policy sequences for one SDP. Could be incorporated
+into the normal theory files if wanted.
+
+    def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
+        policy = dict()
+        for state in self.states(t):
+            actions = self.actions(t, state)
+            random_action = random.choice(actions)
+            p = {state: (random_action, None)}
+            value = self.val(t, [p] + ps_tail, state)
+            policy[state] = (random_action, value)
+        return policy
+
+    def randomPS(self, t: int, n: int) -> PolicySequence:
+        if n == 0:
+            return []
+        else:
+            ps_tail = self.randomPS(t + 1, n - 1)
+            p = self.randomExt(t, ps_tail)
+            return [p] + ps_tail
+"""

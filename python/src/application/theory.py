@@ -3,8 +3,8 @@ from enum import Enum
 from typing import TypeAlias
 
 import numpy as np
-from errorChecks import ErrorChecks
-from mathOperations import MathOperations
+from src.utils.errorChecks import ErrorChecks
+from src.utils.mathOperations import MathOperations
 
 """
 This file contains a python translation of the main functions neccessary to create 

@@ -2,10 +2,9 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import TypeAlias
 
-from errorChecks import ErrorChecks
-from mathOperations import MathOperations
-
 import numpy as np
+from src.utils.errorChecks import ErrorChecks
+from src.utils.mathOperations import MathOperations
 
 """
 This file contains a modified version of the SDP class found in theory.py. It is different

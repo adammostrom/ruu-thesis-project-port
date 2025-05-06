@@ -1,9 +1,9 @@
 from enum import Enum, auto
 from typing import TypeAlias
+
 import numpy as np
 from scipy.stats import norm
-
-from theoryMemorization import SDP # Replace 'theory' with 'theoryMemorization' for faster computations.
+from src.application.theoryMemorization import SDP
 
 """
 Declare all states of the SDP below:

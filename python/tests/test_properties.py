@@ -6,8 +6,6 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-# from src.application.theory import SDP, Action
-
 """
 Testing the property of the SDP using pythons "hypothesis".
 This test file aims to test and assure the properties of the functions defined by SDP.
@@ -35,11 +33,8 @@ Python Hypothesis
 
 # ==================== Test SDP Implementation ====================
 
+# from src.implementations.MatterMostMemo import MatterMost as module
 from src.implementations.MatterMostSDP import MatterMost as module
-
-# from tests.test_SDP import TestSDP as module
-
-# SDP = mattermost_module.MatterMost
 
 sdp_instance = module()
 
@@ -48,18 +43,23 @@ sdp_instance = module()
 
 
 # Tests if the actions function always returns a list, t is irrelevant.
-@given(st.integers(min_value=0, max_value=8), st.sampled_from(sdp_instance.states))
-def test_actions_return_list(t, state):  # `t` is provided by Hypothesis
-    actions = sdp_instance.actions(t, state)
-    assert isinstance(actions, list)
+@given(st.integers(min_value=0, max_value=8))
+def test_actions_return_list(t):  # `t` is provided by Hypothesis
+    
+    states = sdp_instance.states(t)
+    for x in states:
+        actions = sdp_instance.actions(t, x)
+        assert isinstance(actions, list)
 
 
 # Test that the function will behave the same for same input
-@given(st.integers(min_value=0), st.sampled_from(sdp_instance.states))
-def test_actions_deterministic(t, x):
-    result1 = sdp_instance.actions(t, x)
-    result2 = sdp_instance.actions(t, x)
-    assert result1 == result2
+@given(st.integers(min_value=0))
+def test_actions_deterministic(t):
+    states = sdp_instance.states(t)
+    for x in states:
+        result1 = sdp_instance.actions(t, x)
+        result2 = sdp_instance.actions(t, x)
+        assert result1 == result2
 
 
 # ==================== Property Tests: nextFunc  ====================

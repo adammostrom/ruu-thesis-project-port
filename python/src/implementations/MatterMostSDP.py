@@ -2,7 +2,6 @@ from enum import Enum, auto
 
 import numpy as np
 from src.application.theory import SDP
-from theory import SDP
 
 """
 This is the unaltered python translation of the SDP described in the article 

@@ -1,10 +1,9 @@
+import random
 from enum import Enum, auto
 from typing import TypeAlias
 
-import random
 import matplotlib.pyplot as plt
-
-from theoryMemorization import SDP
+from src.application.theoryMemorization import SDP
 
 """
 Parent-class that takes as input one "Parent" SDP, which should not have a
