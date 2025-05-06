@@ -1,5 +1,8 @@
-dist
-dist-newstyle
+dist/
+dist-newstyle/
 .hypothesis/
+**/.hypothesis/
 **/venv
-python/tests/__pycache__
+__pycache__/
+*.pyc
+*.pyo
