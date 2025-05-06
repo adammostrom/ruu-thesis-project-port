@@ -76,5 +76,8 @@ class SDP_Pareto():
             plt.plot(pareto_x, pareto_y)
 
         plt.scatter(x_axis, y_axis, c="blue", s=.8)
-        plt.show()
+        plt.xlabel("Värde Intressent 1")
+        plt.ylabel("Värde Intressent 2")
+        plt.title(f"Approximation av Pareto-front\nBaserad på {n_points} slumpmässiga policy-sekvenser")
+        plt.savefig("Pareto.pdf")
         return x_axis, y_axis
