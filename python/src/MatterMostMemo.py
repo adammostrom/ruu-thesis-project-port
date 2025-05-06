@@ -1,13 +1,11 @@
 from enum import Enum, auto
 
-import numpy as np
-from src.application.theory import SDP
-from theory import SDP
+from theoryMemorization import SDP
 
 """
-This is the unaltered python translation of the SDP described in the article 
+This is a python translation of the SDP described in the article 
 "Responsibility Under Uncertainty: Which Climate Decisions Matter Most?"
-by Botta et al.
+by Botta et al, where memorization is used for faster computations.
 """
 
 # Declare all states of the SDP below:
@@ -300,3 +298,4 @@ SDP1 = MatterMost()
 # result = SDP1.best(0, 7, State.DHU)
 result = SDP1.mMeas(3, 7, State.DHU)
 print(result)
+

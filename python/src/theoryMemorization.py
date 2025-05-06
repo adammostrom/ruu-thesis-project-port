@@ -2,14 +2,22 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import TypeAlias
 
-import numpy as np
 from errorChecks import ErrorChecks
 from mathOperations import MathOperations
 
+import numpy as np
+
 """
-This file contains a python translation of the main functions neccessary to create 
-sequential decision problems (SDP:s) as described in the article "Responsibility Under 
-Uncertainty: Which Climate Decisions Matter Most?" by Botta et al.
+This file contains a modified version of the SDP class found in theory.py. It is different
+in that it modifies policy generation to store not just 'State'-'Action'-pairs, but instead
+'State'-'(Action, Value)'-pairs (see updated type aliases below), where 'Value' is the value 
+of taking 'Action' in 'State' given the current policy sequence. This approach allows for 
+greatly increased computation speeds, in turn allowing for much longer policy sequences and 
+SDP implementations with larger space / action-spaces. 
+
+The modifications compared with the SDP class from theory.py are mainly concentrated in the
+function 'val'. The functions 'bestExt', 'worstExt' and 'best' have been tweaked to fit the
+new policy-type, but otherwise function identically to the original.
 """
 
 class State(Enum):
@@ -18,8 +26,8 @@ class State(Enum):
 class Action(Enum):
     pass
 
-Policy: TypeAlias = dict[State, Action]
-PolicySequence: TypeAlias = list[dict[State, Action]]
+Policy: TypeAlias = dict[State, tuple[Action, float]]
+PolicySequence: TypeAlias = list[dict[State, tuple[Action, float|None]]]
 
 # Abstract Base Class (Enforcing required methods)
 class SDP(ABC, ErrorChecks, MathOperations):
@@ -28,7 +36,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
     @property
     @abstractmethod
     def zero(self) -> float:
-        pass # Problem-specific, needs to be implemented by user in specification.
+        pass # Problem-specific, to be implemented by user in specification.
 
     # Returns the discount rate for adding rewards from later time steps 
     # (1 means no discounting takes place).
@@ -59,7 +67,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
         pass # Problem-specific, to be implemented by user in specification.
 
-    
+
     # Given a time step 't', a policy sequence 'ps' and a state 'x',
     # returns the value of this policy sequence.
     def val(self, t: int, ps: PolicySequence | list[None], x: State) -> float:
@@ -70,37 +78,38 @@ class SDP(ABC, ErrorChecks, MathOperations):
         value = self.zero
         M_vals = list()
         if len(ps) == 0:
-            return value    
-        
-        if x not in ps[0]:  
-            return value  
-        
-        y = ps[0][x]
+            return value
+        y = ps[0][x][0]
         m_next = self.safe_nextFunc(t, x, y)
         for x_prim, pr in m_next.items():
-            reward_value = self.safe_reward(t, x, y, x_prim)
-            val = self.add(reward_value, self.val(t + 1, ps[1:], x_prim))
+            reward = self.safe_reward(t, x, y, x_prim)
+            if len(ps) == 1:
+                val = reward
+            elif len(ps) > 1 and ps[1][x_prim][1] == None:
+                val = self.add(reward, self.val(t + 1, ps[1:], x_prim))
+            else:
+                val = self.add(reward, ps[1][x_prim][1])
             M_vals.append((val, pr))
         value = self.meas(M_vals)
         return value
 
     # Given a time step 't' and a policy sequence 'ps_tail', returns
     # the best (front) extension to this policy sequence.
-    def bestExt(self, t: int, ps_tail: PolicySequence | list[None]) -> Policy:
+    def bestExt(self, t: int, ps_tail: PolicySequence) -> Policy:
         self.check_t(t)
         self.check_ps_tail(ps_tail)
-
+        
         policy = dict()
         for state in self.states(t):
             best_value = -np.inf
             best_action = None
             for action in self.actions(t, state):
-                p = {state: action}
+                p = {state: (action, None)}
                 value = self.val(t, [p] + ps_tail, state)
                 if value >= best_value:
                     best_value = value
                     best_action = action
-            policy[state] = best_action
+            policy[state] = (best_action, best_value)
         return policy
 
     # Given a time step 't' and a policy sequence 'ps_tail', returns
@@ -114,12 +123,12 @@ class SDP(ABC, ErrorChecks, MathOperations):
             worst_value = np.inf
             worst_action = None
             for action in self.actions(t, state):
-                p = {state: action}
+                p = {state: (action, None)}
                 value = self.val(t, [p] + ps_tail, state)
                 if value <= worst_value:
                     worst_value = value
                     worst_action = action
-            policy[state] = worst_action
+            policy[state] = (worst_action, worst_value)
         return policy
 
     # Given a time step 't' and a time horizon 'n', returns an optimal
@@ -142,7 +151,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
         ps = self.bi(t + 1, n - 1)
         p = self.bestExt(t, ps)
-        b = p[x]
+        b = p[x][0]
         if(b == None):
             b = "No Action"
         vb = self.val(t, [p] + ps, x)
@@ -155,7 +164,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
         ps = self.bi(t + 1, n - 1)
         p = self.worstExt(t, ps)
-        b = p[x]
+        b = p[x][0]
         if(b == None):
             b = "No Action"
         vb = self.val(t, [p] + ps, x)
