@@ -1,0 +1,19 @@
+# main.py
+
+from src.implementations.MatterMostMemo import MatterMost as module
+from src.implementations.MatterMostMemo import State
+
+sdp_instance = module()
+
+def run_best(t, n, x):
+    print(sdp_instance.best(t, n, x))
+
+def run_mMeas(t, n, x):
+    print(sdp_instance.mMeas(t, n, x))
+
+if __name__ == "__main__":
+    import code
+    banner = "Functions available: \n * run_best(t, n, x)\n * run_mMeas(t, n, x)"
+    vars = globals().copy()
+    vars.update(locals())
+    code.interact(banner=banner, local=vars)
