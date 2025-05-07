@@ -5,15 +5,10 @@ import re
 import sys
 import unittest
 
-# Compute the absolute path of the `src` directory
-src_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
-
-# Add `src` to `sys.path`
-sys.path.insert(0, src_path)
-
-
 # Import after fixing the path
-from mainFile import mMeas
+from src.implementations.MatterMostMemo import MatterMost as module
+
+sdp_instance = module()
 
 
 class TestmMeasFunctionFromCSV(unittest.TestCase):
@@ -28,7 +23,7 @@ class TestmMeasFunctionFromCSV(unittest.TestCase):
                 cls.test_cases.append(row)
 
     def run_mMeas(self, state, x, y):
-        result = mMeas(x, y, state)  # `mMeas` returns a float
+        result = sdp_instance.mMeas(x, y, state)  # `mMeas` returns a float
         return result
 
     def test_mMeas_from_csv(self):
