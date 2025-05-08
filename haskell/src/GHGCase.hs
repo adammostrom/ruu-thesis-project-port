@@ -32,20 +32,16 @@ reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 
 
 next :: Int -> State -> Action -> Prob State
-next t x y = case (x) of
-  (DHU) -> nextDU t y pD_Start pS_Start pH_D_DH pL_D_DH pH_S_DH pL_S_DH
-  (DHU) -> nextDU t pD_Delay pS_Delay pH_D_DH pL_D_DH pH_S_DH pL_S_DH
-  (DLU) -> nextDU t pD_Start pS_Start pH_D_DL pL_D_DL pH_S_DL pL_S_DL
-  (DLU) -> nextDU t pD_Delay pS_Delay pH_D_DL pL_D_DL pH_S_DL pL_S_DL
-  (DHC) -> nextDC t pD_Start pS_Start pH_D_DH pL_D_DH pH_S_DH pL_S_DH
-  (DHC) -> nextDC t pD_Delay pS_Delay pH_D_DH pL_D_DH pH_S_DH pL_S_DH
-  (DLC) -> nextDC t pD_Start pS_Start pH_D_DH pL_D_DH pH_S_DH pL_S_DH
-  (DLC) -> nextDC t pD_Delay pS_Delay pH_D_DH pL_D_DH pH_S_DH pL_S_DH
-  (SHU)     -> nextSU t pH_S_SH pL_S_SH
-  (SLU)     -> nextSU t pH_S_SL pL_S_SL
-  (SHC)     -> nextSC pH_S_SH pL_S_SH
-  (SLC)     -> nextSC pH_S_SL pL_S_SL
-  _            -> error "Invalid state or action combination"
+next t x y = case x of
+  DHU -> nextDU t y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  DLU -> nextDU t y pH_D_DL pL_D_DL pH_S_DL pL_S_DL
+  DHC -> nextDC t y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  DLC -> nextDC t y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  SHU -> nextSU t pH_S_SH pL_S_SH
+  SLU -> nextSU t pH_S_SL pL_S_SL
+  SHC -> nextSC pH_S_SH pL_S_SH
+  SLC -> nextSC pH_S_SL pL_S_SL
+  _   -> error "Invalid state or action combination"
 
 checkAction :: Action -> (Double, Double)
 checkAction y 
@@ -53,28 +49,30 @@ checkAction y
   | y == Delay = (pD_Delay, pS_Delay)
   | otherwise  = error "Not a valid action"
 
-nextDU :: Int -> Action -> Double -> Double -> Double -> Double -> Double -> Double -> Prob State
-nextDU t y pd ps phd pld phs pls  = mkSimpleProb 
+nextDU :: Int -> Action -> Double -> Double -> Double -> Double -> Prob State
+nextDU t y phd pld phs pls  = mkSimpleProb 
   [ 
-    (DHU, checkAction y * phd * nextCheckTime t DHU),
-    (DHC, pd * phd * nextCheckTime t DHC),
-    (DLU, pd * pld * nextCheckTime t DLU),
-    (DLC, pd * pld * nextCheckTime t DLC),
+    (DHU, fst action * phd * nextCheckTime t DHU),
+    (DHC, fst action * phd * nextCheckTime t DHC),
+    (DLU, fst action * pld * nextCheckTime t DLU),
+    (DLC, fst action * pld * nextCheckTime t DLC),
 
-    (SHU, ps * phs * nextCheckTime t SHU),
-    (SHC, ps * phs * nextCheckTime t SHC),
-    (SLU, ps * pls * nextCheckTime t SLU),
-    (SLC, ps * pls * nextCheckTime t SLC)
+    (SHU, snd action * phs * nextCheckTime t SHU),
+    (SHC, snd action * phs * nextCheckTime t SHC),
+    (SLU, snd action * pls * nextCheckTime t SLU),
+    (SLC, snd action * pls * nextCheckTime t SLC)
   ]
+  where action = checkAction y
 
-nextDC :: Int -> Double -> Double -> Double -> Double -> Double -> Double -> Prob State
-nextDC t pd ps phd pld phs pls = mkSimpleProb
-  [ (DHC, pd * phd),
-    (DLC, pd * pld),
+nextDC :: Int -> Action -> Double -> Double -> Double -> Double -> Prob State
+nextDC t y phd pld phs pls = mkSimpleProb
+  [ (DHC, fst action * phd),
+    (DLC, fst action * pld),
 
-    (SHC, ps * phs),
-    (SLC, ps * pls)
+    (SHC, snd action * phs),
+    (SLC, snd action * pls)
   ]
+  where action = checkAction y
 
 nextSU :: Int  -> Double -> Double -> Prob State
 nextSU t phs pls = mkSimpleProb
