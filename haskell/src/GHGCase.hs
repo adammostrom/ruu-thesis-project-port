@@ -1,7 +1,8 @@
 module GHGCase where
-import SDPTypes(SDP(SDP),Val)
-import Prob(Prob, mkSimpleProb)
+
 import GHGCaseParam
+import Prob (Prob, mkSimpleProb)
+import SDPTypes (SDP (SDP), Val)
 
 -- Concrete Implementation of GHG case from the MatterMost paper
 
@@ -13,6 +14,7 @@ data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
 
 ghgcase :: SDP State Action
 ghgcase = SDP reward next actions states
+
 -- TODO make a version with a few probability parameters
 
 getStates :: [State]
@@ -30,7 +32,6 @@ actions _ x
 reward :: Int -> State -> Action -> State -> Val
 reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 
-
 next :: Int -> State -> Action -> Prob State
 next t x y = case x of
   DHU -> nextDU t y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
@@ -41,65 +42,67 @@ next t x y = case x of
   SLU -> nextSU t pH_S_SL pL_S_SL
   SHC -> nextSC pH_S_SH pL_S_SH
   SLC -> nextSC pH_S_SL pL_S_SL
-  _   -> error "Invalid state or action combination"
-
-checkAction :: Action -> (Double, Double)
-checkAction y 
-  | y == Start = (pD_Start, pS_Start)
-  | y == Delay = (pD_Delay, pS_Delay)
-  | otherwise  = error "Not a valid action"
+  _ -> error "Invalid state or action combination"
 
 nextDU :: Int -> Action -> Double -> Double -> Double -> Double -> Prob State
-nextDU t y phd pld phs pls  = mkSimpleProb 
-  [ 
-    (DHU, fst action * phd * nextCheckTime t DHU),
-    (DHC, fst action * phd * nextCheckTime t DHC),
-    (DLU, fst action * pld * nextCheckTime t DLU),
-    (DLC, fst action * pld * nextCheckTime t DLC),
-
-    (SHU, snd action * phs * nextCheckTime t SHU),
-    (SHC, snd action * phs * nextCheckTime t SHC),
-    (SLU, snd action * pls * nextCheckTime t SLU),
-    (SLC, snd action * pls * nextCheckTime t SLC)
-  ]
-  where action = checkAction y
+nextDU t y phd pld phs pls =
+  mkSimpleProb
+    [ (DHU, fst action * phd * nextCheckTime t DHU),
+      (DHC, fst action * phd * nextCheckTime t DHC),
+      (DLU, fst action * pld * nextCheckTime t DLU),
+      (DLC, fst action * pld * nextCheckTime t DLC),
+      (SHU, snd action * phs * nextCheckTime t SHU),
+      (SHC, snd action * phs * nextCheckTime t SHC),
+      (SLU, snd action * pls * nextCheckTime t SLU),
+      (SLC, snd action * pls * nextCheckTime t SLC)
+    ]
+  where
+    action = checkAction y
 
 nextDC :: Int -> Action -> Double -> Double -> Double -> Double -> Prob State
-nextDC t y phd pld phs pls = mkSimpleProb
-  [ (DHC, fst action * phd),
-    (DLC, fst action * pld),
+nextDC t y phd pld phs pls =
+  mkSimpleProb
+    [ (DHC, fst action * phd),
+      (DLC, fst action * pld),
+      (SHC, snd action * phs),
+      (SLC, snd action * pls)
+    ]
+  where
+    action = checkAction y
 
-    (SHC, snd action * phs),
-    (SLC, snd action * pls)
-  ]
-  where action = checkAction y
-
-nextSU :: Int  -> Double -> Double -> Prob State
-nextSU t phs pls = mkSimpleProb
-  [ 
-    (SHU, phs * nextCheckTime t SHU),
-    (SHC, phs * nextCheckTime t SHC),
-    (SLU, pls * nextCheckTime t SLU),
-    (SLC, pls * nextCheckTime t SLC)
-  ]
+nextSU :: Int -> Double -> Double -> Prob State
+nextSU t phs pls =
+  mkSimpleProb
+    [ (SHU, phs * nextCheckTime t SHU),
+      (SHC, phs * nextCheckTime t SHC),
+      (SLU, pls * nextCheckTime t SLU),
+      (SLC, pls * nextCheckTime t SLC)
+    ]
 
 nextSC :: Double -> Double -> Prob State
-nextSC phs pls = mkSimpleProb
-  [ (SHC, pH_S_SL),
-    (SLC, pL_S_SL)
-  ]
+nextSC phs pls =
+  mkSimpleProb
+    [ (SHC, pH_S_SL),
+      (SLC, pL_S_SL)
+    ]
 
-nextTime :: State ->  Double
+nextTime :: State -> Double
 nextTime state = checkState state pU_D pC_D pU_S pC_S
 
-nextTimeZero :: State ->  Double
+nextTimeZero :: State -> Double
 nextTimeZero state = checkState state pU_D_0 pC_D_0 pU_S_0 pC_S_0
 
 nextCheckTime :: Int -> State -> Double
 nextCheckTime t
-  | t < 0     = error "Time cannot be negative"
-  | t == 0    = nextTimeZero
+  | t < 0 = error "Time cannot be negative"
+  | t == 0 = nextTimeZero
   | otherwise = nextTime
+
+checkAction :: Action -> (Double, Double)
+checkAction y
+  | y == Start = (pD_Start, pS_Start)
+  | y == Delay = (pD_Delay, pS_Delay)
+  | otherwise = error "Not a valid action"
 
 checkState :: State -> Double -> Double -> Double -> Double -> Double
 checkState state pud pcd pus pcs = case state of
@@ -111,4 +114,3 @@ checkState state pud pcd pus pcs = case state of
   SHC -> pcs
   SLU -> pus
   SLC -> pcs
-
