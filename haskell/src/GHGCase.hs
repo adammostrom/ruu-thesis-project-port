@@ -30,215 +30,87 @@ actions _ x
 reward :: Int -> State -> Action -> State -> Val
 reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 
--- TODO create helper functions to make this code easier to adapt
---   look for patterns and abstract them to separate functions
+
 next :: Int -> State -> Action -> Prob State
-next t x y = case (t, x, y) of
-  (0, DHU, Start) ->
-    mkSimpleProb
-      [ (DHU, pD_Start * pH_D_DH * pU_D_0),
-        (DHC, pD_Start * pH_D_DH * pC_D_0),
-        (DLU, pD_Start * pL_D_DH * pU_D_0),
-        (DLC, pD_Start * pL_D_DH * pC_D_0),
+next t x y = case (x) of
+  (DHU) -> nextDU t y pD_Start pS_Start pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  (DHU) -> nextDU t pD_Delay pS_Delay pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  (DLU) -> nextDU t pD_Start pS_Start pH_D_DL pL_D_DL pH_S_DL pL_S_DL
+  (DLU) -> nextDU t pD_Delay pS_Delay pH_D_DL pL_D_DL pH_S_DL pL_S_DL
+  (DHC) -> nextDC t pD_Start pS_Start pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  (DHC) -> nextDC t pD_Delay pS_Delay pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  (DLC) -> nextDC t pD_Start pS_Start pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  (DLC) -> nextDC t pD_Delay pS_Delay pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  (SHU)     -> nextSU t pH_S_SH pL_S_SH
+  (SLU)     -> nextSU t pH_S_SL pL_S_SL
+  (SHC)     -> nextSC pH_S_SH pL_S_SH
+  (SLC)     -> nextSC pH_S_SL pL_S_SL
+  _            -> error "Invalid state or action combination"
 
-        (SHU, pS_Start * pH_S_DH * pU_S_0),
-        (SHC, pS_Start * pH_S_DH * pC_S_0),
-        (SLU, pS_Start * pL_S_DH * pU_S_0),
-        (SLC, pS_Start * pL_S_DH * pC_S_0)
-      ]
-  (0, DHU, Delay) ->
-    mkSimpleProb
-      [ (DHU, pD_Delay * pH_D_DH * pU_D_0),
-        (DHC, pD_Delay * pH_D_DH * pC_D_0),
-        (DLU, pD_Delay * pL_D_DH * pU_D_0),
-        (DLC, pD_Delay * pL_D_DH * pC_D_0),
+checkAction :: Action -> (Double, Double)
+checkAction y 
+  | y == Start = (pD_Start, pS_Start)
+  | y == Delay = (pD_Delay, pS_Delay)
+  | otherwise  = error "Not a valid action"
 
-        (SHU, pS_Delay * pH_S_DH * pU_S_0),
-        (SHC, pS_Delay * pH_S_DH * pC_S_0),
-        (SLU, pS_Delay * pL_S_DH * pU_S_0),
-        (SLC, pS_Delay * pL_S_DH * pC_S_0)
-      ]
-  (0, DHC, Start) ->
-    mkSimpleProb
-      [ (DHC, pD_Start * pH_D_DH),
-        (DLC, pD_Start * pL_D_DH),
+nextDU :: Int -> Action -> Double -> Double -> Double -> Double -> Double -> Double -> Prob State
+nextDU t y pd ps phd pld phs pls  = mkSimpleProb 
+  [ 
+    (DHU, checkAction y * phd * nextCheckTime t DHU),
+    (DHC, pd * phd * nextCheckTime t DHC),
+    (DLU, pd * pld * nextCheckTime t DLU),
+    (DLC, pd * pld * nextCheckTime t DLC),
 
-        (SHC, pS_Start * pH_S_DH),
-        (SLC, pS_Start * pL_S_DH)
-      ]
-  (0, DHC, Delay) ->
-    mkSimpleProb
-      [ (DHC, pD_Delay * pH_D_DH),
-        (DLC, pD_Delay * pL_D_DH),
+    (SHU, ps * phs * nextCheckTime t SHU),
+    (SHC, ps * phs * nextCheckTime t SHC),
+    (SLU, ps * pls * nextCheckTime t SLU),
+    (SLC, ps * pls * nextCheckTime t SLC)
+  ]
 
-        (SHC, pS_Delay * pH_S_DH),
-        (SLC, pS_Delay * pL_S_DH)
-      ]
-  (0, DLU, Start) ->
-    mkSimpleProb
-      [ (DHU, pD_Start * pH_D_DL * pU_D_0),
-        (DHC, pD_Start * pH_D_DL * pC_D_0),
-        (DLU, pD_Start * pL_D_DL * pU_D_0),
-        (DLC, pD_Start * pL_D_DL * pC_D_0),
+nextDC :: Int -> Double -> Double -> Double -> Double -> Double -> Double -> Prob State
+nextDC t pd ps phd pld phs pls = mkSimpleProb
+  [ (DHC, pd * phd),
+    (DLC, pd * pld),
 
-        (SHU, pS_Start * pH_S_DL * pU_S_0),
-        (SHC, pS_Start * pH_S_DL * pC_S_0),
-        (SLU, pS_Start * pL_S_DL * pU_S_0),
-        (SLC, pS_Start * pL_S_DL * pC_S_0)
-      ]
-  (0, DLU, Delay) ->
-    mkSimpleProb
-      [ (DHU, pD_Delay * pH_D_DL * pU_D_0),
-        (DHC, pD_Delay * pH_D_DL * pC_D_0),
-        (DLU, pD_Delay * pL_D_DL * pU_D_0),
-        (DLC, pD_Delay * pL_D_DL * pC_D_0),
+    (SHC, ps * phs),
+    (SLC, ps * pls)
+  ]
 
-        (SHU, pS_Delay * pH_S_DL * pU_S_0),
-        (SHC, pS_Delay * pH_S_DL * pC_S_0),
-        (SLU, pS_Delay * pL_S_DL * pU_S_0),
-        (SLC, pS_Delay * pL_S_DL * pC_S_0)
-      ]
-  (0, DLC, Start) ->
-    mkSimpleProb
-      [ (DHC, pD_Start * pH_D_DL),
-        (DLC, pD_Start * pL_D_DL),
+nextSU :: Int  -> Double -> Double -> Prob State
+nextSU t phs pls = mkSimpleProb
+  [ 
+    (SHU, phs * nextCheckTime t SHU),
+    (SHC, phs * nextCheckTime t SHC),
+    (SLU, pls * nextCheckTime t SLU),
+    (SLC, pls * nextCheckTime t SLC)
+  ]
 
-        (SHC, pS_Start * pH_S_DL),
-        (SLC, pS_Start * pL_S_DL)
-      ]
-  (0, DLC, Delay) ->
-    mkSimpleProb
-      [ (DHC, pD_Delay * pH_D_DL),
-        (DLC, pD_Delay * pL_D_DL),
+nextSC :: Double -> Double -> Prob State
+nextSC phs pls = mkSimpleProb
+  [ (SHC, pH_S_SL),
+    (SLC, pL_S_SL)
+  ]
 
-        (SHC, pS_Delay * pH_S_DL),
-        (SLC, pS_Delay * pL_S_DL)
-      ]
-  (0, SHU, _) ->
-    mkSimpleProb
-      [ (SHU, pH_S_SH * pU_S_0),
-        (SHC, pH_S_SH * pC_S_0),
-        (SLU, pL_S_SH * pU_S_0),
-        (SLC, pL_S_SH * pC_S_0)
-      ]
-  (0, SHC, _) ->
-    mkSimpleProb
-      [ (SHC, pH_S_SH),
-        (SLC, pL_S_SH)
-      ]
-  (0, SLU, _) ->
-    mkSimpleProb
-      [ (SHU, pH_S_SL * pU_S_0),
-        (SHC, pH_S_SL * pC_S_0),
-        (SLU, pL_S_SL * pU_S_0),
-        (SLC, pL_S_SL * pC_S_0)
-      ]
-  (0, SLC, _) ->
-    mkSimpleProb
-      [ (SHC, pH_S_SL),
-        (SLC, pL_S_SL)
-      ]
-  (t, DHU, Start) ->
-    mkSimpleProb
-      [ (DHU, pD_Start * pH_D_DH * pU_D),
-        (DHC, pD_Start * pH_D_DH * pC_D),
-        (DLU, pD_Start * pL_D_DH * pU_D),
-        (DLC, pD_Start * pL_D_DH * pC_D),
+nextTime :: State ->  Double
+nextTime state = checkState state pU_D pC_D pU_S pC_S
 
-        (SHU, pS_Start * pH_S_DH * pU_S),
-        (SHC, pS_Start * pH_S_DH * pC_S),
-        (SLU, pS_Start * pL_S_DH * pU_S),
-        (SLC, pS_Start * pL_S_DH * pC_S)
-      ]
-  (t, DHU, Delay) ->
-    mkSimpleProb
-      [ (DHU, pD_Delay * pH_D_DH * pU_D),
-        (DHC, pD_Delay * pH_D_DH * pC_D),
-        (DLU, pD_Delay * pL_D_DH * pU_D),
-        (DLC, pD_Delay * pL_D_DH * pC_D),
-        (SHU, pS_Delay * pH_S_DH * pU_S),
-        (SHC, pS_Delay * pH_S_DH * pC_S),
-        (SLU, pS_Delay * pL_S_DH * pU_S),
-        (SLC, pS_Delay * pL_S_DH * pC_S)
-      ]
-  (t, DHC, Start) ->
-    mkSimpleProb
-      [ (DHC, pD_Start * pH_D_DH),
-        (DLC, pD_Start * pL_D_DH),
+nextTimeZero :: State ->  Double
+nextTimeZero state = checkState state pU_D_0 pC_D_0 pU_S_0 pC_S_0
 
-        (SHC, pS_Start * pH_S_DH),
-        (SLC, pS_Start * pL_S_DH)
-      ]
-  (t, DHC, Delay) ->
-    mkSimpleProb
-      [ (DHC, pD_Delay * pH_D_DH),
-        (DLC, pD_Delay * pL_D_DH),
+nextCheckTime :: Int -> State -> Double
+nextCheckTime t
+  | t < 0     = error "Time cannot be negative"
+  | t == 0    = nextTimeZero
+  | otherwise = nextTime
 
-        (SHC, pS_Delay * pH_S_DH),
-        (SLC, pS_Delay * pL_S_DH)
-      ]
-  (t, DLU, Start) ->
-    mkSimpleProb
-      [ (DHU, pD_Start * pH_D_DL * pU_D),
-        (DHC, pD_Start * pH_D_DL * pC_D),
-        (DLU, pD_Start * pL_D_DL * pU_D),
-        (DLC, pD_Start * pL_D_DL * pC_D),
+checkState :: State -> Double -> Double -> Double -> Double -> Double
+checkState state pud pcd pus pcs = case state of
+  DHU -> pud
+  DHC -> pcd
+  DLU -> pud
+  DLC -> pcd
+  SHU -> pus
+  SHC -> pcs
+  SLU -> pus
+  SLC -> pcs
 
-        (SHU, pS_Start * pH_S_DL * pU_S),
-        (SHC, pS_Start * pH_S_DL * pC_S),
-        (SLU, pS_Start * pL_S_DL * pU_S),
-        (SLC, pS_Start * pL_S_DL * pC_S)
-      ]
-  (t, DLU, Delay) ->
-    mkSimpleProb
-      [ (DHU, pD_Delay * pH_D_DL * pU_D),
-        (DHC, pD_Delay * pH_D_DL * pC_D),
-        (DLU, pD_Delay * pL_D_DL * pU_D),
-        (DLC, pD_Delay * pL_D_DL * pC_D),
-
-        (SHU, pS_Delay * pH_S_DL * pU_S),
-        (SHC, pS_Delay * pH_S_DL * pC_S),
-        (SLU, pS_Delay * pL_S_DL * pU_S),
-        (SLC, pS_Delay * pL_S_DL * pC_S)
-      ]
-  (t, DLC, Start) ->
-    mkSimpleProb
-      [ (DHC, pD_Start * pH_D_DL),
-        (DLC, pD_Start * pL_D_DL),
-
-        (SHC, pS_Start * pH_S_DL),
-        (SLC, pS_Start * pL_S_DL)
-      ]
-  (t, DLC, Delay) ->
-    mkSimpleProb
-      [ (DHC, pD_Delay * pH_D_DL),
-        (DLC, pD_Delay * pL_D_DL),
-
-        (SHC, pS_Delay * pH_S_DL),
-        (SLC, pS_Delay * pL_S_DL)
-      ]
-  (t, SHU, Unit) ->
-    mkSimpleProb
-      [ (SHU, pH_S_SH * pU_S),
-        (SHC, pH_S_SH * pC_S),
-        (SLU, pL_S_SH * pU_S),
-        (SLC, pL_S_SH * pC_S)
-      ]
-  (t, SHC, Unit) ->
-    mkSimpleProb
-      [ (SHC, pH_S_SH),
-        (SLC, pL_S_SH)
-      ]
-  (t, SLU, Unit) ->
-    mkSimpleProb
-      [ (SHU, pH_S_SL * pU_S),
-        (SHC, pH_S_SL * pC_S),
-        (SLU, pL_S_SL * pU_S),
-        (SLC, pL_S_SL * pC_S)
-      ]
-  (t, SLC, Unit) ->
-    mkSimpleProb
-      [ (SHC, pH_S_SL),
-        (SLC, pL_S_SL)
-      ]
-  _ -> error "Invalid state or action combination"
