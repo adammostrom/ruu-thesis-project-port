@@ -7,30 +7,6 @@ import Data.Function (on)
 import Data.Ord (comparing)
 import Prob(Prob, runProb, expectation)
 import SDPTypes
-import Data.Map qualified as MemoMap  -- Add this to your imports
-
--- Type alias for our memoization cache key
-type MemoKey x y = (Int, [Map x y], x)
-type MemoCache x y = Map.Map (MemoKey x y) Val
-
-val' :: (Ord x, Show x, Ord y) => SDP x y -> Int -> PolicySeq x y -> x -> Val
-val' sdp = go sdp Map.empty
-  where
-    go :: (Ord x, Show x, Ord y) => SDP x y -> MemoCache x y -> Int -> PolicySeq x y -> x -> Val
-    go _ _ _ [] _ = 0
-    go sdp cache t (p : ps) x =
-      let key = (t, p : ps, x)
-      in case Map.lookup key cache of
-           Just v -> v
-           Nothing ->
-             case Map.lookup x p of
-               Nothing -> error $ "No action found in policy for state: " ++ show x
-               Just y ->
-                 let mNext = next sdp t x y
-                     newCache = Map.insert key result cache  -- Create updated cache
-                     recCall x' = reward sdp t x y x' + go sdp newCache (t + 1) ps x'
-                     result = expectation recCall mNext
-                 in result
 
 val :: (Ord x, Show x) => SDP x y -> Int -> PolicySeq x y -> x -> Val
 val sdp _ [] _ = 0
@@ -42,6 +18,70 @@ val sdp t (p : ps) x =
           recCall x' = reward sdp t x y x' + val sdp (t + 1) ps x'
       in expectation recCall mNext
 
+------------------------------------------------------------------------------------------------------------- | A table mapping each state to its computed value
+--   at a given decision step.
+type ValMap x = Map x Val
+
+-- | Base value map: at the end of the horizon, every state has value 0.
+baseValMap
+  :: (Ord x, Show x)
+  => SDP x y       -- ^ the decision problem
+  -> Int           -- ^ end time (t0 + length ps)
+  -> ValMap x      -- ^ map: all states -> 0
+baseValMap sdp tEnd =
+  Map.fromList [ (s, 0) | s <- states sdp tEnd ]
+
+-- | One backward induction step: given the map at time t+1,
+--   compute the map at time t under policy p.
+stepValMap
+  :: (Ord x, Show x)
+  => SDP x y
+  -> (Policy x y, Int)  -- ^ (policy for time t, t)
+  -> ValMap x           -- ^ map at time t+1
+  -> ValMap x           -- ^ resulting map at time t
+stepValMap sdp (p, t) vNext =
+  Map.fromList
+    [ (s, eval s)
+    | s <- states sdp t
+    ]
+  where
+    eval s =
+      case Map.lookup s p of
+        Nothing -> error $ "No action found for state " ++ show s
+        Just y  ->
+          let mNext = next sdp t s y
+          in expectation
+               (\s' -> reward sdp t s y s' + vNext Map.! s')
+               mNext
+
+-- | Build the full table of state-values at the starting time t0
+--   by folding backward through the policy sequence.
+valMaps
+  :: (Ord x, Show x)
+  => SDP x y           -- ^ the decision problem
+  -> Int               -- ^ starting time t0
+  -> PolicySeq x y     -- ^ policy sequence p0:p1:...:pn
+  -> ValMap x          -- ^ map from state -> value at t0
+valMaps sdp t0 ps =
+  foldr (stepValMap sdp) (baseValMap sdp tEnd) (zip ps [t0 ..])
+  where
+    tEnd = t0 + length ps
+
+-- | Memoized value-function: look up the pre-computed table.
+val'
+  :: (Ord x, Show x)
+  => SDP x y
+  -> Int               -- ^ start time
+  -> PolicySeq x y     -- ^ policy sequence
+  -> x                 -- ^ query state
+  -> Val
+val' sdp t0 ps x =
+  let table = valMaps sdp t0 ps
+  in fromMaybe
+       (error $ "val': unknown state " ++ show x)
+       (Map.lookup x table)
+
+------------------------------------------------------------------------------------------------------------
 -- Backwards induction
 bi :: (Show x, Ord x) => SDP x y -> Int -> Int -> PolicySeq x y
 bi sdp _ 0 = []
@@ -99,56 +139,13 @@ mMeas sdp t n x =
       in if bestVal == 0 && worstVal == 0 then 0
          else (bestVal - worstVal) / bestVal
 
--- Memoized versions of functions using val'
-
--- Backwards induction with memoization
-bi' :: (Show x, Ord x, Ord y) => SDP x y -> Int -> Int -> PolicySeq x y
-bi' sdp _ 0 = []
-bi' sdp t n =
-  let ps_tail = bi' sdp t (n - 1)
-      p = bestExt' sdp t ps_tail
-  in p : ps_tail
-
--- Optimal extension with memoization
-optExt' :: (Show x, Ord x, Ord y) => (Val->Val->Ordering) -> SDP x y -> Int -> PolicySeq x y -> Policy x y
-optExt' cmp sdp t ps = Map.fromList $ map optAction (states sdp t)
-  where
-    optAction state = (state, getOptAction t state ps)
-    getOptAction t state ps =
-      let actionsForState = actions sdp t state
-          actionValues = [ (action, val' sdp t (Map.singleton state action : ps) state)
-                        | action <- actionsForState
-                        ]
-          opt = maximumBy (cmp `on` snd) actionValues
-      in fst opt
-
--- Best extension with memoization
-bestExt' :: (Show x, Ord x, Ord y) => SDP x y -> Int -> PolicySeq x y -> Policy x y
-bestExt' = optExt' compare
-
--- Worst extension with memoization
-worstExt' :: (Show x, Ord x, Ord y) => SDP x y -> Int -> PolicySeq x y -> Policy x y
-worstExt' = optExt' (\x y -> flipOrder (compare x y))
-
--- Best action and value with memoization
-best' :: (Show x, Ord x, Ord y) => SDP x y -> Int -> Int -> x -> (y, Val)
-best' sdp t n x
-    | n == 0 = error "Horizon must be greater than zero!"
-    | otherwise =
-        let ps = bi' sdp (t + 1) (n - 1)
-            p = bestExt' sdp t ps
-            b = fromMaybe (error "No action found!") (Map.lookup x p)
-            vb = val' sdp t (p : ps) x
-        in (b, vb)
-
--- Measure function with memoization
-mMeas' :: (Show x, Ord x, Ord y) => SDP x y -> Int -> Int -> x -> Double
+mMeas' :: (Show x, Ord x) => SDP x y -> Int -> Int -> x -> Double
 mMeas' sdp t n x =
-      let ps = bi' sdp t n
-          bestVal = val' sdp t ps x
-          psTail = tail ps
-          worstPolicy | null ps = error "mMeas needs at least one step but got an empty PolicySeq"
-                      | otherwise = worstExt' sdp t psTail
-          worstVal = val' sdp t (worstPolicy : psTail) x
+      let  ps = bi sdp t n
+           bestVal = val' sdp t ps x
+           psTail = tail ps
+           worstPolicy | null ps = error "mMeas needs at least one step but got an empty PolicySeq"
+                       | otherwise = worstExt sdp t psTail
+           worstVal = val' sdp t (worstPolicy : psTail) x
       in if bestVal == 0 && worstVal == 0 then 0
          else (bestVal - worstVal) / bestVal

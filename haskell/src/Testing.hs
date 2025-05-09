@@ -61,10 +61,10 @@ main = do
     printf "Values: %f vs %f\n" val3 val3'
     
     -- Test case 4: bi vs bi'
-    putStrLn "\nTest case 4: Comparing bi and bi' (ghgcase 0 7)"
-    pol1 <- timeTest "bi  " $ return $ bi ghgcase 0 7
-    pol2 <- timeTest "bi' " $ return $ bi' ghgcase 0 7
-    putStrLn $ "Policy sequences equal: " ++ show (pol1 == pol2)
+    -- putStrLn "\nTest case 4: Comparing bi and bi' (ghgcase 0 7)"
+    -- pol1 <- timeTest "bi  " $ return $ bi ghgcase 0 7
+    -- pol2 <- timeTest "bi' " $ return $ bi' ghgcase 0 7
+    -- putStrLn $ "Policy sequences equal: " ++ show (pol1 == pol2)
     
     -- Test case 5: val vs val'
     putStrLn "\nTest case 5: Comparing val and val' with test policy"
@@ -103,15 +103,15 @@ optps1 :: PolicySeq State Action
 optps1 = bi ghgcase 0 7
 
 -- Test helpers for comparing policy sequences
-testBi :: Int -> IO ()
+{- testBi :: Int -> IO ()
 testBi n = do
     putStrLn $ "\nTesting bi vs bi' with n = " ++ show n
     _ <- timeTest "bi  " $ return $ bi ghgcase 0 n
-    _ <- timeTest "bi' " $ return $ bi' ghgcase 0 n
-    return ()
+     _ <- timeTest "bi' " $ return $ bi' ghgcase 0 n
+    return () -}
 
 -- Additional test cases
-testCases :: IO ()
+{- testCases :: IO ()
 testCases = do
     putStrLn "\nRunning additional test cases..."
-    mapM_ testBi [1,2,3,4,5]  -- Test increasing horizons
+    mapM_ testBi [1,2,3,4,5]  -- Test increasing horizons -}
