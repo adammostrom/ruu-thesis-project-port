@@ -3,14 +3,18 @@ module GHGCase where
 import GHGCaseParam
 import Prob (Prob, mkSimpleProb)
 import SDPTypes (SDP (SDP), Val)
+import Control.DeepSeq (NFData)
+import GHC.Generics (Generic)
 
 -- Concrete Implementation of GHG case from the MatterMost paper
 
 data Action = Start | Delay | Unit
-  deriving (Show, Eq, Enum, Ord, Read)
+  deriving (Show, Eq, Enum, Ord, Read, Generic)
+instance NFData Action
 
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
-  deriving (Show, Eq, Enum, Ord, Read)
+  deriving (Show, Eq, Enum, Ord, Read, Generic)
+instance NFData State
 
 ghgcase :: SDP State Action
 ghgcase = SDP reward next actions states
@@ -42,7 +46,7 @@ next t x y = case x of
   SLU -> nextSU t pH_S_SL pL_S_SL
   SHC -> nextSC pH_S_SH pL_S_SH
   SLC -> nextSC pH_S_SL pL_S_SL
-  _ -> error "Invalid state or action combination"
+  --_ -> error "Invalid state or action combination"
 
 nextDU :: Int -> Action -> Double -> Double -> Double -> Double -> Prob State
 nextDU t y phd pld phs pls =
