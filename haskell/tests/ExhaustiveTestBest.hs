@@ -4,9 +4,9 @@ import Data.Maybe (isJust, mapMaybe)
 import Text.Read (readMaybe)
 import Text.Printf(printf)
 
-import GHGCase
 import SDPCompute
-import Prob (Prob, runProb, Probability, weights, unProb)
+import GHGCase
+import Prob(Prob, runProb, Probability)
 
 instance Arbitrary Action where
   arbitrary = elements [Start, Delay, Unit]

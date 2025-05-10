@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveFunctor #-}
 module Prob where
 import Data.List (maximumBy, minimumBy, nub)
 type Probability = Double
