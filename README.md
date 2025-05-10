@@ -4,6 +4,7 @@ This project aims at porting and translating the original source code presented 
 N. Botta m. fl., ”Responsibility Under Uncertainty: Which Climate Decisions Matter Most?”
 Environmental Modelling & Assessment, yr. 28, s. 337–365, 2023. DOI: 10 . 1007 /
 s10666-022-09867-w. URL: https://doi.org/10.1007/s10666-022-09867-w.
+Original source code:https://gitlab.pik-potsdam.de/botta/papers/-/tree/master/2021.Responsibility%20under%20uncertainty:%20which%20climate%20decisions%20matter%20most%3F?ref_type=heads
 ```
 Please note that the intellectual property rights to the code, including any modifications or alterations made by this project, remain with the original authors.
 ### Requirements
