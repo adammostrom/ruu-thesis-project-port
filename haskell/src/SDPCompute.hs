@@ -176,11 +176,11 @@ mMeas sdp t n x =
 
 mMeas' :: (Show x, Ord x) => SDP x y -> Int -> Int -> x -> Double
 mMeas' sdp t n x =
-      let  ps = bi sdp t n
+      let  ps = bi' sdp t n
            bestVal = val' sdp t ps x
            psTail = tail ps
            worstPolicy | null ps = error "mMeas needs at least one step but got an empty PolicySeq"
-                       | otherwise = worstExt sdp t psTail
+                       | otherwise = worstExt' sdp t psTail
            worstVal = val' sdp t (worstPolicy : psTail) x
       in if bestVal == 0 && worstVal == 0 then 0
          else (bestVal - worstVal) / bestVal
