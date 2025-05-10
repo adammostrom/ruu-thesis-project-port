@@ -1,47 +1,41 @@
-# Start with a slim Debian image
-FROM debian:stable-slim
-
-# Set environment variables for non-interactive installs
-ENV DEBIAN_FRONTEND=noninteractive
-
-# Install basic dependencies (curl, wget, git, etc.)
-RUN apt-get update && apt-get install -y \
-    curl \
-    wget \
-    git \
-    build-essential \
-    software-properties-common \
-    lsb-release \
-    ca-certificates \
-    gnupg \
-    && apt-get clean
-
-# Add the deadsnakes repository to install Python 3.10
-RUN curl -fsSL https://packages.python.org/debian/python3.10/deadsnakes-archive-keyring.asc | tee /etc/apt/trusted.gpg.d/deadsnakes.asc
-RUN echo "deb http://ppa.launchpad.net/deadsnakes/ppa/ubuntu focal main" > /etc/apt/sources.list.d/deadsnakes-ppa.list
-
-# Install Python 3.10 and necessary packages
-RUN apt-get update && apt-get install -y \
-    python3.10 \
-    python3.10-pip \
-    python3.10-venv \
-    ghc \
-    cabal-install \
-    && apt-get clean
-
-# Set up Haskell (GHC & Cabal)
-RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
-ENV PATH="/root/.ghcup/bin:${PATH}"
-
-# Set up Python (create a virtual environment with Python 3.10)
-RUN python3.10 -m venv /venv
-ENV PATH="/venv/bin:${PATH}"
-
-# Install Python packages inside the virtual environment
-RUN pip install --upgrade pip && pip install numpy pandas matplotlib jupyter pytest
+# Start with an official Python image (on top of Debian)
+FROM python:3.10-slim-buster
 
 # Set the working directory to the project folder
 WORKDIR /workspace
 
-# Command to run the container (could be modified for your needs)
+# Install basic system dependencies that might be needed
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    build-essential \
+    # Add any other essential system packages here
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the project's requirements file if you have one
+# This allows Docker to cache the dependencies layer if requirements.txt doesn't change
+# TODO specify versions in that file
+COPY requirements.txt .
+
+# TODO probably should set up venv here
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your project's source code
+COPY . .
+
+# If you need Haskell, install it in a separate step.
+# TODO specify ghc version
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ghc \   
+    cabal-install \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set up Haskell environment (adjust as needed)
+ENV PATH="/root/.cabal/bin:${PATH}"
+
+# Command to run the container. Adjust this based on your application's needs.
+# TODO probably needs adjusting - run testsuite as default?
 CMD ["bash"]
