@@ -1,10 +1,13 @@
 from abc import ABC, abstractmethod
-from enum import Enum
+import matplotlib.pyplot as plt
 from typing import TypeAlias
-
+from enum import Enum
 import numpy as np
+import random
+
 from src.utils.errorChecks import ErrorChecks
 from src.utils.mathOperations import MathOperations
+
 
 """
 This file contains a python translation of the main functions neccessary to create 
@@ -178,3 +181,50 @@ class SDP(ABC, ErrorChecks, MathOperations):
         if best_action_val == self.zero:
             return 0
         return (best_action_val - worst_action_val) / best_action_val
+
+
+    """
+    Below are functions that are additions beyond the straight forward 
+    translation of the model from Idris.
+    """
+    def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
+        policy = dict()
+        for state in self.states(t):
+            actions = self.actions(t, state)
+            random_action = random.choice(actions)
+            p = {state: (random_action, None)}
+            value = self.val(t, [p] + ps_tail, state)
+            policy[state] = (random_action, value)
+        return policy
+
+    def randomPS(self, t: int, n: int) -> PolicySequence:
+        if n == 0:
+            return []
+        else:
+            ps_tail = self.randomPS(t + 1, n - 1)
+            p = self.randomExt(t, ps_tail)
+            return [p] + ps_tail
+        
+    def valDistribution(self, t: int, n: int, x: State, n_points = 1000, n_bins = 50) -> None:
+        data = list()
+        for i in range(n_points):
+            ps = self.randomPs(t, n)
+            for state in self.states(t):
+                actions = self.actions(t, state)
+                random_action = random.choice(actions)
+
+
+        # Create histogram (normalized=True gives probabilities)
+        counts, bin_edges = np.histogram(data, bins=n_bins, density=False)
+        probabilities = counts / counts.sum()
+
+        # Compute bin centers for plotting
+        bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
+
+        # Plot
+        plt.bar(bin_centers, probabilities, width=(bin_edges[1] - bin_edges[0]) * 0.9)
+        plt.xlabel('Value')
+        plt.ylabel('Probability')
+        plt.title('Binned Empirical Probability Distribution')
+        plt.show()
+

@@ -26,6 +26,7 @@ main = do
     print $ mMeas' advcase 0 1 (State 'D' 4 2)
     print $ mMeas' advcase 0 1 (State 'D' 5 5)
     print $ mMeas' advcase 0 1 (State 'D' 3 3)
+    print $ mMeas' advcase 0 7 (State 'S' 1 1)
 
 {-
 -- PJ: test policy
