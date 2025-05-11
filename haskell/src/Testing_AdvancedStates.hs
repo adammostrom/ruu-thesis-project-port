@@ -23,9 +23,9 @@ polseq = [pol, pol2, pol3]
 main :: IO ()
 main = do
     putStrLn "Testing mMeas function..."
-    print $ mMeas advcase 0 1 (State 'D' 4 2)
-    print $ mMeas advcase 0 1 (State 'D' 5 5)
-    print $ mMeas advcase 0 1 (State 'D' 3 3)
+    print $ mMeas' advcase 0 1 (State 'D' 4 2)
+    print $ mMeas' advcase 0 1 (State 'D' 5 5)
+    print $ mMeas' advcase 0 1 (State 'D' 3 3)
 
 {-
 -- PJ: test policy
