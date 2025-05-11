@@ -26,9 +26,9 @@ class Action(Enum):
 Define transition probabilities below:
 """
 drifts = {
+    Action.ECON:     (-0.4, 1.0),
     Action.CLIM:      (1.0, -0.4),
-    Action.PASSIVE:  (0.0, 0.0),
-    Action.ECON:     (-0.4, 1.0)
+    Action.PASSIVE:  (0.0, 0.0)
 }
 
 class Specification(SDP):
@@ -110,13 +110,26 @@ climValues = np.arange(1, 6, 1)
 econValues = np.arange(1, 6, 1)
 SDP1 = Specification(decisionValues, climValues, econValues, 0.5)
 
-# result = SDP1.states(0)
-# result = SDP1.actions(0, (0, 1, 1))
-# result = SDP1.nextFunc(0, (0, 1, 1), Action.ECON)
-# result = SDP1.safe_reward(0, (0, 1, 1), Action.ECON, (2, 5, 5))
-# result = SDP1.bi(0, 1)
-# result = SDP1.best(0, 1, (0, 1, 1))
-# result = SDP1.worst(0, 1, (0, 1, 1))
-result = SDP1.mMeas(0, 7, (0, 1, 1))
+result1 = SDP1.states(0)
+print("States at time step 0:", result1)
 
-print(result)
+result2 = SDP1.actions(0, (0, 1, 1))
+print("Actions at time step 0, state (0, 1, 1):", result2)
+
+result3 = SDP1.nextFunc(0, (0, 1, 1), Action.ECON)
+print("Next state distribution at time step 0, state (0, 1, 1), action ECON:", result3)
+
+result4 = SDP1.safe_reward(0, (0, 1, 1), Action.ECON, (2, 5, 5))
+print("Reward at time step 0, state (0, 1, 1), action ECON, next state (2, 5, 5):", result4)
+
+result5 = SDP1.bi(0, 1)
+print("Best action at time step 0, state (0, 1, 1):", result5)
+
+result6 = SDP1.best(0, 1, (0, 1, 1))
+print("Best policy at time step 0, state (0, 1, 1):", result6)
+
+result7 = SDP1.worst(0, 1, (0, 1, 1))
+print("Worst policy at time step 0, state (0, 1, 1):", result7)
+
+result8 = SDP1.mMeas(0, 7, (0, 1, 1))
+print("Measurements at time step 0, state (0, 1, 1), numSteps 7:", result8)
