@@ -1,7 +1,7 @@
 module SDPCompute (module SDPCompute, module SDPTypes) where
 import Data.List (maximumBy, minimumBy, nub)
 import Data.Map (Map)
-import Data.Map qualified as Map
+import qualified Data.Map as Map
 import Data.Maybe (fromMaybe)
 import Data.Function (on)
 import Data.Ord (comparing)
