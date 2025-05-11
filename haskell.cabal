@@ -20,7 +20,7 @@ library
                        QuickCheck
   default-language:     GHC2021
 
-  exposed-modules:     Theory, Prob, SDPTypes, SDPCompute, GHGCaseParam, GHGCase, Testing, Interface
+  exposed-modules:     Theory, Prob, SDPTypes, SDPCompute, GHGCaseParam, GHGCase, Testing, AdvancedProb, AdvancedStates, Interface
 
 executable haskell
     import:           warnings
