@@ -18,71 +18,48 @@ val sdp t (p : ps) x =
           recCall x' = reward sdp t x y x' + val sdp (t + 1) ps x'
       in expectation recCall mNext
 
------------------------------------------------------------------------------------------------------------
--- | A table mapping each state to its computed value
---   at a given decision step.
+----------------------------- Memoization val --------------------------------
+{-
+Idea: pre-compute the value function for all states at each time step.
+∗ It is a table of size |states| x |time|, where |time| is the length of the policy sequence.
+∗ The table is built by backward induction, starting from the end of the horizon.
+∗ The table is built by folding backward through the policy sequence.
+  This was nesseacry to factor out the recursion in the val function.
+-}
+
+-- A table mapping each state to its computed value at a given decision step.
 type ValMap x = Map x Val
 
--- | Base value map: at the end of the horizon, every state has value 0.
-baseValMap
-  :: (Ord x, Show x)
-  => SDP x y       -- ^ the decision problem
-  -> Int           -- ^ end time (t0 + length ps)
-  -> ValMap x      -- ^ map: all states -> 0
-baseValMap sdp tEnd =
-  Map.fromList [ (s, 0) | s <- states sdp tEnd ]
+-- Base value map (base case fir finite horizon): at the end of the horizon, every state has value 0.
+baseValMap :: (Ord x, Show x) => SDP x y -> Int -> ValMap x
+baseValMap sdp tEnd = Map.fromList [ (s, 0) | s <- states sdp tEnd ]
+--              ^ t0 + length ps
 
--- | One backward induction step: given the map at time t+1,
---   compute the map at time t under policy p.
-stepValMap
-  :: (Ord x, Show x)
-  => SDP x y
-  -> (Policy x y, Int)  -- ^ (policy for time t, t)
-  -> ValMap x           -- ^ map at time t+1
-  -> ValMap x           -- ^ resulting map at time t
-stepValMap sdp (p, t) vNext =
-  Map.fromList
-    [ (s, eval s)
-    | s <- states sdp t
-    ]
-  where
-    eval s =
-      case Map.lookup s p of
-        Nothing -> error $ "No action found for state " ++ show s
-        Just y  ->
-          let mNext = next sdp t s y
-          in expectation
-               (\s' -> reward sdp t s y s' + vNext Map.! s')
-               mNext
+-- One backward induction step: given the map at time t+1, compute the map at time t under policy p.
+stepValMap :: (Ord x, Show x) => SDP x y -> (Policy x y, Int) -> ValMap x -> ValMap x
+--                                             ^ policy for time t  |^ map @ t+1|^ map @ t
+stepValMap sdp (p, t) vNext = Map.fromList [ (s, eval s) | s <- states sdp t] where
+  eval s = case Map.lookup s p of
+    Nothing -> error $ "No action found for state " ++ show s
+    Just y  ->  let 
+                  mNext = next sdp t s y
+                in expectation (\s' -> reward sdp t s y s' + vNext Map.! s') mNext
+--              Idea (optimization): use a fold instead of a list comprehension to compute the map.
 
--- | Build the full table of state-values at the starting time t0
---   by folding backward through the policy sequence.
-valMaps
-  :: (Ord x, Show x)
-  => SDP x y           -- ^ the decision problem
-  -> Int               -- ^ starting time t0
-  -> PolicySeq x y     -- ^ policy sequence p0:p1:...:pn
-  -> ValMap x          -- ^ map from state -> value at t0
-valMaps sdp t0 ps =
-  foldr (stepValMap sdp) (baseValMap sdp tEnd) (zip ps [t0 ..])
+-- Build the full table of state-values at the starting time t0 by folding backward through the policy sequence.
+valMaps :: (Ord x, Show x) => SDP x y -> Int -> PolicySeq x y -> ValMap x
+valMaps sdp t0 ps = foldr (stepValMap sdp) (baseValMap sdp tEnd) (zip ps [t0 ..])
   where
     tEnd = t0 + length ps
 
--- | Memoized value-function: look up the pre-computed table.
-val'
-  :: (Ord x, Show x)
-  => SDP x y
-  -> Int               -- ^ start time
-  -> PolicySeq x y     -- ^ policy sequence
-  -> x                 -- ^ query state
-  -> Val
-val' sdp t0 ps x =
-  let table = valMaps sdp t0 ps
-  in fromMaybe
-       (error $ "val': unknown state " ++ show x)
-       (Map.lookup x table)
+-- Memoized value-function: look up the pre-computed table.
+val' :: (Ord x, Show x) => SDP x y -> Int -> PolicySeq x y -> x -> Val
+val' sdp t0 ps x = 
+  let 
+    table = valMaps sdp t0 ps
+  in fromMaybe (error $ "val': unknown state " ++ show x) (Map.lookup x table)
 
-------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------
 -- Backwards induction
 bi :: (Show x, Ord x) => SDP x y -> Int -> Int -> PolicySeq x y
 bi sdp _ 0 = []
@@ -110,9 +87,7 @@ optExt cmp sdp t ps = Map.fromList $ map optAction (states sdp t)
                           ]
            opt = maximumBy (cmp `on` snd) actionValues
       in fst opt
-  -- TODO (optional) reuse the computation of val for ps (now
-  -- potentially recomputed many times). This should be possible using
-  -- memoization.
+
 optExt' :: (Show x, Ord x) => (Val -> Val -> Ordering) -> SDP x y -> Int -> PolicySeq x y -> Policy x y
 optExt' cmp sdp t ps = Map.fromList $ map optAction (states sdp t)
   where
