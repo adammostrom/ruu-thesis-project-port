@@ -66,7 +66,6 @@ class SDP(ABC, ErrorChecks, MathOperations):
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
         pass # Problem-specific, to be implemented by user in specification.
 
-
     # Given a time step 't', a policy sequence 'ps' and a state 'x',
     # returns the value of this policy sequence.
     def val(self, t: int, ps: PolicySequence | list[None], x: State) -> float:
@@ -77,6 +76,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
         value = self.zero
         M_vals = list()
         if len(ps) == 0:
+            return value
+        if x not in ps[0]:  
             return value
         y = ps[0][x][0]
         m_next = self.safe_nextFunc(t, x, y)

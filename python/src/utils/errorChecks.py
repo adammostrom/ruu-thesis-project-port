@@ -72,9 +72,9 @@ class ErrorChecks():
         else: return True
 
 
-    def safe_states(self, t: int, x: State) -> list[State]:
+    def safe_states(self, t: int) -> list[State]:
         self.check_t(t)
-        return self.states(t, x)
+        return self.states(t)
 
     def safe_actions(self, t: int, x: State) -> list[Action] | list[None]:
         self.check_t(t)

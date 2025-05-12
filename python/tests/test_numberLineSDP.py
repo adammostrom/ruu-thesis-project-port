@@ -1,13 +1,16 @@
+import sys, os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import math
 from typing import Callable
 
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
-from src.implementations.numberLineSDP import Action, NumberLineSDP, State
+from src.implementations.numberLineSDP import Action, NumberLine, State
 
 # NumberLine instance
-nli  = NumberLineSDP()
+nli  = NumberLine()
 
 
 
