@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from enum import Enum
+import random
 from typing import TypeAlias
 
 import numpy as np
@@ -130,6 +131,21 @@ class SDP(ABC, ErrorChecks, MathOperations):
                     worst_action = action
             policy[state] = (worst_action, worst_value)
         return policy
+    
+    # Given a time step 't' and a policy sequence 'ps_tail', returns
+    # a random extension to this policy sequence.
+    def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
+        self.check_t(t)
+        self.check_ps_tail(ps_tail)
+
+        policy = dict()
+        for state in self.states(t):
+            actions = self.actions(t, state)
+            random_action = random.choice(actions)
+            p = {state: (random_action, None)}
+            value = self.val(t, [p] + ps_tail, state)
+            policy[state] = (random_action, value)
+        return policy
 
     # Given a time step 't' and a time horizon 'n', returns an optimal
     # policy sequence of length 'n' starting at time step 't'.
@@ -140,6 +156,17 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
         ps_tail = self.bi(t + 1, n - 1)
         p = self.bestExt(t, ps_tail)
+        return [p] + ps_tail
+    
+    # Given a time step 't' and a time horizon 'n', returns a random
+    # policy sequence of length 'n' starting at time step 't'.
+    def randomPS(self, t: int, n: int) -> PolicySequence:
+        self.check_t(t)
+        if n == 0: return []
+        self.check_n(n)
+
+        ps_tail = self.randomPS(t + 1, n - 1)
+        p = self.randomExt(t, ps_tail)
         return [p] + ps_tail
     
     # Given a time step 't', a time horizon 'n' and a state 'x', returns the
