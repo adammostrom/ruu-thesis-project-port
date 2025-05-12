@@ -1,16 +1,21 @@
+{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveGeneric #-}
+
 module GHGCase where
 
 import GHGCaseParam
 import Prob (Prob, mkSimpleProb)
 import SDPTypes (SDP (SDP), Val)
+import Control.DeepSeq (NFData)
+import GHC.Generics (Generic)
 
 -- Concrete Implementation of GHG case from the MatterMost paper
 
 data Action = Start | Delay | Unit
-  deriving (Show, Eq, Enum, Ord, Read)
+  deriving (Show, Eq, Enum, Ord, Read, NFData, Generic)
 
 data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
-  deriving (Show, Eq, Enum, Ord, Read)
+  deriving (Show, Eq, Enum, Ord, Read, NFData, Generic)
 
 ghgcase :: SDP State Action
 ghgcase = SDP reward next actions states

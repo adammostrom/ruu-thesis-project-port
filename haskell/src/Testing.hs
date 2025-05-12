@@ -61,10 +61,10 @@ main = do
     printf "Values: %f vs %f\n" val3 val3'
     
     -- Test case 4: bi vs bi'
-    {- putStrLn "\nTest case 4: Comparing bi and bi' (ghgcase 0 7)"
+    putStrLn "\nTest case 4: Comparing bi and bi' (ghgcase 0 7)"
     pol1 <- timeTest "bi  " $ return $ bi ghgcase 0 7
     pol2 <- timeTest "bi' " $ return $ bi' ghgcase 0 7
-    putStrLn $ "Policy sequences equal: " ++ show (pol1 == pol2) -}
+    putStrLn $ "Policy sequences equal: " ++ show (pol1 == pol2)
     
     -- Test case 5: val vs val'
     putStrLn "\nTest case 5: Comparing val and val' with test policy"
@@ -73,10 +73,19 @@ main = do
     printf "Values: %f vs %f\n" v1 v2
 
     -- Test case 6: mMeas vs mMeas'
-    putStrLn "\nTest case 6: ghgcase 2 12 DHU"
-    val6 <- timeTest "mMeas " $ return $ mMeas ghgcase 2 12 DHU
-    val6' <- timeTest "mMeas'" $ return $ mMeas' ghgcase 2 12 DHU
-    printf "Values: %f vs %f\n" val6 val6'
+    putStrLn "\nTest case 6: ghgcase 2 35 DHU"
+    -- val6 <- timeTest "mMeas " $ return $ mMeas ghgcase 2 12 DHU
+    val6' <- timeTest "mMeas'" $ return $ bi' ghgcase 0 35
+    mapM_ print val6'
+
+    -- Test case 6: mMeas vs mMeas'
+    putStrLn "\nTest case 6: ghgcase 2 70 DHU (2 135)"
+    -- val6 <- timeTest "mMeas " $ return $ mMeas ghgcase 2 12 DHU
+    val7' <- timeTest "mMeas'" $ return $ bi' ghgcase 0 70
+    val8' <- timeTest "mMeas'" $ return $ bi' ghgcase 0 140
+
+    mapM_ print val7'
+    mapM_ print val8'
 
 -- PJ: test policy
 myPol :: Policy State Action

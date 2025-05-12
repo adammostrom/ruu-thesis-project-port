@@ -22,7 +22,6 @@ val sdp t (p : ps) x =
 {-
 Idea: pre-compute the value function for all states at each time step.
 ∗ It is a table of size |states| x |time|, where |time| is the length of the policy sequence.
-∗ The table is built by backward induction, starting from the end of the horizon.
 ∗ The table is built by folding backward through the policy sequence.
   This was nesseacry to factor out the recursion in the val function.
 -}
@@ -94,7 +93,7 @@ optExt' cmp sdp t ps = Map.fromList $ map optAction (states sdp t)
     optAction state = (state, getOptAction t state ps)
     getOptAction t state ps =
       let  actionsForState = actions sdp t state
-           actionValues = [  (action, val' sdp t (Map.singleton state action : ps) state)
+           actionValues = [  (action, val' sdp t (Map.singleton state action : ps) state) -- Map.singleton state action
                           |  action <- actionsForState
                           ]
            opt = maximumBy (cmp `on` snd) actionValues
