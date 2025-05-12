@@ -25,6 +25,9 @@ ghgcase = SDP reward next actions states
 getStates :: [State]
 getStates = [DHU, DHC, DLU, DLC, SHU, SHC, SLU, SLC]
 
+getActions :: [Action]
+getActions = [Start, Delay, Unit]
+
 states :: Int -> [State]
 states _ = getStates
 
