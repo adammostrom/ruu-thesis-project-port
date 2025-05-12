@@ -55,13 +55,14 @@ class SDPModel m where
 -- =====================================================================
 
 -- | Test that when the policy sequence is empty, the value function `val` returns 0.
-prop_valEmptyPolicy :: Int -> State -> Property
-prop_valEmptyPolicy t x =
-  t >= 0 ==> val sdpInstance t [] x == 0
+prop_valEmptyPolicy :: State -> Property
+prop_valEmptyPolicy x =
+  forAll genValidInt $ \t -> 
+    val sdpInstance t [] x == 0
 
 -- | Test that the value function `val` always returns a non-negative value for any generated policy sequence.
-prop_valNonNegative :: Int -> State -> Property
-prop_valNonNegative t x =
+prop_valNonNegative :: State -> Property
+prop_valNonNegative x =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
     let policySeq = bi sdpInstance t n

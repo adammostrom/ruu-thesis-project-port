@@ -9,8 +9,9 @@ import Prob(Prob, runProb, expectation)
 import SDPTypes
 
 val :: (Ord x, Show x) => SDP x y -> Int -> PolicySeq x y -> x -> Val
-val sdp _ [] _ = 0
-val sdp t (p : ps) x =
+val sdp _ [] _         = 0
+val sdp t _ _  | t < 0 = error "Time cannot be negative" 
+val sdp t (p : ps) x   =
   case Map.lookup x p of
     Nothing -> error $ "No action found in policy for state: " ++ show x
     Just y ->
