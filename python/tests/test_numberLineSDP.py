@@ -2,6 +2,7 @@ import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import math
+
 from typing import Callable
 
 import pytest
@@ -9,22 +10,25 @@ from hypothesis import given
 from hypothesis import strategies as st
 from src.implementations.numberLineSDP import Action, NumberLine, State
 
-# NumberLine instance
+# Initialize an instance of the NumberLine class
 nli  = NumberLine()
 
+# -------------------------------------------------------------------------------
+# Test: `states` method
+# -------------------------------------------------------------------------------
 
 
-def assertDictAlmostEqual(self, predicted, expected):
-    self.assertEqual(set(predicted.keys()), set(expected.keys()))
-    for key in expected:
-        self.assertAlmostEqual(predicted[key], expected[key])
+# Test that the `states` method returns the correct list of states for given time step.
+@given(st.integers(min_value=0, max_value=8))
+def test_actions_return(t: int):
+    assert len(nli.states(t)) == 2*t+1
 
-# Checking that sum of probabilities is always 1.
-def test_sum():
-    assert sum(nli.nextFunc(0, State.ZERO, Action.Left).values()) == 1
-    assert sum(nli.nextFunc(0, State.ZERO, Action.Stay).values()) == 1
-    assert sum(nli.nextFunc(0, State.POS2, Action.Left).values()) == 1
-    assert sum(nli.nextFunc(0, State.POS2, Action.Stay).values()) == 1
+
+# def assertDictAlmostEqual(self, predicted, expected):
+#     self.assertEqual(set(predicted.keys()), set(expected.keys()))
+#     for key in expected:
+#         self.assertAlmostEqual(predicted[key], expected[key])
+
 """ 
 def test_trivial(self):
         self.assertDictAlmostEqual(nextFuncSimple(0, "0", "Left"), {'-1': 0.85, '0': 0.1, '1': 0.05})
@@ -35,16 +39,6 @@ def test_trivial(self):
         self.assertDictAlmostEqual(nextFuncSimple(1, "2", "Stay"), {'1': 0.1, '2': 0.9})
         self.assertDictAlmostEqual(nextFuncSimple(1, "2", "Right"), {'1': 0.05, '2': 0.95})
 
-
-
-
-
-
-
-
-
-
-class ValTest(unittest.TestCase):
 
     # Checking cases from a trivial SDP where expected results were calculated by hand.
     def test_trivial(self):
@@ -69,8 +63,146 @@ class ValTest(unittest.TestCase):
   
   
   
-  
-  
+"""  
+
+
+# -------------------------------------------------------------------------------
+# Test: `actions` method
+# -------------------------------------------------------------------------------
+
+# Test that the `actions` method returns the correct list of actions for given states.
+# Note: The time step `t` is currently irrelevant for the `actions` function.
+@given(st.integers(min_value=0, max_value=8))
+def test_actions_return(t: int):
+    assert (nli.actions(t, State.DHU)) == [Action.Start, Action.Delay]
+    assert (nli.actions(t, State.DHC)) == [Action.Start, Action.Delay]
+    assert (nli.actions(t, State.SHU)) == [None]
+    assert (nli.actions(t, State.SHC)) == [None]
+
+# Test that the `safe_actions` method raises appropriate errors for invalid inputs.
+def test_actions_error_raised():
+    # Invalid time step `t`
+    with pytest.raises(ValueError):
+        nli.safe_actions(1.5, State.DHU)
+    with pytest.raises(ValueError):
+        nli.safe_actions(-1, State.DHU)
+    # Invalid state `x`
+    with pytest.raises(ValueError):
+        nli.safe_actions(1, "InvalidState")
+
+# -------------------------------------------------------------------------------
+# Test: `nextFunc` method
+# -------------------------------------------------------------------------------
+
+# Test that the probabilities in the dictionary returned by `nextFunc` sum to 1.
+@given(
+    st.integers(min_value=0, max_value=8),        # Random time step `t`
+)
+def test_nextFunc_sum_equals_1(t):
+    states = nli.states(t)
+    for x in states:
+        actions = nli.actions(t, x)
+        for y in actions:
+            res = nli.nextFunc(t, x, y)
+            assert abs(sum(res.values()) - 1.0) <= 1e-6
+
+# Test specific cases for `nextFunc` where expected results are pre-calculated.
+def test_nextFunc_actuals():
+    helper_nextFunc_actuals_clean(
+        {
+            State.DHU: 0.049,
+            State.DHC: 0.021,
+            State.DLU: 0.021,
+            State.DLC: 0.009,
+            State.SHU: 0.243,
+            State.SHC: 0.027,
+            State.SLU: 0.567,
+            State.SLC: 0.063,
+        },
+        0,
+        State.DHU,
+        Action.Start,
+    )
+
+    helper_nextFunc_actuals_clean(
+        {State.SHU: 0.63, State.SHC: 0.07, State.SLU: 0.27, State.SLC: 0.03},
+        0,
+        State.SHU,
+        None,
+    )
+
+    helper_nextFunc_actuals_clean({State.SHC: 0.7, State.SLC: 0.3}, 0, State.SHC, None)
+
+    helper_nextFunc_actuals_clean({State.SHC: 0.7, State.SLC: 0.3}, 1, State.SHC, None)
+
+# Helper function to validate the output of `nextFunc` against expected results.
+def helper_nextFunc_actuals_clean(expected, t, x, y):
+    pre = nli.nextFunc(t, x, y)
+    res = {state: round(prob, 3) for state, prob in pre.items()}
+    assert res == expected
+    res.clear()
+    expected.clear()
+
+# Test that the `safe_nextFunc` method raises appropriate errors for invalid inputs.
+def test_nextFunc_error_raised():
+    # Invalid time step `t`
+    with pytest.raises(ValueError):
+        nli.safe_nextFunc(1.5, State.DHU, Action.Delay)
+    with pytest.raises(ValueError):
+        nli.safe_nextFunc(-1, State.DHU, Action.Delay)
+    # Invalid state `x`
+    with pytest.raises(ValueError):
+        nli.safe_nextFunc(1, "InvalidState", Action.Start)
+    # Invalid action `y`
+    with pytest.raises(ValueError):
+        nli.safe_nextFunc(1, State.DHU, "InvalidAction")
+
+# -------------------------------------------------------------------------------
+# Test: `reward` method
+# -------------------------------------------------------------------------------
+
+# Test that the `reward` method returns the correct reward based on the next state.
+@given(
+    st.integers(min_value=0, max_value=8),        # Random time step `t`
+)
+def test_reward_states(t):
+    states = nli.states(t)
+    for x in states:
+        actions = nli.actions(t, x)
+        for y in actions:
+            next_xs = nli.nextFunc(t, x, y)
+            for x_prim in next_xs:
+                expected_reward = 1.0 if x_prim in [State.DHU, State.SHU] else 0.0
+                assert nli.reward(t, x, y, x_prim) == expected_reward
+
+# Test that the `safe_reward` method raises appropriate errors for invalid inputs.
+def test_reward_error_raised():
+    # Invalid time step `t`
+    with pytest.raises(ValueError):
+        nli.safe_reward(1.5, State.DHU, Action.Delay, State.DHU)
+    with pytest.raises(ValueError):
+        nli.safe_reward(-1, State.DHU, Action.Delay, State.DHU)
+    # Invalid state `x`
+    with pytest.raises(ValueError):
+        nli.safe_reward(1, "InvalidState", Action.Start, State.DHU)
+    # Invalid action `y`
+    with pytest.raises(ValueError):
+        nli.safe_reward(1, State.DHU, "InvalidAction", State.DHU)
+    # Invalid next state `next_x`
+    with pytest.raises(ValueError):
+        nli.safe_reward(0, State.DHU, Action.Start, "invalidState")
+
+# -------------------------------------------------------------------------------
+# Test: `mMeas` method
+# -------------------------------------------------------------------------------
+
+# See: python/benchmarks/mMeas
+
+# -------------------------------------------------------------------------------
+# Test: `best` method
+# -------------------------------------------------------------------------------
+
+# See: python/benchmarks/best
   
   
   

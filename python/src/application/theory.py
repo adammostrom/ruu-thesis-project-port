@@ -177,6 +177,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
         vb = self.val(t, [p] + ps, x)
         return f"Horizon, best, value : {n}, {b}, {vb}"
     
+    # Given a time step 't', a time horizon 'n' and a state 'x', returns the
+    # least optimal action to take at this time and in this state, as well as its value.
     def worst(self, t: int, n: int, x: State) -> str:
         self.check_t(t)
         self.check_n(n)
@@ -207,50 +209,3 @@ class SDP(ABC, ErrorChecks, MathOperations):
         if best_action_val == self.zero:
             return 0
         return (best_action_val - worst_action_val) / best_action_val
-
-
-    """
-    Below are functions that are additions beyond the straight forward 
-    translation of the model from Idris.
-    """
-    def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
-        policy = dict()
-        for state in self.states(t):
-            actions = self.actions(t, state)
-            random_action = random.choice(actions)
-            p = {state: (random_action, None)}
-            value = self.val(t, [p] + ps_tail, state)
-            policy[state] = (random_action, value)
-        return policy
-
-    def randomPS(self, t: int, n: int) -> PolicySequence:
-        if n == 0:
-            return []
-        else:
-            ps_tail = self.randomPS(t + 1, n - 1)
-            p = self.randomExt(t, ps_tail)
-            return [p] + ps_tail
-        
-    def valDistribution(self, t: int, n: int, x: State, n_points = 1000, n_bins = 50) -> None:
-        data = list()
-        for i in range(n_points):
-            ps = self.randomPs(t, n)
-            for state in self.states(t):
-                actions = self.actions(t, state)
-                random_action = random.choice(actions)
-
-
-        # Create histogram (normalized=True gives probabilities)
-        counts, bin_edges = np.histogram(data, bins=n_bins, density=False)
-        probabilities = counts / counts.sum()
-
-        # Compute bin centers for plotting
-        bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
-
-        # Plot
-        plt.bar(bin_centers, probabilities, width=(bin_edges[1] - bin_edges[0]) * 0.9)
-        plt.xlabel('Value')
-        plt.ylabel('Probability')
-        plt.title('Binned Empirical Probability Distribution')
-        plt.show()
-

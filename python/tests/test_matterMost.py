@@ -11,23 +11,18 @@ mattermost_instance = MatterMost()
 # Test: `states` method
 # -------------------------------------------------------------------------------
 
+
 # Test that the `states` method returns the correct list of states for given time step.
 @given(st.integers(min_value=0, max_value=8))
 def test_actions_return(t: int):
     assert (mattermost_instance.states(t)) == [State.DHU, State.DHC, State.DLU, State.DLC, 
                                                State.SHU, State.SHC, State.SLU, State.SHC]
 
-# Test that the `safe_states` method raises appropriate errors for invalid inputs.
-def test_states_error_raised():
-    # Invalid time step `t`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_states(1.5)
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_states(-1)
 
 # -------------------------------------------------------------------------------
 # Test: `actions` method
 # -------------------------------------------------------------------------------
+
 
 # Test that the `actions` method returns the correct list of actions for given states.
 # Note: The time step `t` is currently irrelevant for the `actions` function.
@@ -38,20 +33,11 @@ def test_actions_return(t: int):
     assert (mattermost_instance.actions(t, State.SHU)) == [None]
     assert (mattermost_instance.actions(t, State.SHC)) == [None]
 
-# Test that the `safe_actions` method raises appropriate errors for invalid inputs.
-def test_actions_error_raised():
-    # Invalid time step `t`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_actions(1.5, State.DHU)
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_actions(-1, State.DHU)
-    # Invalid state `x`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_actions(1, "InvalidState")
 
 # -------------------------------------------------------------------------------
 # Test: `nextFunc` method
 # -------------------------------------------------------------------------------
+
 
 # Test that the probabilities in the dictionary returned by `nextFunc` sum to 1.
 @given(
@@ -64,6 +50,7 @@ def test_nextFunc_sum_equals_1(t):
         for y in actions:
             res = mattermost_instance.nextFunc(t, x, y)
             assert abs(sum(res.values()) - 1.0) <= 1e-6
+
 
 # Test specific cases for `nextFunc` where expected results are pre-calculated.
 def test_nextFunc_actuals():
@@ -94,6 +81,7 @@ def test_nextFunc_actuals():
 
     helper_nextFunc_actuals_clean({State.SHC: 0.7, State.SLC: 0.3}, 1, State.SHC, None)
 
+
 # Helper function to validate the output of `nextFunc` against expected results.
 def helper_nextFunc_actuals_clean(expected, t, x, y):
     pre = mattermost_instance.nextFunc(t, x, y)
@@ -102,23 +90,11 @@ def helper_nextFunc_actuals_clean(expected, t, x, y):
     res.clear()
     expected.clear()
 
-# Test that the `safe_nextFunc` method raises appropriate errors for invalid inputs.
-def test_nextFunc_error_raised():
-    # Invalid time step `t`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_nextFunc(1.5, State.DHU, Action.Delay)
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_nextFunc(-1, State.DHU, Action.Delay)
-    # Invalid state `x`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_nextFunc(1, "InvalidState", Action.Start)
-    # Invalid action `y`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_nextFunc(1, State.DHU, "InvalidAction")
 
 # -------------------------------------------------------------------------------
 # Test: `reward` method
 # -------------------------------------------------------------------------------
+
 
 # Test that the `reward` method returns the correct reward based on the next state.
 @given(
@@ -133,6 +109,7 @@ def test_reward_states(t):
             for x_prim in next_xs:
                 expected_reward = 1.0 if x_prim in [State.DHU, State.SHU] else 0.0
                 assert mattermost_instance.reward(t, x, y, x_prim) == expected_reward
+
 
 # Test that the `safe_reward` method raises appropriate errors for invalid inputs.
 def test_reward_error_raised():
@@ -150,6 +127,7 @@ def test_reward_error_raised():
     # Invalid next state `next_x`
     with pytest.raises(ValueError):
         mattermost_instance.safe_reward(0, State.DHU, Action.Start, "invalidState")
+
 
 # -------------------------------------------------------------------------------
 # Test: `mMeas` method

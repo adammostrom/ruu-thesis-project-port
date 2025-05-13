@@ -1,5 +1,6 @@
 from enum import Enum, auto
 
+# from src.application.theory import SDP # To run SDP framework without memoization
 from src.application.theoryMemorization import SDP
 
 """
