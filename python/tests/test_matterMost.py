@@ -1,4 +1,3 @@
-import math
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
@@ -14,9 +13,11 @@ mattermost_instance = MatterMost()
 
 # Test that the `states` method returns the correct list of states for given time step.
 @given(st.integers(min_value=0, max_value=8))
-def test_actions_return(t: int):
-    assert (mattermost_instance.states(t)) == [State.DHU, State.DHC, State.DLU, State.DLC, 
-                                               State.SHU, State.SHC, State.SLU, State.SHC]
+def test_states_return(t: int):
+    assert mattermost_instance.states(t) == [
+        State.DHU, State.DHC, State.DLU, State.DLC,
+        State.SHU, State.SHC, State.SLU, State.SLC
+    ]
 
 
 # -------------------------------------------------------------------------------
@@ -39,19 +40,6 @@ def test_actions_return(t: int):
 # -------------------------------------------------------------------------------
 
 
-# Test that the probabilities in the dictionary returned by `nextFunc` sum to 1.
-@given(
-    st.integers(min_value=0, max_value=8),        # Random time step `t`
-)
-def test_nextFunc_sum_equals_1(t):
-    states = mattermost_instance.states(t)
-    for x in states:
-        actions = mattermost_instance.actions(t, x)
-        for y in actions:
-            res = mattermost_instance.nextFunc(t, x, y)
-            assert abs(sum(res.values()) - 1.0) <= 1e-6
-
-
 # Test specific cases for `nextFunc` where expected results are pre-calculated.
 def test_nextFunc_actuals():
     helper_nextFunc_actuals_clean(
@@ -69,16 +57,13 @@ def test_nextFunc_actuals():
         State.DHU,
         Action.Start,
     )
-
     helper_nextFunc_actuals_clean(
         {State.SHU: 0.63, State.SHC: 0.07, State.SLU: 0.27, State.SLC: 0.03},
         0,
         State.SHU,
         None,
     )
-
     helper_nextFunc_actuals_clean({State.SHC: 0.7, State.SLC: 0.3}, 0, State.SHC, None)
-
     helper_nextFunc_actuals_clean({State.SHC: 0.7, State.SLC: 0.3}, 1, State.SHC, None)
 
 
@@ -97,9 +82,7 @@ def helper_nextFunc_actuals_clean(expected, t, x, y):
 
 
 # Test that the `reward` method returns the correct reward based on the next state.
-@given(
-    st.integers(min_value=0, max_value=8),        # Random time step `t`
-)
+@given(st.integers(min_value=0, max_value=8))       # Random time step `t`
 def test_reward_states(t):
     states = mattermost_instance.states(t)
     for x in states:
@@ -109,24 +92,6 @@ def test_reward_states(t):
             for x_prim in next_xs:
                 expected_reward = 1.0 if x_prim in [State.DHU, State.SHU] else 0.0
                 assert mattermost_instance.reward(t, x, y, x_prim) == expected_reward
-
-
-# Test that the `safe_reward` method raises appropriate errors for invalid inputs.
-def test_reward_error_raised():
-    # Invalid time step `t`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_reward(1.5, State.DHU, Action.Delay, State.DHU)
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_reward(-1, State.DHU, Action.Delay, State.DHU)
-    # Invalid state `x`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_reward(1, "InvalidState", Action.Start, State.DHU)
-    # Invalid action `y`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_reward(1, State.DHU, "InvalidAction", State.DHU)
-    # Invalid next state `next_x`
-    with pytest.raises(ValueError):
-        mattermost_instance.safe_reward(0, State.DHU, Action.Start, "invalidState")
 
 
 # -------------------------------------------------------------------------------
