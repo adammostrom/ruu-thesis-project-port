@@ -1,7 +1,7 @@
 # main.py
 
-from src.implementations.MatterMostMemo import MatterMost as module
-from src.implementations.MatterMostMemo import State
+from src.implementations.MatterMostSDP import MatterMost as module
+from src.implementations.MatterMostSDP import State
 
 sdp_instance = module()
 

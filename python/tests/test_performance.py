@@ -2,8 +2,8 @@ import csv
 from enum import Enum, auto
 from timeit import default_timer as timer
 
-from src.implementations.MatterMostMemo import MatterMost as memosdp
-from src.implementations.MatterMostMemo import State as memoState
+from src.implementations.MatterMostSDP import MatterMost as memosdp
+from src.implementations.MatterMostSDP import State as memoState
 from src.implementations.MatterMostSDP import MatterMost as mmsdp
 from src.implementations.MatterMostSDP import State as basicState
 

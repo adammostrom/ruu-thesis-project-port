@@ -1,5 +1,6 @@
 import math
 import re
+import numpy as np
 
 import pytest
 from hypothesis import given, settings
@@ -11,7 +12,7 @@ Testing the property of the SDP using pythons "hypothesis".
 This test file aims to test and assure the properties of the functions defined by SDP.
 
 Python Hypothesis 
-- @given(...)                       = Hypothesis decorator for automatically generates test cases.
+- @given(...)                       = Hypothesis decorator that automatically generates test cases.
 - st.integers(min_value=0)          = Randomly generates integer time steps (t).
 - st.sampled_from(MySDP().states()) = Randomly picks a state from the list of valid states.
 
@@ -33,11 +34,17 @@ Python Hypothesis
 
 # ==================== Test SDP Implementation ====================
 
-from src.implementations.MatterMostMemo import MatterMost as module
-
 #from src.implementations.MatterMostSDP import MatterMost as module
+# sdp_instance = module()
 
-sdp_instance = module()
+# from src.implementations.MatterMostMemo import MatterMost as module
+# sdp_instance = module()
+
+from src.implementations.AdvancedStatesSDP import Specification as module
+decisionValues = np.arange(0, 3, 1)
+climValues = np.arange(1, 6, 1)
+econValues = np.arange(1, 6, 1)
+sdp_instance = module(decisionValues, climValues, econValues, 0.5)
 
 # ==================== Property Tests: states ====================
 
