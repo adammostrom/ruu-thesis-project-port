@@ -18,11 +18,10 @@ the Climate-Economy SDP model's behavior. It provides:
 Note: This is not a formal test suite - see Test_advcase.hs for property-based tests.
 -}
 module Testing_AdvancedStates where
-import Data.Map (Map)
 import Data.Map qualified as Map
-import SDPCompute(bi', best', mMeas', Policy, PolicySeq)
+import SDPCompute(bi', mMeas', Policy, PolicySeq)
 import AdvancedStates(next, reward, actions, states, advcase, State(..), Action(..))
-import Prob(Prob, runProb, Probability)
+import Prob(runProb)
 import Text.Printf (printf)
 
 pol :: Policy State Action

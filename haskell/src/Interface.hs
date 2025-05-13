@@ -1,9 +1,5 @@
 module Interface where
 
-import Data.Map (Map)
-import Data.Map qualified as Map
-import Prob(Prob, runProb, Probability)
-
 -- Import SDP functions
 import SDPCompute
 
