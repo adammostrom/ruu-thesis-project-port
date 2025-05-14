@@ -3,43 +3,46 @@ name:               haskell
 version:            0.1.0.0
 license:            MIT
 license-file:       LICENSE
-author:             GROUP42
+author:             GROUP12
 maintainer:         moztrom93@gmail.com
 category:           Development
 build-type:         Simple
 extra-doc-files:    CHANGELOG.md
-common warnings
-    ghc-options: -Wall
 
+common shared-properties
+    ghc-options:        -Wall
+    default-language:   GHC2021
+    build-depends:      base >= 4.14 && < 5,
+                       containers,
+                       QuickCheck,
+                       deepseq
 
 library
-  hs-source-dirs:      haskell/src, haskell/tests
-  default-extensions:  DeriveFunctor
-  build-depends:       base >= 4.14 && < 5, 
-                       containers,
-                       QuickCheck
-  default-language:     GHC2021
-
-  exposed-modules:     CoreComputation
+    import:            shared-properties
+    hs-source-dirs:    haskell/src
+    exposed-modules:   Prob
+                      SDPTypes
+                      SDPCompute
+                      GHGCaseParam
+                      GHGCase
+                      Testing
+                      Testing_AdvancedStates
+                      AdvancedProb
+                      AdvancedStates
+                      Interface
 
 executable haskell
-    import:           warnings
-    -- Changed from Main.hs to CoreComputation.hs
-    main-is:          Main.hs
-    hs-source-dirs:   haskell/src
-    build-depends:    base ^>=4.17.2.1,
-                      QuickCheck,
-                      containers,
-                      haskell
-    default-language: GHC2021  
-
+    import:           shared-properties
+    main-is:         Main.hs
+    hs-source-dirs:  haskell/src
+    build-depends:   haskell
 
 test-suite tests
-  type:               exitcode-stdio-1.0
-  main-is:            testBest.hs
-  other-modules:      CoreComputation
-  hs-source-dirs:     haskell/tests, haskell/src
-  build-depends:  base >= 4.14 && < 5,
-                  haskell,
-                  HUnit, QuickCheck, containers
-  default-language: Haskell2010
+    import:          shared-properties
+    type:           exitcode-stdio-1.0
+    main-is:        RunTests.hs
+    other-modules:  Test_advcase
+                    Test_SDP
+    hs-source-dirs: haskell/tests
+    build-depends:  haskell
+

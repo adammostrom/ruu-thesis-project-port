@@ -1,2 +1,8 @@
-dist
-dist-newstyle
+dist/
+dist-newstyle/
+.hypothesis/
+**/.hypothesis/
+**/venv
+__pycache__/
+*.pyc
+*.pyo
