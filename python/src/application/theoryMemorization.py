@@ -184,6 +184,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
         vb = self.val(t, [p] + ps, x)
         return f"Horizon, best, value : {n}, {b}, {vb}"
     
+    # Given a time step 't', a time horizon 'n' and a state 'x', returns the
+    # least optimal action to take at this time and in this state, as well as its value.
     def worst(self, t: int, n: int, x: State) -> str:
         self.check_t(t)
         self.check_n(n)
