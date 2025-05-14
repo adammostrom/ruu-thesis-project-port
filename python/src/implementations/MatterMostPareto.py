@@ -308,35 +308,3 @@ SDP_Children = [SDP1, SDP2]
 
 Pareto = SDP_Pareto(SDP_Parent, SDP_Children)
 
-# print(len(Pareto.children))
-Pareto.valueCloud(0, 10, State.DHU, 100)
-# result = Pareto.randomPS(0, 2)
-
-# print(result)
-
-
-
-
-
-"""
-Below are functions for creating random policies / policy sequences for one SDP. Could be incorporated
-into the normal theory files if wanted.
-
-    def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
-        policy = dict()
-        for state in self.states(t):
-            actions = self.actions(t, state)
-            random_action = random.choice(actions)
-            p = {state: (random_action, None)}
-            value = self.val(t, [p] + ps_tail, state)
-            policy[state] = (random_action, value)
-        return policy
-
-    def randomPS(self, t: int, n: int) -> PolicySequence:
-        if n == 0:
-            return []
-        else:
-            ps_tail = self.randomPS(t + 1, n - 1)
-            p = self.randomExt(t, ps_tail)
-            return [p] + ps_tail
-"""

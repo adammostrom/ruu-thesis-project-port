@@ -7,13 +7,12 @@
 -- - `dummyProb2`: Helper to create a probability distribution over a list of elements.
 
 module Test_SDP where
-
-import Data.Map (Map)
+  
 import qualified Data.Map as Map
 import GHGCase
 import SDPCompute
 import Test.QuickCheck
-import Prob (Prob, runProb, Probability, weights, unProb)
+import Prob (Prob, weights, unProb)
 
 -- =====================================================================
 -- Arbitrary Instances
@@ -27,10 +26,15 @@ instance Arbitrary State where
 
 
 -- | Specific implementation to test. Exchange depending on model for testing. 
+sdpInstance :: SDP State Action
 sdpInstance   = ghgcase
+sdpGetActions :: [Action]
 sdpGetActions = GHGCase.getActions
+sdpNext :: Int -> State -> Action -> Prob State
 sdpNext       = GHGCase.next
+sdpActions :: Int -> State -> [Action]
 sdpActions    = GHGCase.actions
+sdpStates :: [State]
 sdpStates     = GHGCase.getStates
 
 -- Works for now, could change later to be more formally:

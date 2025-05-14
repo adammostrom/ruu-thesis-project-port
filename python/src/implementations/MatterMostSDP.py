@@ -290,12 +290,3 @@ class MatterMost(SDP):
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
         return 1.0 if x_prim in [State.DHU, State.SHU] else 0.0
 
-
-# First quick check that program still produces same results as before generalization.
-SDP1 = MatterMost()
-# result = SDP1.safe_nextFunc(0, State.DHU, Action.Start)
-# result = SDP1.safe_reward(0, State.DHU, Action.Start, State.DHU)
-# result = SDP1.bi(0, 3)
-# result = SDP1.best(0, 7, State.DHU)
-result = SDP1.mMeas(3, 7, State.DHU)
-print(result)

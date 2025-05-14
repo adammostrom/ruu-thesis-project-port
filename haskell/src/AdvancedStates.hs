@@ -82,6 +82,7 @@ advcase = SDP reward next actions states
 getStates :: [State]
 getStates = [State x1 x2 x3 | x1 <- [MaxEcon, MaxClim, Passive], x2 <- [1 .. e], x3 <- [1 .. c]]
 
+
 -- Let x2, x3 roam between 1 and e/c respectively
 {-| Generate all possible states for a given time step.
 Creates the cartesian product of:

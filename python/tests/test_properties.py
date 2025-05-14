@@ -5,7 +5,6 @@ import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
 
-
 """
 Testing the property of the SDP using pythons "hypothesis".
 This test file aims to test and assure the properties of the functions defined by SDP.
@@ -34,8 +33,6 @@ Python Hypothesis
 # ==================== Test SDP Implementation ====================
 
 from src.implementations.MatterMostSDP import MatterMost as module
-
-#from src.implementations.MatterMostSDP import MatterMost as module
 
 sdp_instance = module()
 
@@ -468,11 +465,10 @@ def test_randomExt_valid_actions(t: int):
 @given(st.integers(min_value=0, max_value=10))
 def test_randomExt_stability(t):
     states = sdp_instance.states(t)
-    for x in states:
-        ps_tail = [ {s: sdp_instance.actions(t, s)[0] for s in states} ]
-        policy1 = sdp_instance.randomExt(t, ps_tail)
-        policy2 = sdp_instance.randomExt(t + 1, ps_tail)
-        assert policy1.keys() == policy2.keys()
+    ps_tail = [ {s: sdp_instance.actions(t, s)[0] for s in states} ]
+    policy1 = sdp_instance.randomExt(t, ps_tail)
+    policy2 = sdp_instance.randomExt(t + 1, ps_tail)
+    assert policy1.keys() == policy2.keys()
 
 
 # ==================== Property Tests: bi ====================
