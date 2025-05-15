@@ -65,9 +65,8 @@ next t x y = case x of
   DLC -> nextDC y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
   SHU -> nextSU t pH_S_SH pL_S_SH
   SLU -> nextSU t pH_S_SL pL_S_SL
-  SHC -> nextSC pH_S_SH pL_S_SH
-  SLC -> nextSC pH_S_SL pL_S_SL
-  _ -> error "Invalid state or action combination"
+  SHC -> nextSC 
+  SLC -> nextSC 
 
 -- | Helper function for next, returns probability distribution if current state is DHU or DLU.
 nextDU :: Int -> Action -> Double -> Double -> Double -> Double -> Prob State
@@ -107,8 +106,8 @@ nextSU t phs pls =
       (SLC, pls * nextCheckTime t SLC)
     ]
 -- | Helper function for next, returns probability distribution if current state is SHC or SLC
-nextSC :: Double -> Double -> Prob State
-nextSC phs pls =
+nextSC ::  Prob State
+nextSC  =
   mkSimpleProb
     [ (SHC, pH_S_SL),
       (SLC, pL_S_SL)

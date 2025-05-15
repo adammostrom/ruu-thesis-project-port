@@ -136,8 +136,8 @@ next _ (State _ x2 x3) act =
 
           econEdges, climEdges :: [Double]
           -- \| Include infinities to capture full probability mass
-          econEdges = (-1 / 0) : map fromIntegral [1 .. e] ++ [1 / 0]
-          climEdges = (-1 / 0) : map fromIntegral [1 .. c] ++ [1 / 0]
+          econEdges = -(1 / 0) : map fromIntegral [1 .. e] ++ [1 / 0]
+          climEdges = -(1 / 0) : map fromIntegral [1 .. c] ++ [1 / 0]
 
           -- \| Calculate probabilities by taking differences of consecutive CDF values
           -- This ensures we capture all probability mass between -∞ and +∞

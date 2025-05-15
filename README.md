@@ -16,8 +16,13 @@ If you wish to run the project using local dependencies, these are required:
 - `GHC 9.4.8 (or newer)`
 - `Cabal version 3.10.0 or newer (version 3.12.1.0 is recommended)`
 ##### Python Requirements
-
 - `Python 3.10 or newer`
+- `numpy==1.26.0`
+- `pandas>=2.0.0`
+- `matplotlib~=3.8.0`
+- `pytest>=8.3.5`
+- `scipy>=1.15.3`
+
 ### Project Structure
 The project is divided into two paradigms, one **Python** implementation and one **Haskell** implementation. Both paradigms reflect the same level of correctness and validation, and should be considered reflexive translations of each other.
 

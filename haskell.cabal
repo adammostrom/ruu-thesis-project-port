@@ -15,8 +15,8 @@ common shared-properties
     build-depends:      base >= 4.14 && < 5,
                        containers,
                        QuickCheck,
-                       deepseq
-
+                       deepseq,
+                       time
 library
     import:            shared-properties
     hs-source-dirs:    haskell/src

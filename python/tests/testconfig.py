@@ -6,7 +6,7 @@ def _choose_impl():
     options = {
         "1": ("MatterMost", "src.implementations.MatterMostSDP", "MatterMost"),
         "2": ("NumberLine", "src.implementations.numberLineSDP", "NumberLine"),
-        "3": ("Labyrinth", "src.implementations.labyrinthSDP", "MediumLabyrinth"),
+        "3": ("Labyrinth", "src.implementations.LabyrinthSDP", "MediumLabyrinth"),
     }
 
     print("Choose an SDP implementation to test:")
@@ -28,7 +28,7 @@ else:
     mapping = {
         "mattermost": ("src.implementations.MatterMostSDP", "MatterMost"),
         "numberline": ("src.implementations.numberLineSDP", "NumberLine"),
-        "labyrinth": ("src.implementations.labyrinthSDP", "MediumLabyrinth"),
+        "labyrinth": ("src.implementations.LabyrinthSDP", "MediumLabyrinth"),
     }
     if name not in mapping:
         raise ValueError(f"Unknown SDP_IMPL: {name}")
