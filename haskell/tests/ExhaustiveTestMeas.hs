@@ -55,7 +55,7 @@ readTestData file = do
 compareTestResults :: Int -> Int -> State -> Double -> IO String
 compareTestResults t n x expectedValue = do
   let computedValue = testMeas t n x
-  if abs (computedValue - expectedValue) < 1e-6
+  if abs (computedValue - expectedValue) < 1e-7
     then
       return $
         "Test Passed for "

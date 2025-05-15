@@ -56,6 +56,8 @@ actions _ x
 reward :: Int -> State -> Action -> State -> Val
 reward _ _ _ next_x = if next_x == DHU || next_x == SHU then 1 else 0
 
+
+
 -- | Concrete implemenation of SDP type function. Case dependent. Returns the probability distribution of the next state, given a state, a timestep and an action to take.
 next :: Int -> State -> Action -> Prob State
 next t x y = case x of

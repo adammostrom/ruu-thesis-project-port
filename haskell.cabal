@@ -36,6 +36,11 @@ executable haskell
     main-is:         Main.hs
     hs-source-dirs:  haskell/src
     build-depends:   haskell
+    other-modules:   GHGCase
+                     GHGCaseParam
+                     Prob
+                     SDPCompute
+                     SDPTypes
 
 test-suite tests
     import:          shared-properties
