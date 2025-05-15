@@ -2,7 +2,7 @@
 
 import argparse
 
-from src.implementations import (AdvancedStatesSDP, MatterMostMemo,
+from src.implementations import (AdvancedStatesSDP,
                                  MatterMostPareto)
 
 IMPLEMENTATIONS = {

@@ -61,8 +61,8 @@ next :: Int -> State -> Action -> Prob State
 next t x y = case x of
   DHU -> nextDU t y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
   DLU -> nextDU t y pH_D_DL pL_D_DL pH_S_DL pL_S_DL
-  DHC -> nextDC t y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
-  DLC -> nextDC t y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  DHC -> nextDC y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
+  DLC -> nextDC y pH_D_DH pL_D_DH pH_S_DH pL_S_DH
   SHU -> nextSU t pH_S_SH pL_S_SH
   SLU -> nextSU t pH_S_SL pL_S_SL
   SHC -> nextSC pH_S_SH pL_S_SH
@@ -86,8 +86,8 @@ nextDU t y phd pld phs pls =
     action = checkAction y
 
 -- | Helper function for next, returns probability distribution if current state is DHC or DLC
-nextDC :: Int -> Action -> Double -> Double -> Double -> Double -> Prob State
-nextDC t y phd pld phs pls =
+nextDC :: Action -> Double -> Double -> Double -> Double -> Prob State
+nextDC y phd pld phs pls =
   mkSimpleProb
     [ (DHC, fst action * phd),
       (DLC, fst action * pld),
