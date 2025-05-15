@@ -1,3 +1,4 @@
+# TODO detail, but the concept is called "memoization" without an "r", thus I suggest you rename the file.
 from abc import ABC, abstractmethod
 from enum import Enum
 import random
@@ -78,12 +79,16 @@ class SDP(ABC, ErrorChecks, MathOperations):
         M_vals = list()
         if len(ps) == 0:
             return value
+        # TODO Minor: p = ps[0] is a useful name from here on, and perhaps also ps_tail = ps[1:]
         if x not in ps[0]:  
             return value
+        # TODO I would expect a check if value = ps[0][x][1] is not None, if so, return value?
+        # TODO In any case, a comment or two to explain what is assumed would be nice
         y = ps[0][x][0]
         m_next = self.safe_nextFunc(t, x, y)
         for x_prim, pr in m_next.items():
             reward = self.safe_reward(t, x, y, x_prim)
+            # TODO There is some moderately complex reasoning hiding behind the following cases. Please explain it.
             if len(ps) == 1:
                 val = reward
             elif len(ps) > 1 and ps[1][x_prim][1] == None:
