@@ -16,6 +16,7 @@ class MathOperations():
     # Checks that input constitutes a valid probability distribution, and
     # if so, returns this as a dictionary.
     def mkSimpleProb(self, pairs: list[tuple[State, float]]) -> dict[State, float]:
+        # TODO also check for an empty list before indexing into pairs[0] (... "non-empty list of" below)
         if type(pairs) != list or type(pairs[0]) != tuple:
             raise TypeError(f"Input must be a list of tuples.")
         pr_sum = 0
