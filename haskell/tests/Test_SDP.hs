@@ -83,6 +83,17 @@ prop_longerPolicyBetterOrEqual t x =
           v2 = val sdpInstance t (ps ++ [last ps]) x
       in v2 >= v1
 
+
+-- | Monotonicity of val with respect to policy sequence extension.
+prop_valMonotonic :: State -> Property
+prop_valMonotonic x =
+  forAll genValidIntZero $ \t ->
+  forAll genValidInt $ \n ->
+    let ps = bi sdpInstance t n
+        ps' = ps ++ take 1 ps  -- extend by repeating last or one more valid step
+    in not (null ps) ==>
+      val sdpInstance t ps x <= val sdpInstance t ps' x
+
 -- TODO, error checks? Import Control.Exception
 
 
@@ -117,6 +128,15 @@ prop_biCorrectElements =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
     all (\p -> all (`Map.member` p) sdpStates) (bi sdpInstance t n)
+
+
+  
+-- | All actions in the policy are feasible for the given state.
+prop_policyOnlyFeasibleActions :: Property
+prop_policyOnlyFeasibleActions =
+  forAll genValidIntZero $ \t ->
+  forAll genValidInt $ \n ->
+    all (\p -> all (\(s, a) -> a `elem` sdpActions t s) (Map.toList p)) (bi sdpInstance t n)
 
 -- =====================================================================
 -- Test bestExt, worstExt
@@ -247,6 +267,7 @@ testVal = do
   quickCheck prop_valEmptyPolicy
   quickCheck prop_valNonNegative
   quickCheck prop_longerPolicyBetterOrEqual
+  quickCheck prop_valMonotonic
 
 -- | Run tests for `bi`.
 testBi :: IO ()
@@ -255,6 +276,7 @@ testBi = do
   quickCheck prop_biEmptyPolicy
   quickCheck prop_biCorrectLength
   quickCheck prop_biCorrectElements
+  quickCheck prop_policyOnlyFeasibleActions
 
 -- | Run tests for `bestExt` and `worstExt`.
 testBestExt :: IO ()
