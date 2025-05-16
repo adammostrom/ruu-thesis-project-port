@@ -1,6 +1,7 @@
 from enum import Enum, auto
 from typing import TypeAlias
 
+# from src.application.theory import SDP # To run SDP framework without memoization
 from src.application.theoryMemorization import SDP
 
 """
@@ -11,9 +12,9 @@ in state 'ZERO', and for any given time step 't', one must be in a state between
 """
 
 # Declare all states of the SDP below:
-State: TypeAlias = int # Needed because internal functions expect states to be of type 'State'
-def generate_states(t: int) -> list[int]:
-    return [i for i in range(-t, t+1)]
+State: TypeAlias = str # Needed because internal functions expect states to be of type 'State'
+def generate_states(t: int) -> list[str]:
+    return [str(i) for i in range(-t-1, t+2)]
 
 # Declare all actions of the SDP below:
 class Action(Enum):
@@ -54,12 +55,12 @@ class NumberLine(SDP):
             raise ValueError(f"Invalid State: '{x}' for time step '{t}'.")
 
     def nextFunc(self, t: int, x: State, y: Action) -> dict[State, float]:
-        states = self.states(t)
+        states = self.states(t+1)
         if x not in states:
             raise ValueError(f"Invalid state: '{x}' for time step '{t}'.")
-        left = x-1
+        left = str(int(x)-1)
         current = x
-        right = x+1
+        right = str(int(x)+1)
         match y:
             case Action.Left:
                 transitions = [(left, pL_Left), (current, pS_Left), (right, pR_Left)]
@@ -77,17 +78,3 @@ class NumberLine(SDP):
 
 
 SDP1 = NumberLine()
-
-# result = SDP1.states(2)
-# result = SDP1.actions(3, 1)
-# result = SDP1.nextFunc(4, 3, Action.Stay)
-
-# ps = SDP1.bi(0, 3)
-# result = SDP1.val(0, ps, 0)
-
-# result = SDP1.safe_reward(3, 3, Action.Stay, 4)
-# result = SDP1.bi(0, 3)
-# result = SDP1.best(0, 7, 0)
-result = SDP1.mMeas(0, 1, 0)
-
-print(result)

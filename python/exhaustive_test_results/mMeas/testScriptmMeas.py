@@ -6,7 +6,7 @@ import sys
 import unittest
 
 # Import after fixing the path
-from src.implementations.MatterMostMemo import MatterMost as module
+from src.implementations.MatterMostSDP import MatterMost as module
 
 sdp_instance = module()
 

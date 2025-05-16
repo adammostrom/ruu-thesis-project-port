@@ -1,18 +1,17 @@
 from abc import ABC, abstractmethod
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt # TODO why import plotting in the theory file?
 import random
 from typing import TypeAlias
 from enum import Enum
 import numpy as np
-import random
 
 from src.utils.errorChecks import ErrorChecks
 from src.utils.mathOperations import MathOperations
 
 
 """
-This file contains a python translation of the main functions neccessary to create 
-sequential decision problems (SDP:s) as described in the article "Responsibility Under 
+This file contains a python translation of the main functions neccessary to create
+sequential decision problems (SDP:s) as described in the article "Responsibility Under
 Uncertainty: Which Climate Decisions Matter Most?" by Botta et al.
 """
 
@@ -23,7 +22,7 @@ class Action(Enum):
     pass
 
 Policy: TypeAlias = dict[State, Action]
-PolicySequence: TypeAlias = list[dict[State, Action]]
+PolicySequence: TypeAlias = list[Policy]
 
 # Abstract Base Class (Enforcing required methods)
 class SDP(ABC, ErrorChecks, MathOperations):
@@ -34,12 +33,16 @@ class SDP(ABC, ErrorChecks, MathOperations):
     def zero(self) -> float:
         pass # Problem-specific, needs to be implemented by user in specification.
 
-    # Returns the discount rate for adding rewards from later time steps 
+    # Returns the discount rate for adding rewards from later time steps
     # (1 means no discounting takes place).
     @property
     @abstractmethod
     def discountRate(self) -> float:
         pass # Problem-specific, needs to be implemented by user in specification.
+
+    # TODO This discount rate is reasonable to have, but not included as a separate concept in our SDP papers, but instead "baked into" the add method. Remove or explain the connection.
+    # TODO The add method seems to not be explained. Perhaps it is explained elsewhere? (in MathOperations?) Do you mean that add(x,y) = x + discount*y (Aha - I found it in mathOperations.py)
+    # TODO I think zero and add "belong together" - thus I suggest you move zero to MathOperations but leave a comment somewhere in here to mention them both (and perhaps discount).
 
     # Returns all states 'x' that are valid in time step 't'.
     @abstractmethod
@@ -48,7 +51,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Returns all actions 'y' that are valid in time step 't' and state 'x'.
     @abstractmethod
-    def actions(self, t: int, x: State) -> list[Action] | list[None]:
+    def actions(self, t: int, x: State) -> list[Action] | list[None]: # TODO why use list[None] as an error case? I think an empty list would be more natural if there are truly no actions available.
         pass # Problem-specific, to be implemented by user in specification.
 
     # Given a time step 't', a state 'x' and an action 'y', returns the
@@ -65,6 +68,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Given a time step 't', a policy sequence 'ps' and a state 'x',
     # returns the value of this policy sequence.
+    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean?
     def val(self, t: int, ps: PolicySequence | list[None], x: State) -> float:
         self.check_t(t)
         self.check_ps(ps)
@@ -73,11 +77,12 @@ class SDP(ABC, ErrorChecks, MathOperations):
         value = self.zero
         M_vals = list()
         if len(ps) == 0:
-            return value    
-        
-        if x not in ps[0]:  
-            return value  
-        
+            return value
+
+        # TODO why return zero here? I think raising a ValueError or similar would be better.
+        if x not in ps[0]:
+            return value
+
         y = ps[0][x]
         m_next = self.safe_nextFunc(t, x, y)
         for x_prim, pr in m_next.items():
@@ -89,20 +94,23 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Given a time step 't' and a policy sequence 'ps_tail', returns
     # the best (front) extension to this policy sequence.
+    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean?
     def bestExt(self, t: int, ps_tail: PolicySequence | list[None]) -> Policy:
         self.check_t(t)
-        self.check_ps_tail(ps_tail)
+        self.check_ps_tail(ps_tail)  # TODO why a special "check" for a ps_tail?
 
         policy = dict()
         for state in self.states(t):
             best_value = -np.inf
             best_action = None
             for action in self.actions(t, state):
+                # TODO Add a comment explaining that, although p is only a "partial" policy, val will still succeed because it is only called on state.
                 p = {state: action}
                 value = self.val(t, [p] + ps_tail, state)
                 if value >= best_value:
                     best_value = value
                     best_action = action
+            # TODO note that best_action may still be None in case the list of actions was empty (or raise ValueError or similar)
             policy[state] = best_action
         return policy
 
@@ -111,7 +119,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
     def worstExt(self, t: int, ps_tail: PolicySequence | list[None]) -> Policy:
         self.check_t(t)
         self.check_ps_tail(ps_tail)
-        
+
         policy = dict()
         for state in self.states(t):
             worst_value = np.inf
@@ -124,7 +132,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
                     worst_action = action
             policy[state] = worst_action
         return policy
-    
+
     # Given a time step 't' and a policy sequence 'ps_tail', returns
     # a random extension to this policy sequence.
     def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
@@ -136,6 +144,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
             actions = self.actions(t, state)
             random_action = random.choice(actions)
             p = {state: random_action}
+            # TODO why compute a value and then not use it?
             value = self.val(t, [p] + ps_tail, state)
             policy[state] = random_action
         return policy
@@ -150,7 +159,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
         ps_tail = self.bi(t + 1, n - 1)
         p = self.bestExt(t, ps_tail)
         return [p] + ps_tail
-    
+
     # Given a time step 't' and a time horizon 'n', returns a random
     # policy sequence of length 'n' starting at time step 't'.
     def randomPS(self, t: int, n: int) -> PolicySequence:
@@ -161,7 +170,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
         ps_tail = self.randomPS(t + 1, n - 1)
         p = self.randomExt(t, ps_tail)
         return [p] + ps_tail
-    
+
     # Given a time step 't', a time horizon 'n' and a state 'x', returns the
     # optimal action to take at this time and in this state, as well as its value.
     def best(self, t: int, n: int, x: State) -> str:
@@ -173,10 +182,12 @@ class SDP(ABC, ErrorChecks, MathOperations):
         p = self.bestExt(t, ps)
         b = p[x]
         if(b == None):
-            b = "No Action"
+            b = "No Action"   # TODO I think keeping None (or raising an exception) is better than inserting a "random string"
         vb = self.val(t, [p] + ps, x)
         return f"Horizon, best, value : {n}, {b}, {vb}"
-    
+
+    # Given a time step 't', a time horizon 'n' and a state 'x', returns the
+    # least optimal action to take at this time and in this state, as well as its value.
     def worst(self, t: int, n: int, x: State) -> str:
         self.check_t(t)
         self.check_n(n)
@@ -189,9 +200,9 @@ class SDP(ABC, ErrorChecks, MathOperations):
             b = "No Action"
         vb = self.val(t, [p] + ps, x)
         return f"Horizon, worst, value : {n}, {b}, {vb}"
-    
+
     # Given a time step 't', a time horizon 'n' and a state 'x', returns a value
-    # between 0 and 1, indicating the "importance" of taking the best action 
+    # between 0 and 1, indicating the "importance" of taking the best action
     # at this time step in this state considering the current time horizon.
     def mMeas(self, t: int, n: int, x: State) -> float:
         self.check_t(t)
@@ -207,50 +218,3 @@ class SDP(ABC, ErrorChecks, MathOperations):
         if best_action_val == self.zero:
             return 0
         return (best_action_val - worst_action_val) / best_action_val
-
-
-    """
-    Below are functions that are additions beyond the straight forward 
-    translation of the model from Idris.
-    """
-    def randomExt(self, t: int, ps_tail: PolicySequence) -> Policy:
-        policy = dict()
-        for state in self.states(t):
-            actions = self.actions(t, state)
-            random_action = random.choice(actions)
-            p = {state: (random_action, None)}
-            value = self.val(t, [p] + ps_tail, state)
-            policy[state] = (random_action, value)
-        return policy
-
-    def randomPS(self, t: int, n: int) -> PolicySequence:
-        if n == 0:
-            return []
-        else:
-            ps_tail = self.randomPS(t + 1, n - 1)
-            p = self.randomExt(t, ps_tail)
-            return [p] + ps_tail
-        
-    def valDistribution(self, t: int, n: int, x: State, n_points = 1000, n_bins = 50) -> None:
-        data = list()
-        for i in range(n_points):
-            ps = self.randomPs(t, n)
-            for state in self.states(t):
-                actions = self.actions(t, state)
-                random_action = random.choice(actions)
-
-
-        # Create histogram (normalized=True gives probabilities)
-        counts, bin_edges = np.histogram(data, bins=n_bins, density=False)
-        probabilities = counts / counts.sum()
-
-        # Compute bin centers for plotting
-        bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
-
-        # Plot
-        plt.bar(bin_centers, probabilities, width=(bin_edges[1] - bin_edges[0]) * 0.9)
-        plt.xlabel('Value')
-        plt.ylabel('Probability')
-        plt.title('Binned Empirical Probability Distribution')
-        plt.show()
-

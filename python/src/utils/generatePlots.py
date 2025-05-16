@@ -13,7 +13,7 @@ CURRENTLY NEEDS TO BE RUN IN CONNECTION TO REST OF FRAMEWORK, DISCUSS HOW AT GRO
 Below are functions that can be used to produce plots of results from SDP:s.
 """
 
-from src.implementations.MatterMostMemo import MatterMost as Implementation
+from src.implementations.MatterMostSDP import MatterMost as Implementation
 
 class State(Enum):
     pass
