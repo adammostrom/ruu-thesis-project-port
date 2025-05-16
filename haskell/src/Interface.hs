@@ -1,17 +1,10 @@
 module Interface where
 
-<<<<<<< HEAD
-=======
-import Data.Map (Map)
-import Data.Map qualified as Map
-import Prob(Prob, runProb, Probability)
-import Data.Time
+import Data.Time.Clock
 
->>>>>>> 6f43335ff100c2c4e1538b9c9eb8fb17a794d3c4
+
 -- Import SDP functions
 import SDPCompute
-
--- Import the SDP module
 import GHGCase
 
 timeRunBest :: Int -> Int -> State -> IO ()
@@ -28,3 +21,8 @@ runBest = best ghgcase
 
 runmMeas :: Int -> Int -> State -> Val
 runmMeas = mMeas ghgcase
+
+runBestMemo :: Int -> Int -> State -> (Action, Val)
+runBestMemo = best' ghgcase
+
+

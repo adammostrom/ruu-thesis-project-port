@@ -1,43 +1,95 @@
-# main.py
+import code
+import importlib
+import os
 
-import argparse
-
-from src.implementations import (AdvancedStatesSDP, MatterMostMemo,
-                                 MatterMostPareto)
-
-IMPLEMENTATIONS = {
-    "mattermost": (MatterMostMemo.MatterMost, MatterMostMemo.State),
-    "mattermost pareto": (MatterMostPareto.MatterMost, MatterMostPareto.State),
-    "advanced states": (AdvancedStatesSDP.Specification, AdvancedStatesSDP.State),
-}
-
-def get_sdp_instance(impl_name):
-    if impl_name not in IMPLEMENTATIONS:
-        raise ValueError(f"Unknown implementation: {impl_name}")
-    cls, _ = IMPLEMENTATIONS[impl_name]
-    return cls()
-
-def run_best(sdp, t, n, x):
-    return(sdp.best(t, n, x))
-
-def run_mMeas(sdp, t, n, x):
-    return(sdp.mMeas(t, n, x))
-
-def run_bi(sdp, t, n):
-    return(sdp.bi(t, n))
+# TODO: CREATE SPECIAL CASE FOR ADVANCED STATE AND ASK FOR MORE INPUTS.
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--impl", choices=IMPLEMENTATIONS.keys(), required=True)
-    args = parser.parse_args()
+    path = 'src/implementations'
+    files = os.listdir(path)
+    files = [file for file in files if "__" not in file and file != 'specificationTemplateSDP.py']
+    files.sort()
 
-    sdp_instance = get_sdp_instance(args.impl)
+    files_index = [(i, file) for i, file in enumerate(files)]
 
-    banner = f"Running interactive shell with '{args.impl}' implementation.\n"
-    banner += "Available functions:\n * run_best(sdp, t, n, x)\n * run_mMeas(sdp, t, n, x)\n"
-    banner += "Access the instance as `sdp_instance`"
+    print("\nFound [", len(files), "] implementations. Select numerator from the list to run.\n")
+    for i, file in files_index:
+        print(f"{i}: {file}")
+    print()
 
-    import code
-    vars = globals().copy()
-    vars.update(locals())
-    code.interact(banner=banner, local=vars)
+    try:
+        choice = int(input("Enter number: "))
+        selected_file = files_index[choice][1].replace('.py', '')
+        module_path = f"{path.replace('/', '.')}.{selected_file}"
+
+        module = importlib.import_module(module_path)
+        
+        # TODO: TAKE INPUT PARAMETERS FOR THE ADVANCED STATE
+        if selected_file == 'AdvancedStatesSDP':
+            print("Advanced State requires further arguments: ")
+            
+            
+
+        # TODO: MAKE MORE INTERACTIVE FOR USERS IN LABYRINTH, MAYBE EASIER FUNCTIONS THAT TAKES INPUTS AND MAKES THE LOOP ETC.
+        if selected_file == 'LabyrinthSDP':
+            SpecClass = getattr(module, "SmallLabyrinthDet", None)
+            State = getattr(module, "State", None)
+            sdp = SpecClass()
+            print("\nInstance created as 'sdp'. Entering interactive shell...\n")
+
+            code.interact(local=dict(globals(), **{
+                "sdp": sdp,
+                "State": State
+            }))
+                
+        
+
+        # Replace your class-loading block with this:
+        State = getattr(module, "State", None)
+
+        # Try to get the main class
+        POSSIBLE_CLASSES = ["MatterMost", "AdvancedStates", "Labyrinth"]
+        SpecClass = None
+        for name in POSSIBLE_CLASSES:
+            SpecClass = getattr(module, name, None)
+            if SpecClass:
+                print(f"Using class: {name}")
+                break
+
+        if SpecClass is None:
+            raise AttributeError("No valid class found in module.")
+
+        # Launch shell
+        sdp = SpecClass()
+        
+        # TODO: LIST FUNCTONS AVAILABLE, MAKE LESS GENERIC, MAYBE LET EACH IMPELEMTATION HOLD THESE OR
+        print("\nInstance created as 'sdp'. Entering interactive shell.\n")
+        EXPOSED_METHODS = {
+            "states": "states(t: int) -> list[State]",
+            "actions": "actions(t: int, x: State) -> list[Action] | list[None]",
+            "nextFunc": "nextFunc(t: int, x: State, y: Action) -> dict[State, float]",
+            "reward": "reward(t: int, x: State, y: Action, x_prim: State) -> float",
+            "val": "val(t: int, ps: PolicySequence | list[None], x: State) -> float",
+            "bestExt": "bestExt(t: int, ps_tail: PolicySequence) -> Policy",
+            "worstExt": "worstExt(t: int, ps_tail: PolicySequence | list[None]) -> Policy",
+            "randomExt": "randomExt(t: int, ps_tail: PolicySequence) -> Policy",
+            "bi": "bi(t: int, n: int) -> PolicySequence",
+            "randomPS": "randomPS(t: int, n: int) -> PolicySequence",
+            "best": "best(t: int, n: int, x: State) -> str",
+            "worst": "worst(t: int, n: int, x: State) -> str",
+            "mMeas": "mMeas(t: int, n: int, x: State) -> float"
+        }
+        print("Available functions: ")
+        for sig in EXPOSED_METHODS.values():
+            print(f"  • {sig}")
+
+        print("\nFor more information, run 'help(sdp)' or review documentation. \n")
+        code.interact(local=dict(globals(), **{
+            "sdp": sdp,
+            "State": State
+        }))
+
+    except (IndexError, ValueError):
+        print("Invalid input. Please enter a valid number.")
+    except Exception as e:
+        print(f"Failed: {e}")
