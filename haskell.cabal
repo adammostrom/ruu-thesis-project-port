@@ -13,15 +13,14 @@ common shared-properties
     ghc-options:        -Wall
     default-language:   GHC2021
     build-depends:      base >= 4.14 && < 5,
-                        containers,
-                        QuickCheck,
-                        deepseq,
-                        time 
-
+                       containers,
+                       QuickCheck,
+                       deepseq,
+                       time
 library
     import:            shared-properties
     hs-source-dirs:    haskell/src
-    exposed-modules:   
+    exposed-modules:   Prob
                       SDPTypes
                       SDPCompute
                       GHGCaseParam

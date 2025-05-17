@@ -12,7 +12,7 @@ import qualified Data.Map as Map
 import GHGCase
 import SDPCompute
 import Test.QuickCheck
-
+import Prob
 -- =====================================================================
 -- Arbitrary Instances
 -- =====================================================================
