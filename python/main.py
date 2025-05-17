@@ -64,7 +64,7 @@ if __name__ == "__main__":
         sdp = SpecClass()
         
         # TODO: LIST FUNCTONS AVAILABLE, MAKE LESS GENERIC, MAYBE LET EACH IMPELEMTATION HOLD THESE OR
-        print("\nInstance created as 'sdp'. Entering interactive shell.\n To exit, type 'quit()'. ")
+        print("\nInstance created as 'sdp'. Entering interactive shell.\nTo exit, type 'quit()'. ")
         EXPOSED_METHODS = {
             "states"   : "states(t: int) -> list[State]",
             "actions"  : "actions(t: int, x: State) -> list[Action] | list[None]",
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         for sig in EXPOSED_METHODS.values():
             print(f"  • {sig}")
 
-        print("\nFor more detailed information about the currently loaded sdp, run 'help(sdp)' or review documentation. \n")
+        print("\nRun the functions using the sdp instance: `sdp.runBest(0, 1, State.DHU)`\nFor more detailed information about the currently loaded sdp, run 'help(sdp)' or review documentation. \n")
         code.interact(local=dict(globals(), **{
             "sdp": sdp,
             "State": State

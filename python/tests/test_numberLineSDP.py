@@ -1,7 +1,7 @@
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
-from src.implementations.numberLineSDP import Action, NumberLine, State
+from src.implementations.NumberLineSDP import Action, NumberLine, State
 
 # Initialize an instance of the NumberLine class
 nli  = NumberLine()

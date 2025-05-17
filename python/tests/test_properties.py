@@ -537,7 +537,7 @@ def test_bi_with_invalid_time_step():
     with pytest.raises(ValueError):
         sdp_instance.bi(-1, 1)
         
-
+# Test that bi returns an optimal policy
 @given(st.integers(min_value=0, max_value=5), st.integers(min_value=1, max_value=3))
 def test_bi_policy_optimality(t, n):
     ps = sdp_instance.bi(t, n)

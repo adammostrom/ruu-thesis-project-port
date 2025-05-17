@@ -56,6 +56,12 @@ A simple, educational implementation meant to be followed “by hand” to bette
 Note: To run any implementation, from the root directory, use:
     `> make python-run`
 
+#### How to solve an SDP:
+
+TODO
+
+
+
 #### Creating Your Own SDP
 
 1. Start with `SpecificationTemplate.py` as a base. Rename the default class **Specification** to match your new SDP.
@@ -74,9 +80,47 @@ Note: The test configuration (`testconfig.py`) expects that:
 2. The class name matches the filename, minus the SDP suffix. (e.g. `ExampleSDP.py` must contain class **Example(SDP)**)
 
 ### tests Directory
+Note: `pytest` is required for the tests to work properly. See repository root README or `requirements.txt`.
 
 The test directory contains a set of files "testing suites" that reflect both specific testing of implementations (`test_MatterMost`, `test_numberLineSDP`) as well as a generic test suite that contains a set of property tests which capsulate the intended and required behaviour of a correctly implemented SDP inheriting the model.
 
 For more information on property tests, users are encouraged to navigate to: https://en.wikipedia.org/wiki/Property_testing.
 
-With properties we can assert certain behaviours of a program independent of the specifications. An important property of any SDP is that the *backwards induction* (found in: `/src/theory`) returns an optimal 
+With properties we can assert certain behaviours of a program independent of the specifications. An important property of any SDP is that the *backwards induction* (found in: `/src/theory.py` & `/src/theoryMemoization.py`) returns an optimal sequence if policies. This property is formulated as a test in the `tests/test_properties.py`. 
+
+For each state at time t, we compare the value of following the policy sequence returned by `bi(t, n)` to the value of following an alternative policy where we take a different action at t and follow the same tail. 
+
+If `bi` is optimal, its value must be greater than or equal to the value of any such alternative.
+
+Since `bi` constructs the policy sequence by recursively selecting the best possible action at each time step (with respect to the optimal tail), this test asserts the Bellman optimality condition at each state and time step. If this condition holds for all states, we conclude that `bi` returns an optimal policy sequence.
+
+Since `bi` builds the sequence recursively by always choosing the best local action, the whole sequence is globally optimal.
+
+Computing the best policy sequence using backwards induction.
+```python
+    ps = bi(t, n)
+```
+For each state s at time t, compute the value of following the optimal policy:
+```python
+    V_opt = val(t, ps, s)
+```
+We try every action `a` from a given state and timestep. With this action, we make a new policy sequence and give it `a`
+
+```python
+    for a in actions(t, s):
+        test_policy = [{s: (a, _)}] + ps[1:]
+        V_test = val(t, test_policy, s)
+        assert V_test <= V_opt
+```
+
+This directly tests the condition that no other action at t could yield a higher value — if any V_test > V_opt, then the supposedly optimal policy is not truly optimal.
+
+To run this specific test, type:
+ `> pytest python/tests/test_properties.py::test_bi_policy_optimality`
+
+Users are encouraged to look through the `tests/test_properties.py` and `tests/test_propertiesMemo.py` to explore the different properties an SDP should hold.
+
+
+#### misc
+
+The folder also contains a subfolder `/exhaustive_test_results` which contains a large suite of tests targeting the "surface" or "user-interaction" functions. The folder contains each subfolder for each function, and in respective subfolder a csv file `<func>_test_cases.csv` which contains the results from running the function given a subset of inputs from the original source code written in Idris. These results are then compared using the respective testScripts with the actual function implemented for the `MatterMost` SDP in `python/src/implementations` and comparing the result.

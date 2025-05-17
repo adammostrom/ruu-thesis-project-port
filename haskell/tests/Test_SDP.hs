@@ -103,13 +103,6 @@ prop_biEmptyPolicy =
   forAll genValidIntZero $ \t ->
     bi sdpInstance t 0 == []
 
--- | Test that the sequence produced by `bi` has exactly n elements.
-prop_biCorrectLength :: Property
-prop_biCorrectLength =
-  forAll genValidIntZero $ \t ->
-  forAll genValidInt $ \n ->
-    length (bi sdpInstance t n) == n
-
 
 -- | Test that every element of the sequence produced by `bi` is a valid policy.
 prop_biCorrectElements :: Property
@@ -174,11 +167,6 @@ prop_bestExtPolicyIdempotent s =
         v2 = val sdpInstance t newPs s
     in v1 == v2
 
-{- prop_bestExtMaximizeValue :: State -> Property
-prop_bestExtMaximizeValue s = 
-  forAll genValidInt $ \t ->
-  forAll genValidInt $ \n ->
-    let ps = bi sdpInstance t n -}
         
 -- =====================================================================
 -- Test best
@@ -263,7 +251,6 @@ testBi :: IO ()
 testBi = do
   quickCheck prop_biLength
   quickCheck prop_biEmptyPolicy
-  quickCheck prop_biCorrectLength
   quickCheck prop_biCorrectElements
   quickCheck prop_policyOnlyFeasibleActions
 

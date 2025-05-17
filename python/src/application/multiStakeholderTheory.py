@@ -3,7 +3,7 @@ from enum import Enum, auto
 from typing import TypeAlias
 
 import matplotlib.pyplot as plt
-from src.application.theoryMemorization import SDP
+from src.application.theoryMemoization import SDP
 
 """
 Parent-class that takes as input one "Parent" SDP, which should not have a
