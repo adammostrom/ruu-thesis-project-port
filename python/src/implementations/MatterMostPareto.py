@@ -2,7 +2,7 @@ from enum import Enum, auto
 from typing import TypeAlias
 
 from src.application.multiStakeholderTheory import SDP_Pareto
-from src.application.theoryMemorization import SDP
+from src.application.theoryMemoization import SDP
 
 """
 This file contains a development of the sequential decision problem described in 

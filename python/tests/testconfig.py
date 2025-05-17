@@ -1,43 +1,54 @@
-# test_config.py
+import importlib
 import os
 
+sdp_instance = None
+
+def _list_impl_files():
+    path = 'src/implementations'
+    return sorted([
+        f for f in os.listdir(path)
+        if f.endswith('.py') and 'SDP' in f and '__' not in f and f != 'specificationTemplateSDP.py'
+    ])
 
 def _choose_impl():
-    options = {
-        "1": ("MatterMost", "src.implementations.MatterMostSDP", "MatterMost"),
-        "2": ("NumberLine", "src.implementations.numberLineSDP", "NumberLine"),
-        "3": ("Labyrinth", "src.implementations.LabyrinthSDP", "MediumLabyrinth"),
-    }
+    files = _list_impl_files()
+    if not files:
+        raise RuntimeError("No valid SDP implementations found.")
 
-    print("Choose an SDP implementation to test:")
-    for key, (name, _, _) in options.items():
-        print(f"  {key}: {name}")
-    
-    choice = input("Enter choice [1-3]: ").strip()
-    if choice not in options:
-        raise ValueError("Invalid selection")
+    print(f"\nFound [{len(files)}] implementations. Select one to run:\n")
+    for i, file in enumerate(files):
+        print(f"{i}: {file}")
+    print()
 
-    return options[choice]
-    
+    try:
+        choice = int(input("Enter number: "))
+        filename = files[choice]
+        class_name = filename.replace('.py', '')
+        module_path = f"src.implementations.{class_name}"
+        return module_path, class_name
+    except (IndexError, ValueError):
+        raise ValueError("Invalid input. Please enter a valid number.")
 
-# Only prompt when running as a script or SDP_IMPL not set
+# Determine module and class to load
 if "SDP_IMPL" not in os.environ:
-    name, module_path, class_name = _choose_impl()
+    module_path, class_name = _choose_impl()
 else:
-    name = os.environ["SDP_IMPL"].lower()
-    mapping = {
-        "mattermost": ("src.implementations.MatterMostSDP", "MatterMost"),
-        "numberline": ("src.implementations.numberLineSDP", "NumberLine"),
-        "labyrinth": ("src.implementations.LabyrinthSDP", "MediumLabyrinth"),
-    }
-    if name not in mapping:
-        raise ValueError(f"Unknown SDP_IMPL: {name}")
-    module_path, class_name = mapping[name]
+    class_name = os.environ["SDP_IMPL"]
+    module_path = f"src.implementations.{class_name}"
 
 # Dynamic import
-import importlib
-
 module = importlib.import_module(module_path)
-SelectedSDP = getattr(module, class_name)
 
-sdp_instance = SelectedSDP()
+# Try to get the main class from possible options
+POSSIBLE_CLASSES = ["MatterMost", "MatterMostPareto", "Labyrinth", class_name.strip('SDP')] # Possible to manually add the SDP Classes if naming is an issue.
+SpecClass = None
+for name in POSSIBLE_CLASSES:
+    SpecClass = getattr(module, name, None)
+    if SpecClass:
+        print(f"Using class: {name}")
+        break
+
+if SpecClass is None:
+    raise AttributeError(f"No valid class found in module: {module_path}")
+
+sdp_instance = SpecClass()

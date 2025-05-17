@@ -34,13 +34,12 @@ Python Hypothesis
 # ==================== Test SDP Implementation ====================
 
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
-from src.implementations.MatterMostSDP import MatterMost as module
 
-sdp_instance = module()
+#from tests.testconfig import sdp_instance
 
-#from src.implementations.numberLineSDP import NumberLine as module
-# sdp_instance = module()
+from src.implementations.MatterMostSDP import MatterMost
 
+sdp_instance = MatterMost()
 # ==================== Property Tests: states ====================
 
 
@@ -498,11 +497,11 @@ def test_bi_valid_returns(t, n):
     for p in result:
         for state, action in p.items():
             assert state in sdp_instance.states(t)
-            assert action in sdp_instance.actions(t, state)  # Ensure valid action
+            assert action in sdp_instance.actions(t, state)
             t += 1
 
 
-# Test that that the optimal policy is the same given same input type.
+# Test that the optimal policy is the same given same input type.
 @given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=3))
 def test_bi_consistency(t, n):
     result1 = sdp_instance.bi(t, n)
@@ -537,6 +536,17 @@ def test_bi_with_n_two():
 def test_bi_with_invalid_time_step():
     with pytest.raises(ValueError):
         sdp_instance.bi(-1, 1)
+        
+
+@given(st.integers(min_value=0, max_value=5), st.integers(min_value=1, max_value=3))
+def test_bi_policy_optimality(t, n):
+    ps = sdp_instance.bi(t, n)
+    for state in sdp_instance.states(t):
+        optimal_value = sdp_instance.val(t, ps, state)
+        for action in sdp_instance.actions(t, state):
+            test_policy = [{state: (action, None)}] + ps[1:]
+            test_value = sdp_instance.val(t, test_policy, state)
+            assert test_value <= optimal_value
 
 
 # ==================== Property Tests: randomPS ====================

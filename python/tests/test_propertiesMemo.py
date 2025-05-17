@@ -36,15 +36,7 @@ Python Hypothesis
 
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
 
-from src.implementations.MatterMostSDP import MatterMost as module
-
-sdp_instance = module()
-
-# from src.implementations.numberLineSDP import NumberLine as module
-# sdp_instance = module()
-
-# from src.implementations.labyrinthSDP import MediumLabyrinth as module
-# sdp_instance = module()
+from tests.testconfig import sdp_instance
 
 # from src.implementations.AdvancedStatesSDP import Specification as module
 # decisionValues = np.arange(0, 3, 1)

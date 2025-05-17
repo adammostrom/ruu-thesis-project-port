@@ -7,7 +7,7 @@ import os
 if __name__ == "__main__":
     path = 'src/implementations'
     files = os.listdir(path)
-    files = [file for file in files if "__" not in file and file != 'specificationTemplateSDP.py']
+    files = [file for file in files if "__" not in file and file != 'specificationTemplate.py']
     files.sort()
 
     # TODO, LOOK FOR THE SUBSTRING "SDP"
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         State = getattr(module, "State", None)
 
         # Try to get the main class
-        POSSIBLE_CLASSES = ["MatterMost", "AdvancedStates", "Labyrinth"]
+        POSSIBLE_CLASSES = ["MatterMost", "AdvancedStates", "Labyrinth", selected_file]
         SpecClass = None
         for name in POSSIBLE_CLASSES:
             SpecClass = getattr(module, name, None)
