@@ -24,21 +24,25 @@ If you wish to run the project using local dependencies, these are required:
 - `scipy>=1.15.3`
 
 ### Project Structure
-The project is divided into two paradigms, one **Python** implementation and one **Haskell** implementation. Both paradigms reflect the same level of correctness and validation, and should be considered reflexive translations of each other.
+The project is divided into two paradigms, one **Python** implementation and one **Haskell** implementation. Both paradigms reflect the same level of correctness and validation, and should be considered reflexive translations of each other. Follow the respective READMEs in each subfolder for further information and instructions.
 
 ### How-To-Run
 
 ##### Haskell:
-1. From the root directory, run with cabal:
-`cabal repl`
-2. This opens a GHCI shell. From this shell session, load the module:
-`:l haskell/src/Interface.hs`
-3. From this module, user applicative functions such as `best`, `worst` and `meas` can be run with given inputs, example:
-`runBest 0 1 DHU`
+1. To run the project: 
+`make haskell-run`
+And follow the instructions at the prompt.
+
 See documentation for further specifications on inputs, function theory and edge cases.
+
+For running the tests of the implemented SDPs, run:
+`make haskell-test`
+
 
 ##### Python
 
-1. Navigate to the python directory: `python`
-2. Open a python shell session with the main.py argument: `python3 main.py`
-4. Run the function with input parameters, example: `run_best(0, 1, State.DHU)`
+1. To run the project:
+`make python-run`
+
+
+

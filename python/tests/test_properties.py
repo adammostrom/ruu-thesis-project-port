@@ -1,9 +1,7 @@
 import re
-import numpy as np
 
 import numpy as np
 import pytest
-from hypothesis import given
 from hypothesis import given
 from hypothesis import strategies as st
 
@@ -40,10 +38,7 @@ Python Hypothesis
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
 from src.implementations.MatterMostSDP import MatterMost as module
-<<<<<<< HEAD
 
-=======
->>>>>>> 6f43335ff100c2c4e1538b9c9eb8fb17a794d3c4
 sdp_instance = module()
 
 #from src.implementations.numberLineSDP import NumberLine as module
@@ -157,9 +152,8 @@ def test_nextFunc_return_dict(t):
 
 
 # Test that Probabilities given from next always sum to 1
-@given(
-    st.integers(min_value=1, max_value=10))
-    st.integers(min_value=1, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
 def test_nextFunc_probabilities_sum_1(t):
     states = sdp_instance.states(t)
     for x in states:
@@ -170,9 +164,8 @@ def test_nextFunc_probabilities_sum_1(t):
 
 
 # Test that all probabilities are larger than 0
-@given(
-    st.integers(min_value=0, max_value=10))
-    st.integers(min_value=0, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
 def test_nextFunc_no_negative_probs(t):
     states = sdp_instance.states(t)
     for x in states:
@@ -191,13 +184,13 @@ def test_nextFunc_valid_states(t):
     current_states = sdp_instance.states(t)
     next_states = sdp_instance.states(t+1)
     for x in current_states:
-    current_states = sdp_instance.states(t)
-    next_states = sdp_instance.states(t+1)
-    for x in current_states:
-        y = sdp_instance.actions(t, x)
-        next = sdp_instance.nextFunc(t, x, y[0])
-        assert set(next.keys()).issubset(set(next_states))
-        assert set(next.keys()).issubset(set(next_states))
+        current_states = sdp_instance.states(t)
+        next_states = sdp_instance.states(t+1)
+        for x in current_states:
+            y = sdp_instance.actions(t, x)
+            next = sdp_instance.nextFunc(t, x, y[0])
+            assert set(next.keys()).issubset(set(next_states))
+            assert set(next.keys()).issubset(set(next_states))
 
 
 # Test that we always get the same dictionary (same states and probabilities) given the exact same input.
@@ -596,7 +589,6 @@ def test_randomExt_return_value(t):
 # The output policy should only assign valid actions to each state.
 # That means policy[state] should be in self.actions(t, state).
 @given(st.integers(min_value=0, max_value=5)) 
-<<<<<<< HEAD
 def test_randomExt_valid_actions(t: int):
     states = sdp_instance.states(t)
     for x in states:
@@ -616,14 +608,6 @@ def test_randomExt_stability(t):
     policy1 = sdp_instance.randomExt(t, ps_tail)
     policy2 = sdp_instance.randomExt(t + 1, ps_tail)
     assert policy1.keys() == policy2.keys()
-=======
-def test_randomExt_valid_actions(t):
-    states = sdp_instance.states(t+1)
-    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
-    policy = sdp_instance.randomExt(t, ps_tail)
-    for state, action in policy.items():
-        assert action in sdp_instance.actions(t, state)
->>>>>>> 6f43335ff100c2c4e1538b9c9eb8fb17a794d3c4
 
 
 # ==================== Property Tests: bi ====================

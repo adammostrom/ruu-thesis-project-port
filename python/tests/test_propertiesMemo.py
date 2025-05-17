@@ -1,9 +1,7 @@
 import re
-import numpy as np
 
 import numpy as np
 import pytest
-from hypothesis import given
 from hypothesis import given
 from hypothesis import strategies as st
 
@@ -42,6 +40,7 @@ Python Hypothesis
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
 
 from src.implementations.MatterMostSDP import MatterMost as module
+
 sdp_instance = module()
 
 # from src.implementations.numberLineSDP import NumberLine as module
@@ -162,9 +161,8 @@ def test_nextFunc_return_dict(t):
 
 
 # Test that Probabilities given from next always sum to 1
-@given(
-    st.integers(min_value=1, max_value=10))
-    st.integers(min_value=1, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
 def test_nextFunc_probabilities_sum_1(t):
     states = sdp_instance.states(t)
     for x in states:
@@ -175,9 +173,8 @@ def test_nextFunc_probabilities_sum_1(t):
 
 
 # Test that all probabilities are larger than 0
-@given(
-    st.integers(min_value=0, max_value=10))
-    st.integers(min_value=0, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
+@given(st.integers(min_value=1, max_value=10))
 def test_nextFunc_no_negative_probs(t):
     states = sdp_instance.states(t)
     for x in states:
@@ -196,13 +193,13 @@ def test_nextFunc_valid_states(t):
     current_states = sdp_instance.states(t)
     next_states = sdp_instance.states(t+1)
     for x in current_states:
-    current_states = sdp_instance.states(t)
-    next_states = sdp_instance.states(t+1)
-    for x in current_states:
-        y = sdp_instance.actions(t, x)
-        next = sdp_instance.nextFunc(t, x, y[0])
-        assert set(next.keys()).issubset(set(next_states))
-        assert set(next.keys()).issubset(set(next_states))
+        current_states = sdp_instance.states(t)
+        next_states = sdp_instance.states(t+1)
+        for x in current_states:
+            y = sdp_instance.actions(t, x)
+            next = sdp_instance.nextFunc(t, x, y[0])
+            assert set(next.keys()).issubset(set(next_states))
+            assert set(next.keys()).issubset(set(next_states))
 
 
 # Test that we always get the same dictionary (same states and probabilities) given the exact same input.

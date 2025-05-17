@@ -26,12 +26,8 @@ main = do
 
 ghgcase :: IO ()
 ghgcase = do
-  putStrLn "Running SDP basic tests..."
-  putStrLn "=========================="
   Test_SDP.testAll
 
 advcase :: IO ()
 advcase = do
-  putStrLn "\nRunning advanced state tests..."
-  putStrLn "=============================="
   Test_advcase.testAll

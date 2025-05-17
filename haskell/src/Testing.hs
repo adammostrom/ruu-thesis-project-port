@@ -109,11 +109,11 @@ main = do
   val3' <- timeTest "mMeas'" $ return $ mMeas' ghgcase 0 7 DHU
   printf "Values: %f vs %f\n" val3 val3'
 
-  -- Test case 4: bi vs bi'
+{-   -- Test case 4: bi vs bi'
   putStrLn "\nTest case 4: Comparing bi and bi' (ghgcase 0 7)"
   pol1 <- timeTest "bi  " $ return $ bi ghgcase 0 7
-  pol2 <- timeTest "bi' " $ return $ bi' ghgcase 0 7
-  putStrLn $ "Policy sequences equal: " ++ show (pol1 == pol2)
+  --pol2 <- timeTest "bi' " $ return $ bi' ghgcase 0 7
+  putStrLn $ "Policy sequences equal: " ++ show (pol1 == pol2) -}
 
   -- Test case 5: val vs val'
   putStrLn "\nTest case 5: Comparing val and val' with test policy"

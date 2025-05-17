@@ -2,7 +2,7 @@ HASKELL_DIR = haskell
 PYTHON_DIR  = python
 
 # Targets
-.PHONY: all haskell_clean haskell_build haskell_test run_haskell install_python python-test
+.PHONY: all haskell_clean haskell_build haskell_test haskell-run install_python python-test
 
 # Clean Haskell build artifacts
 haskell-clean:
@@ -15,8 +15,8 @@ haskell-build:
 	cabal build -v2
 
 haskell-run:
-	@echo "Starting cabal"
-	cabal repl -v0
+	@echo "Starting GHCI session..."
+	cabal run -v0; cabal repl -v0
 
 # Run the haskell tests
 haskell-test:
@@ -28,6 +28,6 @@ python-test:
 	cd $(PYTHON_DIR) && pytest -s tests/test_propertiesMemo.py
 
 python-run:
-	@echo "Running Greenhouse Gas implementation..."
+	@echo "Running Python model.."	
 	cd $(PYTHON_DIR) && python3 main.py
 

@@ -9,10 +9,13 @@
 module Test_SDP where
   
 import qualified Data.Map as Map
-import GHGCase
+
 import SDPCompute
 import Test.QuickCheck
 import Prob
+
+-- | Adjust this import based on the SDP to test. 
+import GHGCase as Case
 -- =====================================================================
 -- Arbitrary Instances
 -- =====================================================================
@@ -25,33 +28,20 @@ instance Arbitrary State where
 
 
 -- | Specific implementation to test. Exchange depending on model for testing. 
+
 sdpInstance :: SDP State Action
 sdpInstance   = ghgcase
 sdpGetActions :: [Action]
-sdpGetActions = GHGCase.getActions
+sdpGetActions = Case.getActions
 sdpNext :: Int -> State -> Action -> Prob State
-sdpNext       = GHGCase.next
+sdpNext       = Case.next
 sdpActions :: Int -> State -> [Action]
-sdpActions    = GHGCase.actions
+sdpActions    = Case.actions
 sdpStates :: [State]
-sdpStates     = GHGCase.getStates
+sdpStates     = Case.getStates
 
--- Works for now, could change later to be more formally:
-
-{-
-class SDPModel m where
-  getActions :: m -> State -> [Action]
-  next       :: m -> State -> Action -> State
-  actions    :: m -> [Action]
-  getStates  :: m -> [State]
-
-  instance SDPModel GHGCase where
-  getActions = GHGCase.getActions
-  next       = GHGCase.next
-  actions    = GHGCase.actions
-  getStates  = GHGCase.getStates
-
--}
+name :: String
+name = Case.moduleName
 
 -- =====================================================================
 -- Test val
@@ -72,8 +62,8 @@ prop_valNonNegative x =
     in val ghgcase t policySeq x >= 0
 
 -- | Test that a longer policy sequence is at least as good as the original sequence (geq).
-prop_longerPolicyBetterOrEqual :: Int -> State -> Property
-prop_longerPolicyBetterOrEqual t x =
+prop_longerPolicyBetterOrEqual ::  State -> Property
+prop_longerPolicyBetterOrEqual x =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
     let ps = bi sdpInstance t n
@@ -114,8 +104,8 @@ prop_biEmptyPolicy =
     bi sdpInstance t 0 == []
 
 -- | Test that the sequence produced by `bi` has exactly n elements.
-prop_biCorrectLength :: Int -> Property
-prop_biCorrectLength t =
+prop_biCorrectLength :: Property
+prop_biCorrectLength =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
     length (bi sdpInstance t n) == n
@@ -218,7 +208,7 @@ prop_bestValIsOptimal :: State -> Property
 prop_bestValIsOptimal s =
   forAll genValidInt $ \t ->
   forAll genValidInt $ \n ->
-    let (a, vBest) = best sdpInstance t n s
+    let (_, vBest) = best sdpInstance t n s
         ps = bi sdpInstance (t + 1) (n - 1)
         otherActions = sdpActions t s
         altVals = [val sdpInstance t (Map.singleton s a' : ps) s | a' <- otherActions]
@@ -306,6 +296,7 @@ testmMeas = do
 -- | Run all tests.
 testAll :: IO ()
 testAll = do
+  putStrLn $ "Currently running tests for: " ++ name
   testVal
   testBi
   testBestExt
@@ -331,4 +322,4 @@ genValidIntZero = choose (0, 7)
 
 -- | Generate a valid action for a given state and time.
 genValidAction :: Int -> State -> Gen Action
-genValidAction t x = elements (GHGCase.actions t x)
+genValidAction t x = elements (Case.actions t x)

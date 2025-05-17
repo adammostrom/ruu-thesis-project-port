@@ -33,6 +33,10 @@ data State = DHU | DHC | DLU | DLC | SHU | SHC | SLU | SLC
 ghgcase :: SDP State Action
 ghgcase = SDP reward next actions states
 
+-- | Mostly for user interaction purposes
+moduleName :: String
+moduleName = "GHGCase"
+
 -- | Return all States.
 getStates :: [State]
 getStates = [DHU, DHC, DLU, DLC, SHU, SHC, SLU, SLC]

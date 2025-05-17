@@ -41,6 +41,7 @@ executable haskell
                      Prob
                      SDPCompute
                      SDPTypes
+                     Interface
 
 test-suite tests
     import:          shared-properties

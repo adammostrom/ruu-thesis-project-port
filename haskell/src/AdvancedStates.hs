@@ -75,6 +75,10 @@ drifts action =
 advcase :: SDP State Action
 advcase = SDP reward next actions states
 
+-- | Mostly for user interaction purposes
+moduleName :: String
+moduleName = "AdvancedStates"
+
 getStates :: [State]
 getStates = [State x1 x2 x3 | x1 <- [MaxEcon, MaxClim, Passive], x2 <- [1 .. e], x3 <- [1 .. c]]
 
