@@ -7,7 +7,10 @@ from src.implementations.MatterMostSDP import MatterMost as mmsdp
 from src.implementations.MatterMostSDP import State as basicState
 from src.implementations.MatterMostSDP import State as memoState
 
-#from src.implementations.MatterMostSDP import State
+"""
+Written in order to perform a trivial performance test of the model presented in the paper (see docs) for computational speed comparisons.
+Results written to a csv file. Image 4.1 in the final project essay used this script for time measurement.
+"""
 
 sdp_basic = mmsdp()
 sdp_memo = memosdp()

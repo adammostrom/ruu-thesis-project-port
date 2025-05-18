@@ -29,7 +29,7 @@ The project is divided into two paradigms, one **Python** implementation and one
 ### How-To-Run
 
 ##### Haskell:
-1. To run the project: 
+1. To run the project, from root type: 
 `make haskell-run`
 And follow the instructions at the prompt.
 
@@ -41,8 +41,13 @@ For running the tests of the implemented SDPs, run:
 
 ##### Python
 
-1. To run the project:
+1. To run the project, from root type:
 `make python-run`
 
+And follow the instructions at the prompt.
 
+See documentation for further specifications on inputs, function theory and edge cases.
+
+For running tests, run:
+`make python-test`
 

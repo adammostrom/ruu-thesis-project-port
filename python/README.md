@@ -56,13 +56,13 @@ A simple, educational implementation meant to be followed “by hand” to bette
 Note: To run any implementation, from the root directory, use:
     `> make python-run`
 
-#### How to solve an SDP:
+#### How to solve an SDP case:
 
 TODO
 
 
 
-#### Creating Your Own SDP
+#### Creating Your Own SDP case
 
 1. Start with `SpecificationTemplate.py` as a base. Rename the default class **Specification** to match your new SDP.
 2. Define the relevant State and Action Enums.

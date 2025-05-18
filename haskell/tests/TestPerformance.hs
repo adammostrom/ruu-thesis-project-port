@@ -18,10 +18,11 @@ test_best t n x = best ghgcase t n DHU
 
 main :: IO ()
 main = do
+    putStrLn ("Time measurement is currently available for function -best- ")
     forM_ [1..12] $ \n -> do
         start <- getCPUTime
 
-        let (a, v) = best ghgcase 0 n DHU
+        let (a, v) = best' ghgcase 0 n DHU -- adjust the function
         a `seq` v `seq` return ()  -- force both parts of the tuple
 
         end <- getCPUTime

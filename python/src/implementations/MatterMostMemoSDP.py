@@ -2,7 +2,7 @@ from enum import Enum, auto
 from timeit import default_timer as timer
 
 # from src.application.theory import SDP # To run SDP framework without memoization
-from src.application.theory import SDP
+from src.application.theoryMemoization import SDP
 
 """
 This is a python translation of the SDP described in the article 
@@ -292,9 +292,8 @@ class MatterMost(SDP):
         return 1.0 if x_prim in [State.DHU, State.SHU] else 0.0
 
 
-    
     # Function to timecheck the 
-    def run_best_time(self, t, n, x):
+    def best_time(self, t, n, x):
         start = timer()
         self.best(t, n, x)
         end = timer()
