@@ -30,5 +30,5 @@ python-test:
 
 python-run:
 	@echo "Running Python model.."	
-	PYTHONPATH=. python3 python/main.py
+	python3 python/main.py
 
