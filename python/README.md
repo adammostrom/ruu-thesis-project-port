@@ -17,9 +17,9 @@ The `src directory` contains all the necessary components to run the program. Th
 
 #### application Directory
 
-This directory contains the translation of the main component presented in the *Responsibility Under Uncertainty* research paper, located in `theory.py`. Unlike the original version, this file has been refactored into an abstract class using Python’s `abc module` (see docs). The abstract class is named `SDP` and defines the following required methods: `next`, `reward`, and `states`.
+This directory contains the translation of the main component presented in the *Responsibility Under Uncertainty* research paper, located in `theory.py`. Unlike the original version, this file has been refactored into an abstract class using Python’s `abc module` (see docs). The abstract class is named `SDP` and defines the following required functions: `next`, `reward`, and `states`.
 
-Any new SDP can be implemented by inheriting from the SDP class in `theory.py`or `theoryMemoization.py` (recommended) and correctly defining the required methods. This structure allows the new class to use the computational logic from SDP, while specifying its own behavior for those methods.
+Any new SDP can be implemented by inheriting from the SDP class in `theory.py`or `theoryMemoization.py` (recommended) and correctly defining the required functions. This structure allows the new class to use the computational logic from SDP, while specifying its own behavior for those functions.
 
 **Group 12** has extended the original model by introducing memoization, significantly improving computational performance. This implementation is in `theoryMemoization.py`. New**SDPs can choos**e to inherit from either `theory.py` or `theoryMemoization.py`.
 
@@ -66,7 +66,7 @@ TODO
 
 1. Start with `SpecificationTemplate.py` as a base. Rename the default class **Specification** to match your new SDP.
 2. Define the relevant State and Action Enums.
-3. Implement the required methods: `next`, `reward`, and `states`.
+3. Implement the required functions: `next`, `reward`, and `states`.
 4. Name your file and class appropriately. The file should be named like `ExampleSDP.py`, and the class inside should be named **Example(SDP)**, inheriting from SDP.
 
 To test your implementation, run the test suite via:

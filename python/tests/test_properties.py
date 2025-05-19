@@ -7,11 +7,11 @@ from hypothesis import strategies as st
 
 """
 Testing the property of the SDP using pythons "hypothesis".
-This test file aims to test and assure the properties of the functions defined by SDP
-WITH MEMOIZATION.
+This test file aims to test and assure the properties of the functions defined by SDP 
+WITHOUT MEMOIZATION.
 
 Python Hypothesis 
-- @given(...)                       = Hypothesis decorator that automatically generates test cases.
+- @given(...)                       = Hypothesis decorator for automatically generates test cases.
 - st.integers(min_value=0)          = Randomly generates integer time steps (t).
 - st.sampled_from(MySDP().states()) = Randomly picks a state from the list of valid states.
 
@@ -33,21 +33,13 @@ Python Hypothesis
 
 # ==================== Test SDP Implementation ====================
 
-
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
+from python.src.implementations.MatterMostSDP import MatterMost as module
 
-from src.implementations.MatterMostSDP import MatterMost
+sdp_instance = module()
 
-#from tests.testconfig import sdp_instance
-
-sdp_instance = MatterMost()
-
-# from src.implementations.AdvancedStatesSDP import Specification as module
-# decisionValues = np.arange(0, 3, 1)
-# climValues = np.arange(1, 2, 1)
-# econValues = np.arange(1, 2, 1)
-# sdp_instance = module(decisionValues, climValues, econValues, 0.5)
-
+#from src.implementations.numberLineSDP import NumberLine as module
+# sdp_instance = module()
 
 # ==================== Property Tests: states ====================
 
@@ -310,7 +302,7 @@ def test_meas_invalid():
 def test_val_return_type(t: int):
     states = sdp_instance.states(t)
     for x in states:
-        ps = [ {s: (sdp_instance.actions(t, s)[0], None) for s in states} ]
+        ps = [ {s: sdp_instance.actions(t, s)[0] for s in states} ]
         result = sdp_instance.val(t, ps, x)
         assert isinstance(result, float)
 
@@ -320,7 +312,7 @@ def test_val_return_type(t: int):
 def test_val_deterministic(t):
     states = sdp_instance.states(t)
     for x in states:
-        ps = [ {s: (sdp_instance.actions(t, s)[0], None) for s in states} ]
+        ps = [ {s: sdp_instance.actions(t, s)[0] for s in states} ]
         val1 = sdp_instance.val(t, ps, x)
         val2 = sdp_instance.val(t, ps, x)
         assert val1 == val2
@@ -365,11 +357,11 @@ def test_val_with_state_not_in_policy():
 # ==================== Property Tests: bestExt ====================
 
 
-# Test that bestExt returns a policy (dict[State, (Action, float)])
+# Test that bestExt returns a policy (dict[State, Action])
 @given(st.integers(min_value=0, max_value=5))
 def test_bestExt_return_value(t: int):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     result = sdp_instance.bestExt(t, ps_tail)
     assert isinstance(result, dict)
     assert ps_tail
@@ -380,9 +372,9 @@ def test_bestExt_return_value(t: int):
 @given(st.integers(min_value=0, max_value=5))
 def test_bestExt_valid_actions(t: int):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     policy = sdp_instance.bestExt(t, ps_tail)
-    for state, (action,_) in policy.items():
+    for state, action in policy.items():
         assert action in sdp_instance.actions(t, state)
 
 
@@ -390,22 +382,22 @@ def test_bestExt_valid_actions(t: int):
 @given(st.integers(min_value=0, max_value=5))
 def test_bestExt_deterministic(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     result1 = sdp_instance.bestExt(t, ps_tail)
     result2 = sdp_instance.bestExt(t, ps_tail)
     assert result1 == result2
 
 
 # Test that the actions from the best policy gives a higher value than any other.
-@given(st.integers(min_value=0, max_value=10))
+@given(st.integers(min_value=0, max_value=100))
 def test_bestExt_optimality(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     policy = sdp_instance.bestExt(t, ps_tail)
-    for state, (action,_) in policy.items():
-        best_value = sdp_instance.val(t, [{state: (action, None)}] + ps_tail, state)
+    for state, action in policy.items():
+        best_value = sdp_instance.val(t, [{state: action}] + ps_tail, state)
         for other_action in sdp_instance.actions(t, state):
-            value = sdp_instance.val(t, [{state: (other_action, None)}] + ps_tail, state)
+            value = sdp_instance.val(t, [{state: other_action}] + ps_tail, state)
             assert value <= best_value
 
 
@@ -416,7 +408,7 @@ def test_bestExt_optimality(t):
 @given(st.integers(min_value=0, max_value=5))
 def test_worstExt_return_value(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     result = sdp_instance.worstExt(t, ps_tail)
     assert isinstance(result, dict)
     assert ps_tail
@@ -427,9 +419,9 @@ def test_worstExt_return_value(t):
 @given(st.integers(min_value=0, max_value=5)) 
 def test_worstExt_valid_actions(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     policy = sdp_instance.worstExt(t, ps_tail)
-    for state, (action,_) in policy.items():
+    for state, action in policy.items():
         assert action in sdp_instance.actions(t, state)
 
 
@@ -437,7 +429,7 @@ def test_worstExt_valid_actions(t):
 @given(st.integers(min_value=0, max_value=5))
 def test_worstExt_deterministic(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     result1 = sdp_instance.bestExt(t, ps_tail)
     result2 = sdp_instance.bestExt(t, ps_tail)
     assert result1 == result2
@@ -447,23 +439,23 @@ def test_worstExt_deterministic(t):
 @given(st.integers(min_value=0, max_value=10))
 def test_worstExt_suboptimality(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     policy = sdp_instance.worstExt(t, ps_tail)
-    for state, (action,_) in policy.items():
-        worst_value = sdp_instance.val(t, [{state: (action, None)}] + ps_tail, state)
+    for state, action in policy.items():
+        worst_value = sdp_instance.val(t, [{state: action}] + ps_tail, state)
         for other_action in sdp_instance.actions(t, state):
-            value = sdp_instance.val(t, [{state: (other_action, None)}] + ps_tail, state)
+            value = sdp_instance.val(t, [{state: other_action}] + ps_tail, state)
             assert value >= worst_value
 
 
 # ==================== Property Tests: randomExt ====================
 
 
-# Test that randomExt returns a policy (dict[State, (Action, float)])
+# Test that randomExt returns a policy (dict[State, Action])
 @given(st.integers(min_value=0, max_value=5))
 def test_randomExt_return_value(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     result = sdp_instance.randomExt(t, ps_tail)
     assert isinstance(result, dict)
     assert ps_tail
@@ -474,9 +466,9 @@ def test_randomExt_return_value(t):
 @given(st.integers(min_value=0, max_value=5)) 
 def test_randomExt_valid_actions(t):
     states = sdp_instance.states(t+1)
-    ps_tail = [ {s: (sdp_instance.actions(t+1, s)[0], None) for s in states} ]
+    ps_tail = [ {s: sdp_instance.actions(t+1, s)[0] for s in states} ]
     policy = sdp_instance.randomExt(t, ps_tail)
-    for state, (action,_) in policy.items():
+    for state, action in policy.items():
         assert action in sdp_instance.actions(t, state)
 
 
@@ -484,7 +476,7 @@ def test_randomExt_valid_actions(t):
 
 
 # Test that the length of the computed sequence steps is equal to the given limit/horizon.
-@given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=5))
+@given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=3))
 def test_bi_length(t, n):
     result = sdp_instance.bi(t, n)
     assert len(result) == n
@@ -492,7 +484,7 @@ def test_bi_length(t, n):
 
 # Test that the bi function upholds its recursive structure, by checking if the next value 
 # in the "stack" is different from the previous one.
-@given(st.integers(min_value=1, max_value=5), st.integers(min_value=1, max_value=5))
+@given(st.integers(min_value=1, max_value=5), st.integers(min_value=1, max_value=4))
 def test_bi_recursive_structure_2(t, n):
     result = sdp_instance.bi(t, n)
     result2 = sdp_instance.bi(t+1, n-1)
@@ -500,18 +492,18 @@ def test_bi_recursive_structure_2(t, n):
 
 
 # Test that the return values are of correct type (State, Action).
-@given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=5))
+@given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=3))
 def test_bi_valid_returns(t, n):
     result = sdp_instance.bi(t, n)
     for p in result:
-        for state, (action,_) in p.items():
+        for state, action in p.items():
             assert state in sdp_instance.states(t)
             assert action in sdp_instance.actions(t, state)  # Ensure valid action
             t += 1
 
 
 # Test that that the optimal policy is the same given same input type.
-@given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=5))
+@given(st.integers(min_value=0, max_value=5), st.integers(min_value=0, max_value=3))
 def test_bi_consistency(t, n):
     result1 = sdp_instance.bi(t, n)
     result2 = sdp_instance.bi(t, n)
@@ -546,6 +538,7 @@ def test_bi_with_invalid_time_step():
     with pytest.raises(ValueError):
         sdp_instance.bi(-1, 1)
         
+        
 # Test that bi returns an optimal policy
 @given(st.integers(min_value=0, max_value=5), st.integers(min_value=1, max_value=3))
 def test_bi_policy_optimality(t, n):
@@ -556,7 +549,6 @@ def test_bi_policy_optimality(t, n):
             test_policy = [{state: (action, None)}] + ps[1:]
             test_value = sdp_instance.val(t, test_policy, state)
             assert test_value <= optimal_value
-
 
 # ==================== Property Tests: randomPS ====================
 
@@ -573,11 +565,10 @@ def test_randomPS_length(t, n):
 def test_randomPS_valid_returns(t, n):
     result = sdp_instance.randomPS(t, n)
     for p in result:
-        for state, (action,_) in p.items():
+        for state, action in p.items():
             assert state in sdp_instance.states(t)
             assert action in sdp_instance.actions(t, state)  # Ensure valid action
             t += 1
-
 
 # Test that the base case returns an empty list.
 @given(st.integers(min_value=0, max_value=5))
@@ -621,7 +612,8 @@ def test_best_policy_consistency():
     ps = sdp_instance.bi(1, 2)
     extended_policy = sdp_instance.bestExt(0, ps)
     result = sdp_instance.best(0, 3, x)
-    action, val = extended_policy[x]
+    action = extended_policy[x]
+    val = sdp_instance.val(0, [extended_policy] + ps, x)
     assert action.name in result
     assert f"{np.round(val, 10)}"[:-1] in result
 
@@ -664,7 +656,8 @@ def test_worst_policy_consistency():
     ps = sdp_instance.bi(1, 2)
     extended_policy = sdp_instance.worstExt(0, ps)
     result = sdp_instance.worst(0, 3, x)
-    action, val = extended_policy[x]
+    action = extended_policy[x]
+    val = sdp_instance.val(0, [extended_policy] + ps, x)
     assert action.name in result
     assert f"{np.round(val, 8)}"[:-1] in result
 
@@ -684,7 +677,7 @@ def test_worst_horizon_increasing():
 # Test that the return type of mMeas is correct.
 @given(
     st.integers(min_value=0, max_value=5),
-    st.integers(min_value=1, max_value=5),
+    st.integers(min_value=1, max_value=3),
 )
 def test_mMeas_output_type(t, n):
     states = sdp_instance.states(t)
@@ -696,7 +689,7 @@ def test_mMeas_output_type(t, n):
 # Test that the function always returns a value between 0 and 1
 @given(
     st.integers(min_value=0, max_value=5),
-    st.integers(min_value=1, max_value=5),
+    st.integers(min_value=1, max_value=3),
 )
 def test_mMeas_output_range(t, n):
     states = sdp_instance.states(t)

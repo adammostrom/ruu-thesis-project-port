@@ -1,5 +1,6 @@
 import importlib
 import os
+import subprocess
 
 sdp_instance = None
 
@@ -47,6 +48,9 @@ for name in POSSIBLE_CLASSES:
     if SpecClass:
         print(f"Using class: {name}")
         break
+    
+if SpecClass == "MatterMost":
+        subprocess.run(["pytest", "-s", "-v", "test_properties.py"])
 
 if SpecClass is None:
     raise AttributeError(f"No valid class found in module: {module_path}")

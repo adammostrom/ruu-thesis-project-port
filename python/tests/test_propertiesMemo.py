@@ -36,7 +36,7 @@ Python Hypothesis
 
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
 
-from tests.testconfig import sdp_instance
+from python.tests.testconfig import sdp_instance
 
 # from src.implementations.AdvancedStatesSDP import Specification as module
 # decisionValues = np.arange(0, 3, 1)
