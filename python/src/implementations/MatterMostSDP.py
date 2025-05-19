@@ -2,7 +2,7 @@ from enum import Enum, auto
 from timeit import default_timer as timer
 
 # from src.application.theory import SDP # To run SDP framework without memoization
-from src.application.theory import SDP
+from python.src.application.theory import SDP
 
 """
 This is a python translation of the SDP described in the article 

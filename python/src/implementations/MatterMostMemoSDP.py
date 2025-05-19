@@ -2,7 +2,7 @@ from enum import Enum, auto
 from timeit import default_timer as timer
 
 # from src.application.theory import SDP # To run SDP framework without memoization
-from src.application.theoryMemoization import SDP
+from python.src.application.theoryMemoization import SDP
 
 """
 This is a python translation of the SDP described in the article 
@@ -58,7 +58,7 @@ pU_D = 0.3
 pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
-class MatterMost(SDP):
+class MatterMostMemo(SDP):
 
     # Returns the discount rate for adding rewards from later time steps 
     # (1 means no discounting takes place).

@@ -4,8 +4,9 @@ from enum import Enum
 from typing import TypeAlias
 
 import numpy as np
-from src.utils.errorChecks import ErrorChecks
-from src.utils.mathOperations import MathOperations
+
+from python.src.utils.errorChecks import ErrorChecks
+from python.src.utils.mathOperations import MathOperations
 
 # TODO detail, but the concept is called "memoization" without an "r", thus I suggest you rename the file.
 

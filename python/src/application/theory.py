@@ -5,8 +5,9 @@ from typing import TypeAlias
 
 import matplotlib.pyplot as plt  # TODO why import plotting in the theory file?
 import numpy as np
-from src.utils.errorChecks import ErrorChecks
-from src.utils.mathOperations import MathOperations
+
+from python.src.utils.errorChecks import ErrorChecks
+from python.src.utils.mathOperations import MathOperations
 
 """
 This file contains a python translation of the main functions neccessary to create

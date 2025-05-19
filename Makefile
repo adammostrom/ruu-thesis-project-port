@@ -25,7 +25,7 @@ haskell-test:
 
 python-test:
 	@echo "Launching python test suite"
-	cd $(PYTHON_DIR) && pytest -s tests/test_propertiesMemo.py
+	cd $(PYTHON_DIR) && pytest -s -v tests/run_tests.py
 
 python-run:
 	@echo "Running Python model.."	

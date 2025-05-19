@@ -2,7 +2,8 @@ from enum import Enum
 from typing import TypeAlias
 
 import numpy as np
-from src.application.theoryMemoization import SDP
+
+from python.src.application.theoryMemoization import SDP
 
 """
 The following file shows an implementation of the SDP-framework from "theoryMemorization.py" 
