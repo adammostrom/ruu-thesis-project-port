@@ -21,7 +21,7 @@ This directory contains the translation of the main component presented in the *
 
 Any new SDP can be implemented by inheriting from the SDP class in `theory.py`or `theoryMemoization.py` (recommended) and correctly defining the required functions. This structure allows the new class to use the computational logic from SDP, while specifying its own behavior for those functions.
 
-**Group 12** has extended the original model by introducing memoization, significantly improving computational performance. This implementation is in `theoryMemoization.py`. New**SDPs can choos**e to inherit from either `theory.py` or `theoryMemoization.py`.
+**Group 12** has extended the original model by introducing memoization, significantly improving computational performance. This implementation is in `theoryMemoization.py`. New implementations of the SDP model can inherit from either `theory.py` or `theoryMemoization.py`.
 
 
 TODO: multistakeholder theory
@@ -42,13 +42,13 @@ Math operations separated away from the SDP due to Separation of Concerns. Can b
 This directory includes the “MatterMost” implementation, as originally published in the *Responsibility Under Uncertainty* paper, as well as other implementations developed by **Group 12**:
 
 **AdvancedStates**
-A new approach to state management. (TODO: expand description)
+A new approach to state management. TODO: expand description
 
 **Labyrinth**
 A visual introduction to SDPs, where sequential decision-making is illustrated using mazes solved by the model.
 
 **MatterMostPareto**
-A Pareto-optimized implementation. (TODO: expand description)
+A Pareto-optimized implementation. TODO: expand description
 
 **NumberLine**
 A simple, educational implementation meant to be followed “by hand” to better understand step-by-step SDP computations.

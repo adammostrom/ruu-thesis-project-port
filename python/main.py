@@ -1,11 +1,20 @@
 import code
 import importlib
 import os
+import sys
 
 # TODO: CREATE SPECIAL CASE FOR ADVANCED STATE AND ASK FOR MORE INPUTS.
 
+
+
+# Adjust this to point to the root of your project (where 'python' folder lives)
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
+
 if __name__ == "__main__":
-    path = 'src/implementations'
+    path = 'python/src/implementations'
     files = os.listdir(path)
     files = [file for file in files if "__" not in file and file != 'specificationTemplate.py']
     files.sort()
@@ -49,7 +58,7 @@ if __name__ == "__main__":
         State = getattr(module, "State", None)
 
         # Try to get the main class
-        POSSIBLE_CLASSES = ["MatterMost", "AdvancedStates", "Labyrinth", selected_file]
+        POSSIBLE_CLASSES = ["MatterMost","MatterMostMemo", "AdvancedStates", "Labyrinth", selected_file]
         SpecClass = None
         for name in POSSIBLE_CLASSES:
             SpecClass = getattr(module, name, None)
@@ -62,29 +71,8 @@ if __name__ == "__main__":
 
         # Launch shell
         sdp = SpecClass()
-        
-        # TODO: LIST FUNCTONS AVAILABLE, MAKE LESS GENERIC, MAYBE LET EACH IMPELEMTATION HOLD THESE OR
-        print("\nInstance created as 'sdp'. Entering interactive shell.\nTo exit, type 'quit()'. ")
-        EXPOSED_METHODS = {
-            "states    ": "states(t: int) -> list[State]",
-            "actions   ": "actions(t: int, x: State) -> list[Action] | list[None]",
-            "nextFunc  ": "nextFunc(t: int, x: State, y: Action) -> dict[State, float]",
-            "reward    ": "reward(t: int, x: State, y: Action, x_prim: State) -> float",
-            "val       ": "val(t: int, ps: PolicySequence | list[None], x: State) -> float",
-            "bestExt   ": "bestExt(t: int, ps_tail: PolicySequence) -> Policy",
-            "worstExt  ": "worstExt(t: int, ps_tail: PolicySequence | list[None]) -> Policy",
-            "randomExt ": "randomExt(t: int, ps_tail: PolicySequence) -> Policy",
-            "bi        ": "bi(t: int, n: int) -> PolicySequence",
-            "randomPS  ": "randomPS(t: int, n: int) -> PolicySequence",
-            "best      ": "best(t: int, n: int, x: State) -> str",
-            "worst     ": "worst(t: int, n: int, x: State) -> str",
-            "mMeas     ": "mMeas(t: int, n: int, x: State) -> float",
-            "best_time ": "best(t: int, n: int, x: State) -> float"
-        }
-        print("Available functions: ")
-        for sig in EXPOSED_METHODS.values():
-            print(f"  • {sig}")
-
+            
+        print("For a list of functions, run 'sdp.public_api()' \n")
         print("\nRun the functions using the sdp instance: `sdp.best(0, 1, State.DHU)`\nFor more detailed information about the currently loaded sdp, run 'help(sdp)' or review documentation. \n")
         code.interact(local=dict(globals(), **{
             "sdp": sdp,

@@ -16,7 +16,8 @@ haskell-build:
 
 haskell-run:
 	@echo "Starting GHCI session..."
-	cabal run -v0; cabal repl -v0
+	cabal run -v0 && cabal repl -v0
+
 
 # Run the haskell tests
 haskell-test:
@@ -29,5 +30,5 @@ python-test:
 
 python-run:
 	@echo "Running Python model.."	
-	cd $(PYTHON_DIR) && python3 main.py
+	PYTHONPATH=. python3 python/main.py
 

@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import TypeAlias
 
-import matplotlib.pyplot as plt  # TODO why import plotting in the theory file?
 import numpy as np
 
 from python.src.utils.errorChecks import ErrorChecks
