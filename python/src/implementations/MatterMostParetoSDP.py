@@ -1,8 +1,8 @@
 from enum import Enum, auto
 from typing import TypeAlias
 
-from src.application.multiStakeholderTheory import SDP_Pareto
-from src.application.theoryMemoization import SDP
+from python.src.application.multiStakeholderTheory import SDP_Pareto
+from python.src.application.theoryMemoization import SDP
 
 """
 This file contains a development of the sequential decision problem described in 
@@ -65,7 +65,7 @@ pC_S = 1.0 - pU_S
 pC_D = 1.0 - pU_D
 
 
-class MatterMost(SDP):
+class MatterMostPareto(SDP):
 
     @property
     def zero(self) -> float:
@@ -288,19 +288,19 @@ class MatterMost(SDP):
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
         pass
 
-class ClimateMatterMost(MatterMost):
+class ClimateMatterMost(MatterMostPareto):
     # Value is added for transitioning into states which are not comitted to
     # severe future climate change.
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
         return 1.0 if x_prim in [State.DHU, State.DLU, State.SHU, State.SLU] else 0.0
 
-class EconomyMatterMost(MatterMost):
+class EconomyMatterMost(MatterMostPareto):
     # Value is added for transitioning into states which do not have low economic output.
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
         return 1.0 if x_prim in [State.DHU, State.DHC, State.SHU, State.SHC] else 0.0
 
 
-SDP_Parent = MatterMost()
+SDP_Parent = MatterMostPareto()
 SDP1 = ClimateMatterMost()
 SDP2 = EconomyMatterMost()
 

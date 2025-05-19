@@ -2,7 +2,7 @@ from enum import Enum, auto
 from typing import TypeAlias
 
 # from src.application.theory import SDP # To run SDP framework without memoization
-from src.application.theoryMemoization import SDP
+from python.src.application.theoryMemoization import SDP
 
 """
 Specification of a number line SDP with no explicit limit on the number of states.

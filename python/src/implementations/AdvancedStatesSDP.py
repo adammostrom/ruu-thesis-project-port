@@ -3,7 +3,8 @@ from typing import TypeAlias
 
 import numpy as np
 from scipy.stats import norm
-from src.application.theoryMemoization import SDP
+
+from python.src.application.theoryMemoization import SDP
 
 """
 Declare all states of the SDP below:

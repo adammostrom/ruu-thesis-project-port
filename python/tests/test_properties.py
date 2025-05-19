@@ -38,8 +38,6 @@ from python.src.implementations.MatterMostSDP import MatterMost as module
 
 sdp_instance = module()
 
-#from src.implementations.numberLineSDP import NumberLine as module
-# sdp_instance = module()
 
 # ==================== Property Tests: states ====================
 

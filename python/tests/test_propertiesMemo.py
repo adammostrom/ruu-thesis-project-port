@@ -5,6 +5,8 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
+import python.src.implementations.AdvancedStatesSDP
+
 """
 Testing the property of the SDP using pythons "hypothesis".
 This test file aims to test and assure the properties of the functions defined by SDP
@@ -37,13 +39,6 @@ Python Hypothesis
  # Can be switched with the other commented SDP:s, as long as they in turn use the SDP framework WITHOUT memoization.
 
 from python.tests.testconfig import sdp_instance
-
-# from src.implementations.AdvancedStatesSDP import Specification as module
-# decisionValues = np.arange(0, 3, 1)
-# climValues = np.arange(1, 2, 1)
-# econValues = np.arange(1, 2, 1)
-# sdp_instance = module(decisionValues, climValues, econValues, 0.5)
-
 
 # ==================== Property Tests: states ====================
 
