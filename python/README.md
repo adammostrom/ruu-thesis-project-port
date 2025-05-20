@@ -17,7 +17,16 @@ The `src directory` contains all the necessary components to run the program. Th
 
 #### application Directory
 
-This directory contains the translation of the main component presented in the *Responsibility Under Uncertainty* research paper, located in `theory.py`. Unlike the original version, this file has been refactored into an abstract class using Python’s `abc module` (see docs). The abstract class is named `SDP` and defines the following required functions: `next`, `reward`, and `states`.
+This directory contains the translation of the main component presented in the *Responsibility Under Uncertainty* research paper, located in `theory.py`. Unlike the original version, this file has been refactored into an abstract class using Python’s `abc module` (see docs). The abstract class is named `SDP` and defines the following required functions: `next`, `reward`, `actions` and `states`.
+
+    - `reward` 
+    TODO
+    - `next`
+    TODO
+    - `actions`
+    TODO
+    - `states`
+    TODO
 
 Any new SDP can be implemented by inheriting from the SDP class in `theory.py`or `theoryMemoization.py` (recommended) and correctly defining the required functions. This structure allows the new class to use the computational logic from SDP, while specifying its own behavior for those functions.
 
@@ -41,14 +50,15 @@ Math operations separated away from the SDP due to Separation of Concerns. Can b
 
 This directory includes the “MatterMost” implementation, as originally published in the *Responsibility Under Uncertainty* paper, as well as other implementations developed by **Group 12**:
 
+TODO: expand description
 **AdvancedStates**
-A new approach to state management. TODO: expand description
+A new approach to state management. 
 
 **Labyrinth**
 A visual introduction to SDPs, where sequential decision-making is illustrated using mazes solved by the model.
-
+ TODO: expand description
 **MatterMostPareto**
-A Pareto-optimized implementation. TODO: expand description
+A Pareto-optimized implementation.
 
 **NumberLine**
 A simple, educational implementation meant to be followed “by hand” to better understand step-by-step SDP computations.

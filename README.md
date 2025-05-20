@@ -28,6 +28,8 @@ The project is divided into two paradigms, one **Python** implementation and one
 
 ### How-To-Run
 
+For a detailed overview of how to build using docker and / or install dependencies. See `/docs/manual.pdf`
+
 ##### Haskell:
 1. To run the project, from root type: 
 `make haskell-run`
