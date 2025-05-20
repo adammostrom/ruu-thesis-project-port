@@ -58,9 +58,11 @@ runBi = bi sdpInstance
 runVal :: Int -> PolicySeq State Action -> State -> Val
 runVal = val sdpInstance
 
---bestExt :: (Show x, Ord x) => SDP x y -> Int -> PolicySeq x y -> Policy x y
 runBestExt :: Int -> PolicySeq State Action -> Policy State Action
 runBestExt = bestExt sdpInstance
+
+runWorstExt :: Int -> PolicySeq State Action -> Policy State Action
+runWorstExt = bestExt sdpInstance
 
 -- Benchmarking utilities
 timeRun :: (Int -> Int -> State -> (Action, Val)) -> Int -> Int -> State -> IO ()

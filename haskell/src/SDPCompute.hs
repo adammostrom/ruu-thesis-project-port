@@ -190,14 +190,13 @@ best' sdp t n x
 --    Compares best and worst achievable values to determine state significance.
 --    Non-memoized version.
 mMeas :: (Show x, Ord x) => SDP x y -> Int -> Int -> x -> Double
+mMeas _ _ 0 _ = 0.0
 mMeas sdp t n x =
-  let ps = bi sdp t n
-      bestVal = val sdp t ps x
-      psTail = tail ps
-      worstPolicy
-        | null ps = error "mMeas needs at least one step but got an empty PolicySeq"
-        | otherwise = worstExt sdp t psTail
-      worstVal = val sdp t (worstPolicy : psTail) x
+  let ps = bi sdp (t + 1) (n - 1)
+      bestPol = bestExt sdp t ps
+      bestVal = val sdp t (bestPol : ps) x
+      worstPol = worstExt sdp t ps
+      worstVal = val sdp t (worstPol : ps) x
    in if bestVal == 0 && worstVal == 0
         then 0
         else (bestVal - worstVal) / bestVal
