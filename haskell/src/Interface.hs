@@ -48,6 +48,20 @@ runBestMemo = best' sdpInstance
 runmMeas :: Int -> Int -> State -> Val
 runmMeas = mMeas sdpInstance
 
+
+runmMeasMemo :: Int -> Int -> State -> Val
+runmMeasMemo = mMeas' sdpInstance
+
+runBi :: Int -> Int -> PolicySeq State Action
+runBi = bi sdpInstance
+
+runVal :: Int -> PolicySeq State Action -> State -> Val
+runVal = val sdpInstance
+
+--bestExt :: (Show x, Ord x) => SDP x y -> Int -> PolicySeq x y -> Policy x y
+runBestExt :: Int -> PolicySeq State Action -> Policy State Action
+runBestExt = bestExt sdpInstance
+
 -- Benchmarking utilities
 timeRun :: (Int -> Int -> State -> (Action, Val)) -> Int -> Int -> State -> IO ()
 timeRun runFunction timeStep horizon state = do

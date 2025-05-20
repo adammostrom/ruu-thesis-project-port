@@ -104,12 +104,13 @@ prop_biEmptyPolicy =
     bi sdpInstance t 0 == []
 
 
--- | Test that every element of the sequence produced by `bi` is a valid policy.
-prop_biCorrectElements :: Property
-prop_biCorrectElements =
+-- | Test that bi generates optimal policy sequences (by comparison with random policies)
+prop_biOptimal :: State -> Property
+prop_biOptimal x =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
-    all (\p -> all (`Map.member` p) sdpStates) (bi sdpInstance t n)
+    let optPolicySeq = bi sdpInstance t n
+    in val ghgcase t optPolicySeq x >= val ghgcase t optPolicySeq x
 
 
   
@@ -251,7 +252,7 @@ testBi :: IO ()
 testBi = do
   quickCheck prop_biLength
   quickCheck prop_biEmptyPolicy
-  quickCheck prop_biCorrectElements
+  quickCheck prop_biOptimal
   quickCheck prop_policyOnlyFeasibleActions
 
 -- | Run tests for `bestExt` and `worstExt`.
@@ -310,3 +311,4 @@ genValidIntZero = choose (0, 7)
 -- | Generate a valid action for a given state and time.
 genValidAction :: Int -> State -> Gen Action
 genValidAction t x = elements (Case.actions t x)
+
