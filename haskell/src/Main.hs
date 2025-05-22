@@ -1,5 +1,17 @@
 module Main where
 
+import Data.List (isInfixOf)
+import System.FilePath ((</>))
+import System.Directory (listDirectory)
+
+
+getFullPaths :: IO [FilePath]
+getFullPaths = do
+  let dir = "haskell/src"
+  names <- listDirectory dir
+  return (filter (isInfixOf "Interface") names)
+
+
 main :: IO ()
 main = do
   putStrLn "\n=================================================================================================="
@@ -16,6 +28,7 @@ main = do
 
   putStrLn "How to Get Started:"
   putStrLn "----------------------------------------------------------------------------------"
+  putStrLn head getFullPaths
   putStrLn "  1. Load the desired interface module in GHCi:"
   putStrLn "       > :l haskell/src/Interface.hs           -- For the standard GHG case"
   putStrLn "       > :l haskell/src/InterfaceADV.hs        -- For the advanced state model\n"

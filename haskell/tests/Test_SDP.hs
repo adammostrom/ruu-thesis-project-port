@@ -103,23 +103,22 @@ prop_biEmptyPolicy =
   forAll genValidIntZero $ \t ->
     bi sdpInstance t 0 == []
 
-
--- | Test that bi generates optimal policy sequences (by comparison with random policies)
-prop_biOptimal :: State -> Property
-prop_biOptimal x =
-  forAll genValidIntZero $ \t ->
-  forAll genValidInt $ \n ->
-    let optPolicySeq = bi sdpInstance t n
-    in val ghgcase t optPolicySeq x >= val ghgcase t optPolicySeq x
-
-
-  
 -- | All actions in the policy are feasible for the given state.
 prop_policyOnlyFeasibleActions :: Property
 prop_policyOnlyFeasibleActions =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
     all (\p -> all (\(s, a) -> a `elem` sdpActions t s) (Map.toList p)) (bi sdpInstance t n)
+
+-- | Test that bi generates optimal policy sequences (by comparison with random policies)
+prop_biOptimal ::State -> Property
+prop_biOptimal x = 
+  forAll genValidIntZero $ \t ->
+  forAll genValidInt $ \n ->
+  forAll (genPs t n) $ \ps' ->
+    let ps = bi sdpInstance t n
+    in val sdpInstance t ps' x <= val sdpInstance t ps x
+
 
 -- =====================================================================
 -- Test bestExt, worstExt
@@ -298,7 +297,7 @@ testAll = do
 
 -- | Run `bi` with the given parameters.
 runBi :: Int -> Int -> PolicySeq State Action
-runBi t n = bi ghgcase t n
+runBi t n = bi sdpInstance t n
 
 -- | Generate a valid integer in the range [1, 7].
 genValidInt :: Gen Int
@@ -312,3 +311,6 @@ genValidIntZero = choose (0, 7)
 genValidAction :: Int -> State -> Gen Action
 genValidAction t x = elements (Case.actions t x)
 
+genPs :: Int -> Int -> Gen (PolicySeq State Action)
+genPs t n = do
+  return $ bi sdpInstance t n

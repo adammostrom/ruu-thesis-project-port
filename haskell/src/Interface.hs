@@ -4,6 +4,9 @@ import Data.Time.Clock
 import SDPCompute
 import GHGCase
 
+
+
+-- $ map (dir </>) names
 -- Load SDP instance
 sdpInstance :: SDP State Action
 sdpInstance = ghgcase

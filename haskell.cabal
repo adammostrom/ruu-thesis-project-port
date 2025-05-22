@@ -16,7 +16,9 @@ common shared-properties
                        containers,
                        QuickCheck,
                        deepseq,
-                       time
+                       time,
+                       filepath,
+                       directory
 library
     import:            shared-properties
     hs-source-dirs:    haskell/src

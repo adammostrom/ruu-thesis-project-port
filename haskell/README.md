@@ -32,7 +32,7 @@ These two modules binds the model as presented and translated from the original 
 
 In the `SDPCompute` module, users will also find the functions that implement memoization, which significantly improves the computational performance of the calculations and constitutes a development of the model.
 
-##### Uncertainty Monad
+##### Uncertainty Monad (Prob)
 
 The `Prob` monad models discrete uncertainty by wrapping possible outcomes with their probabilities. It allows to chain and compose stochastic computations using standard monadic operations (>>=), making it easy to build probabilistic logic. 
 
@@ -42,3 +42,11 @@ It represents  everything as a list of (value, probability) pairs.
 
 These modules outlines the original SDP case presented in the research paper *Responsibility Under Uncertainty*. The GHGCaseParams contains the paramters for different probabilites as presented in the paper. The GHGCase defines the functions `next`, `reward`, `states`, `actions` by using the datatype `SDP` found in `SDPTypes`.
 
+##### AdvancedStates, AdvancedProb
+
+These modules constitutes the development effort of group 12 by expanding upon the case presented by the authors of the *Responsibility Under Uncertainty* paper. 
+The model uses discretized state spaces with configurable granularity (e,c) and implements probabilistic transitions using a normal distribution model with action-dependent drifts.
+
+##### Interface Modules
+
+These modules are the entry point for the different implementations, as of 2025-05-22 this serves as the interaction space. Any new implementation is encouraged to either copy the Interface.hs module and swap out the sdp to interact with, or implement their own. Preferably naming it with "InterfaceXY" where XY is up to the author, this way the entry point (Main) can find the modules.
