@@ -60,5 +60,9 @@ if class_name == "AdvancedStatesSDP":
     climValues = np.arange(1, 2, 1)
     econValues = np.arange(1, 2, 1)
     sdp_instance = SpecClass(decisionValues, climValues, econValues, 0.5)
+    
+    
+elif class_name == "LabyrinthSDP":
+    
 else:
     sdp_instance = SpecClass()
