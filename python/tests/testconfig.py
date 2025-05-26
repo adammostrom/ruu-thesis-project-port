@@ -1,5 +1,6 @@
 import importlib
 import os
+import subprocess
 
 import numpy as np
 
@@ -54,6 +55,16 @@ for name in possible_classnames:
 if SpecClass is None:
     raise AttributeError(f"No valid class found in module: {module_path}")
 
+
+if class_name == "MatterMost":
+    
+    test_file = {
+        "MatterMost": "tests/test_properties.py"
+    }.get(type(sdp_instance).__name__)
+
+    subprocess.run(["pytest", "-s", "-v", test_file])
+
+
 # Special-case instantiation
 if class_name == "AdvancedStatesSDP":
     decisionValues = np.arange(0, 3, 1)
@@ -63,6 +74,6 @@ if class_name == "AdvancedStatesSDP":
     
     
 elif class_name == "LabyrinthSDP":
-    
+    print("Do something")
 else:
     sdp_instance = SpecClass()

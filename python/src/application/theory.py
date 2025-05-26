@@ -40,9 +40,11 @@ class SDP(ABC, ErrorChecks, MathOperations):
         pass # Problem-specific, needs to be implemented by user in specification.
 
     # TODO This discount rate is reasonable to have, but not included as a separate concept in our SDP papers, but instead "baked into" the add method. Remove or explain the connection.
-    # TODO The add method seems to not be explained. Perhaps it is explained elsewhere? (in MathOperations?) Do you mean that add(x,y) = x + discount*y (Aha - I found it in mathOperations.py)
     # TODO I think zero and add "belong together" - thus I suggest you move zero to MathOperations but leave a comment somewhere in here to mention them both (and perhaps discount).
 
+    # I think we should keep both of the discount here as we states that it is a baseline and discount rate based on the implementation.
+    # If we place it in mathOperations we have to define the functions with a fixed value, unless any new implementation pass an argument to these functions, which seems to be unnecessary. /AM
+    
     # Returns all states 'x' that are valid in time step 't'.
     @abstractmethod
     def states(self, t: int) -> list[State]:
@@ -50,7 +52,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Returns all actions 'y' that are valid in time step 't' and state 'x'.
     @abstractmethod
-    def actions(self, t: int, x: State) -> list[Action] | list[None]: # TODO why use list[None] as an error case? I think an empty list would be more natural if there are truly no actions available.
+    def actions(self, t: int, x: State) -> list[Action]: # TODO why use list[None] as an error case? I think an empty list would be more natural if there are truly no actions available. -Done / AM
         pass # Problem-specific, to be implemented by user in specification.
 
     # Given a time step 't', a state 'x' and an action 'y', returns the
@@ -67,8 +69,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Given a time step 't', a policy sequence 'ps' and a state 'x',
     # returns the value of this policy sequence.
-    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean?
-    def val(self, t: int, ps: PolicySequence | list[None], x: State) -> float:
+    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean? - Done / AM
+    def val(self, t: int, ps: PolicySequence, x: State) -> float:
         self.check_t(t)
         self.check_ps(ps)
         self.check_x(t, x)
@@ -78,9 +80,10 @@ class SDP(ABC, ErrorChecks, MathOperations):
         if len(ps) == 0:
             return value
 
-        # TODO why return zero here? I think raising a ValueError or similar would be better.
+        # TODO why return zero here? I think raising a ValueError or similar would be better. -Done /AM
         if x not in ps[0]:
-            return value
+            #return value
+            raise ValueError(f"State: '{x}' not found in '{ps[0]}'.")
 
         y = ps[0][x]
         m_next = self.safe_nextFunc(t, x, y)
@@ -93,23 +96,28 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Given a time step 't' and a policy sequence 'ps_tail', returns
     # the best (front) extension to this policy sequence.
-    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean?
-    def bestExt(self, t: int, ps_tail: PolicySequence | list[None]) -> Policy:
+    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean? - Done /AM
+    def bestExt(self, t: int, ps_tail: PolicySequence) -> Policy:
         self.check_t(t)
-        self.check_ps_tail(ps_tail)  # TODO why a special "check" for a ps_tail?
+        self.check_ps_tail(ps_tail)  # TODO why a special "check" for a ps_tail? - To make sure ps_tail is correct structure. (PolicySeq = [policy] or [],  policy = {} ) /Am
 
         policy = dict()
         for state in self.states(t):
             best_value = -np.inf
-            best_action = None
+            best_action = None 
             for action in self.actions(t, state):
                 # TODO Add a comment explaining that, although p is only a "partial" policy, val will still succeed because it is only called on state.
+                # 'p' is a partial policy (defined for one state only), but this is valid because
+                # 'val' is only called on this state. The value function only requires the policy
+                # to be defined for the current state.
                 p = {state: action}
                 value = self.val(t, [p] + ps_tail, state)
                 if value >= best_value:
                     best_value = value
                     best_action = action
             # TODO note that best_action may still be None in case the list of actions was empty (or raise ValueError or similar)
+            # In the MatterMost version we have a case where we can return a list of [None] for when we have no actions, while in Haskell we would return a list of "Unit", meaning that we will never get an empty list of actions.
+
             policy[state] = best_action
         return policy
 
@@ -142,9 +150,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
         for state in self.states(t):
             actions = self.actions(t, state)
             random_action = random.choice(actions)
-            p = {state: random_action}
-            # TODO why compute a value and then not use it?
-            value = self.val(t, [p] + ps_tail, state)
+            # TODO why compute a value and then not use it? - Removed line / AM
             policy[state] = random_action
         return policy
 
@@ -180,8 +186,8 @@ class SDP(ABC, ErrorChecks, MathOperations):
         ps = self.bi(t + 1, n - 1)
         p = self.bestExt(t, ps)
         b = p[x]
-        if(b == None):
-            b = "No Action"   # TODO I think keeping None (or raising an exception) is better than inserting a "random string"
+        #if(b == None):  - Removed this all together /AM
+            #b = "No Action"   # TODO I think keeping None (or raising an exception) is better than inserting a "random string"
         vb = self.val(t, [p] + ps, x)
         return f"Horizon, best, value : {n}, {b}, {vb}"
 

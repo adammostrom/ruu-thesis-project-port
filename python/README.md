@@ -19,14 +19,18 @@ The `src directory` contains all the necessary components to run the program. Th
 
 This directory contains the translation of the main component presented in the *Responsibility Under Uncertainty* research paper, located in `theory.py`. Unlike the original version, this file has been refactored into an abstract class using Python’s `abc module` (see docs). The abstract class is named `SDP` and defines the following required functions: `next`, `reward`, `actions` and `states`.
 
+
     - `reward` 
-    TODO
+    The reward function yields the reward of selecting control `y` in state `x` when the next state is `x'`. Controls (or Actions) can represent resource usage or decisions, and rewards may depend on both the current and next state. In this implementation, rewards are combined using standard addition, but other combination rules can be used to model different applications.
+
     - `next`
-    TODO
+    The transition function `next` maps a state `x` and control `y` at decision step `t` to dict[State, float] datastructure,  representing the possible next states, where the float number is the probability. 
+
     - `actions`
-    TODO
+    The actions function returns available actions as each timestep given a state. 
+
     - `states`
-    TODO
+    The states function returns a list of all available states for a given timestep.
 
 Any new SDP can be implemented by inheriting from the SDP class in `theory.py`or `theoryMemoization.py` (recommended) and correctly defining the required functions. This structure allows the new class to use the computational logic from SDP, while specifying its own behavior for those functions.
 
@@ -50,15 +54,15 @@ Math operations separated away from the SDP due to Separation of Concerns. Can b
 
 This directory includes the “MatterMost” implementation, as originally published in the *Responsibility Under Uncertainty* paper, as well as other implementations developed by **Group 12**:
 
-TODO: expand description
+
 **AdvancedStates**
-A new approach to state management. 
+The model uses discretized state spaces with configurable granularity (e,c) and implements probabilistic transitions using a normal distribution model with action-dependent drifts.
 
 **Labyrinth**
 A visual introduction to SDPs, where sequential decision-making is illustrated using mazes solved by the model.
- TODO: expand description
+
 **MatterMostPareto**
-A Pareto-optimized implementation.
+Contains the SDP presented as MatterMost in the original paper, but with a "split" SDP with different reward function. The reward results are compared to find a pareto front
 
 **NumberLine**
 A simple, educational implementation meant to be followed “by hand” to better understand step-by-step SDP computations.
@@ -66,9 +70,27 @@ A simple, educational implementation meant to be followed “by hand” to bette
 Note: To run any implementation, from the root directory, use:
     `> make python-run`
 
+
 #### How to solve an SDP case:
 
-TODO
+There are several cases implemented in the python module. By running `make python run` you will be prompted to select an implementation.
+For the Matter Most case, the documentation and the original source code paper contains extensive information on the case and is recommended to read if the user wants more in depth knowledge about the case and how the code computes the SDP.
+
+For users that want to explore by doing, we recommend running the Matter Most gase, and consider the scenarios:
+
+What is the best decision in DHU (Transition = Delayed, Economy = High, Trajectory towards Climate Crisis = Uncommited).
+
+`best(0, 1, State.DHU)`
+
+Which returns "Delay, 0.468".
+
+This means that the expected value of deciding to delay a green transition is ~47%.
+
+TODO:
+
+
+
+
 
 
 
