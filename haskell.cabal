@@ -31,7 +31,8 @@ library
                       Testing_AdvancedStates
                       AdvancedProb
                       AdvancedStates
-                      Interface
+                      InterfaceGHGCase
+                      InterfaceAdvancedStates
 
 executable haskell
     import:           shared-properties
@@ -43,7 +44,8 @@ executable haskell
                      Prob
                      SDPCompute
                      SDPTypes
-                     Interface
+                     InterfaceGHGCase
+                     InterfaceAdvancedStates
 
 test-suite tests
     import:          shared-properties

@@ -303,23 +303,24 @@ class MatterMost(SDP):
         return(results)
     
     
-    def public_api(self):
-        EXPOSED_METHODS = {
-            "states    ": "states(t: int) -> list[State]",
-            "actions   ": "actions(t: int, x: State) -> list[Action] | list[None]",
-            "nextFunc  ": "nextFunc(t: int, x: State, y: Action) -> dict[State, float]",
-            "reward    ": "reward(t: int, x: State, y: Action, x_prim: State) -> float",
-            "val       ": "val(t: int, ps: PolicySequence | list[None], x: State) -> float",
-            "bestExt   ": "bestExt(t: int, ps_tail: PolicySequence) -> Policy",
-            "worstExt  ": "worstExt(t: int, ps_tail: PolicySequence | list[None]) -> Policy",
-            "randomExt ": "randomExt(t: int, ps_tail: PolicySequence) -> Policy",
-            "bi        ": "bi(t: int, n: int) -> PolicySequence",
-            "randomPS  ": "randomPS(t: int, n: int) -> PolicySequence",
-            "best      ": "best(t: int, n: int, x: State) -> str",
-            "worst     ": "worst(t: int, n: int, x: State) -> str",
-            "mMeas     ": "mMeas(t: int, n: int, x: State) -> float",
-            "best_time ": "best(t: int, n: int, x: State) -> float"
+    def help(self):
+        exposed_methods = {
+            "states":     "states(t: int) -> list[State]",
+            "actions":    "actions(t: int, x: State) -> list[Action] | list[None]",
+            "nextFunc":   "nextFunc(t: int, x: State, y: Action) -> dict[State, float]",
+            "reward":     "reward(t: int, x: State, y: Action, x_prim: State) -> float",
+            "val":        "val(t: int, ps: PolicySequence | list[None], x: State) -> float",
+            "bestExt":    "bestExt(t: int, ps_tail: PolicySequence) -> Policy",
+            "worstExt":   "worstExt(t: int, ps_tail: PolicySequence | list[None]) -> Policy",
+            "randomExt":  "randomExt(t: int, ps_tail: PolicySequence) -> Policy",
+            "bi":         "bi(t: int, n: int) -> PolicySequence",
+            "randomPS":   "randomPS(t: int, n: int) -> PolicySequence",
+            "best":       "best(t: int, n: int, x: State) -> str",
+            "worst":      "worst(t: int, n: int, x: State) -> str",
+            "mMeas":      "mMeas(t: int, n: int, x: State) -> float",
+            "best_time":  "best_time(t: int, n: int, x: State) -> float"
         }
-        print("Available functions: ")
-        for sig in EXPOSED_METHODS.values():
-            print(f"  • {sig}")
+
+        print("Available functions:")
+        for name in sorted(exposed_methods):
+            print(f"  • {exposed_methods[name]}")

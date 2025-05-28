@@ -49,4 +49,10 @@ The model uses discretized state spaces with configurable granularity (e,c) and 
 
 ##### Interface Modules
 
-These modules are the entry point for the different implementations, as of 2025-05-22 this serves as the interaction space. Any new implementation is encouraged to either copy the Interface.hs module and swap out the sdp to interact with, or implement their own. Preferably naming it with "InterfaceXY" where XY is up to the author, this way the entry point (Main) can find the modules.
+These modules are the entry point for the different implementations, as of 2025-05-22 this serves as the interaction space. Any new implementation is encouraged to either copy the `Interface.hs` module and swap out the sdp to interact with, or implement their own. Preferably naming it with "InterfaceXY" where XY is up to the author, this way the entry point (Main) can find the modules.
+
+**InterfaceGHGCase**
+
+
+**InterfaceAdvancedStates**
+

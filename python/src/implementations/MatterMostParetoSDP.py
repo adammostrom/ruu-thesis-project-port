@@ -287,6 +287,32 @@ class MatterMostPareto(SDP):
 
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> int:
         pass
+    
+    
+    def help(self):
+        EXPOSED_METHODS = {
+            "states    ": "states(t: int) -> list[State]",
+            "actions   ": "actions(t: int, x: State) -> list[Action] | list[None]",
+            "nextFunc  ": "nextFunc(t: int, x: State, y: Action | None) -> dict[State, float]",
+            "reward    ": "reward(t: int, x: State, y: Action, x_prim: State) -> float"
+        }
+
+        print("MatterMostPareto SDP module")
+        print("This module models a multi-objective Sequential Decision Problem (SDP) based on climate and economic concerns.")
+        print("\nAvailable functions:")
+        for name, sig in EXPOSED_METHODS.items():
+            print(f"  • {sig}")
+
+        print("\nReward variations:")
+        print("  • ClimateMatterMost.reward: rewards transitions that avoid climate commitment.")
+        print("  • EconomyMatterMost.reward: rewards transitions that avoid low economic output.")
+
+        print("\nUse with:")
+        print("  • SDP_Parent   : shared structure (transition model)")
+        print("  • SDP1         : instance optimizing climate outcomes")
+        print("  • SDP2         : instance optimizing economic outcomes")
+        print("  • Pareto       : SDP_Pareto(SDP_Parent, [SDP1, SDP2]) computes Pareto front.")
+
 
 class ClimateMatterMost(MatterMostPareto):
     # Value is added for transitioning into states which are not comitted to

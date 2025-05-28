@@ -78,20 +78,29 @@ For the Matter Most case, the documentation and the original source code paper c
 
 For users that want to explore by doing, we recommend running the Matter Most gase, and consider the scenarios:
 
-What is the best decision in DHU (Transition = Delayed, Economy = High, Trajectory towards Climate Crisis = Uncommited).
+Run the program:
+From the root folder, type:
+
+`make python-run`
+
+You’ll get a prompt to select an SDP implementation (e.g., MatterMost, NumberLine, Labyrinth).
+
+Pick a scenario & state:
+For example, in MatterMost, try:
 
 `best(0, 1, State.DHU)`
 
-Which returns "Delay, 0.468".
+This asks: “What’s the best action at time 0 with horizon 1 in state DHU?”
 
-This means that the expected value of deciding to delay a green transition is ~47%.
+Understand output:
+Example output: "Delay, 0.468" means delaying the green transition has an expected reward of 0.468.
 
-TODO:
+Explore time horizons:
+Run for different horizons (1 to N) to see how optimal decisions change over time:
 
+`bests(0, [1..8], State.DHU)`
 
-
-
-
+Usually, longer horizons favor starting transition, shorter favor delay.
 
 
 #### Creating Your Own SDP case

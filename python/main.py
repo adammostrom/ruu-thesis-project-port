@@ -3,24 +3,20 @@ import importlib
 import os
 import sys
 
-# TODO: CREATE SPECIAL CASE FOR ADVANCED STATE AND ASK FOR MORE INPUTS.
-
-
-
-# Automatically add project root to sys.path
+# Add project root to sys.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 
 if __name__ == "__main__":
     path = 'python/src/implementations'
-    files = os.listdir(path)
-    files = [file for file in files if "__" not in file and file != 'specificationTemplate.py']
+    files = [f for f in os.listdir(path) if "__" not in f and f != 'specificationTemplate.py']
     files.sort()
 
-    # TODO, LOOK FOR THE SUBSTRING "SDP"
-    files_index = [(i, file) for i, file in enumerate(files)]
+    # Filter files containing "SDP" substring (optional)
+    files = [f for f in files if "SDP" in f]
 
-    print("\nFound [", len(files), "] implementations. Select numerator from the list to run.\n")
+    files_index = list(enumerate(files))
+
+    print(f"\nFound [{len(files)}] SDP implementations. Select number from list to run.\n")
     for i, file in files_index:
         print(f"{i}: {file}")
     print()
@@ -29,34 +25,24 @@ if __name__ == "__main__":
         choice = int(input("Enter number: "))
         selected_file = files_index[choice][1].replace('.py', '')
         module_path = f"{path.replace('/', '.')}.{selected_file}"
-
         module = importlib.import_module(module_path)
-        
-        # TODO: TAKE INPUT PARAMETERS FOR THE ADVANCED STATE
+
+        # Handle advanced state special input
         if selected_file == 'AdvancedStatesSDP':
-            print("Advanced State requires further arguments: ")
-            
-            
+            print("AdvancedStatesSDP requires extra initialization parameters.")
+            # Example: ask for parameter 'param1' and 'param2'
+            param1 = input("Enter param1 (int): ")
+            param2 = input("Enter param2 (str): ")
+            try:
+                param1 = int(param1)
+            except ValueError:
+                print("Invalid param1, should be int. Exiting.")
+                sys.exit(1)
+        else:
+            param1 = param2 = None
 
-        # TODO: MAKE MORE INTERACTIVE FOR USERS IN LABYRINTH, MAYBE EASIER FUNCTIONS THAT TAKES INPUTS AND MAKES THE LOOP ETC.
-        if selected_file == 'LabyrinthSDP':
-            SpecClass = getattr(module, "SmallLabyrinthDet", None)
-            State = getattr(module, "State", None)
-            sdp = SpecClass()
-            print("\nInstance created as 'sdp'. Entering interactive shell...\n")
-
-            code.interact(local=dict(globals(), **{
-                "sdp": sdp,
-                "State": State
-            }))
-                
-        
-
-        # Replace your class-loading block with this:
-        State = getattr(module, "State", None)
-
-        # Try to get the main class
-        POSSIBLE_CLASSES = ["MatterMost","MatterMostMemo", "AdvancedStates", "Labyrinth", selected_file]
+        # Look for main class to instantiate
+        POSSIBLE_CLASSES = ["MatterMost", "MatterMostMemo", "AdvancedStates", "Labyrinth", "NumberLine", "MatterMostPareto", selected_file]
         SpecClass = None
         for name in POSSIBLE_CLASSES:
             SpecClass = getattr(module, name, None)
@@ -67,15 +53,28 @@ if __name__ == "__main__":
         if SpecClass is None:
             raise AttributeError("No valid class found in module.")
 
-        # Launch shell
-        sdp = SpecClass()
-            
-        print("For a list of functions, run 'sdp.public_api()' \n")
-        print("\nRun the functions using the sdp instance: `sdp.best(0, 1, State.DHU)`\nFor more detailed information about the currently loaded sdp, run 'help(sdp)' or review documentation. \n")
-        code.interact(local=dict(globals(), **{
-            "sdp": sdp,
-            "State": State
-        }))
+        # Instantiate with parameters if advanced
+        if selected_file == 'AdvancedStatesSDP':
+            sdp = SpecClass(param1, param2)  # Customize constructor args as needed
+        else:
+            sdp = SpecClass()
+
+        State = getattr(module, "State", None)
+
+        print("\nInstance created as 'sdp'. For a list of functions, run 'sdp.help()'")
+        print("Enter `help(sdp)` for detailed info or run commands interactively.\n")
+
+        # If LabyrinthSDP, special interactive shell with State
+        if selected_file == 'LabyrinthSDP':
+            SpecClassLabyrinth = getattr(module, "SmallLabyrinthDet", None)
+            if SpecClassLabyrinth:
+                sdp = SpecClassLabyrinth()
+                State = getattr(module, "State", None)
+                print("Using SmallLabyrinthDet instance as 'sdp'. Starting interactive shell...\n")
+                code.interact(local={"sdp": sdp, "State": State})
+                sys.exit(0)
+
+        code.interact(local={"sdp": sdp, "State": State})
 
     except (IndexError, ValueError):
         print("Invalid input. Please enter a valid number.")

@@ -79,14 +79,11 @@ class SDP(ABC, ErrorChecks, MathOperations):
         M_vals = list()
         if len(ps) == 0:
             return value
-        # TODO Minor: p = ps[0] is a useful name from here on, and perhaps also ps_tail = ps[1:] - Done /AM
         p = ps[0]
         ps_tail = ps[1:]
         if x not in p:  
             return value
         y = p[x][0]
-        # TODO I would expect a check if value = ps[0][x][1] is not None, if so, return value?
-        # TODO In any case, a comment or two to explain what is assumed would be nice - Done /AM
         
         # If value for x_prim at t+1 is known, we use it; else we compute recursively.
         if p[x][1] is not None:
@@ -94,7 +91,6 @@ class SDP(ABC, ErrorChecks, MathOperations):
         m_next = self.safe_nextFunc(t, x, y)
         for x_prim, pr in m_next.items():
             reward = self.safe_reward(t, x, y, x_prim)
-            # TODO There is some moderately complex reasoning hiding behind the following cases. Please explain it.
             # For each possible next state x_prim:
             # - Compute reward for transitioning from x to x_prim via y.
             # - If only one step left, total value is just reward.

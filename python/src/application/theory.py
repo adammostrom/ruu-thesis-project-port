@@ -52,7 +52,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Returns all actions 'y' that are valid in time step 't' and state 'x'.
     @abstractmethod
-    def actions(self, t: int, x: State) -> list[Action]: # TODO why use list[None] as an error case? I think an empty list would be more natural if there are truly no actions available. -Done / AM
+    def actions(self, t: int, x: State) -> list[Action]: 
         pass # Problem-specific, to be implemented by user in specification.
 
     # Given a time step 't', a state 'x' and an action 'y', returns the
@@ -69,7 +69,6 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Given a time step 't', a policy sequence 'ps' and a state 'x',
     # returns the value of this policy sequence.
-    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean? - Done / AM
     def val(self, t: int, ps: PolicySequence, x: State) -> float:
         self.check_t(t)
         self.check_ps(ps)
@@ -80,9 +79,7 @@ class SDP(ABC, ErrorChecks, MathOperations):
         if len(ps) == 0:
             return value
 
-        # TODO why return zero here? I think raising a ValueError or similar would be better. -Done /AM
         if x not in ps[0]:
-            #return value
             raise ValueError(f"State: '{x}' not found in '{ps[0]}'.")
 
         y = ps[0][x]
@@ -96,17 +93,15 @@ class SDP(ABC, ErrorChecks, MathOperations):
 
     # Given a time step 't' and a policy sequence 'ps_tail', returns
     # the best (front) extension to this policy sequence.
-    # TODO why allow a list[None] instead of a policy sequence? What is that supposed to mean? - Done /AM
     def bestExt(self, t: int, ps_tail: PolicySequence) -> Policy:
         self.check_t(t)
-        self.check_ps_tail(ps_tail)  # TODO why a special "check" for a ps_tail? - To make sure ps_tail is correct structure. (PolicySeq = [policy] or [],  policy = {} ) /Am
+        self.check_ps_tail(ps_tail) 
 
         policy = dict()
         for state in self.states(t):
             best_value = -np.inf
             best_action = None 
             for action in self.actions(t, state):
-                # TODO Add a comment explaining that, although p is only a "partial" policy, val will still succeed because it is only called on state.
                 # 'p' is a partial policy (defined for one state only), but this is valid because
                 # 'val' is only called on this state. The value function only requires the policy
                 # to be defined for the current state.
@@ -150,7 +145,6 @@ class SDP(ABC, ErrorChecks, MathOperations):
         for state in self.states(t):
             actions = self.actions(t, state)
             random_action = random.choice(actions)
-            # TODO why compute a value and then not use it? - Removed line / AM
             policy[state] = random_action
         return policy
 
@@ -186,8 +180,6 @@ class SDP(ABC, ErrorChecks, MathOperations):
         ps = self.bi(t + 1, n - 1)
         p = self.bestExt(t, ps)
         b = p[x]
-        #if(b == None):  - Removed this all together /AM
-            #b = "No Action"   # TODO I think keeping None (or raising an exception) is better than inserting a "random string"
         vb = self.val(t, [p] + ps, x)
         return f"Horizon, best, value : {n}, {b}, {vb}"
 

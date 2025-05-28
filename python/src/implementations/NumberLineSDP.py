@@ -74,6 +74,34 @@ class NumberLine(SDP):
 
     def reward(self, t: int, x: State, y: Action, x_prim: State) -> float:
         return float(x_prim)
+    
+    def help(self):
+        EXPOSED_METHODS = {
+            "states    ": "states(t: int) -> list[State]",
+            "actions   ": "actions(t: int, x: State) -> list[Action] | list[None]",
+            "nextFunc  ": "nextFunc(t: int, x: State, y: Action) -> dict[State, float]",
+            "reward    ": "reward(t: int, x: State, y: Action, x_prim: State) -> float"
+        }
+
+        print("NumberLine SDP module")
+        print("This module defines a simple stochastic dynamic program on an infinite number line.")
+        print("States are integers (as strings), actions move left/right/stay, and rewards depend on the resulting state.\n")
+
+        print("Available functions:")
+        for name, sig in EXPOSED_METHODS.items():
+            print(f"  • {sig}")
+
+        print("\nReward interpretation:")
+        print("  • Reward is equal to the resulting state (as float).")
+        print("    Higher-numbered states yield higher rewards.\n")
+
+        print("Use with:")
+        print("  • SDP1 : instance of NumberLine for immediate use or testing.\n")
+
+        print("Notes:")
+        print("  • States are strings: e.g., '0', '-1', '2'")
+        print("  • Must start in state '0' at t = 0")
+        print("  • At time t, valid states are between -t-1 and t+1 inclusive")
 
 
 

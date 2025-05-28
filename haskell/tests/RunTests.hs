@@ -5,29 +5,26 @@
 -- License     : MIT
 -- Stability   : experimental
 -- Portability : POSIX
---
--- Available implementations:
---     - GHGCase: Basic tests for the SDP module.
---     - AdvancedStates: Advanced state tests.
 module Main where
 
-import Test_SDP
-import Test_advcase
+import qualified Test_SDP as TSDP
+import qualified Test_advcase as TADV
+
+tests :: [(String, IO ())]
+tests =
+  [ ("GHGCase - Basic tests for the SDP module", TSDP.testAll)
+  , ("AdvancedStates - Advanced state tests", TADV.testAll)
+  ]
 
 main :: IO ()
 main = do
-  putStrLn "Available implementations to test: \n 0. GHGCase \n 1. AdvancedStates "
+  putStrLn "Available implementations to test:"
+  mapM_ (\(i, (desc, _)) -> putStrLn $ " " ++ show i ++ ". " ++ desc) (zip [0..] tests)
+
+  putStrLn "\nEnter the number of the test to run:"
   input <- getLine
 
-  case input of
-    "0" -> do ghgcase
-    "1" -> do advcase
-    _ -> putStrLn "No module for that number"
-
-ghgcase :: IO ()
-ghgcase = do
-  Test_SDP.testAll
-
-advcase :: IO ()
-advcase = do
-  Test_advcase.testAll
+  let maybeIndex = reads input :: [(Int, String)]
+  case maybeIndex of
+    [(n, _)] | n >= 0 && n < length tests -> snd (tests !! n)
+    _ -> putStrLn "Invalid selection. Please enter a valid number."

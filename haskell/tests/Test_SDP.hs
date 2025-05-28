@@ -234,6 +234,17 @@ prop_nextDeterministic x =
         d1 = unzip $ unProb (sdpNext t x s)
     in fst d0 == fst d1 && snd d0 == snd d1
 
+
+-- =====================================================================
+-- Test actions
+-- =====================================================================
+
+-- | the set of valid controls in any state has to be non-empty,  
+prop_actionsNotEmpty :: State -> Property
+prop_actionsNotEmpty x = 
+  forAll genValidInt $ \t ->
+    length (Case.actions t x) >= 1 
+
 -- =====================================================================
 -- Test Runners
 -- =====================================================================
