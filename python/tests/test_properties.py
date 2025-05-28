@@ -345,11 +345,14 @@ def test_val_with_state_not_in_policy():
     states = sdp_instance.states(0)
     x1 = states[0]
     x2 = states[1]
+    if x1 == x2:
+        return  # trivial, skip
+
     actions = sdp_instance.actions(0, x1)
     for y in actions:
         ps = [{x1: y}]
-        result = sdp_instance.val(0, ps, x2)
-        assert result == sdp_instance.zero
+        with pytest.raises(ValueError, match="not found"):
+            sdp_instance.val(0, ps, x2)
 
 
 # ==================== Property Tests: bestExt ====================
@@ -544,7 +547,7 @@ def test_bi_policy_optimality(t, n):
     for state in sdp_instance.states(t):
         optimal_value = sdp_instance.val(t, ps, state)
         for action in sdp_instance.actions(t, state):
-            test_policy = [{state: (action, None)}] + ps[1:]
+            test_policy = [{state: action}] + ps[1:]  
             test_value = sdp_instance.val(t, test_policy, state)
             assert test_value <= optimal_value
 
