@@ -39,12 +39,6 @@ class SDP(ABC, ErrorChecks, MathOperations):
     def discountRate(self) -> float:
         pass # Problem-specific, needs to be implemented by user in specification.
 
-    # TODO This discount rate is reasonable to have, but not included as a separate concept in our SDP papers, but instead "baked into" the add method. Remove or explain the connection.
-    # TODO I think zero and add "belong together" - thus I suggest you move zero to MathOperations but leave a comment somewhere in here to mention them both (and perhaps discount).
-
-    # I think we should keep both of the discount here as we states that it is a baseline and discount rate based on the implementation.
-    # If we place it in mathOperations we have to define the functions with a fixed value, unless any new implementation pass an argument to these functions, which seems to be unnecessary. /AM
-    
     # Returns all states 'x' that are valid in time step 't'.
     @abstractmethod
     def states(self, t: int) -> list[State]:
@@ -110,9 +104,6 @@ class SDP(ABC, ErrorChecks, MathOperations):
                 if value >= best_value:
                     best_value = value
                     best_action = action
-            # TODO note that best_action may still be None in case the list of actions was empty (or raise ValueError or similar)
-            # In the MatterMost version we have a case where we can return a list of [None] for when we have no actions, while in Haskell we would return a list of "Unit", meaning that we will never get an empty list of actions.
-
             policy[state] = best_action
         return policy
 

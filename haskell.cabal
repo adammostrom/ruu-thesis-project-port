@@ -27,8 +27,6 @@ library
                       SDPCompute
                       GHGCaseParam
                       GHGCase
-                      Testing
-                      Testing_AdvancedStates
                       AdvancedProb
                       AdvancedStates
                       InterfaceGHGCase
@@ -53,6 +51,8 @@ test-suite tests
     main-is:        RunTests.hs
     other-modules:  Test_advcase
                     Test_SDP
+                    Testing
+                    Testing_AdvancedStates
     hs-source-dirs: haskell/tests
     build-depends:  haskell
 

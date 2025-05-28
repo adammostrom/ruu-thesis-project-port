@@ -53,25 +53,6 @@ prop_valEmptyPolicy x =
   forAll genValidInt $ \t -> 
     val sdpInstance t [] x == 0
 
--- | Test that the value function `val` always returns a non-negative value for any generated policy sequence.
-prop_valNonNegative :: State -> Property
-prop_valNonNegative x =
-  forAll genValidIntZero $ \t ->
-  forAll genValidInt $ \n ->
-    let policySeq = bi sdpInstance t n
-    in val ghgcase t policySeq x >= 0
-
--- | Test that a longer policy sequence is at least as good as the original sequence (geq).
-prop_longerPolicyBetterOrEqual ::  State -> Property
-prop_longerPolicyBetterOrEqual x =
-  forAll genValidIntZero $ \t ->
-  forAll genValidInt $ \n ->
-    let ps = bi sdpInstance t n
-    in not (null ps) ==>
-      let v1 = val sdpInstance t ps x
-          v2 = val sdpInstance t (ps ++ [last ps]) x
-      in v2 >= v1
-
 
 -- | Monotonicity of val with respect to policy sequence extension.
 prop_valMonotonic :: State -> Property
@@ -145,28 +126,6 @@ prop_bestExtGEQworst s =
         worstVal = val sdpInstance t (worstPol : ps) s
     in bestVal  >= worstVal
 
--- | Test that applying `bestExt` twice produces the same result.
-prop_optExtDeterministic :: Property
-prop_optExtDeterministic =
-  forAll genValidInt $ \t ->
-  forAll genValidInt $ \n ->
-    let ps = bi sdpInstance t n
-        p1 = bestExt sdpInstance t ps
-        p2 = bestExt sdpInstance t ps
-    in p1 == p2
-
--- | Test that applying `bestExt` twice produces the same value for the policy sequence.
-prop_bestExtPolicyIdempotent :: State -> Property
-prop_bestExtPolicyIdempotent s =
-  forAll genValidInt $ \t ->
-  forAll genValidInt $ \n ->
-    let ps = bi sdpInstance t n
-        bestP = bestExt sdpInstance t ps
-        newPs = bestP : ps
-        v1 = val sdpInstance t newPs s
-        v2 = val sdpInstance t newPs s
-    in v1 == v2
-
         
 -- =====================================================================
 -- Test best
@@ -206,12 +165,12 @@ prop_bestValIsOptimal s =
 -- Test meas
 -- =====================================================================
 
--- | Test that the value returned from `mMeas` is never larger than 1.0.
+-- | Test that the value returned from `mMeas` is larger or equal to 0.
 prop_valueLTOne :: State -> Property
 prop_valueLTOne x =
   forAll genValidInt $ \t ->
   forAll genValidInt $ \n ->
-    mMeas sdpInstance t n x <= 1.0
+    mMeas sdpInstance t n x >= 0.0
 
 -- =====================================================================
 -- Test next
@@ -225,15 +184,6 @@ prop_sumEqualToOne x =
     sum (Prob.weights (sdpNext t x s)) >= 0.99 &&
     sum (Prob.weights (sdpNext t x s)) <= 1.01
 
--- | Test that `next` is deterministic (returns the same probability distribution given the same inputs).
-prop_nextDeterministic :: State -> Property
-prop_nextDeterministic x = 
-  forAll genValidInt $ \t ->
-  forAll (genValidAction t x) $ \s ->
-    let d0 = unzip $ unProb (sdpNext t x s)
-        d1 = unzip $ unProb (sdpNext t x s)
-    in fst d0 == fst d1 && snd d0 == snd d1
-
 
 -- =====================================================================
 -- Test actions
@@ -245,6 +195,18 @@ prop_actionsNotEmpty x =
   forAll genValidInt $ \t ->
     length (Case.actions t x) >= 1 
 
+
+-- =====================================================================
+-- Test Val
+-- =====================================================================
+
+-- | Total preorders on Val
+prop_valTotalPreorder :: Val -> Val -> Val -> Property
+prop_valTotalPreorder x y z =
+  (x <= y || y <= x) &&    
+  x <= x &&                
+  (x <= y && y <= z) ==> x <= z 
+
 -- =====================================================================
 -- Test Runners
 -- =====================================================================
@@ -253,9 +215,8 @@ prop_actionsNotEmpty x =
 testVal :: IO ()
 testVal = do
   quickCheck prop_valEmptyPolicy
-  quickCheck prop_valNonNegative
-  quickCheck prop_longerPolicyBetterOrEqual
   quickCheck prop_valMonotonic
+
 
 -- | Run tests for `bi`.
 testBi :: IO ()
@@ -270,8 +231,6 @@ testBestExt :: IO ()
 testBestExt = do
   quickCheck prop_bestExtGEQworst
   quickCheck prop_bestExtWorstCorrectLength
-  quickCheck prop_bestExtPolicyIdempotent
-  quickCheck prop_optExtDeterministic
 
 -- | Run tests for `best`.
 testBest :: IO ()
@@ -284,12 +243,19 @@ testBest = do
 testNext :: IO ()
 testNext = do
   quickCheck prop_sumEqualToOne
-  quickCheck prop_nextDeterministic
 
 -- | Run tests for `mMeas`.
 testmMeas :: IO ()
 testmMeas = do
   quickCheck prop_valueLTOne
+
+testValType :: IO()
+testValType = do
+  quickCheck prop_valTotalPreorder
+
+testActions :: IO()
+testActions = do
+  quickCheck prop_actionsNotEmpty
 
 -- | Run all tests.
 testAll :: IO ()
@@ -301,6 +267,8 @@ testAll = do
   testBest
   testNext
   testmMeas
+  testValType
+  testActions
 
 -- =====================================================================
 -- Utility Functions

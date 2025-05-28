@@ -37,8 +37,9 @@ Any new SDP can be implemented by inheriting from the SDP class in `theory.py`or
 **Group 12** has extended the original model by introducing memoization, significantly improving computational performance. This implementation is in `theoryMemoization.py`. New implementations of the SDP model can inherit from either `theory.py` or `theoryMemoization.py`.
 
 
-TODO: multistakeholder theory
+**Multistakeholder Theory:**
 
+This module defines a framework for generating and analyzing multi-objective policies in Stochastic Dynamic Programming (SDP). It assumes you have a parent SDP (with defined dynamics but no reward) and multiple children SDPs, each adding its own reward function. The idea is to generate random policy sequences that are consistent across children in terms of state-action choices but differ in value due to different rewards.
 
 #### utils Directory
 The utils directory contains components used by the SDP, mainly:
@@ -73,7 +74,7 @@ Note: To run any implementation, from the root directory, use:
 
 #### How to solve an SDP case:
 
-There are several cases implemented in the python module. By running `make python run` you will be prompted to select an implementation.
+There are several cases implemented in the python module. By running `make python-run` you will be prompted to select an implementation.
 For the Matter Most case, the documentation and the original source code paper contains extensive information on the case and is recommended to read if the user wants more in depth knowledge about the case and how the code computes the SDP.
 
 For users that want to explore by doing, we recommend running the Matter Most gase, and consider the scenarios:
@@ -98,10 +99,15 @@ Example output: "Delay, 0.468" means delaying the green transition has an expect
 Explore time horizons:
 Run for different horizons (1 to N) to see how optimal decisions change over time:
 
-`bests(0, [1..8], State.DHU)`
+Example:
+
+`best(0, 8, State.DHU)`
 
 Usually, longer horizons favor starting transition, shorter favor delay.
 
+Using the memoization version, users can input a much higher horizon than originally presented.
+
+We recommend reading the documentation to understand what the functions does and how to interpret them, while exploring and experimenting with the framework.
 
 #### Creating Your Own SDP case
 
@@ -127,7 +133,7 @@ The test directory contains a set of files "testing suites" that reflect both sp
 
 For more information on property tests, users are encouraged to navigate to: https://en.wikipedia.org/wiki/Property_testing.
 
-With properties we can assert certain behaviours of a program independent of the specifications. An important property of any SDP is that the *backwards induction* (found in: `/src/theory.py` & `/src/theoryMemoization.py`) returns an optimal sequence if policies. This property is formulated as a test in the `tests/test_properties.py`. 
+With properties we can assert certain behaviours of a program independent of the specifications. An important property of any SDP is that the *backwards induction* (found in: `/src/theory.py` & `/src/theoryMemoization.py`) returns an optimal sequence for policies. This property is formulated as a test in the `tests/test_properties.py`. 
 
 For each state at time t, we compare the value of following the policy sequence returned by `bi(t, n)` to the value of following an alternative policy where we take a different action at t and follow the same tail. 
 
@@ -136,6 +142,8 @@ If `bi` is optimal, its value must be greater than or equal to the value of any 
 Since `bi` constructs the policy sequence by recursively selecting the best possible action at each time step (with respect to the optimal tail), this test asserts the Bellman optimality condition at each state and time step. If this condition holds for all states, we conclude that `bi` returns an optimal policy sequence.
 
 Since `bi` builds the sequence recursively by always choosing the best local action, the whole sequence is globally optimal.
+
+..........................................................................................
 
 Computing the best policy sequence using backwards induction.
 ```python

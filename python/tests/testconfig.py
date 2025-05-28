@@ -52,6 +52,7 @@ for name in possible_classnames:
         print(f"Using class: {name}")
         break
 
+
 if SpecClass is None:
     raise AttributeError(f"No valid class found in module: {module_path}")
 
@@ -73,7 +74,5 @@ if class_name == "AdvancedStatesSDP":
     sdp_instance = SpecClass(decisionValues, climValues, econValues, 0.5)
     
     
-elif class_name == "LabyrinthSDP":
-    print("Do something")
 else:
     sdp_instance = SpecClass()

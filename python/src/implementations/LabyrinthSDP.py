@@ -193,19 +193,19 @@ smallMazeDet = SmallLabyrinthDet()
 Below are some sanity checks to demonstrate this first maze implementation.
 """
 
-# print("Best choises in small deterministic maze:")
-# bests = []
-# for i in range(1, 8):
-#     bests.append(smallMazeDet.best(0, i, (1, 1)))
+""" print("Best choises in small deterministic maze:")
+bests = []
+for i in range(1, 8):
+    bests.append(smallMazeDet.best(0, i, (1, 1)))
 
-# for result in bests:
-#     print(result)
+for result in bests:
+    print(result)
 
-# ps = smallMazeDet.bi(0, 6)
-# n = 1
-# for p in reversed(ps):
-#     smallMazeDet.mazeVis((3, 3),p , n)
-#     n += 1
+ps = smallMazeDet.bi(0, 6)
+n = 1
+for p in reversed(ps):
+    smallMazeDet.mazeVis((3, 3),p , n)
+    n += 1 """
 
 """
 Next we modify the probabilities of states transitions. Maybe the labyrinth is dark, 
