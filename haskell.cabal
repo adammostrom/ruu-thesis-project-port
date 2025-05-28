@@ -53,6 +53,9 @@ test-suite tests
                     Test_SDP
                     Testing
                     Testing_AdvancedStates
+                    AdvancedProb
+                    AdvancedStates
     hs-source-dirs: haskell/tests
+                    haskell/src
     build-depends:  haskell
 

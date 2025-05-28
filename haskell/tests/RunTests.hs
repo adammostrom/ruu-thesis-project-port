@@ -19,7 +19,8 @@ tests =
 main :: IO ()
 main = do
   putStrLn "Available implementations to test:"
-  mapM_ (\(i, (desc, _)) -> putStrLn $ " " ++ show i ++ ". " ++ desc) (zip [0..] tests)
+  let numberedTests = zip [0 :: Int ..] tests
+  mapM_ (\(i, (desc, _)) -> putStrLn $ " " ++ show i ++ ". " ++ desc) numberedTests
 
   putStrLn "\nEnter the number of the test to run:"
   input <- getLine

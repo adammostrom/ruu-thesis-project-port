@@ -90,16 +90,16 @@ prop_valEmptyPolicy t x =
   t >= 0 ==> val' advcase t [] x == 0
 
 -- | Test that the value function `val'` always returns a non-negative value for any generated policy sequence.
-prop_valNonNegative :: Int -> State -> Property
-prop_valNonNegative t x =
+prop_valNonNegative :: State -> Property
+prop_valNonNegative x =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
     let policySeq = bi' advcase t n
     in val' advcase t policySeq x >= 0
 
 -- | Test that a longer policy sequence is at least as good as the original sequence (geq).
-prop_longerPolicyBetterOrEqual :: Int -> State -> Property
-prop_longerPolicyBetterOrEqual t x =
+prop_longerPolicyBetterOrEqual ::State -> Property
+prop_longerPolicyBetterOrEqual x =
   forAll genValidIntZero $ \t ->
   forAll genValidInt $ \n ->
     let ps = bi' advcase t n
@@ -217,7 +217,7 @@ prop_bestValIsOptimal :: State -> Property
 prop_bestValIsOptimal s =
   forAll genValidInt $ \t ->
   forAll genValidInt $ \n ->
-    let (a, vBest) = best' advcase t n s
+    let (_, vBest) = best' advcase t n s
         ps = bi' advcase (t + 1) (n - 1)
         otherActions = AdvancedStates.actions t s
         altVals = [val' advcase t (Map.singleton s a' : ps) s | a' <- otherActions]
