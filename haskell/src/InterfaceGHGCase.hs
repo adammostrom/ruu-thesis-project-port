@@ -3,6 +3,7 @@ module InterfaceGHGCase where
 import Data.Time.Clock
 import SDPCompute
 import GHGCase
+import Control.DeepSeq (deepseq)
 
 
 
@@ -70,12 +71,13 @@ runWorstExt = bestExt sdpInstance
 timeRun :: (Int -> Int -> State -> (Action, Val)) -> Int -> Int -> State -> IO ()
 timeRun runFunction timeStep horizon state = do
   startTime <- getCurrentTime
-  let (a, v) = runFunction timeStep horizon state
+  let result = runFunction timeStep horizon state
+  result `deepseq` return ()  -- force full evaluation here
   endTime <- getCurrentTime
-  let diff = diffUTCTime endTime startTime
-  putStrLn $ "\n(a, v): " ++ show (a, v)
-  putStrLn $ "Execution Time: " ++ show diff ++ "\n"
+  putStrLn $ "\n(a, v): " ++ show result
+  putStrLn $ "Execution Time: " ++ show (diffUTCTime endTime startTime) ++ "\n"
 
+  
 timeRunBest :: Int -> Int -> State -> IO ()
 timeRunBest = timeRun runBest
 
